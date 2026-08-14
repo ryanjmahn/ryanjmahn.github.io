@@ -1,0 +1,149 @@
+/* ---------- tokens ---------- */
+:root {
+  --bg: #fbfaf7;
+  --ink: #141311;
+  --ink-dim: #6b675e;
+  --serif: "Times New Roman", Times, serif;
+  --maxw: 760px;
+  --gutter: clamp(1.5rem, 6vw, 3rem);
+}
+
+[data-theme="dark"] {
+  --bg: #121110;
+  --ink: #ece8e0;
+  --ink-dim: #948f83;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(0.9rem, 0.84rem + 0.22vw, 0.98rem);
+  line-height: 1.8;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+::selection { background: var(--ink); color: var(--bg); }
+
+a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--ink-dim);
+  text-underline-offset: 0.15em;
+  transition: text-decoration-color 0.2s ease;
+}
+
+a:hover { text-decoration-color: var(--ink); }
+
+/* ---------- theme toggle ---------- */
+.theme-toggle {
+  all: unset;
+  position: fixed;
+  top: 1.6rem;
+  right: clamp(1.5rem, 6vw, 3rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  color: var(--ink-dim);
+  cursor: pointer;
+  border-radius: 50%;
+  transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.theme-toggle:hover {
+  color: var(--ink);
+  background: color-mix(in srgb, var(--ink) 8%, transparent);
+  transform: rotate(-14deg);
+}
+
+.theme-toggle .icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  display: none;
+}
+
+[data-theme="light"] .icon-moon { display: block; }
+[data-theme="dark"] .icon-sun { display: block; }
+
+/* ---------- page ---------- */
+.page {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: clamp(3rem, 9vh, 5rem) var(--gutter) 6rem;
+}
+
+.intro {
+  margin: 0 0 2.2rem;
+}
+
+.close {
+  margin: 2.2rem 0 0;
+  color: #000;
+}
+
+.close a { color: #000; }
+.close a:hover { color: var(--ink-dim); }
+
+[data-theme="dark"] .close,
+[data-theme="dark"] .close a {
+  color: #fff;
+}
+
+/* ---------- bio list ---------- */
+.bio {
+  list-style: none;
+  margin: 0 0 2.2rem;
+  padding: 0;
+}
+
+.bio li {
+  position: relative;
+  padding-left: 1.1em;
+  margin: 0 0 0.6rem;
+  color: var(--ink);
+}
+
+.bio li::before {
+  content: "\2022";
+  position: absolute;
+  left: 0;
+  color: var(--ink-dim);
+}
+
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 1.6rem 0;
+}
+
+.contact li {
+  padding-left: 0;
+  margin: 0;
+}
+
+.contact li::before {
+  content: none;
+}
+
+.contact li:not(:last-child)::after {
+  content: "|";
+  margin: 0 0.7em;
+  color: var(--ink-dim);
+}
+
+/* ---------- inline expand ---------- */
+.expand {
+  text-decoration-style: dotted;
+}
+
+.more {
+  color: var(--ink-dim);
+}
+
+.more[hidden] { display: none; }
