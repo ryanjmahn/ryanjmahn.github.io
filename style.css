@@ -80,6 +80,14 @@ canvas.particle-field {
   filter: grayscale(55%) saturate(120%) hue-rotate(190deg) brightness(1.05);
 }
 
+.particle-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
 /* =========================================================
    bio page
    ========================================================= */
