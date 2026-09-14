@@ -307,6 +307,14 @@ canvas.particle-field {
   }
 }
 
+@media (max-width: 480px) {
+  .site-nav { font-size: 0.76rem; }
+  .site-nav ul { gap: 1.1rem; }
+  .badge { font-size: 0.66rem; }
+  .hero-visual { height: 150px; }
+  .hero-meta { flex-wrap: wrap; }
+}
+
 /* =========================================================
    voice + links
    ========================================================= */
@@ -605,6 +613,7 @@ a.card:hover::after {
 @media (max-width: 480px) {
   .contact-list a { flex-direction: column; gap: 0.2rem; align-items: flex-start; }
   .contact-list .value { text-align: left; }
+  .corner-field { width: 180px; height: 180px; top: -3rem; right: -3rem; opacity: 0.45; }
 }
 
 /* =========================================================

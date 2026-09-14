@@ -38,7 +38,9 @@
         });
       }
 
-      if (REDUCE_MOTION) {
+      const staticOnly = REDUCE_MOTION || window.innerWidth < 480;
+
+      if (staticOnly) {
         this.draw();
       } else {
         this.tick = this.tick.bind(this);
