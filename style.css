@@ -142,7 +142,7 @@ a:hover { text-decoration-color: var(--ink); }
 
 .tagline {
   margin: 0.35em 0 0;
-  color: var(--ink-soft);
+  color: var(--ink);
 }
 
 .contact-line {
@@ -174,7 +174,7 @@ a:hover { text-decoration-color: var(--ink); }
 }
 
 .entry-year {
-  color: var(--ink-soft);
+  color: var(--ink);
   font-size: 0.9rem;
 }
 
