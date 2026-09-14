@@ -3,15 +3,14 @@
    ========================================================= */
 
 :root {
-  /* near-monochrome + one accent */
-  --intonaco: #fbf8f0;
-  --lapis: #4640de;      /* indigo accent */
-  --vermilion: #4640de;
-  --orpiment: #4640de;
-  --verdigris: #4640de;
-  --madder: #4640de;
-  --umber: #12121a;
-  --umber-soft: #5c5d6b;
+  /* near-monochrome: black, white, one grey, one indigo accent */
+  --paper: #fafaf7;
+  --paper-dim: #f1f0eb;
+  --ink: #12121a;
+  --ink-soft: #5c5d6b;
+  --line: #e2e0d8;
+  --accent: #4640de;
+  --accent-dim: rgba(70, 64, 222, 0.12);
 
   /* type */
   --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", serif;
@@ -40,24 +39,19 @@ html { -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
-  background: var(--intonaco);
-  color: var(--umber);
+  background: var(--paper);
+  color: var(--ink);
   font-family: var(--font-serif);
   font-size: var(--type-body);
   line-height: 1.65;
 }
 
-::selection { background: var(--umber); color: var(--intonaco); }
+::selection { background: var(--ink); color: var(--paper); }
 
 a { color: inherit; }
 
-/* per-page pigment mapping */
-body[data-page="home"]    { --dominant: var(--lapis);     --accent: var(--orpiment); }
-body[data-page="works"]   { --dominant: var(--vermilion); --accent: var(--verdigris); }
-body[data-page="contact"] { --dominant: var(--verdigris);  --accent: var(--madder); }
-
 :focus-visible {
-  outline: 2px solid var(--dominant, var(--lapis));
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
@@ -76,13 +70,21 @@ canvas.particle-field {
    ========================================================= */
 
 .site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 0.9em;
-  padding: clamp(1.5rem, 5vh, 2.5rem) var(--gutter) 0;
-  font-family: var(--font-mono);
-  font-size: var(--type-meta);
-  letter-spacing: 0.12em;
+  padding: 1.15rem var(--gutter);
+  background: color-mix(in srgb, var(--paper) 86%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-serif);
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
   text-transform: lowercase;
 }
 
@@ -92,39 +94,46 @@ canvas.particle-field {
   justify-content: center;
   width: 1.7rem;
   height: 1.7rem;
-  border: 1px solid var(--dominant);
   border-radius: 50%;
-  color: var(--dominant);
-  font-family: var(--font-kr);
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-display);
   font-size: 0.8rem;
-  font-weight: 500;
+  font-weight: 700;
   text-decoration: none;
-  letter-spacing: 0;
 }
 
 .site-nav ul {
   list-style: none;
   display: flex;
+  gap: 2rem;
   margin: 0;
   padding: 0;
 }
 
-.site-nav li:not(:last-child)::after {
-  content: "\00b7";
-  margin: 0 0.6em;
-  color: var(--umber-soft);
-}
-
 .site-nav a {
+  position: relative;
   text-decoration: none;
-  color: var(--umber-soft);
+  color: var(--ink-soft);
+  padding-bottom: 2px;
+  transition: color 0.2s var(--ease);
 }
 
 .site-nav a[aria-current="page"] {
-  color: var(--umber);
+  color: var(--ink);
 }
 
-.site-nav a:hover { color: var(--umber); }
+.site-nav a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 2px;
+  background: var(--accent);
+}
+
+.site-nav a:hover { color: var(--ink); }
 
 /* =========================================================
    home — hero
@@ -154,7 +163,7 @@ canvas.particle-field {
 .hero-bg .bridge-tower line,
 .hero-bg .bridge-suspenders line {
   fill: none;
-  stroke: var(--lapis);
+  stroke: var(--accent);
 }
 
 .hero-bg .bridge-cable { stroke-width: 3; }
@@ -168,8 +177,8 @@ canvas.particle-field {
   display: inline-flex;
   align-items: center;
   gap: 0.55em;
-  background: var(--umber);
-  color: var(--intonaco);
+  background: var(--ink);
+  color: var(--paper);
   padding: 0.45em 0.95em;
   border-radius: 100px;
   font-family: var(--font-serif);
@@ -183,7 +192,7 @@ canvas.particle-field {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--lapis);
+  background: var(--accent);
   flex: none;
 }
 
@@ -205,7 +214,7 @@ canvas.particle-field {
   font-size: clamp(2.75rem, 7vw, 6.25rem);
   line-height: 1.04;
   letter-spacing: -0.01em;
-  color: var(--umber);
+  color: var(--ink);
 }
 
 .hero-headline .line {
@@ -224,7 +233,7 @@ canvas.particle-field {
   height: 44px;
   border-radius: 50%;
   object-fit: cover;
-  border: 1px solid var(--umber-soft);
+  border: 1px solid var(--ink-soft);
 }
 
 .hero-name {
@@ -233,7 +242,7 @@ canvas.particle-field {
   font-size: 0.85rem;
   letter-spacing: 0.04em;
   text-transform: lowercase;
-  color: var(--umber-soft);
+  color: var(--ink-soft);
 }
 
 .hero-visual {
@@ -272,7 +281,7 @@ canvas.particle-field {
   font-family: var(--font-serif);
   font-size: 1.05rem;
   line-height: 1.75;
-  color: var(--umber);
+  color: var(--ink);
 }
 
 .links-section {
@@ -291,9 +300,9 @@ canvas.particle-field {
   align-items: center;
   gap: 0.5rem;
   padding: 0.6rem 1rem;
-  border: 1px solid var(--umber-soft);
+  border: 1px solid var(--ink-soft);
   border-radius: 100px;
-  color: var(--umber);
+  color: var(--ink);
   text-decoration: none;
   font-family: var(--font-serif);
   font-size: 0.8rem;
@@ -340,7 +349,7 @@ canvas.particle-field {
   font-size: var(--type-meta);
   letter-spacing: 0.14em;
   text-transform: lowercase;
-  color: var(--umber-soft);
+  color: var(--ink-soft);
 }
 
 .group-heading {
@@ -349,7 +358,7 @@ canvas.particle-field {
   font-style: italic;
   font-weight: 400;
   font-size: 1rem;
-  color: var(--umber-soft);
+  color: var(--ink-soft);
   text-transform: lowercase;
 }
 
@@ -366,7 +375,7 @@ canvas.particle-field {
   justify-self: end;
   font-family: var(--font-mono);
   font-size: var(--type-meta);
-  color: var(--umber);
+  color: var(--ink);
 }
 
 .entry-name {
@@ -376,38 +385,38 @@ canvas.particle-field {
   font-size: var(--type-entry);
   text-transform: uppercase;
   letter-spacing: 0.01em;
-  color: var(--umber);
+  color: var(--ink);
 }
 
 .entry-year {
   font-family: var(--font-mono);
   font-size: var(--type-meta);
-  color: var(--umber-soft);
+  color: var(--ink-soft);
 }
 
 .entry-desc {
   grid-column: 2 / 4;
   margin: 0.35rem 0 0;
   font-size: var(--type-body);
-  color: var(--umber);
+  color: var(--ink);
   text-transform: lowercase;
 }
 
 .entry-desc .entry-link {
-  color: var(--umber);
+  color: var(--ink);
   text-decoration: underline;
-  text-decoration-color: var(--dominant);
+  text-decoration-color: var(--accent);
   text-underline-offset: 0.15em;
   white-space: nowrap;
 }
 
-.entry-desc .entry-link:hover { text-decoration-color: var(--umber); }
+.entry-desc .entry-link:hover { text-decoration-color: var(--ink); }
 
 .entry-rule {
   grid-column: 1 / 4;
   margin: 1.5rem 0;
   height: 1px;
-  background: var(--dominant);
+  background: var(--accent);
 }
 
 @media (max-width: 560px) {
@@ -427,48 +436,53 @@ canvas.particle-field {
   max-width: 560px;
   margin: 0 auto;
   padding: clamp(2rem, 6vh, 3.5rem) var(--gutter) 5rem;
+  overflow: hidden;
 }
 
-.plate-bg-contact {
-  position: fixed;
-  bottom: -6vh;
-  right: -8vw;
-  width: min(38vw, 340px);
-  z-index: -1;
+.corner-field {
+  position: absolute;
+  top: -4rem;
+  right: -6rem;
+  width: 320px;
+  height: 320px;
+  z-index: 0;
+  opacity: 0.7;
   pointer-events: none;
 }
 
-.plate-bg-contact img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
 .page-title {
+  position: relative;
+  z-index: 1;
   margin: 0 0 1.75rem;
   font-family: var(--font-display);
   font-weight: 800;
   font-size: var(--type-title);
   text-transform: lowercase;
-  color: var(--umber);
+  color: var(--ink);
 }
 
 .contact-intro {
+  position: relative;
+  z-index: 1;
   margin: 0 0 clamp(2.5rem, 6vh, 3.5rem);
   max-width: 42ch;
+  font-family: var(--font-serif);
   font-size: var(--type-body);
-  color: var(--umber);
+  line-height: 1.7;
+  color: var(--ink);
 }
 
 .contact-list {
+  position: relative;
+  z-index: 1;
   list-style: none;
   margin: 0 0 clamp(3rem, 8vh, 5rem);
   padding: 0;
-  border-top: 1px solid var(--dominant);
+  border-top: 1px solid var(--line);
 }
 
 .contact-list li {
-  border-bottom: 1px solid var(--dominant);
+  border-bottom: 1px solid var(--line);
 }
 
 .contact-list a {
@@ -478,15 +492,18 @@ canvas.particle-field {
   gap: 1rem;
   padding: 1.1rem 0.1rem;
   text-decoration: none;
-  color: var(--umber);
+  color: var(--ink);
+  transition: color 0.2s var(--ease);
 }
 
+.contact-list a:hover { color: var(--accent); }
+
 .contact-list .label {
-  font-family: var(--font-mono);
+  font-family: var(--font-serif);
   font-size: var(--type-meta);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.05em;
   text-transform: lowercase;
-  color: var(--umber-soft);
+  color: var(--ink-soft);
 }
 
 .contact-list .value {
@@ -500,7 +517,7 @@ canvas.particle-field {
   font-family: var(--font-serif);
   font-style: italic;
   font-size: 0.95rem;
-  color: var(--umber-soft);
+  color: var(--ink-soft);
 }
 
 @media (max-width: 480px) {
