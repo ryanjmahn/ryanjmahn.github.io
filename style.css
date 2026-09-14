@@ -9,7 +9,7 @@
   --line: #e2e0d8;
   --accent: #4640de;
 
-  --font-serif: "Newsreader", "Iowan Old Style", "Palatino Linotype", serif;
+  --font-serif: "Times New Roman", Times, Georgia, serif;
 
   --gutter: clamp(1.25rem, 6vw, 3rem);
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
@@ -51,7 +51,6 @@ body {
   font-family: var(--font-serif);
   font-size: 1.125rem;
   line-height: 1.7;
-  font-optical-sizing: auto;
   transition: background-color 0.3s var(--ease), color 0.3s var(--ease);
 }
 
@@ -69,16 +68,6 @@ a:hover { text-decoration-color: var(--ink); }
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
-}
-
-/* =========================================================
-   particle field
-   ========================================================= */
-
-canvas.particle-field {
-  display: block;
-  width: 100%;
-  height: 100%;
 }
 
 /* =========================================================
@@ -100,14 +89,6 @@ canvas.particle-field {
   object-position: center 45%;
   opacity: 0.35;
   filter: grayscale(100%) contrast(1.05) brightness(1.08);
-}
-
-.particle-bg {
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  opacity: 1;
-  pointer-events: auto;
 }
 
 /* =========================================================
@@ -186,7 +167,6 @@ canvas.particle-field {
     padding: clamp(3rem, 14vh, 6rem) 1.25rem clamp(2.5rem, 8vh, 4rem);
   }
   .bio .meta { line-height: 1.8; }
-  .particle-bg { opacity: 0.8; }
 }
 
 /* =========================================================
