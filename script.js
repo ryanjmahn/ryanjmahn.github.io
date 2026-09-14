@@ -1,33 +1,22 @@
-// scroll reveal — fade + rise on entry, gated behind prefers-reduced-motion.
+// auto-updating local time, seoul timezone.
 
 (function () {
-  const REDUCE_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const el = document.getElementById("local-time");
+  if (!el) return;
 
-  const targets = document.querySelectorAll(
-    ".voice, .links-section, .card, .contact-list li, .contact-intro"
-  );
-
-  if (REDUCE_MOTION || !("IntersectionObserver" in window)) {
-    targets.forEach((el) => el.classList.add("in-view"));
-    return;
-  }
-
-  targets.forEach((el, i) => {
-    el.classList.add("reveal");
-    el.style.transitionDelay = `${Math.min(i, 6) * 60}ms`;
+  const formatter = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Asia/Seoul",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
   });
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("in-view");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
-  );
+  function tick() {
+    const now = new Date();
+    el.textContent = formatter.format(now);
+    el.setAttribute("datetime", now.toISOString());
+  }
 
-  targets.forEach((el) => observer.observe(el));
+  tick();
+  setInterval(tick, 15000);
 })();
