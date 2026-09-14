@@ -135,9 +135,36 @@ canvas.particle-field {
   max-width: 1280px;
   margin: 0 auto;
   padding: clamp(3rem, 8vh, 5.5rem) var(--gutter) clamp(2rem, 6vh, 4rem);
+  overflow: hidden;
 }
 
+.hero-bg {
+  position: absolute;
+  left: 50%;
+  bottom: -4%;
+  width: min(1400px, 130%);
+  transform: translateX(-50%);
+  z-index: 0;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.hero-bg .bridge-cable,
+.hero-bg .bridge-deck,
+.hero-bg .bridge-tower line,
+.hero-bg .bridge-suspenders line {
+  fill: none;
+  stroke: var(--lapis);
+}
+
+.hero-bg .bridge-cable { stroke-width: 3; }
+.hero-bg .bridge-deck { stroke-width: 4; }
+.hero-bg .bridge-tower line { stroke-width: 5; }
+.hero-bg .bridge-suspenders line { stroke-width: 1.5; }
+
 .badge {
+  position: relative;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   gap: 0.55em;
