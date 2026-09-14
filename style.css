@@ -21,7 +21,10 @@
 
 * { box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; }
+html {
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
 
 body {
   margin: 0;
@@ -104,7 +107,7 @@ canvas.particle-field {
   content: "";
   position: absolute;
   z-index: -1;
-  inset: -1.5rem -1.25rem;
+  inset: -1rem;
   background: color-mix(in srgb, var(--paper) 72%, transparent);
   border-radius: 8px;
 }
@@ -139,6 +142,14 @@ canvas.particle-field {
 .bio .link-list span[aria-hidden] {
   margin: 0 0.6em;
   color: var(--ink-soft);
+}
+
+@media (max-width: 480px) {
+  .bio {
+    padding: clamp(3rem, 14vh, 6rem) 1.25rem clamp(2.5rem, 8vh, 4rem);
+  }
+  .bio .meta { line-height: 1.8; }
+  .particle-bg { opacity: 0.28; }
 }
 
 /* =========================================================
