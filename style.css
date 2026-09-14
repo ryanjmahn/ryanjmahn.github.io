@@ -134,6 +134,20 @@ a:hover { text-decoration-color: var(--ink); }
   margin-bottom: clamp(2.5rem, 7vh, 4rem);
 }
 
+.back-link {
+  margin: 0 0 1.25rem;
+  font-size: 0.9rem;
+}
+
+.back-link a {
+  text-decoration: none;
+  color: var(--ink-soft);
+}
+
+.back-link a:hover {
+  color: var(--ink);
+}
+
 .name {
   margin: 0;
   font-size: 1.6em;
@@ -184,6 +198,14 @@ a:hover { text-decoration-color: var(--ink); }
 
 .entry-more {
   white-space: nowrap;
+}
+
+.diary-entry .entry-body p {
+  margin: 0 0 1em;
+}
+
+.diary-entry .entry-body p:last-child {
+  margin-bottom: 0;
 }
 
 @media (max-width: 480px) {
