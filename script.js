@@ -22,31 +22,20 @@
 })();
 
 // light/dark mode toggle
+// particle color is fixed (set via data-color in the markup) and does
+// NOT change between themes — one neutral tone, visible on both.
 
 (function () {
   const root = document.documentElement;
   const btn = document.getElementById("theme-toggle");
   if (!btn) return;
 
-  function particleColorFor(theme) {
-    return theme === "dark" ? "#f2f1ec" : "#000000";
-  }
-
-  function applyParticleColor(theme) {
-    document.querySelectorAll("canvas.particle-field").forEach((c) => {
-      c.dataset.color = particleColorFor(theme);
-    });
-    if (window.__particles) window.__particles.refresh();
-  }
-
   function render(theme) {
     btn.textContent = theme === "dark" ? "light" : "dark";
     btn.setAttribute("aria-pressed", String(theme === "dark"));
   }
 
-  const current = root.getAttribute("data-theme") === "dark" ? "dark" : "light";
-  applyParticleColor(current);
-  render(current);
+  render(root.getAttribute("data-theme") === "dark" ? "dark" : "light");
 
   btn.addEventListener("click", () => {
     const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
@@ -54,7 +43,6 @@
     try {
       localStorage.setItem("theme", next);
     } catch (e) {}
-    applyParticleColor(next);
     render(next);
   });
 })();

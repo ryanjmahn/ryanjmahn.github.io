@@ -84,11 +84,31 @@
     draw() {
       const { ctx, w, h, points } = this;
       const color = this.canvas.dataset.color || this.color;
+      const HOVER_RADIUS = 170;
+      const HOVER_PUSH = 24;
       ctx.clearRect(0, 0, w, h);
 
-      for (let i = 0; i < points.length; i++) {
-        for (let j = i + 1; j < points.length; j++) {
-          const a = points[i], b = points[j];
+      // particles near the cursor are displaced radially outward (and grow
+      // slightly), tapering to zero at HOVER_RADIUS — a live repel effect
+      // rather than a static field, à la exa's homepage.
+      const rendered = points.map((p) => {
+        let x = p.x, y = p.y, r = p.r;
+        if (this.mouse.x != null) {
+          const dx = p.x - this.mouse.x, dy = p.y - this.mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < HOVER_RADIUS && dist > 0.01) {
+            const t = 1 - dist / HOVER_RADIUS;
+            x += (dx / dist) * t * HOVER_PUSH;
+            y += (dy / dist) * t * HOVER_PUSH;
+            r += t * 1.6;
+          }
+        }
+        return { x, y, r, o: p.o };
+      });
+
+      for (let i = 0; i < rendered.length; i++) {
+        for (let j = i + 1; j < rendered.length; j++) {
+          const a = rendered[i], b = rendered[j];
           const dx = a.x - b.x, dy = a.y - b.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < this.linkDist) {
@@ -103,17 +123,11 @@
         }
       }
 
-      for (const p of points) {
-        let r = p.r;
-        if (this.mouse.x != null) {
-          const dx = p.x - this.mouse.x, dy = p.y - this.mouse.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 140) r += (1 - dist / 140) * 1.8;
-        }
+      for (const p of rendered) {
         ctx.globalAlpha = p.o;
         ctx.fillStyle = color;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fill();
       }
       ctx.globalAlpha = 1;
