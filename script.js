@@ -22,8 +22,6 @@
 })();
 
 // light/dark mode toggle
-// particle color is fixed (set via data-color in the markup) and does
-// NOT change between themes — one neutral tone, visible on both.
 
 (function () {
   const root = document.documentElement;
