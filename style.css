@@ -9,7 +9,7 @@
   --line: #e2e0d8;
   --accent: #4640de;
 
-  --font-serif: "Instrument Sans", -apple-system, "Helvetica Neue", sans-serif;
+  --font-serif: "Newsreader", "Iowan Old Style", "Palatino Linotype", serif;
 
   --gutter: clamp(1.25rem, 6vw, 3rem);
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
@@ -28,8 +28,9 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-serif);
-  font-size: 1.0625rem;
+  font-size: 1.125rem;
   line-height: 1.7;
+  font-optical-sizing: auto;
 }
 
 ::selection { background: var(--ink); color: var(--paper); }
