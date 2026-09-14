@@ -64,8 +64,8 @@
         y: Math.random() * this.h,
         vx: (Math.random() - 0.5) * 0.12,
         vy: (Math.random() - 0.5) * 0.12,
-        r: Math.random() * 1.8 + 0.9,
-        o: Math.random() * 0.5 + 0.4,
+        r: Math.random() * 2 + 1.1,
+        o: Math.random() * 0.4 + 0.55,
       }));
     }
 
@@ -89,7 +89,7 @@
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < this.linkDist) {
             ctx.strokeStyle = color;
-            ctx.globalAlpha = (1 - dist / this.linkDist) * 0.28;
+            ctx.globalAlpha = (1 - dist / this.linkDist) * 0.4;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
