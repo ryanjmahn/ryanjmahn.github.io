@@ -3,6 +3,7 @@
 
 (function () {
   const REDUCE_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const instances = [];
 
   function densityFor(el) {
     const density = Number(el.dataset.density || 1);
@@ -23,6 +24,8 @@
 
       this.resize();
       this.seed();
+
+      instances.push(this);
 
       window.addEventListener("resize", () => this.resize());
 
@@ -79,7 +82,8 @@
     }
 
     draw() {
-      const { ctx, w, h, points, color } = this;
+      const { ctx, w, h, points } = this;
+      const color = this.canvas.dataset.color || this.color;
       ctx.clearRect(0, 0, w, h);
 
       for (let i = 0; i < points.length; i++) {
@@ -131,4 +135,10 @@
   } else {
     init();
   }
+
+  window.__particles = {
+    refresh() {
+      instances.forEach((f) => f.draw());
+    },
+  };
 })();
