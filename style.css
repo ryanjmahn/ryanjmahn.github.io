@@ -79,15 +79,15 @@ canvas.particle-field {
   height: 100%;
   object-fit: cover;
   object-position: center 30%;
-  opacity: 0.07;
-  filter: grayscale(55%) saturate(120%) hue-rotate(190deg) brightness(1.05);
+  opacity: 0.16;
+  filter: grayscale(45%) saturate(130%) hue-rotate(190deg) brightness(1.05);
 }
 
 .particle-bg {
   position: fixed;
   inset: 0;
   z-index: -2;
-  opacity: 0.4;
+  opacity: 0.75;
   pointer-events: none;
 }
 
@@ -149,7 +149,7 @@ canvas.particle-field {
     padding: clamp(3rem, 14vh, 6rem) 1.25rem clamp(2.5rem, 8vh, 4rem);
   }
   .bio .meta { line-height: 1.8; }
-  .particle-bg { opacity: 0.28; }
+  .particle-bg { opacity: 0.5; }
 }
 
 /* =========================================================
