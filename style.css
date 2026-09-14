@@ -15,6 +15,24 @@
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #121214;
+    --ink: #f2f1ec;
+    --ink-soft: #9a98a3;
+    --line: #2a2a2e;
+    --accent: #8b86ff;
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper: #121214;
+  --ink: #f2f1ec;
+  --ink-soft: #9a98a3;
+  --line: #2a2a2e;
+  --accent: #8b86ff;
+}
+
 /* =========================================================
    reset & base
    ========================================================= */
@@ -34,6 +52,7 @@ body {
   font-size: 1.125rem;
   line-height: 1.7;
   font-optical-sizing: auto;
+  transition: background-color 0.3s var(--ease), color 0.3s var(--ease);
 }
 
 ::selection { background: var(--ink); color: var(--paper); }
@@ -89,6 +108,32 @@ canvas.particle-field {
   z-index: -2;
   opacity: 1;
   pointer-events: none;
+}
+
+/* =========================================================
+   theme toggle
+   ========================================================= */
+
+.theme-toggle {
+  position: fixed;
+  top: clamp(1rem, 4vh, 1.75rem);
+  right: clamp(1.25rem, 6vw, 3rem);
+  z-index: 10;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  padding: 0.4em 0.9em;
+  font-family: var(--font-serif);
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+
+.theme-toggle:hover {
+  color: var(--ink);
+  border-color: var(--accent);
 }
 
 /* =========================================================
