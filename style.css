@@ -317,114 +317,131 @@ canvas.particle-field {
 }
 
 /* =========================================================
-   works — index of plates
+   works — project card grid
    ========================================================= */
 
 .works-page {
   position: relative;
-  max-width: 640px;
+  max-width: 1160px;
   margin: 0 auto;
   padding: clamp(2rem, 6vh, 3.5rem) var(--gutter) 6rem;
 }
 
-.plate-bg {
-  position: fixed;
-  top: 8vh;
-  left: 50%;
-  width: min(60vw, 760px);
-  transform: translateX(-50%);
-  z-index: -1;
+.works-header {
+  position: relative;
+  padding: clamp(1rem, 4vh, 2rem) 0 clamp(3rem, 8vh, 4.5rem);
+  overflow: hidden;
+}
+
+.header-field {
+  position: absolute;
+  top: -40%;
+  right: -6%;
+  width: 380px;
+  height: 380px;
+  z-index: 0;
+  opacity: 0.55;
   pointer-events: none;
 }
 
-.plate-bg img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
 .kicker {
-  margin: 0 0 clamp(2.5rem, 6vh, 3.5rem);
-  font-family: var(--font-mono);
-  font-size: var(--type-meta);
-  letter-spacing: 0.14em;
-  text-transform: lowercase;
-  color: var(--ink-soft);
-}
-
-.group-heading {
-  margin: clamp(2.5rem, 5vh, 3rem) 0 1.25rem;
+  position: relative;
+  z-index: 1;
+  margin: 0 0 0.5rem;
   font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 400;
-  font-size: 1rem;
-  color: var(--ink-soft);
-  text-transform: lowercase;
-}
-
-.group-heading:first-of-type { margin-top: 0; }
-
-.entry {
-  display: grid;
-  grid-template-columns: 2.75rem 1fr auto;
-  align-items: baseline;
-  gap: 0.6rem 0.75rem;
-}
-
-.entry .numeral {
-  justify-self: end;
-  font-family: var(--font-mono);
   font-size: var(--type-meta);
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+  color: var(--ink-soft);
+}
+
+.works-title {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--type-title);
+  text-transform: lowercase;
   color: var(--ink);
 }
 
-.entry-name {
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.25rem, 3vw, 2rem);
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1.6rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.25s var(--ease), border-color 0.25s var(--ease), background 0.25s var(--ease);
+}
+
+a.card:hover {
+  transform: scale(1.02);
+  border-color: var(--accent);
+  background: var(--paper-dim);
+}
+
+.card-tags {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-family: var(--font-serif);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  color: var(--accent);
+  border: 1px solid var(--accent-dim);
+  background: var(--accent-dim);
+  padding: 0.25em 0.7em;
+  border-radius: 100px;
+}
+
+.card-name {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: var(--type-entry);
-  text-transform: uppercase;
-  letter-spacing: 0.01em;
+  font-size: 1.3rem;
+  line-height: 1.15;
   color: var(--ink);
 }
 
-.entry-year {
-  font-family: var(--font-mono);
-  font-size: var(--type-meta);
+.card-desc {
+  margin: 0;
+  flex: 1;
+  font-family: var(--font-serif);
+  font-size: 0.88rem;
+  line-height: 1.55;
   color: var(--ink-soft);
 }
 
-.entry-desc {
-  grid-column: 2 / 4;
-  margin: 0.35rem 0 0;
-  font-size: var(--type-body);
-  color: var(--ink);
-  text-transform: lowercase;
+.card-meta {
+  font-family: var(--font-serif);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
 }
 
-.entry-desc .entry-link {
-  color: var(--ink);
-  text-decoration: underline;
-  text-decoration-color: var(--accent);
-  text-underline-offset: 0.15em;
-  white-space: nowrap;
+@media (max-width: 980px) {
+  .card-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-.entry-desc .entry-link:hover { text-decoration-color: var(--ink); }
-
-.entry-rule {
-  grid-column: 1 / 4;
-  margin: 1.5rem 0;
-  height: 1px;
-  background: var(--accent);
-}
-
-@media (max-width: 560px) {
-  .entry { grid-template-columns: 1fr; gap: 0.3rem; }
-  .entry .numeral { justify-self: start; }
-  .entry-year { justify-self: start; }
-  .entry-desc,
-  .entry-rule { grid-column: 1; }
+@media (max-width: 640px) {
+  .card-grid { grid-template-columns: 1fr; }
+  .header-field { width: 220px; height: 220px; right: -4rem; }
 }
 
 /* =========================================================
