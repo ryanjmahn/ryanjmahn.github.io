@@ -1,83 +1,23 @@
 /* =========================================================
-   fonts — self-hosted
-   ========================================================= */
-
-@font-face {
-  font-family: "Cabinet Grotesk";
-  src: url("assets/fonts/cabinet-grotesk-bold.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Cabinet Grotesk";
-  src: url("assets/fonts/cabinet-grotesk-extrabold.woff2") format("woff2");
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Newsreader";
-  src: url("assets/fonts/newsreader-variable.woff2") format("woff2");
-  font-weight: 200 800;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Newsreader";
-  src: url("assets/fonts/newsreader-italic-variable.woff2") format("woff2");
-  font-weight: 200 800;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Fragment Mono";
-  src: url("assets/fonts/fragment-mono.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Pretendard";
-  src: url("assets/fonts/pretendard-extrabold.woff2") format("woff2");
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Pretendard";
-  src: url("assets/fonts/pretendard-medium.woff2") format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* =========================================================
    tokens
    ========================================================= */
 
 :root {
-  /* pigments, restored fresco at full saturation */
-  --intonaco: #fbf8f0;   /* fresh lime plaster — page ground */
-  --lapis: #3636d3;      /* ultramarine */
-  --vermilion: #e2452f;  /* cinnabar */
-  --orpiment: #f2b01e;   /* arsenic yellow — ornament only, never text */
-  --verdigris: #1fa8a0;  /* copper green */
-  --madder: #d0396b;     /* madder lake */
-  --umber: #2a2320;      /* raw umber — all body and display text */
-  --umber-soft: #6b6058; /* diluted umber — secondary text, captions */
+  /* near-monochrome + one accent */
+  --intonaco: #fbf8f0;
+  --lapis: #4640de;      /* indigo accent */
+  --vermilion: #4640de;
+  --orpiment: #4640de;
+  --verdigris: #4640de;
+  --madder: #4640de;
+  --umber: #12121a;
+  --umber-soft: #5c5d6b;
 
   /* type */
-  --font-display: "Cabinet Grotesk", "Helvetica Neue", sans-serif;
-  --font-serif: "Newsreader", "Iowan Old Style", "Palatino Linotype", serif;
-  --font-mono: "Fragment Mono", ui-monospace, "SF Mono", monospace;
-  --font-kr: "Pretendard", var(--font-display);
+  --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", serif;
+  --font-serif: "Instrument Sans", -apple-system, "Helvetica Neue", sans-serif;
+  --font-mono: "Instrument Sans", -apple-system, "Helvetica Neue", sans-serif;
+  --font-kr: var(--font-display);
 
   --type-name: clamp(5rem, 18vw, 13rem);
   --type-title: clamp(2rem, 4vw, 3rem);
