@@ -146,15 +146,7 @@ canvas.particle-field {
   max-width: 680px;
   margin: 0 auto;
   padding: clamp(4rem, 18vh, 9rem) var(--gutter) clamp(3rem, 10vh, 5rem);
-}
-
-.bio::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: -1rem;
-  background: color-mix(in srgb, var(--paper) 60%, transparent);
-  border-radius: 8px;
+  background: transparent;
 }
 
 .bio p {

@@ -62,14 +62,34 @@
 
     seed() {
       const count = Math.round(this.baseCount * densityFor(this.canvas));
-      this.points = Array.from({ length: count }, () => ({
-        x: Math.random() * this.w,
-        y: Math.random() * this.h,
-        vx: (Math.random() - 0.5) * 0.12,
-        vy: (Math.random() - 0.5) * 0.12,
-        r: Math.random() * 2 + 1.1,
-        o: Math.random() * 0.4 + 0.55,
-      }));
+
+      // organic point-cloud shape: most points cluster (denser core, soft
+      // falloff) toward one corner, the rest scatter sparsely across the
+      // rest of the canvas — not a uniform grid/scatter.
+      const clusterX = this.w * 0.78;
+      const clusterY = this.h * 0.16;
+      const clusterR = Math.max(this.w, this.h) * 0.34;
+
+      this.points = Array.from({ length: count }, () => {
+        let x, y;
+        if (Math.random() < 0.62) {
+          const angle = Math.random() * Math.PI * 2;
+          const radius = clusterR * Math.sqrt(Math.random());
+          x = clusterX + Math.cos(angle) * radius;
+          y = clusterY + Math.sin(angle) * radius;
+        } else {
+          x = Math.random() * this.w;
+          y = Math.random() * this.h;
+        }
+        return {
+          x: Math.min(Math.max(x, 0), this.w),
+          y: Math.min(Math.max(y, 0), this.h),
+          vx: (Math.random() - 0.5) * 0.12,
+          vy: (Math.random() - 0.5) * 0.12,
+          r: Math.random() * 2.2 + 1.3,
+          o: Math.random() * 0.3 + 0.4,
+        };
+      });
     }
 
     step() {
@@ -113,7 +133,7 @@
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < this.linkDist) {
             ctx.strokeStyle = color;
-            ctx.globalAlpha = (1 - dist / this.linkDist) * 0.4;
+            ctx.globalAlpha = (1 - dist / this.linkDist) * 0.5;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
