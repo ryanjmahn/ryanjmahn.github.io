@@ -127,161 +127,157 @@ canvas.particle-field {
 .site-nav a:hover { color: var(--umber); }
 
 /* =========================================================
-   home — frontispiece
+   home — hero
    ========================================================= */
 
-.frontispiece {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: clamp(2rem, 6vh, 4rem) var(--gutter) clamp(4rem, 10vh, 6rem);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.arch-frame {
+.hero {
   position: relative;
-  width: min(84vw, 560px);
-  aspect-ratio: 640 / 560;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(3rem, 8vh, 5.5rem) var(--gutter) clamp(2rem, 6vh, 4rem);
 }
 
-.arch-frame svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-
-.arch-frame svg .arch-pilaster {
-  stroke: var(--dominant);
-}
-
-.arch-frame svg .arch-curve {
-  stroke: var(--dominant);
-}
-
-@media (max-width: 768px) {
-  .arch-frame svg .arch-pilaster { display: none; }
-}
-
-.arch-content {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
+.badge {
+  display: inline-flex;
   align-items: center;
-  justify-content: flex-end;
-  padding-bottom: 12%;
+  gap: 0.55em;
+  background: var(--umber);
+  color: var(--intonaco);
+  padding: 0.45em 0.95em;
+  border-radius: 100px;
+  font-family: var(--font-serif);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+  margin-bottom: clamp(2rem, 6vh, 3.5rem);
 }
 
-.glyph {
+.badge .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--lapis);
+  flex: none;
+}
+
+.hero-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 2rem;
+  min-height: 46vh;
+}
+
+.hero-copy { position: relative; z-index: 2; }
+
+.hero-headline {
   margin: 0;
-  font-family: var(--font-kr);
+  font-family: var(--font-display);
   font-weight: 800;
-  font-size: var(--type-name);
-  line-height: 1;
+  font-size: clamp(2.75rem, 7vw, 6.25rem);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
   color: var(--umber);
 }
 
-.latin-name {
-  margin-top: 0.6em;
-  font-family: var(--font-mono);
-  font-size: var(--type-meta);
-  letter-spacing: 0.18em;
+.hero-headline .line {
+  display: block;
+}
+
+.hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: clamp(1.75rem, 4vh, 2.5rem);
+}
+
+.hero-portrait {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--umber-soft);
+}
+
+.hero-name {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
   text-transform: lowercase;
   color: var(--umber-soft);
 }
 
-.medallion {
-  margin-top: clamp(1.5rem, 4vh, 2.5rem);
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 1px solid var(--dominant);
-  padding: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.hero-visual {
+  position: relative;
+  height: clamp(280px, 38vw, 460px);
 }
 
-.medallion img,
-.medallion .medallion-placeholder {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  filter: url(#duotone-lapis) contrast(1.25) brightness(1.05);
+.hero-visual canvas {
+  position: absolute;
+  inset: 0;
 }
 
-.medallion .medallion-placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--intonaco);
-  border: 1px dashed var(--dominant);
-  color: var(--dominant);
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.08em;
-  text-align: center;
-  line-height: 1.4;
-  padding: 0.5rem;
-  filter: none;
+@media (max-width: 860px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .hero-visual {
+    height: 220px;
+    order: -1;
+  }
 }
 
-.bio-line {
-  margin: clamp(1.5rem, 4vh, 2rem) 0 0;
-  font-size: var(--type-body);
+/* =========================================================
+   voice + links
+   ========================================================= */
+
+.voice {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: clamp(3rem, 8vh, 5rem) var(--gutter);
+}
+
+.voice p {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.75;
   color: var(--umber);
-  text-transform: lowercase;
-  max-width: 32ch;
+}
+
+.links-section {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--gutter) clamp(4rem, 10vh, 6rem);
 }
 
 .links-row {
   display: flex;
-  gap: 0.9rem;
-  margin-top: clamp(1.5rem, 4vh, 2rem);
+  gap: 0.75rem;
 }
 
 .links-row a {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border: 1px solid var(--dominant);
-  border-radius: 50%;
-  color: var(--dominant);
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--umber-soft);
+  border-radius: 100px;
+  color: var(--umber);
   text-decoration: none;
+  font-family: var(--font-serif);
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
 }
 
 .links-row svg {
-  width: 1.05rem;
-  height: 1.05rem;
+  width: 1rem;
+  height: 1rem;
   stroke: currentColor;
   fill: none;
-}
-
-.plinth {
-  width: 100%;
-  max-width: 420px;
-  margin-top: clamp(2.5rem, 6vh, 3.5rem);
-  position: relative;
-  height: 1px;
-  background: var(--dominant);
-}
-
-.plinth::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 9px;
-  height: 9px;
-  background: var(--accent);
-  transform: translate(-50%, -50%) rotate(45deg);
 }
 
 /* =========================================================
