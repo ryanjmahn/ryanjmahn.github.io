@@ -6,15 +6,6 @@
 <title>diary · 재민</title>
 <meta name="description" content="재민's diary — short entries, roughly chronological." />
 <link rel="stylesheet" href="style.css" />
-<script>
-  (function () {
-    try {
-      var stored = localStorage.getItem("theme");
-      var theme = stored || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      document.documentElement.setAttribute("data-theme", theme);
-    } catch (e) {}
-  })();
-</script>
 </head>
 <body data-page="diary">
 
@@ -24,8 +15,6 @@
     <img src="assets/images/sf-golden-gate.jpg" alt="" loading="eager" decoding="async" />
   </picture>
 </div>
-
-<button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">dark</button>
 
 <main class="bio">
 
@@ -41,7 +30,7 @@
       <span class="entry-year">2026-09-14</span>
       <div class="entry-body">
         <p>
-          day 1. will be documenting my life journey as I reach for the stars. 
+          day 1. will be documenting my life journey as I reach for the stars.
         </p>
       </div>
     </li>
