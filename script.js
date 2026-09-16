@@ -292,3 +292,103 @@
   img.onload = () => buildParticles(img);
   img.src = IMG_SRC;
 })();
+
+// shared helper: resample any image-like source (an <img> or a canvas) into
+// monospace ascii, each character colored to match its sampled pixel, drawn
+// into a target <canvas> and printed in top-to-bottom like a terminal
+
+function renderAsciiArt(source, canvasEl, opts) {
+  const { cols, charAspect = 0.55, ramp = "@%#*+=-:. ", rowStagger = 22, fontSizePx, reduceMotion = false } = opts;
+  const FONT_STACK = 'ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace';
+  const ctx = canvasEl.getContext("2d");
+
+  const srcW = source.naturalWidth || source.width;
+  const srcH = source.naturalHeight || source.height;
+  const rows = Math.max(1, Math.round(cols * (srcH / srcW) * charAspect));
+
+  const off = document.createElement("canvas");
+  off.width = cols;
+  off.height = rows;
+  const octx = off.getContext("2d");
+  octx.drawImage(source, 0, 0, cols, rows);
+  const data = octx.getImageData(0, 0, cols, rows).data;
+
+  const cells = [];
+  for (let y = 0; y < rows; y++) {
+    const rowCells = [];
+    for (let x = 0; x < cols; x++) {
+      const idx = (y * cols + x) * 4;
+      const a = data[idx + 3];
+      const r = data[idx];
+      const g = data[idx + 1];
+      const b = data[idx + 2];
+      const lum = a < 10 ? 255 : 0.299 * r + 0.587 * g + 0.114 * b;
+      const ci = Math.min(ramp.length - 1, Math.floor((lum / 255) * ramp.length));
+      rowCells.push({ ch: ramp[ci], color: `rgb(${r}, ${g}, ${b})` });
+    }
+    cells.push(rowCells);
+  }
+
+  const size = fontSizePx();
+  const cellW = size * 0.6;
+  const cellH = size;
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  const cssW = cols * cellW;
+  const cssH = rows * cellH;
+  canvasEl.style.width = `${cssW}px`;
+  canvasEl.style.height = `${cssH}px`;
+  canvasEl.width = Math.round(cssW * dpr);
+  canvasEl.height = Math.round(cssH * dpr);
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.font = `${size}px ${FONT_STACK}`;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+
+  function drawRow(y) {
+    const rowCells = cells[y];
+    for (let x = 0; x < rowCells.length; x++) {
+      const cell = rowCells[x];
+      if (cell.ch === " ") continue;
+      ctx.fillStyle = cell.color;
+      ctx.fillText(cell.ch, x * cellW + cellW / 2, y * cellH + cellH / 2);
+    }
+  }
+
+  if (reduceMotion) {
+    for (let y = 0; y < rows; y++) drawRow(y);
+    return;
+  }
+
+  let revealed = 0;
+  const printRow = () => {
+    drawRow(revealed);
+    revealed++;
+    if (revealed < rows) setTimeout(printRow, rowStagger);
+  };
+  printRow();
+}
+
+// ascii portrait — a personal photo resampled into monospace characters in
+// the photo's own colors, printed in top-to-bottom like a terminal drawing
+// it out
+
+(function () {
+  const mount = document.querySelector(".ascii-portrait");
+  if (!mount) return;
+  const canvas = mount.querySelector("canvas");
+  if (!canvas) return;
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+
+  const img = new Image();
+  img.onload = () => {
+    renderAsciiArt(img, canvas, {
+      cols: 84,
+      fontSizePx: () => clamp(window.innerWidth * 0.008, 4.5, 6.5),
+      reduceMotion,
+    });
+  };
+  img.src = "assets/images/ryan.png";
+})();
