@@ -158,8 +158,12 @@ a:hover { text-decoration-color: var(--ink); }
   margin: 0;
 }
 
-.entry-more {
-  white-space: nowrap;
+.entry-body strong a {
+  text-decoration-color: var(--ink-soft);
+}
+
+.entry-body strong a:hover {
+  text-decoration-color: var(--ink);
 }
 
 .diary-entry .entry-body p {
