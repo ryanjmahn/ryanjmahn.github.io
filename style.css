@@ -101,6 +101,15 @@ a:hover { text-decoration-color: var(--ink); }
   color: var(--ink);
 }
 
+.ascii-portrait {
+  margin: 0 0 1.5rem;
+  line-height: 0;
+}
+
+.ascii-portrait canvas {
+  display: block;
+}
+
 .name {
   margin: 0;
   font-size: 1.6em;
