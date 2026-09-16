@@ -9,7 +9,7 @@
   --line: #e2e0d8;
   --accent: #4640de;
 
-  --font-serif: "Times New Roman", Times, Georgia, serif;
+  --font-serif: "Instrument Serif", "Times New Roman", Times, Georgia, serif;
 
   --gutter: clamp(1.25rem, 6vw, 3rem);
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
