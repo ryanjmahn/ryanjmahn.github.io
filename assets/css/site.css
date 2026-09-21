@@ -96,7 +96,7 @@ button {
   pointer-events: none;
   opacity: .08;
   mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch' result='t'/%3E%3CfeColorMatrix in='t' type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 180px 180px;
   animation: grain-shift 1.6s steps(4) infinite;
 }
@@ -114,8 +114,9 @@ button {
   background-color: var(--paper);
   background-image:
     radial-gradient(ellipse at 50% 40%, transparent 55%, rgba(60, 50, 40, .08) 100%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.018' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)' opacity='.4'/%3E%3C/svg%3E");
-  background-size: cover, 240px 240px;
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='4' stitchTiles='stitch' result='t'/%3E%3CfeColorMatrix in='t' type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='.6' intercept='.1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+  background-size: cover, 100% 100%;
+  background-repeat: no-repeat, no-repeat;
   position: relative;
 }
 .surface-paper::before {
@@ -133,7 +134,9 @@ body.surface-paper-body {
   background-color: var(--paper);
   background-image:
     radial-gradient(ellipse at 50% 30%, transparent 55%, rgba(60, 50, 40, .08) 100%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.018' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)' opacity='.4'/%3E%3C/svg%3E");
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='4' stitchTiles='stitch' result='t'/%3E%3CfeColorMatrix in='t' type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='.6' intercept='.1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+  background-size: cover, 100% 100%;
+  background-repeat: no-repeat, no-repeat;
   background-attachment: fixed;
 }
 body.surface-paper-body::before {
@@ -174,7 +177,7 @@ body.surface-paper-body::before {
   opacity: .14;
   mix-blend-mode: overlay;
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch' result='t'/%3E%3CfeColorMatrix in='t' type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 180px 180px;
   animation: grain-shift 1.6s steps(4) infinite;
 }
@@ -350,6 +353,7 @@ body.surface-paper-body::before {
   overflow: hidden;
   aspect-ratio: 3 / 4;
   isolation: isolate;
+  container-type: inline-size;
 }
 .plate--full { aspect-ratio: 16 / 10; }
 @media (max-width: 720px) {
@@ -445,11 +449,23 @@ body.surface-paper-body::before {
   z-index: 0;
   background: var(--paper-2);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   text-align: center;
   padding: var(--s3);
 }
+/* keeps the straddle headline legible where it overlaps the inset's
+   left edge, on both the placeholder and a real photo later (§4.4) */
+.plate__inset::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(90deg, var(--paper) 0%, transparent 22%);
+  opacity: .8;
+}
+.plate--dark .plate__inset::after { background: linear-gradient(90deg, var(--ink) 0%, transparent 22%); }
 .plate--dark .plate__photo-placeholder { background: #2a2a28; }
 .plate__photo-placeholder span {
   font-family: var(--font-bracket);
@@ -478,32 +494,59 @@ body.surface-paper-body::before {
   position: absolute;
   z-index: 2;
   margin: 0;
+  max-width: calc(100% - 2 * var(--s2));
+  overflow-wrap: break-word;
   font-family: var(--font-display);
   font-variation-settings: "opsz" 32;
   font-weight: 700;
   letter-spacing: -.045em;
   line-height: .88;
-  font-size: clamp(40px, 7vw, 96px);
+  /* vw-based fallback for browsers without container query units, then
+     the real sizing: relative to the PLATE's own width (cqi), not the
+     viewport — a plate in a two-up pair is much narrower than a
+     full-bleed one and must size its headline accordingly. */
+  font-size: clamp(32px, 7vw, 80px);
+  font-size: clamp(32px, 17cqi, 96px);
 }
-.plate__headline.is-huge { letter-spacing: -.055em; font-size: clamp(48px, 9vw, 150px); }
+.plate__headline.is-huge {
+  letter-spacing: -.055em;
+  font-size: clamp(36px, 7vw, 90px);
+  font-size: clamp(36px, 15cqi, 130px);
+}
 
-/* tonal fade: dark plates, headline dissolves into the photo's bright zone */
+/* tonal fade: dark plates, headline dissolves into the photo's bright zone.
+   --fade-pos is tuned per plate (inline style) once the real photo is in,
+   so the bright band lands on the image's actual bright zone; the grey
+   shoulders stay well above the ink so the headline is never unreadable
+   on a placeholder or an untuned photo. */
 .plate--dark .plate__headline.tech-fade {
+  --fade-pos: 50%;
   left: var(--s2);
   bottom: var(--s3);
   right: var(--s2);
-  text-transform: lowercase;
-  background: linear-gradient(90deg, #2a2a2a 0%, #2a2a2a 30%, #f4f4f2 52%, #2a2a2a 78%);
+  background: linear-gradient(90deg,
+    #6b6a67 0%,
+    #6b6a67 calc(var(--fade-pos) - 28%),
+    #f4f4f2 var(--fade-pos),
+    #6b6a67 calc(var(--fade-pos) + 30%),
+    #6b6a67 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
+.plate--dark .plate__headline.tech-fade.has-body-line { bottom: calc(var(--s3) + 2.2em); }
 
 /* straddle: paper plates, headline overlaps the inset photo's left edge */
 .plate--paper .plate__headline.tech-straddle {
-  left: var(--s2);
+  left: 44px;
   bottom: 22%;
+  max-width: 78%;
   color: var(--ink);
+  /* straddle headlines sit in a tighter column than tonal-fade ones
+     (the inset photo eats the right side), so they need their own,
+     smaller container-relative scale to avoid overflowing the plate */
+  font-size: clamp(24px, 6vw, 56px);
+  font-size: clamp(24px, 12cqi, 72px);
 }
 .plate--paper .plate__headline.tech-straddle .accent-dot { color: var(--accent); }
 
@@ -524,7 +567,10 @@ body.surface-paper-body::before {
 }
 .plate--dark .plate__definition .bracket { color: rgba(233, 231, 226, .7); }
 .plate__definition .def {
-  display: block;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
   font-family: var(--font-def);
   font-style: italic;
   font-size: 18px;
@@ -762,4 +808,40 @@ body.surface-paper-body::before {
   .caption-row__phrase { order: 3; flex-basis: 100%; }
   .plate__headline { font-size: clamp(32px, 10vw, 64px) !important; }
   .site-footer { flex-direction: column; gap: var(--s1); }
+}
+
+/* plates at mobile width: the rotated vertical meta strip is long enough
+   relative to a short 4:5 plate that it can run into the headline or
+   definition below it, so it goes horizontal and moves out of the way;
+   the wordmark's flanking rules collide with the index number in the
+   same corner, so they shrink; the definition's fixed line-height eats
+   a much bigger share of a short plate, so the straddle headline moves
+   up to clear it. */
+@media (max-width: 720px) {
+  .plate__wordmark {
+    font-size: 10px;
+    gap: 4px;
+    left: var(--s2);
+    right: 52px;
+    transform: none;
+    justify-content: center;
+  }
+  .plate__wordmark .rule { width: 18px; }
+
+  .plate__meta {
+    position: absolute;
+    top: 44px;
+    left: var(--s2);
+    right: var(--s2);
+    bottom: auto;
+    writing-mode: horizontal-tb;
+    transform: none;
+    font-size: 11px;
+    white-space: normal;
+  }
+
+  .plate--paper .plate__headline.tech-straddle { bottom: 34%; }
+
+  .plate__definition .bracket { font-size: 15px; }
+  .plate__definition .def { font-size: 15px; }
 }
