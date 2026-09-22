@@ -7,7 +7,7 @@
 <meta name="description" content="Probix Labs — a product lab promoting reproducible science." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..800;1,14..32,400..800&family=Inter+Tight:wght@500..600&family=Tinos:ital,wght@0,400;0,700;1,400&family=Instrument+Serif:ital@0;1&family=Noto+Serif+KR:wght@400..700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Tinos:ital,wght@0,400;0,700;1,400&family=Instrument+Serif:ital@0;1&family=Noto+Serif+KR:wght@400..700&display=swap" rel="stylesheet" />
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@latest/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="/assets/css/site.css" />
 </head>
@@ -16,33 +16,31 @@
 
 <!-- NAV: keep in sync across pages -->
 <nav class="site-nav surface-paper-thin" aria-label="primary">
-  <a href="/" class="site-nav__mark">/재민</a>
+  <a href="/" class="site-nav__mark">/ra</a>
   <div class="site-nav__links">
     <a href="/">home</a>
     <a href="/built/" aria-current="page">built</a>
     <a href="/initiatives/">initiatives</a>
-    <a href="/research/">research</a>
+    <a href="/research/">researches</a>
     <a href="/cv/">cv</a>
     <span class="site-nav__divider" aria-hidden="true">|</span>
     <a href="/diary.html">diary</a>
-    <a href="/shelf/">shelf</a>
     <a href="/contact/">contact</a>
   </div>
   <button class="site-nav__menu-btn" aria-expanded="false" aria-controls="mobile-menu">menu</button>
 </nav>
 <div class="site-nav__overlay surface-paper" id="mobile-menu">
   <div class="site-nav__overlay-top">
-    <a href="/" class="site-nav__mark">/재민</a>
+    <a href="/" class="site-nav__mark">/ra</a>
     <button class="site-nav__menu-btn site-nav__overlay-close">close</button>
   </div>
   <div class="site-nav__overlay-links">
     <a href="/">home</a>
     <a href="/built/">built</a>
     <a href="/initiatives/">initiatives</a>
-    <a href="/research/">research</a>
+    <a href="/research/">researches</a>
     <a href="/cv/">cv</a>
     <a href="/diary.html">diary</a>
-    <a href="/shelf/">shelf</a>
     <a href="/contact/">contact</a>
   </div>
 </div>
@@ -64,10 +62,10 @@
     <div class="plate__index">002<span class="tri" aria-hidden="true">▼</span></div>
     <div class="plate__meta"><b>(co-founder, coo)</b> ▾ — probix</div>
     <div class="plate__inset">
-      <div class="plate__photo-placeholder">
-        <span>TODO(ryan): archival lab / microscope photo — see CREDITS.md</span>
-      </div>
-      <div class="grade-warm" style="position:absolute; inset:0;"></div>
+      <picture>
+        <source srcset="/assets/img/plate-002.webp" type="image/webp" />
+        <img src="/assets/img/plate-002.jpg" alt="San Francisco skyline seen across the bay, downtown towers rising above the fog line." class="plate__photo grade-warm" width="2000" height="1026" loading="eager" fetchpriority="high" />
+      </picture>
     </div>
     <h2 class="plate__headline tech-straddle">Reproducible<span class="accent-dot">.</span></h2>
     <div class="plate__definition">

@@ -3,57 +3,66 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>_plates — scratch</title>
+<title>_plates — review</title>
 <meta name="robots" content="noindex" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..800;1,14..32,400..800&family=Inter+Tight:wght@500..600&family=Tinos:ital,wght@0,400;0,700;1,400&family=Instrument+Serif:ital@0;1&family=Noto+Serif+KR:wght@400..700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Tinos:ital,wght@0,400;0,700;1,400&family=Instrument+Serif:ital@0;1&family=Noto+Serif+KR:wght@400..700&display=swap" rel="stylesheet" />
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@latest/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="/assets/css/site.css" />
 <style>
-  .scratch-wrap { max-width: 1200px; margin: 0 auto; padding: var(--s3) var(--gutter); }
-  .scratch-wrap h1 { font-family: var(--font-label); font-size: 15px; }
-  .scratch-pair { margin-bottom: var(--s4); }
+  .review-wrap { max-width: 1200px; margin: 0 auto; padding: var(--s3) var(--gutter) var(--s5); }
+  .review-wrap h1 { font-family: var(--font-label); font-size: 15px; color: var(--ink-2); font-weight: 600; margin: 0 0 var(--s2); }
+  .review-note { font-family: var(--font-caption); font-size: 17px; color: var(--ink-2); max-width: 60ch; margin: 0 0 var(--s4); }
+  .review-tag {
+    font-family: var(--font-label); font-size: 13px; font-weight: 600; color: var(--ink-2);
+    margin: var(--s1) 0 6px; text-transform: lowercase;
+  }
 </style>
 </head>
 <body class="surface-paper-body">
 <div class="grain-global" aria-hidden="true"></div>
-<div class="scratch-wrap">
-<h1>_plates.html — checked against §4, delete before shipping (§7 step 7)</h1>
+<div class="review-wrap">
+  <h1>plate review — scratch page, not linked from nav</h1>
+  <p class="review-note">All nine content plates, now in the plate-002 straddle style throughout. Reload after any swap. Delete this file when done.</p>
 
-<div class="scratch-pair">
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:var(--s2); padding:0 var(--gutter);">
+    <p class="review-tag">001 · home hero</p>
+    <p class="review-tag">002 · probix (home)</p>
+  </div>
   <div class="plate-pair">
-
-    <!-- Plate 001 — home hero — dark, tonal fade -->
-    <figure class="plate plate--dark reveal">
-      <div class="local-grain" aria-hidden="true"></div>
-      <div class="plate__photo-placeholder">
-        <span>lone climber ridge black and white / summit clouds hiker</span>
-      </div>
-      <div class="plate__wordmark"><span class="rule"></span> ryan jaemin ahn&trade; <span class="rule"></span></div>
-      <div class="plate__index">001<span class="tri">▼</span></div>
-      <h2 class="plate__headline is-huge tech-fade">build responsibly.</h2>
-    </figure>
-
-    <!-- Plate 002 — Probix — paper, straddle + definition -->
-    <figure class="plate plate--paper reveal" data-reveal-delay="120">
+    <figure class="plate plate--paper reveal is-visible">
       <div class="plate__dust" aria-hidden="true">
         <svg viewBox="0 0 400 500" preserveAspectRatio="none">
-          <line x1="30" y1="60" x2="120" y2="420" stroke="#fff" stroke-opacity=".3" stroke-width="1"/>
-          <line x1="340" y1="20" x2="300" y2="200" stroke="#fff" stroke-opacity=".25" stroke-width="1"/>
-          <circle cx="60" cy="150" r="1.2" fill="#111" fill-opacity=".2"/>
-          <circle cx="250" cy="300" r="1" fill="#111" fill-opacity=".2"/>
-          <circle cx="180" cy="420" r="1.4" fill="#111" fill-opacity=".18"/>
+          <line x1="50" y1="30" x2="140" y2="380" stroke="#fff" stroke-opacity=".3" stroke-width="1"/>
+          <circle cx="80" cy="200" r="1.3" fill="#111" fill-opacity=".2"/>
         </svg>
       </div>
+      <div class="plate__kicker">ryan jaemin ahn</div>
+      <div class="plate__index">001<span class="tri" aria-hidden="true">▼</span></div>
+      <div class="plate__meta"><b>(8,849m)</b> ▾ — everest</div>
+      <div class="plate__inset">
+        <picture>
+          <source srcset="/assets/img/plate-001.webp" type="image/webp" />
+          <img src="/assets/img/plate-001.jpg" alt="" class="plate__photo grade-silver" width="2048" height="1536" loading="lazy" />
+        </picture>
+      </div>
+      <h2 class="plate__headline tech-straddle">Build responsibly<span class="accent-dot">.</span></h2>
+      <div class="plate__definition">
+        <span class="bracket">[verb]</span>
+        <span class="def">to make — with the consequences of making in mind.</span>
+      </div>
+    </figure>
+
+    <figure class="plate plate--paper reveal is-visible">
       <div class="plate__kicker">probix labs</div>
-      <div class="plate__index">002<span class="tri">▼</span></div>
+      <div class="plate__index">002<span class="tri" aria-hidden="true">▼</span></div>
       <div class="plate__meta"><b>(co-founder, coo)</b> ▾ — probix</div>
       <div class="plate__inset">
-        <div class="plate__photo-placeholder">
-          <span>laboratory 1920s public domain / scientist microscope vintage</span>
-        </div>
-        <div class="grade-warm" style="position:absolute; inset:0;"></div>
+        <picture>
+          <source srcset="/assets/img/plate-002.webp" type="image/webp" />
+          <img src="/assets/img/plate-002.jpg" alt="" class="plate__photo grade-warm" width="2000" height="1026" loading="lazy" />
+        </picture>
       </div>
       <h2 class="plate__headline tech-straddle">Reproducible<span class="accent-dot">.</span></h2>
       <div class="plate__definition">
@@ -61,45 +70,39 @@
         <span class="def">able to be obtained again — by someone else, following the same method.</span>
       </div>
     </figure>
-
   </div>
-  <div class="caption-row">
-    <span class="caption-row__label">ryan jaemin ahn</span>
-    <span class="caption-row__phrase">Builder, seventeen, Seoul.</span>
-    <span class="caption-row__num">01</span>
-  </div>
-</div>
 
-<div class="scratch-pair">
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:var(--s2); padding:0 var(--gutter); margin-top:var(--s4);">
+    <p class="review-tag">003 · stemise</p>
+    <p class="review-tag">004 · hackathons</p>
+  </div>
   <div class="plate-pair">
-
-    <!-- Plate 003 — STEMise — dark, tonal fade -->
-    <figure class="plate plate--dark reveal">
-      <div class="local-grain" aria-hidden="true"></div>
-      <div class="plate__photo-placeholder">
-        <span>horizon ocean black and white / crowd aerial black and white</span>
+    <figure class="plate plate--paper reveal is-visible">
+      <div class="plate__kicker">stemise</div>
+      <div class="plate__index">003<span class="tri" aria-hidden="true">▼</span></div>
+      <div class="plate__meta"><b>(4,500+)</b> ▾ — youths</div>
+      <div class="plate__inset">
+        <picture>
+          <source srcset="/assets/img/plate-003.webp" type="image/webp" />
+          <img src="/assets/img/plate-003.jpg" alt="" class="plate__photo grade-film" width="1920" height="1930" loading="lazy" />
+        </picture>
+        <div class="grade-film-overlay"></div>
       </div>
-      <div class="grade-film-overlay"></div>
-      <div class="plate__index">003<span class="tri">▼</span></div>
-      <div class="plate__body-line">4,500+ youths reached.</div>
-      <h2 class="plate__headline tech-fade has-body-line">132 nations.</h2>
+      <h2 class="plate__headline tech-straddle">132 nations<span class="accent-dot">.</span></h2>
+      <div class="plate__definition">
+        <span class="bracket">[noun]</span>
+        <span class="def">the ability to reach, or be present in, places you've never stood.</span>
+      </div>
     </figure>
 
-    <!-- Plate 004 — Hackathons — paper, straddle -->
-    <figure class="plate plate--paper reveal" data-reveal-delay="120">
-      <div class="plate__dust" aria-hidden="true">
-        <svg viewBox="0 0 400 500" preserveAspectRatio="none">
-          <line x1="350" y1="40" x2="280" y2="340" stroke="#fff" stroke-opacity=".28" stroke-width="1"/>
-          <circle cx="90" cy="90" r="1.3" fill="#111" fill-opacity=".2"/>
-          <circle cx="310" cy="440" r="1" fill="#111" fill-opacity=".18"/>
-        </svg>
-      </div>
-      <div class="plate__index">004<span class="tri">▼</span></div>
+    <figure class="plate plate--paper reveal is-visible">
+      <div class="plate__index">004<span class="tri" aria-hidden="true">▼</span></div>
       <div class="plate__meta"><b>(3 directed)</b> ▾ — hackathons</div>
       <div class="plate__inset">
-        <div class="plate__photo-placeholder">
-          <span>auditorium black and white / people working laptops hall</span>
-        </div>
+        <picture>
+          <source srcset="/assets/img/plate-004.webp" type="image/webp" />
+          <img src="/assets/img/plate-004.jpg" alt="" class="plate__photo grade-film" width="1600" height="1074" loading="lazy" />
+        </picture>
         <div class="grade-film-overlay"></div>
       </div>
       <h2 class="plate__headline tech-straddle">2,000+ builders<span class="accent-dot">.</span></h2>
@@ -108,37 +111,69 @@
         <span class="def">people who make things that didn't exist yesterday.</span>
       </div>
     </figure>
-
   </div>
-  <div class="caption-row">
-    <span class="caption-row__label">STEMise · Hackathons</span>
-    <span class="caption-row__phrase">STEM, everywhere it's missing.</span>
-    <span class="caption-row__num">03 / 04</span>
-  </div>
-</div>
 
-<div class="scratch-pair" style="max-width: 680px; margin: 0 auto var(--s4);">
-  <!-- Plate 005 — Research — dark, tonal fade -->
-  <figure class="plate plate--dark plate--full reveal">
-    <div class="local-grain" aria-hidden="true"></div>
-    <div class="plate__photo-placeholder">
-      <span>pancreatic tissue micrograph public domain / cells microscopy public domain (NIH / NCI Visuals Online)</span>
+  <p class="review-tag" style="margin-top:var(--s4);">005 · researches (PDAC)</p>
+  <figure class="plate plate--paper plate--full reveal is-visible" style="margin-bottom: var(--s4);">
+    <div class="plate__kicker">researches</div>
+    <div class="plate__index">005<span class="tri" aria-hidden="true">▼</span></div>
+    <div class="plate__meta"><b>(kras g12d)</b> ▾ — binding</div>
+    <div class="plate__inset">
+      <picture>
+        <source srcset="/assets/img/plate-005.webp" type="image/webp" />
+        <img src="/assets/img/plate-005.jpg" alt="" class="plate__photo grade-cyan" width="1024" height="1024" loading="lazy" />
+      </picture>
+      <div class="grade-cyan-overlay"></div>
     </div>
-    <div class="grade-cyan-overlay"></div>
-    <div class="plate__index">005<span class="tri">▼</span></div>
-    <h2 class="plate__headline tech-fade">PDAC.</h2>
+    <h2 class="plate__headline tech-straddle">PDAC<span class="accent-dot">.</span></h2>
     <div class="plate__definition">
       <span class="bracket">[abbrev.]</span>
       <span class="def">pancreatic ductal adenocarcinoma — the most common pancreatic cancer, and one of the hardest to catch early.</span>
     </div>
   </figure>
-  <div class="caption-row">
-    <span class="caption-row__label">Research</span>
-    <span class="caption-row__phrase">Pancreatic cancer, computationally.</span>
-    <span class="caption-row__num">05</span>
-  </div>
-</div>
 
+  <p class="review-tag">006 · cv</p>
+  <figure class="plate plate--paper plate--full reveal is-visible" style="margin-bottom: var(--s4);">
+    <div class="plate__kicker">roles &amp; projects</div>
+    <div class="plate__index">006<span class="tri" aria-hidden="true">▼</span></div>
+    <div class="plate__meta"><b>(3)</b> ▾ — roles</div>
+    <div class="plate__inset">
+      <picture>
+        <source srcset="/assets/img/plate-006.webp" type="image/webp" />
+        <img src="/assets/img/plate-006.jpg" alt="" class="plate__photo grade-cyan" width="1066" height="1600" loading="lazy" />
+      </picture>
+    </div>
+    <h2 class="plate__headline tech-straddle">cv<span class="accent-dot">.</span></h2>
+  </figure>
+
+  <p class="review-tag">008 · contact</p>
+  <figure class="plate plate--paper plate--full reveal is-visible" style="margin-bottom: var(--s4);">
+    <div class="plate__kicker">say hello</div>
+    <div class="plate__index">008<span class="tri" aria-hidden="true">▼</span></div>
+    <div class="plate__meta"><b>(37.57&deg; N)</b> ▾ — seoul</div>
+    <div class="plate__inset">
+      <picture>
+        <source srcset="/assets/img/plate-008.webp" type="image/webp" />
+        <img src="/assets/img/plate-008.jpg" alt="" class="plate__photo grade-warm" width="2048" height="1149" loading="lazy" />
+      </picture>
+    </div>
+    <h2 class="plate__headline tech-straddle">Reach out<span class="accent-dot">.</span></h2>
+  </figure>
+
+  <p class="review-tag">009 · diary</p>
+  <figure class="plate plate--paper plate--full reveal is-visible" style="margin-bottom: var(--s4);">
+    <div class="plate__kicker">entries</div>
+    <div class="plate__index">009<span class="tri" aria-hidden="true">▼</span></div>
+    <div class="plate__meta"><b>(2026&ndash;)</b> ▾ — ongoing</div>
+    <div class="plate__inset">
+      <picture>
+        <source srcset="/assets/img/plate-009.webp" type="image/webp" />
+        <img src="/assets/img/plate-009.jpg" alt="" class="plate__photo grade-film" width="1600" height="1068" loading="lazy" />
+      </picture>
+      <div class="grade-film-overlay"></div>
+    </div>
+    <h2 class="plate__headline tech-straddle">Diary<span class="accent-dot">.</span></h2>
+  </figure>
 </div>
 <script src="/assets/js/site.js" defer></script>
 </body>

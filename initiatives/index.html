@@ -7,7 +7,7 @@
 <meta name="description" content="STEMise and the international hackathons 재민 directs." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..800;1,14..32,400..800&family=Inter+Tight:wght@500..600&family=Tinos:ital,wght@0,400;0,700;1,400&family=Instrument+Serif:ital@0;1&family=Noto+Serif+KR:wght@400..700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Tinos:ital,wght@0,400;0,700;1,400&family=Instrument+Serif:ital@0;1&family=Noto+Serif+KR:wght@400..700&display=swap" rel="stylesheet" />
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@latest/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="/assets/css/site.css" />
 </head>
@@ -16,33 +16,31 @@
 
 <!-- NAV: keep in sync across pages -->
 <nav class="site-nav surface-paper-thin" aria-label="primary">
-  <a href="/" class="site-nav__mark">/재민</a>
+  <a href="/" class="site-nav__mark">/ra</a>
   <div class="site-nav__links">
     <a href="/">home</a>
     <a href="/built/">built</a>
     <a href="/initiatives/" aria-current="page">initiatives</a>
-    <a href="/research/">research</a>
+    <a href="/research/">researches</a>
     <a href="/cv/">cv</a>
     <span class="site-nav__divider" aria-hidden="true">|</span>
     <a href="/diary.html">diary</a>
-    <a href="/shelf/">shelf</a>
     <a href="/contact/">contact</a>
   </div>
   <button class="site-nav__menu-btn" aria-expanded="false" aria-controls="mobile-menu">menu</button>
 </nav>
 <div class="site-nav__overlay surface-paper" id="mobile-menu">
   <div class="site-nav__overlay-top">
-    <a href="/" class="site-nav__mark">/재민</a>
+    <a href="/" class="site-nav__mark">/ra</a>
     <button class="site-nav__menu-btn site-nav__overlay-close">close</button>
   </div>
   <div class="site-nav__overlay-links">
     <a href="/">home</a>
     <a href="/built/">built</a>
     <a href="/initiatives/">initiatives</a>
-    <a href="/research/">research</a>
+    <a href="/research/">researches</a>
     <a href="/cv/">cv</a>
     <a href="/diary.html">diary</a>
-    <a href="/shelf/">shelf</a>
     <a href="/contact/">contact</a>
   </div>
 </div>
@@ -52,15 +50,30 @@
 
   <div class="plate-pair">
 
-    <!-- Plate 003 — STEMise — dark, tonal fade -->
-    <figure class="plate plate--dark reveal">
-      <div class="local-grain" aria-hidden="true"></div>
-      <div class="plate__photo-placeholder">
-        <span>TODO(ryan): wide horizon / ocean or aerial crowd, black and white — see CREDITS.md</span>
+    <!-- Plate 003 — STEMise — paper, straddle -->
+    <figure class="plate plate--paper reveal">
+      <div class="plate__dust" aria-hidden="true">
+        <svg viewBox="0 0 400 500" preserveAspectRatio="none">
+          <line x1="40" y1="80" x2="110" y2="360" stroke="#fff" stroke-opacity=".28" stroke-width="1"/>
+          <circle cx="300" cy="120" r="1.3" fill="#111" fill-opacity=".2"/>
+          <circle cx="90" cy="440" r="1" fill="#111" fill-opacity=".18"/>
+        </svg>
       </div>
+      <div class="plate__kicker">stemise</div>
       <div class="plate__index">003<span class="tri" aria-hidden="true">▼</span></div>
-      <div class="plate__body-line">4,500+ youths reached.</div>
-      <h2 class="plate__headline tech-fade has-body-line">132 nations.</h2>
+      <div class="plate__meta"><b>(4,500+)</b> ▾ — youths</div>
+      <div class="plate__inset">
+        <picture>
+          <source srcset="/assets/img/plate-003.webp" type="image/webp" />
+          <img src="/assets/img/plate-003.jpg" alt="The full moon photographed from the Apollo 11 spacecraft, its cratered surface lit against black space." class="plate__photo grade-film" width="1920" height="1930" loading="eager" fetchpriority="high" />
+        </picture>
+        <div class="grade-film-overlay"></div>
+      </div>
+      <h2 class="plate__headline tech-straddle">132 nations<span class="accent-dot">.</span></h2>
+      <div class="plate__definition">
+        <span class="bracket">[noun]</span>
+        <span class="def">the ability to reach, or be present in, places you've never stood.</span>
+      </div>
     </figure>
 
     <!-- Plate 004 — Hackathons — paper, straddle -->
@@ -75,9 +88,10 @@
       <div class="plate__index">004<span class="tri" aria-hidden="true">▼</span></div>
       <div class="plate__meta"><b>(3 directed)</b> ▾ — hackathons</div>
       <div class="plate__inset">
-        <div class="plate__photo-placeholder">
-          <span>TODO(ryan): auditorium / people at laptops, black and white — see CREDITS.md</span>
-        </div>
+        <picture>
+          <source srcset="/assets/img/plate-004.webp" type="image/webp" />
+          <img src="/assets/img/plate-004.jpg" alt="Two boxers trade punches mid-bout in the ring, headgear and gloves connecting under the arena lights." class="plate__photo grade-film" width="1600" height="1074" loading="lazy" />
+        </picture>
         <div class="grade-film-overlay"></div>
       </div>
       <h2 class="plate__headline tech-straddle">2,000+ builders<span class="accent-dot">.</span></h2>
@@ -92,6 +106,25 @@
     <span class="caption-row__label">STEMise · Hackathons</span>
     <span class="caption-row__phrase">STEM, everywhere it's missing.</span>
     <span class="caption-row__num">03 / 04</span>
+  </div>
+
+  <div class="now-strip reveal">
+    <div class="now-strip__item">
+      <span class="now-strip__num" data-count-target="4500" data-count-suffix="+">0</span>
+      <span class="now-strip__label">youths reached</span>
+    </div>
+    <div class="now-strip__item">
+      <span class="now-strip__num" data-count-target="132">0</span>
+      <span class="now-strip__label">nations</span>
+    </div>
+    <div class="now-strip__item">
+      <span class="now-strip__num" data-count-target="200" data-count-prefix="$" data-count-suffix="k+">$0</span>
+      <span class="now-strip__label">raised in prizes</span>
+    </div>
+    <div class="now-strip__item">
+      <span class="now-strip__num" data-count-target="3">0</span>
+      <span class="now-strip__label">hackathons directed</span>
+    </div>
   </div>
 
   <div class="quiet-column">

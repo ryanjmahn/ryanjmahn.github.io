@@ -13,26 +13,34 @@ loaded by the page; only the converted markup is pasted into
 `404.html`. Retired from the main layout in the poster-plates revamp
 (§6) — survives only as a `console.log` easter egg and on `/404.html`.
 
-## Plate photography — TODO(ryan): not yet sourced
+## Plate photography
 
-I can't browse or download from Unsplash/Wikimedia Commons in this
-environment, so every plate below is a neutral grey placeholder block
-at the correct aspect ratio, per the build brief's §1.3 fallback. Drop
-a licensed photo into the path listed and remove the corresponding
-`.plate__photo-placeholder` block (swap in a `<picture>`/`<img
-class="plate__photo grade-...">`).
+All five plates now use real, licensed photographs (CC0 / public domain
+only, per §1.3). Sourced via the Openverse API (openverse.org), which
+indexes CC-licensed and public-domain work from Wikimedia Commons, the
+Library of Congress, StockSnap, and other open archives, plus direct
+from Wikimedia Commons. Each file below is graded in CSS per §4.5
+(`.grade-...` classes) — the source photos are unedited aside from
+resizing and WebP/JPEG export.
 
-| plate | path (once sourced) | grade | search terms |
-|---|---|---|---|
-| 001 — home hero | `assets/img/plate-001.webp` | `.grade-silver` | "lone climber ridge black and white", "summit clouds hiker" |
-| 002 — Probix | `assets/img/plate-002.webp` | `.grade-warm` | "laboratory 1920s public domain" (Wikimedia Commons), "scientist microscope vintage" |
-| 003 — STEMise | `assets/img/plate-003.webp` | `.grade-film` | "horizon ocean black and white", "crowd aerial black and white" |
-| 004 — Hackathons | `assets/img/plate-004.webp` | `.grade-film` | "auditorium black and white", "people working laptops hall" |
-| 005 — Research | `assets/img/plate-005.webp` | `.grade-cyan` | "pancreatic tissue micrograph public domain", "cells microscopy public domain" (Wikimedia Commons / NIH / NCI Visuals Online — verify PD/CC0 license explicitly before using) |
+| plate | path | grade | source | author | license |
+|---|---|---|---|---|---|
+| 001 — home hero | `assets/img/plate-001.{webp,jpg}` | `.grade-silver` | [WordPress Photo Directory, via Openverse](https://wordpress.org/photos/photo/8896a6efa0/) — Mount Everest's summit at sunrise | Bijay Kumal | CC0 1.0 |
+| 002 — Probix | `assets/img/plate-002.{webp,jpg}` | `.grade-warm` | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:San_Francisco_skyline_from_Marin_Headlands.jpg) — "San Francisco skyline from Marin Headlands" | Ryan Schwark | CC0 1.0 |
+| 003 — STEMise | `assets/img/plate-003.{webp,jpg}` | `.grade-film` | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:AS11-44-6667_-_Full_Moon_Photographed_From_Apollo_11_Spacecraft.jpg) — "Full Moon Photographed From Apollo 11 Spacecraft" | NASA | Public domain (US government work) |
+| 004 — Hackathons | `assets/img/plate-004.{webp,jpg}` | `.grade-film` | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:USMC-16033.jpg) — U.S. Armed Forces Sports boxing match | MC2 Elliott Fabrizio (U.S. Navy) | Public domain (US federal work) |
+| 005 — Research | `assets/img/plate-005.{webp,jpg}` | `.grade-cyan` | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Small_Molecule_Probe_Targeting_Cancer_(41658265005).jpg) — "Small Molecule Probe Targeting Cancer," fluorescence microscopy of cancer cells | NCATS Chemical Genomics Center (NIH) | Public domain (US federal work) |
+| 006 — CV | `assets/img/plate-006.{webp,jpg}` | `.grade-cyan` | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:TROPICS_Rocket_Launch_(KSC-20230507-PH-RLS01_0005-reupload).jpg) — a Rocket Lab launch, NASA/Kennedy Space Center | NASA / Kennedy Space Center | Public domain (US federal work) |
+| 008 — Contact | `assets/img/plate-008.{webp,jpg}` | `.grade-warm` | [WordPress Photo Directory, via Openverse](https://wordpress.org/photos/photo/416a282c7f/) — Lower Manhattan skyline at night | Manjil Aryal | CC0 1.0 |
+| 009 — Diary | `assets/img/plate-009.{webp,jpg}` | `.grade-film` | [StockSnap](https://stocksnap.io/photo/technology-airplane-S3V8HTDRDS) — "Technology Airplane," a wing at sunrise | Stefan Stefancik | CC0 1.0 |
 
-Licenses to use once sourced: Unsplash License, or Wikimedia
-Commons/NIH images marked public domain or CC0 only. Record each
-image's source URL, author, and license here as it's added.
+Exported at ≤2000px long edge, WebP (quality ~72–80) with a JPEG
+fallback in `<picture>`, per §4.5. Plate 005's original histology
+texture was swapped for a cleaner, higher-contrast microscopy shot;
+Plate 004's original photo was swapped for a real boxing-match action
+shot. The cv/contact/diary typographic plates (006/008/009), originally
+photo-less per the build brief's §2.4, now carry real photos too, at
+Ryan's request.
 
 ## Icons
 Home intro icon row (email / github / linkedin / diary) uses inline
