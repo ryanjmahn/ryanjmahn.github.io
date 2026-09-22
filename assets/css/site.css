@@ -109,8 +109,11 @@ button {
   100% { transform: translate(0, 0); }
 }
 
-/* paper fiber noise, shared by page body / nav / paper plates / mobile menu */
-.surface-paper {
+/* paper fiber noise, shared by page body / nav / paper plates / mobile
+   menu. .plate--paper gets it directly, same reasoning as .plate--dark
+   above — one class in markup, texture included. */
+.surface-paper,
+.plate--paper {
   background-color: var(--paper);
   background-image:
     radial-gradient(ellipse at 50% 40%, transparent 55%, rgba(60, 50, 40, .08) 100%),
@@ -119,10 +122,12 @@ button {
   background-repeat: no-repeat, no-repeat;
   position: relative;
 }
-.surface-paper::before {
+.surface-paper::before,
+.plate--paper::before {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 1;
   background: var(--warm-cast);
   opacity: .15;
   mix-blend-mode: multiply;
@@ -171,27 +176,36 @@ body.surface-paper-body::before {
   pointer-events: none;
 }
 
-/* dark surfaces: never pure black, always lit + grained + vignetted */
-.surface-dark {
+/* dark surfaces: never pure black, always lit + grained + vignetted.
+   .plate--dark gets this directly (rather than needing a second
+   .surface-dark class in markup); .surface-dark stays available for
+   any future non-plate dark section. */
+.surface-dark,
+.plate--dark {
   background-color: var(--ink);
   position: relative;
   color: var(--paper);
 }
-.surface-dark::before {
+.surface-dark::before,
+.plate--dark::before {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 1;
   background: radial-gradient(ellipse 70% 55% at 50% 38%, rgba(255, 255, 255, .10), transparent 70%);
   pointer-events: none;
 }
-.surface-dark::after {
+.surface-dark::after,
+.plate--dark::after {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 1;
   background: radial-gradient(ellipse at 50% 50%, transparent 50%, rgba(0, 0, 0, .45) 100%);
   pointer-events: none;
 }
-.surface-dark .local-grain {
+.surface-dark .local-grain,
+.plate--dark .local-grain {
   position: absolute;
   inset: 0;
   z-index: 2;
@@ -381,7 +395,8 @@ body.surface-paper-body::before {
   .plate, .plate--full { aspect-ratio: 4 / 5; }
 }
 
-.plate--dark { background: var(--ink); color: var(--paper); }
+/* .plate--dark's background/color/lighting come from the merged
+   .surface-dark rule above */
 .plate--paper { background: var(--paper); color: var(--ink); }
 
 .plate__wordmark {
