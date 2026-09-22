@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>research · 재민</title>
+<title>researches · 재민</title>
 <meta name="description" content="PDAC tumor segmentation and KRAS G12D cryptic-pocket prediction." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..800;1,14..32,400..800&family=Inter+Tight:wght@500..600&family=Tinos:ital,wght@0,400;0,700;1,400&family=Instrument+Serif:ital@0;1&family=Noto+Serif+KR:wght@400..700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Tinos:ital,wght@0,400;0,700;1,400&family=Instrument+Serif:ital@0;1&family=Noto+Serif+KR:wght@400..700&display=swap" rel="stylesheet" />
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@latest/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="/assets/css/site.css" />
 </head>
@@ -16,33 +16,31 @@
 
 <!-- NAV: keep in sync across pages -->
 <nav class="site-nav surface-paper-thin" aria-label="primary">
-  <a href="/" class="site-nav__mark">/재민</a>
+  <a href="/" class="site-nav__mark">/ra</a>
   <div class="site-nav__links">
     <a href="/">home</a>
     <a href="/built/">built</a>
     <a href="/initiatives/">initiatives</a>
-    <a href="/research/" aria-current="page">research</a>
+    <a href="/research/" aria-current="page">researches</a>
     <a href="/cv/">cv</a>
     <span class="site-nav__divider" aria-hidden="true">|</span>
     <a href="/diary.html">diary</a>
-    <a href="/shelf/">shelf</a>
     <a href="/contact/">contact</a>
   </div>
   <button class="site-nav__menu-btn" aria-expanded="false" aria-controls="mobile-menu">menu</button>
 </nav>
 <div class="site-nav__overlay surface-paper" id="mobile-menu">
   <div class="site-nav__overlay-top">
-    <a href="/" class="site-nav__mark">/재민</a>
+    <a href="/" class="site-nav__mark">/ra</a>
     <button class="site-nav__menu-btn site-nav__overlay-close">close</button>
   </div>
   <div class="site-nav__overlay-links">
     <a href="/">home</a>
     <a href="/built/">built</a>
     <a href="/initiatives/">initiatives</a>
-    <a href="/research/">research</a>
+    <a href="/research/">researches</a>
     <a href="/cv/">cv</a>
     <a href="/diary.html">diary</a>
-    <a href="/shelf/">shelf</a>
     <a href="/contact/">contact</a>
   </div>
 </div>
@@ -50,22 +48,33 @@
 
 <main class="page">
 
-  <!-- Plate 005 — Research — dark, tonal fade -->
-  <figure class="plate plate--dark plate--full reveal" style="margin: 0 var(--gutter);">
-    <div class="local-grain" aria-hidden="true"></div>
-    <div class="plate__photo-placeholder">
-      <span>TODO(ryan): pancreatic tissue micrograph, public domain / CC0 — see CREDITS.md</span>
+  <!-- Plate 005 — Research — paper, straddle -->
+  <figure class="plate plate--paper plate--full reveal" style="margin: 0 var(--gutter);">
+    <div class="plate__dust" aria-hidden="true">
+      <svg viewBox="0 0 800 500" preserveAspectRatio="none">
+        <line x1="70" y1="50" x2="150" y2="360" stroke="#fff" stroke-opacity=".3" stroke-width="1"/>
+        <circle cx="640" cy="130" r="1.2" fill="#111" fill-opacity=".2"/>
+        <circle cx="120" cy="420" r="1" fill="#111" fill-opacity=".18"/>
+      </svg>
     </div>
-    <div class="grade-cyan-overlay"></div>
+    <div class="plate__kicker">researches</div>
     <div class="plate__index">005<span class="tri" aria-hidden="true">▼</span></div>
-    <h2 class="plate__headline tech-fade">PDAC.</h2>
+    <div class="plate__meta"><b>(kras g12d)</b> ▾ — binding</div>
+    <div class="plate__inset">
+      <picture>
+        <source srcset="/assets/img/plate-005.webp" type="image/webp" />
+        <img src="/assets/img/plate-005.jpg" alt="Fluorescence microscopy image of cancer cells, nuclei glowing green and red against a black background." class="plate__photo grade-cyan" width="1024" height="1024" loading="eager" fetchpriority="high" />
+      </picture>
+      <div class="grade-cyan-overlay"></div>
+    </div>
+    <h2 class="plate__headline tech-straddle">PDAC<span class="accent-dot">.</span></h2>
     <div class="plate__definition">
       <span class="bracket">[abbrev.]</span>
       <span class="def">pancreatic ductal adenocarcinoma — the most common pancreatic cancer, and one of the hardest to catch early.</span>
     </div>
   </figure>
   <div class="caption-row" style="margin-top: var(--s1);">
-    <span class="caption-row__label">Research</span>
+    <span class="caption-row__label">Researches</span>
     <span class="caption-row__phrase">Pancreatic cancer, computationally.</span>
     <span class="caption-row__num">05</span>
   </div>

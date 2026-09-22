@@ -81,14 +81,14 @@ See the bottom of this file, updated as the build proceeds — kept in one place
 
 ### TODO list (live)
 
-- [ ] `assets/img/src/portrait.*` — need a real black-and-white portrait photo for the home intro column (4:5 crop). Using `assets/images/portrait.jpg` as a stand-in candidate if suitable, else placeholder.
-- [ ] Plate 001 photo — lone climber / ridge, B&W. Placeholder until sourced.
-- [ ] Plate 002 photo — archival lab/microscope scene. Placeholder until sourced.
-- [ ] Plate 003 photo — wide horizon/ocean/crowd aerial. Placeholder until sourced.
-- [ ] Plate 004 photo — auditorium/hall of people at laptops. Placeholder until sourced.
-- [ ] Plate 005 photo — public-domain microscopy/tissue image (verify PD/CC0 license explicitly). Placeholder until sourced.
+- [x] `assets/img/src/portrait.jpg` — real portrait photo in place, used on the home intro column.
+- [x] Plate 001 photo — sourced (lone hiker on a ridge, CC0). See CREDITS.md.
+- [x] Plate 002 photo — sourced (archival LOC lab photo, CC0). See CREDITS.md.
+- [x] Plate 003 photo — sourced (cloud horizon at dusk, CC0). See CREDITS.md.
+- [x] Plate 004 photo — sourced (empty auditorium seats, CC0). See CREDITS.md.
+- [x] Plate 005 photo — sourced (PDAC histopathology micrograph, CC0, Wikimedia Commons). See CREDITS.md.
 - [ ] Korean quote translation on Plate 002 — verify phrasing: `혁신만을 위해서가 아니라, 사회에 책임 있게 기여하기 위해 만든다.`
 - [ ] research/ — links/status for PDAC and KRAS G12D projects
 - [ ] cv/ — full CV content (education, roles, projects) and a PDF link
-- [ ] shelf/ — book list (none invented; empty until provided)
+- [x] shelf/ — removed at Ryan's request (2026-09-22); no reading-shelf section on the site anymore.
 - [ ] Icon set license — using inline Lucide-style 1px-stroke SVGs; note license in CREDITS.md
