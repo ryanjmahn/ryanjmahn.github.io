@@ -4,7 +4,8 @@
 Three modes, all sharing the same character ramp and cell proportions as the
 original portrait renderer:
 
-  photo  - full per-character color (the portrait itself)
+  photo  - full per-character color (the portrait itself); --plain drops the
+           color and leaves density alone to carry the tone (monochrome site)
   figure - plain text + <span class="hit"> on red-dominant cells (margin figures)
   strip  - procedural 3-row density texture, no source image needed
 
@@ -58,7 +59,7 @@ def char_for(r, g, b):
     return RAMP[idx]
 
 
-def render_photo(path, cols, crop_bottom):
+def render_photo(path, cols, crop_bottom, plain=False, bare=False):
     img = Image.open(path)
     if crop_bottom < 1.0:
         img = crop_top(img, crop_bottom)
@@ -68,9 +69,14 @@ def render_photo(path, cols, crop_bottom):
         parts = []
         for (r, g, b) in row:
             ch = char_for(r, g, b)
-            parts.append(" " if ch == " " else f'<span style="color:rgb({r},{g},{b})">{ch}</span>')
-        lines.append("".join(parts))
+            if ch == " " or plain:
+                parts.append(ch)
+            else:
+                parts.append(f'<span style="color:rgb({r},{g},{b})">{ch}</span>')
+        lines.append("".join(parts).rstrip())
     body = "\n".join(lines)
+    if bare:
+        return body
     return f'<pre class="ascii-portrait" role="img" aria-label="ASCII portrait of Ryan Jaemin Ahn">\n{body}\n</pre>'
 
 
@@ -109,6 +115,8 @@ def main():
     photo.add_argument("input")
     photo.add_argument("--cols", type=int, default=84)
     photo.add_argument("--crop-bottom", type=float, default=1.0, help="fraction of height to keep, from the top")
+    photo.add_argument("--plain", action="store_true", help="no per-character color (monochrome)")
+    photo.add_argument("--bare", action="store_true", help="text only, no <pre> wrapper (for console.log)")
 
     figure = sub.add_parser("figure", help="muted + red-hit conversion")
     figure.add_argument("input")
@@ -120,7 +128,7 @@ def main():
     args = p.parse_args()
 
     if args.mode == "photo":
-        print(render_photo(args.input, args.cols, args.crop_bottom))
+        print(render_photo(args.input, args.cols, args.crop_bottom, args.plain, args.bare))
     elif args.mode == "figure":
         print(render_figure(args.input, args.cols))
     elif args.mode == "strip":
