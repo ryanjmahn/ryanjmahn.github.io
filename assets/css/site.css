@@ -1,6 +1,8 @@
 /* =========================================================
-   tokens — poster plates system
-   only these six + the four grade presets in §4.5 are allowed
+   tokens — poster plates system, strict monochrome.
+   the five colors below are the whole palette. every other tone in
+   this file is derived from them with color-mix(); no other hex,
+   rgb() or hsl() values are allowed outside this block.
    ========================================================= */
 
 :root {
@@ -9,11 +11,6 @@
   --ink: #111110;
   --ink-2: #5B5A56;
   --rule: rgba(17, 17, 16, .18);
-  --accent: #B4442F; /* oxidized red. alternates: #2F5D8A (cyanotype), #8A6A2F (brass) */
-
-  --grade-cyan-tint: #2F5D8A;
-  --grade-film-warm: #C9A77C;
-  --warm-cast: #F3E9D8;
 
   --s1: 8px;
   --s2: 16px;
@@ -57,7 +54,7 @@ body {
 
 img { max-width: 100%; display: block; }
 
-::selection { background: var(--accent); color: var(--paper); }
+::selection { background: var(--ink); color: var(--paper); }
 
 a {
   color: inherit;
@@ -67,7 +64,7 @@ a {
   text-decoration-color: var(--rule);
   transition: color .2s var(--ease), text-decoration-color .2s var(--ease);
 }
-a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+a:hover { text-decoration-color: var(--ink); }
 
 :focus-visible {
   outline: 2px solid var(--ink);
@@ -116,7 +113,7 @@ button {
 .plate--paper {
   background-color: var(--paper);
   background-image:
-    radial-gradient(ellipse at 50% 40%, transparent 55%, rgba(60, 50, 40, .08) 100%),
+    radial-gradient(ellipse at 50% 40%, transparent 55%, color-mix(in srgb, var(--ink) 8%, transparent) 100%),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='4' stitchTiles='stitch' result='t'/%3E%3CfeColorMatrix in='t' type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='.6' intercept='.1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
   background-size: cover, 100% 100%;
   background-repeat: no-repeat, no-repeat;
@@ -128,7 +125,7 @@ button {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: var(--warm-cast);
+  background: var(--paper-2);
   opacity: .15;
   mix-blend-mode: multiply;
   pointer-events: none;
@@ -149,7 +146,7 @@ button {
   content: "";
   position: absolute;
   inset: 0;
-  background: var(--warm-cast);
+  background: var(--paper-2);
   opacity: .15;
   mix-blend-mode: multiply;
   pointer-events: none;
@@ -159,7 +156,7 @@ body { background: var(--paper); }
 body.surface-paper-body {
   background-color: var(--paper);
   background-image:
-    radial-gradient(ellipse at 50% 30%, transparent 55%, rgba(60, 50, 40, .08) 100%),
+    radial-gradient(ellipse at 50% 30%, transparent 55%, color-mix(in srgb, var(--ink) 8%, transparent) 100%),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='4' stitchTiles='stitch' result='t'/%3E%3CfeColorMatrix in='t' type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='.6' intercept='.1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
   background-size: cover, 100% 100%;
   background-repeat: no-repeat, no-repeat;
@@ -170,7 +167,7 @@ body.surface-paper-body::before {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: var(--warm-cast);
+  background: var(--paper-2);
   opacity: .15;
   mix-blend-mode: multiply;
   pointer-events: none;
@@ -192,7 +189,7 @@ body.surface-paper-body::before {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: radial-gradient(ellipse 70% 55% at 50% 38%, rgba(255, 255, 255, .10), transparent 70%);
+  background: radial-gradient(ellipse 70% 55% at 50% 38%, color-mix(in srgb, var(--paper) 10%, transparent), transparent 70%);
   pointer-events: none;
 }
 .surface-dark::after,
@@ -206,8 +203,8 @@ body.surface-paper-body::before {
      light on its own — this guarantees enough separation underneath
      them no matter what the photo is doing there. */
   background:
-    linear-gradient(to top, rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, .22) 22%, transparent 42%),
-    radial-gradient(ellipse at 50% 50%, transparent 50%, rgba(0, 0, 0, .45) 100%);
+    linear-gradient(to top, color-mix(in srgb, var(--ink) 50%, transparent) 0%, color-mix(in srgb, var(--ink) 22%, transparent) 22%, transparent 42%),
+    radial-gradient(ellipse at 50% 50%, transparent 50%, color-mix(in srgb, var(--ink) 45%, transparent) 100%);
   pointer-events: none;
 }
 .surface-dark .local-grain,
@@ -288,7 +285,7 @@ body.surface-paper-body::before {
 .site-nav__links a:hover { color: var(--ink); border-bottom-color: var(--rule); }
 .site-nav__links a[aria-current="page"] {
   color: var(--ink);
-  border-bottom: 1px solid var(--accent);
+  border-bottom: 1px solid var(--ink);
 }
 .site-nav__divider { color: var(--rule); }
 
@@ -327,7 +324,7 @@ body.surface-paper-body::before {
   letter-spacing: -.02em;
 }
 .site-nav__overlay-links a { text-decoration: none; color: var(--ink); }
-.site-nav__overlay-links a[aria-current="page"] { color: var(--accent); }
+.site-nav__overlay-links a[aria-current="page"] { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
 
 @media (max-width: 720px) {
   .site-nav__links { display: none; }
@@ -445,7 +442,7 @@ body.surface-paper-body::before {
   font-size: 20px;
   letter-spacing: -.02em;
 }
-.plate__index .tri { display: block; margin-top: 2px; color: var(--accent); font-size: 10px; }
+.plate__index .tri { display: block; margin-top: 2px; font-size: 10px; }
 
 .plate__meta {
   position: absolute;
@@ -469,20 +466,13 @@ body.surface-paper-body::before {
   object-fit: cover;
 }
 
-/* photo grade presets — the only four allowed */
-.grade-silver { filter: grayscale(1) contrast(1.2) brightness(.95); }
-.grade-warm   { filter: grayscale(1) sepia(.28) contrast(1.15); }
-.grade-cyan   { filter: grayscale(1) contrast(1.15); }
-.grade-film   { filter: saturate(.45) contrast(1.08) brightness(.97); }
-
-.grade-cyan-overlay, .grade-film-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-}
-.grade-cyan-overlay { background: var(--grade-cyan-tint); opacity: .22; mix-blend-mode: color; }
-.grade-film-overlay { background: var(--grade-film-warm); opacity: .10; mix-blend-mode: soft-light; }
+/* photo grade presets — the only two allowed. The image files are
+   already grayscale (tools/process-images.sh bakes it in), with their
+   blacks lifted to ~12% so that after this contrast curve the darkest
+   tone still lands around 4% rather than clipping to pure #000.
+   .grade-warm is for at most two paper plates. */
+.grade-silver { filter: grayscale(1) contrast(1.22) brightness(.95); }
+.grade-warm   { filter: grayscale(1) sepia(.18) contrast(1.15); }
 
 /* placeholder photo block — used until real licensed photography is dropped in */
 .plate__photo-placeholder {
@@ -508,7 +498,7 @@ body.surface-paper-body::before {
   opacity: .8;
 }
 .plate--dark .plate__inset::after { background: linear-gradient(90deg, var(--ink) 0%, transparent 22%); }
-.plate--dark .plate__photo-placeholder { background: #2a2a28; }
+.plate--dark .plate__photo-placeholder { background: color-mix(in srgb, var(--ink) 90%, var(--paper)); }
 .plate__photo-placeholder span {
   font-family: var(--font-bracket);
   font-style: italic;
@@ -516,7 +506,7 @@ body.surface-paper-body::before {
   color: var(--ink-2);
   max-width: 30ch;
 }
-.plate--dark .plate__photo-placeholder span { color: rgba(233, 231, 226, .55); }
+.plate--dark .plate__photo-placeholder span { color: color-mix(in srgb, var(--paper) 55%, transparent); }
 
 .plate__inset {
   position: absolute;
@@ -574,15 +564,15 @@ body.surface-paper-body::before {
   left: var(--s2);
   bottom: var(--s3);
   background: linear-gradient(90deg,
-    #201f1d 0%,
-    #201f1d calc(var(--fade-pos) - 26%),
-    #f8f8f6 var(--fade-pos),
-    #201f1d calc(var(--fade-pos) + 28%),
-    #201f1d 100%);
+    var(--ink) 0%,
+    var(--ink) calc(var(--fade-pos) - 26%),
+    var(--paper) var(--fade-pos),
+    var(--ink) calc(var(--fade-pos) + 28%),
+    var(--ink) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, .55));
+  filter: drop-shadow(0 2px 10px color-mix(in srgb, var(--ink) 55%, transparent));
 }
 .plate--dark .plate__headline.tech-fade.has-body-line { bottom: calc(var(--s3) + 2.2em); }
 
@@ -603,7 +593,6 @@ body.surface-paper-body::before {
   font-size: clamp(24px, 6vw, 56px);
   font-size: clamp(24px, 12cqi, 72px);
 }
-.plate--paper .plate__headline.tech-straddle .accent-dot { color: var(--accent); }
 
 .plate__definition {
   position: absolute;
@@ -620,7 +609,7 @@ body.surface-paper-body::before {
   color: var(--ink-2);
   margin-bottom: 4px;
 }
-.plate--dark .plate__definition .bracket { color: rgba(233, 231, 226, .7); }
+.plate--dark .plate__definition .bracket { color: color-mix(in srgb, var(--paper) 70%, transparent); }
 .plate__definition .def {
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -630,9 +619,9 @@ body.surface-paper-body::before {
   font-style: italic;
   font-size: 18px;
   letter-spacing: -.01em;
-  color: rgba(17, 17, 16, .85);
+  color: color-mix(in srgb, var(--ink) 85%, transparent);
 }
-.plate--dark .plate__definition .def { color: rgba(233, 231, 226, .85); }
+.plate--dark .plate__definition .def { color: color-mix(in srgb, var(--paper) 85%, transparent); }
 
 .plate__quote {
   position: absolute;
@@ -762,7 +751,7 @@ body.surface-paper-body::before {
   color: var(--ink);
 }
 .icon-row svg { width: 20px; height: 20px; }
-.icon-row a:hover { color: var(--accent); }
+.icon-row a:hover { color: var(--ink-2); }
 
 .portrait-frame {
   position: relative;
@@ -963,3 +952,7 @@ body.surface-paper-body::before {
   .plate__definition .bracket { font-size: 15px; }
   .plate__definition .def { font-size: 15px; }
 }
+
+/* dust + scratch marks: light scratches, dark specks, colored from tokens */
+.plate__dust line { stroke: var(--paper); }
+.plate__dust circle { fill: var(--ink); }
