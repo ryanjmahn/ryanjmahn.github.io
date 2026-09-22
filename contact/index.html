@@ -16,12 +16,12 @@
 
 <!-- NAV: keep in sync across pages -->
 <nav class="site-nav surface-paper-thin" aria-label="primary">
-  <a href="/" class="site-nav__mark">/ra</a>
+  <a href="/" class="site-nav__mark" aria-label="ryan jaemin ahn">/재민</a>
   <div class="site-nav__links">
     <a href="/">home</a>
     <a href="/built/">built</a>
     <a href="/initiatives/">initiatives</a>
-    <a href="/research/">researches</a>
+    <a href="/research/">research</a>
     <a href="/cv/">cv</a>
     <span class="site-nav__divider" aria-hidden="true">|</span>
     <a href="/diary.html">diary</a>
@@ -31,14 +31,14 @@
 </nav>
 <div class="site-nav__overlay surface-paper" id="mobile-menu">
   <div class="site-nav__overlay-top">
-    <a href="/" class="site-nav__mark">/ra</a>
+    <a href="/" class="site-nav__mark" aria-label="ryan jaemin ahn">/재민</a>
     <button class="site-nav__menu-btn site-nav__overlay-close">close</button>
   </div>
   <div class="site-nav__overlay-links">
     <a href="/">home</a>
     <a href="/built/">built</a>
     <a href="/initiatives/">initiatives</a>
-    <a href="/research/">researches</a>
+    <a href="/research/">research</a>
     <a href="/cv/">cv</a>
     <a href="/diary.html">diary</a>
     <a href="/contact/">contact</a>
@@ -46,27 +46,34 @@
 </div>
 <!-- /NAV -->
 
-<main class="page">
+<main class="page" id="main">
 
   <!-- Plate 008 — Contact — paper, straddle -->
-  <figure class="plate plate--paper plate--full reveal" style="margin: 0 var(--gutter);">
-    <div class="plate__dust" aria-hidden="true">
-      <svg viewBox="0 0 800 500" preserveAspectRatio="none">
-        <line x1="55" y1="70" x2="130" y2="350" stroke-opacity=".3" stroke-width="1"/>
-        <circle cx="680" cy="150" r="1.2" fill-opacity=".2"/>
-        <circle cx="160" cy="440" r="1" fill-opacity=".18"/>
-      </svg>
+  <figure class="plate-unit plate-unit--full reveal">
+    <div class="plate plate--paper plate--full">
+      <div class="plate__dust" aria-hidden="true">
+        <svg viewBox="0 0 800 500" preserveAspectRatio="none">
+          <line x1="55" y1="70" x2="130" y2="350" stroke-opacity=".3" stroke-width="1"/>
+          <circle cx="680" cy="150" r="1.2" fill-opacity=".2"/>
+          <circle cx="160" cy="440" r="1" fill-opacity=".18"/>
+        </svg>
+      </div>
+      <div class="plate__kicker">say hello</div>
+      <div class="plate__index">008<span class="tri" aria-hidden="true">▼</span></div>
+      <div class="plate__meta"><b>(37.57&deg; N)</b> ▾ — seoul</div>
+      <div class="plate__inset">
+        <picture>
+          <source srcset="/assets/img/plate-008.webp" type="image/webp" />
+          <img src="/assets/img/plate-008.jpg" alt="The Lower Manhattan skyline lit up at night, seen across the East River." class="plate__photo grade-warm" width="2048" height="1149" loading="eager" fetchpriority="high" />
+        </picture>
+      </div>
+      <h1 class="plate__headline tech-straddle">Reach out.</h1>
     </div>
-    <div class="plate__kicker">say hello</div>
-    <div class="plate__index">008<span class="tri" aria-hidden="true">▼</span></div>
-    <div class="plate__meta"><b>(37.57&deg; N)</b> ▾ — seoul</div>
-    <div class="plate__inset">
-      <picture>
-        <source srcset="/assets/img/plate-008.webp" type="image/webp" />
-        <img src="/assets/img/plate-008.jpg" alt="The Lower Manhattan skyline lit up at night, seen across the East River." class="plate__photo grade-warm" width="2048" height="1149" loading="eager" fetchpriority="high" />
-      </picture>
-    </div>
-    <h2 class="plate__headline tech-straddle">Reach out.</h2>
+    <figcaption class="caption-row">
+      <span class="caption-row__label">Contact</span>
+      <span class="caption-row__phrase">Seoul, and wherever email reaches.</span>
+      <span class="caption-row__num">08</span>
+    </figcaption>
   </figure>
 
   <div class="quiet-column">
