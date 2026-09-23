@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
+<script>document.documentElement.classList.add("js")</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>diary · 재민</title>
 <meta name="description" content="재민's diary — short entries, roughly chronological." />
@@ -14,36 +15,21 @@
 <body data-page="diary" class="surface-paper-body">
 <div class="grain-global" aria-hidden="true"></div>
 
-<!-- NAV: keep in sync across pages -->
+<!-- NAV: keep in sync across pages (only aria-current differs) -->
+<a class="skip-link" href="#main">Skip to content</a>
 <nav class="site-nav surface-paper-thin" aria-label="primary">
   <a href="/" class="site-nav__mark" aria-label="ryan jaemin ahn">/재민</a>
-  <div class="site-nav__links">
-    <a href="/">home</a>
-    <a href="/built/">built</a>
-    <a href="/initiatives/">initiatives</a>
-    <a href="/research/">research</a>
-    <a href="/cv/">cv</a>
-    <span class="site-nav__divider" aria-hidden="true">|</span>
-    <a href="/diary.html" aria-current="page">diary</a>
-    <a href="/contact/">contact</a>
-  </div>
-  <button class="site-nav__menu-btn" aria-expanded="false" aria-controls="mobile-menu">menu</button>
+  <button class="site-nav__toggle" type="button" aria-expanded="false" aria-controls="site-menu">menu</button>
+  <ul class="site-nav__links" id="site-menu">
+    <li><a href="/">home</a></li>
+    <li><a href="/built/">built</a></li>
+    <li><a href="/initiatives/">initiatives</a></li>
+    <li><a href="/research/">research</a></li>
+    <li><a href="/cv/">cv</a></li>
+    <li class="site-nav__sep"><a href="/diary.html" aria-current="page">diary</a></li>
+    <li><a href="/contact/">contact</a></li>
+  </ul>
 </nav>
-<div class="site-nav__overlay surface-paper" id="mobile-menu">
-  <div class="site-nav__overlay-top">
-    <a href="/" class="site-nav__mark" aria-label="ryan jaemin ahn">/재민</a>
-    <button class="site-nav__menu-btn site-nav__overlay-close">close</button>
-  </div>
-  <div class="site-nav__overlay-links">
-    <a href="/">home</a>
-    <a href="/built/">built</a>
-    <a href="/initiatives/">initiatives</a>
-    <a href="/research/">research</a>
-    <a href="/cv/">cv</a>
-    <a href="/diary.html">diary</a>
-    <a href="/contact/">contact</a>
-  </div>
-</div>
 <!-- /NAV -->
 
 <main class="page" id="main">

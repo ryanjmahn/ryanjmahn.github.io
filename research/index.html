@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
+<script>document.documentElement.classList.add("js")</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>research · 재민</title>
 <meta name="description" content="PDAC tumor segmentation and KRAS G12D cryptic-pocket prediction." />
@@ -15,36 +16,21 @@
 <body data-page="research" class="surface-paper-body">
 <div class="grain-global" aria-hidden="true"></div>
 
-<!-- NAV: keep in sync across pages -->
+<!-- NAV: keep in sync across pages (only aria-current differs) -->
+<a class="skip-link" href="#main">Skip to content</a>
 <nav class="site-nav surface-paper-thin" aria-label="primary">
   <a href="/" class="site-nav__mark" aria-label="ryan jaemin ahn">/재민</a>
-  <div class="site-nav__links">
-    <a href="/">home</a>
-    <a href="/built/">built</a>
-    <a href="/initiatives/">initiatives</a>
-    <a href="/research/" aria-current="page">research</a>
-    <a href="/cv/">cv</a>
-    <span class="site-nav__divider" aria-hidden="true">|</span>
-    <a href="/diary.html">diary</a>
-    <a href="/contact/">contact</a>
-  </div>
-  <button class="site-nav__menu-btn" aria-expanded="false" aria-controls="mobile-menu">menu</button>
+  <button class="site-nav__toggle" type="button" aria-expanded="false" aria-controls="site-menu">menu</button>
+  <ul class="site-nav__links" id="site-menu">
+    <li><a href="/">home</a></li>
+    <li><a href="/built/">built</a></li>
+    <li><a href="/initiatives/">initiatives</a></li>
+    <li><a href="/research/" aria-current="page">research</a></li>
+    <li><a href="/cv/">cv</a></li>
+    <li class="site-nav__sep"><a href="/diary.html">diary</a></li>
+    <li><a href="/contact/">contact</a></li>
+  </ul>
 </nav>
-<div class="site-nav__overlay surface-paper" id="mobile-menu">
-  <div class="site-nav__overlay-top">
-    <a href="/" class="site-nav__mark" aria-label="ryan jaemin ahn">/재민</a>
-    <button class="site-nav__menu-btn site-nav__overlay-close">close</button>
-  </div>
-  <div class="site-nav__overlay-links">
-    <a href="/">home</a>
-    <a href="/built/">built</a>
-    <a href="/initiatives/">initiatives</a>
-    <a href="/research/">research</a>
-    <a href="/cv/">cv</a>
-    <a href="/diary.html">diary</a>
-    <a href="/contact/">contact</a>
-  </div>
-</div>
 <!-- /NAV -->
 
 <main class="page" id="main">
@@ -86,7 +72,7 @@
       <li>
         <span class="gutter-label">segmentation</span>
         <div class="entry-body">
-          <p class="entry-title">PDAC tumor segmentation</p>
+          <h3 class="entry-title">PDAC tumor segmentation</h3>
           <dl class="study">
             <dt>problem</dt>
             <dd>PDAC tumors are small and low-contrast against the tissue around them, so outlining them by hand is slow and varies from reader to reader.</dd>
@@ -101,7 +87,7 @@
       <li>
         <span class="gutter-label">binding<br />prediction</span>
         <div class="entry-body">
-          <p class="entry-title">KRAS G12D cryptic-pocket prediction</p>
+          <h3 class="entry-title">KRAS G12D cryptic-pocket prediction</h3>
           <dl class="study">
             <dt>problem</dt>
             <dd>KRAS G12D is a common driver mutation in pancreatic cancer, and KRAS has few obvious drug-binding sites; cryptic pockets, which open only transiently, are one way in.</dd>
