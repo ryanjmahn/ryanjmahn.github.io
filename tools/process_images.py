@@ -29,7 +29,7 @@ from PIL import Image, ImageOps
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC = ROOT / "assets/img/src"
 OUT = ROOT / "assets/img"
-SIZES = (1600, 2000)  # long edge, px
+SIZES = (1000, 1600, 2000)  # long edge, px
 ASPECT = 3 / 4  # width / height of every plate photo
 BLACK_LIFT = 32  # 0-255; ~12.5%, lands at ~4% after the CSS grade
 AVIF_BUDGET = 180_000  # bytes

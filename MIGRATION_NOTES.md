@@ -81,14 +81,29 @@ See the bottom of this file, updated as the build proceeds — kept in one place
 
 ### TODO list (live)
 
-- [x] `assets/img/src/portrait.jpg` — real portrait photo in place, used on the home intro column.
-- [x] Plate 001 photo — sourced (lone hiker on a ridge, CC0). See CREDITS.md.
-- [x] Plate 002 photo — sourced (archival LOC lab photo, CC0). See CREDITS.md.
-- [x] Plate 003 photo — sourced (cloud horizon at dusk, CC0). See CREDITS.md.
-- [x] Plate 004 photo — sourced (empty auditorium seats, CC0). See CREDITS.md.
-- [x] Plate 005 photo — sourced (PDAC histopathology micrograph, CC0, Wikimedia Commons). See CREDITS.md.
-- [ ] Korean quote translation on Plate 002 — verify phrasing: `혁신만을 위해서가 아니라, 사회에 책임 있게 기여하기 위해 만든다.`
-- [ ] research/ — links/status for PDAC and KRAS G12D projects
-- [ ] cv/ — full CV content (education, roles, projects) and a PDF link
-- [x] shelf/ — removed at Ryan's request (2026-09-22); no reading-shelf section on the site anymore.
-- [ ] Icon set license — using inline Lucide-style 1px-stroke SVGs; note license in CREDITS.md
+Everything below is also marked `<!-- TODO(ryan): … -->` in the page source.
+
+- [ ] Korean line under the Probix pull quote (home + /built/) — machine-drafted, needs a native check: `혁신만을 위해서가 아니라, 사회에 책임 있게 기여하기 위해 만든다.` If you change it, re-run `tools/subset-fonts.sh`.
+- [ ] /built/ — your dates as co-founder/COO; 1–2 more sentences on what Probix ships and for whom; founding date, team size, current product status
+- [ ] /research/ — per study: dataset + imaging modality + metrics (PDAC), methods compared (KRAS G12D), status, collaborators, link/preprint (a commented-out `status` row is ready in each)
+- [ ] /initiatives/ — your role and dates at STEMise; hackathon names and years
+- [ ] /cv/ — education (commented-out row ready); a PDF link
+- [ ] home — the "latest writing" line is hand-maintained; update it when you add a diary entry
+- [x] shelf/ — removed at Ryan's request (2026-09-22); not in the nav.
+- [x] Icon set license — noted in CREDITS.md
+
+## Lighthouse (punch list item 39)
+
+Lighthouse 12, mobile emulation (default throttling), headless Chrome,
+served locally with gzip to approximate GitHub Pages. Run 2026-09-23.
+
+| page | Performance | Accessibility | Best Practices | SEO | LCP | CLS | TBT |
+|---|---|---|---|---|---|---|---|
+| `/` | 97 | 100 | 100 | 100 | 2.4 s | 0 | 0 ms |
+| `/built/` | 99 | 100 | 100 | 100 | 1.8 s | 0 | 0 ms |
+| `/research/` | 97 | 100 | 100 | 100 | 2.6 s | 0 | 0 ms |
+
+Remaining suggestions are all outside what the page can control or were
+accepted on purpose: short cache TTLs (GitHub Pages sets them),
+`plates.js` as a small render-blocking script (it has to pick the photo
+before first paint), and ~3 KB of unminified CSS.
