@@ -1,0 +1,99 @@
+{
+  "_comment": "crop + export spec per output file. src is in assets/img/src/. cx/cy = crop centre (0-1), zoom >= 1 crops tighter. aspect null = keep the original's aspect. sizes = long edges.",
+  "plate-001-a": {
+    "src": "plate-001-a.jpg",
+    "cx": 0.6
+  },
+  "plate-001-b": {
+    "src": "plate-001-b.jpg",
+    "cy": 0.4,
+    "zoom": 1.2,
+    "gamma": 0.55
+  },
+  "plate-001-c": {
+    "src": "plate-001-c.jpg",
+    "gamma": 0.55
+  },
+  "plate-002-a": {
+    "src": "plate-002-a.jpg"
+  },
+  "plate-002-b": {
+    "src": "plate-002-b.jpg"
+  },
+  "plate-002-c": {
+    "src": "plate-002-c.jpg"
+  },
+  "plate-003-a": {
+    "src": "plate-003-a.jpg"
+  },
+  "plate-003-b": {
+    "src": "plate-003-b.jpg"
+  },
+  "plate-003-c": {
+    "src": "plate-003-c.jpg",
+    "cx": 0.28
+  },
+  "plate-004-a": {
+    "src": "plate-004-a.jpg",
+    "zoom": 1.1
+  },
+  "plate-004-b": {
+    "src": "plate-004-b.jpg",
+    "zoom": 1.1
+  },
+  "plate-004-c": {
+    "src": "plate-004-c.jpg",
+    "cx": 0.55,
+    "zoom": 1.1,
+    "gamma": 0.48
+  },
+  "plate-005-a": {
+    "src": "plate-005-a.jpg",
+    "sizes": [
+      1600,
+      1840
+    ]
+  },
+  "plate-005-b": {
+    "src": "plate-005-b.jpg",
+    "sizes": [
+      1600,
+      1840
+    ]
+  },
+  "plate-005-c": {
+    "src": "plate-005-c.jpg",
+    "sizes": [
+      1600,
+      1840
+    ]
+  },
+  "plate-006": {
+    "src": "plate-006.jpg",
+    "aspect": null,
+    "sizes": [
+      1600
+    ]
+  },
+  "plate-008": {
+    "src": "plate-008.jpg",
+    "aspect": null,
+    "sizes": [
+      1600
+    ]
+  },
+  "plate-009": {
+    "src": "plate-009.jpg",
+    "aspect": null,
+    "sizes": [
+      1600
+    ]
+  },
+  "portrait": {
+    "src": "portrait.jpg",
+    "aspect": null,
+    "sizes": [
+      480
+    ]
+  }
+}
