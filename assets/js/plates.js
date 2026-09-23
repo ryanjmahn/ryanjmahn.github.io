@@ -25,7 +25,7 @@
 (function () {
   var PLATES = {
     "001": {
-      sizes: [1600, 2000], w: 1200, h: 1600, grade: "silver",
+      sizes: [1000, 1600, 2000], w: 1200, h: 1600, grade: "silver",
       variants: [
         { id: "a", scrim: "22%", fade: "50%", alt: "A lone hiker, tiny on a grassy slope under a sky filled with towering cumulus clouds." },
         { id: "b", scrim: "26%", fade: "50%", alt: "Two hikers, small on the skyline, crossing a wide grassy ridge beneath scattered clouds." },
@@ -33,7 +33,7 @@
       ]
     },
     "002": {
-      sizes: [1600, 2000], w: 1200, h: 1600, grade: "warm",
+      sizes: [1000, 1600, 2000], w: 1200, h: 1600, grade: "warm",
       variants: [
         { id: "a", scrim: "22%", fade: "50%", alt: "A wooden test tube rack, a row of identical holes above a row of identical drying pegs, on a plain white ground." },
         { id: "b", scrim: "22%", fade: "50%", alt: "A dark wooden test tube rack drilled with two rows of identical round holes, on a plain white ground." },
@@ -41,7 +41,7 @@
       ]
     },
     "003": {
-      sizes: [1600, 2000], w: 1200, h: 1600, grade: "warm",
+      sizes: [1000, 1600, 2000], w: 1200, h: 1600, grade: "warm",
       variants: [
         { id: "a", scrim: "26%", fade: "50%", alt: "A 19th-century engraved map of the western hemisphere, the Americas drawn inside a ruled circle of meridians." },
         { id: "b", scrim: "26%", fade: "50%", alt: "A 19th-century engraved map of the eastern hemisphere: Europe, Africa, Asia and Australia inside a circle of meridians." },
@@ -49,7 +49,7 @@
       ]
     },
     "004": {
-      sizes: [1600, 2000], w: 1200, h: 1600, grade: "silver",
+      sizes: [1000, 1600, 2000], w: 1200, h: 1600, grade: "silver",
       variants: [
         { id: "a", scrim: "22%", fade: "50%", alt: "An 1870s drafting room: architects seated around a long table covered in drawings, plaster casts on the wall behind them." },
         { id: "b", scrim: "22%", fade: "50%", alt: "The same 1870s drafting room from another angle, the team gathered at a table strewn with set squares and plans." },
@@ -57,7 +57,7 @@
       ]
     },
     "005": {
-      sizes: [1600, 1840], w: 1200, h: 1600, grade: "silver",
+      sizes: [1000, 1600, 1840], w: 1200, h: 1600, grade: "silver",
       variants: [
         { id: "a", scrim: "30%", fade: "50%", alt: "Micrograph of human pancreas: dense clusters of glandular cells divided by pale, branching bands of connective tissue." },
         { id: "b", scrim: "30%", fade: "50%", alt: "Micrograph of human pancreas, pale islets of hormone-producing cells scattered among darker glandular tissue." },
