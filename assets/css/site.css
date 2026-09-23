@@ -452,6 +452,11 @@ body.surface-paper-body::before {
   container-type: inline-size;
 }
 .plate--full { aspect-ratio: 16 / 10; }
+/* a poster wall has to read as a wall: cap plates so the caption row and
+   the top of the next section show on first paint */
+@media (min-width: 721px) {
+  .plate { width: 100%; max-height: 86vh; }
+}
 @media (max-width: 720px) {
   .plate, .plate--full { aspect-ratio: 4 / 5; }
 }
@@ -516,6 +521,9 @@ body.surface-paper-body::before {
   white-space: nowrap;
 }
 .plate__meta b { font-weight: 700; }
+/* the strip is rotated 180°, which would flip ▾ to ▴; turn the arrow
+   back so it matches the ▼ under the index number */
+.plate__meta .meta-arrow { display: inline-block; writing-mode: horizontal-tb; transform: rotate(180deg); }
 
 .plate__photo-frame { position: absolute; inset: 0; z-index: 0; }
 .plate__photo {
@@ -574,6 +582,14 @@ body.surface-paper-body::before {
 }
 @media (max-width: 720px) {
   .plate__inset { top: 10%; right: 6%; width: 60%; height: 72%; }
+}
+/* plate 001: the photo takes the right 55% and bleeds off the plate's
+   bottom and right edges; the headline overlaps its left edge */
+.plate__inset[data-plate="001"],
+.plate__inset[data-plate="001"] + .plate__advance { top: 12%; right: 0; bottom: 0; width: 55%; height: auto; }
+@media (max-width: 720px) {
+  .plate__inset[data-plate="001"],
+  .plate__inset[data-plate="001"] + .plate__advance { top: 10%; width: 62%; }
 }
 
 /* headline-meets-photo techniques — exactly one per plate */
@@ -685,9 +701,12 @@ body.surface-paper-body::before {
 .plate--dark .plate__definition .def,
 .plate--dark .plate__definition .sub { color: color-mix(in srgb, var(--paper) 85%, transparent); }
 
-/* pull quote: lives in the .plate-unit, not the .plate, so it can sit over
-   the plate's empty left column on wide screens and drop below the plate
+/* pull quote: lives in the .plate-unit, not the .plate, so on wide
+   screens it can share the plate's grid cell and sit in the bottom-left
+   quiet zone (under the definition), and on phones drop below the plate
    as a normal block where that column is too narrow to hold it */
+.plate-unit { display: grid; grid-template-columns: minmax(0, 1fr); }
+.plate-unit > .plate { grid-area: 1 / 1; }
 .plate__quote {
   margin: var(--s2) var(--s2) 0;
   max-width: 46ch;
@@ -695,26 +714,29 @@ body.surface-paper-body::before {
 .plate__quote p {
   margin: 0;
   font-family: var(--font-bracket);
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1.4;
 }
 .plate__quote .kr {
-  margin-top: var(--s1);
+  margin-top: 6px;
   font-family: var(--font-kr-sans);
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1.5;
   color: var(--ink-2);
 }
 @media (min-width: 721px) {
   .plate__quote {
-    position: absolute;
+    grid-area: 1 / 1;
+    align-self: end;
+    justify-self: start;
     z-index: 3;
-    top: 16%;
-    left: 44px;
-    width: 32%;
-    margin: 0;
+    width: 34%;
+    margin: 0 0 var(--s2) var(--s2);
   }
-  .plate-unit--full .plate__quote { left: calc(var(--gutter) + 44px); width: 30%; }
+  .plate-unit--full .plate__quote { width: 28%; }
+  /* make room: headline and definition move up the plate */
+  .plate--quoted .plate__headline.tech-straddle { bottom: 42%; }
+  .plate--quoted .plate__definition { bottom: 24%; }
 }
 
 .plate__body-line {
@@ -1045,6 +1067,7 @@ body.surface-paper-body::before {
   }
   .plate__wordmark .rule { width: 18px; }
 
+  .plate__meta .meta-arrow { transform: none; }
   .plate__meta {
     position: absolute;
     top: 44px;
