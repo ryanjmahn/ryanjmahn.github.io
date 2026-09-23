@@ -3,33 +3,61 @@
 
 (function nav() {
   var navEl = document.querySelector(".site-nav");
-  if (navEl) {
-    var setScrolled = function () {
-      navEl.classList.toggle("is-scrolled", window.scrollY > 8);
-    };
-    setScrolled();
-    window.addEventListener("scroll", setScrolled, { passive: true });
+  if (!navEl) return;
+  var setScrolled = function () {
+    navEl.classList.toggle("is-scrolled", window.scrollY > 8);
+  };
+  setScrolled();
+  window.addEventListener("scroll", setScrolled, { passive: true });
+
+  // Mobile menu: the same link list, shown full-screen. While open, focus
+  // is trapped in the nav, Esc closes, the page behind is inert and
+  // doesn't scroll, and focus returns to the toggle on close.
+  var toggle = navEl.querySelector(".site-nav__toggle");
+  var menu = document.getElementById("site-menu");
+  var main = document.getElementById("main");
+  if (!toggle || !menu) return;
+  var isOpen = false;
+
+  function focusables() {
+    return [navEl.querySelector(".site-nav__mark"), toggle].concat(
+      Array.prototype.slice.call(menu.querySelectorAll("a")));
   }
 
-  var menuBtn = document.querySelector(".site-nav__menu-btn");
-  var overlay = document.querySelector(".site-nav__overlay");
-  var closeBtn = document.querySelector(".site-nav__overlay-close");
-  if (menuBtn && overlay) {
-    var open = function () {
-      overlay.classList.add("is-open");
-      menuBtn.setAttribute("aria-expanded", "true");
-    };
-    var close = function () {
-      overlay.classList.remove("is-open");
-      menuBtn.setAttribute("aria-expanded", "false");
-      menuBtn.focus();
-    };
-    menuBtn.addEventListener("click", open);
-    if (closeBtn) closeBtn.addEventListener("click", close);
-    overlay.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") close();
-    });
+  function setOpen(open, restoreFocus) {
+    isOpen = open;
+    navEl.classList.toggle("is-open", open);
+    document.documentElement.classList.toggle("nav-open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.textContent = open ? "close" : "menu";
+    if (main) main.inert = open;
+    if (open) {
+      var first = menu.querySelector("a");
+      if (first) first.focus();
+    } else if (restoreFocus) {
+      toggle.focus();
+    }
   }
+
+  toggle.addEventListener("click", function () { setOpen(!isOpen, true); });
+
+  document.addEventListener("keydown", function (e) {
+    if (!isOpen) return;
+    if (e.key === "Escape") { e.preventDefault(); setOpen(false, true); return; }
+    if (e.key !== "Tab") return;
+    var items = focusables();
+    var i = items.indexOf(document.activeElement);
+    if (e.shiftKey && i <= 0) { e.preventDefault(); items[items.length - 1].focus(); }
+    else if (!e.shiftKey && i === items.length - 1) { e.preventDefault(); items[0].focus(); }
+  });
+
+  menu.addEventListener("click", function (e) {
+    if (isOpen && e.target.closest("a")) setOpen(false, false);
+  });
+
+  window.matchMedia("(min-width: 721px)").addEventListener("change", function (mq) {
+    if (mq.matches && isOpen) setOpen(false, false);
+  });
 })();
 
 (function reveal() {
