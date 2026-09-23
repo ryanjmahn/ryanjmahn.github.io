@@ -259,6 +259,8 @@ body.surface-paper-body::before {
 .site-nav.is-scrolled::after { opacity: 1; }
 
 .site-nav__mark {
+  position: relative;
+  z-index: 2;
   font-family: var(--font-kr-sans);
   font-weight: 600;
   font-size: 16px;
@@ -267,16 +269,22 @@ body.surface-paper-body::before {
   color: var(--ink);
 }
 
+/* one link list for every width: inline on desktop, a full-screen menu
+   on mobile (with JS), a wrapped row on mobile without JS */
 .site-nav__links {
   display: flex;
   align-items: center;
   gap: var(--s2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
   font-family: var(--font-label);
   font-size: 14px;
   font-weight: 500;
   letter-spacing: -.02em;
 }
 .site-nav__links a {
+  display: inline-block;
   text-decoration: none;
   color: var(--ink-2);
   padding-bottom: 4px;
@@ -287,48 +295,60 @@ body.surface-paper-body::before {
   color: var(--ink);
   border-bottom: 1px solid var(--ink);
 }
-.site-nav__divider { color: var(--rule); }
+.site-nav__sep {
+  padding-left: var(--s2);
+  border-left: 1px solid var(--rule);
+}
 
-.site-nav__menu-btn {
+.site-nav__toggle {
   display: none;
+  position: relative;
+  z-index: 2;
   font-family: var(--font-label);
   font-size: 14px;
   font-weight: 500;
   color: var(--ink);
+  padding: 8px 0 8px 8px;
 }
 
-.site-nav__overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-  flex-direction: column;
-  padding: var(--s2);
-}
-.site-nav__overlay.is-open { display: flex; }
-.site-nav__overlay-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 56px;
-}
-.site-nav__overlay-links {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: var(--s2);
+.skip-link {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  padding: 8px 14px;
+  background: var(--ink);
+  color: var(--paper);
   font-family: var(--font-label);
-  font-weight: 500;
-  font-size: 32px;
-  letter-spacing: -.02em;
+  font-size: 14px;
+  text-decoration: none;
+  transform: translateY(-160%);
 }
-.site-nav__overlay-links a { text-decoration: none; color: var(--ink); }
-.site-nav__overlay-links a[aria-current="page"] { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
+.skip-link:focus { transform: none; }
 
 @media (max-width: 720px) {
-  .site-nav__links { display: none; }
-  .site-nav__menu-btn { display: block; }
+  .site-nav { height: auto; min-height: 56px; flex-wrap: wrap; }
+  html:not(.js) .site-nav__links { flex-wrap: wrap; row-gap: 4px; padding: 4px 0 10px; }
+  html:not(.js) .site-nav__sep { padding-left: 0; border-left: 0; }
+
+  .js .site-nav__toggle { display: block; }
+  .js .site-nav__links { display: none; }
+  .js .site-nav.is-open .site-nav__links {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: var(--s2);
+    padding: var(--s2);
+    background: var(--paper);
+    font-size: 32px;
+  }
+  .js .site-nav.is-open .site-nav__links a { color: var(--ink); padding-bottom: 2px; }
+  .js .site-nav.is-open .site-nav__sep { padding-left: 0; border-left: 0; }
+  .nav-open, .nav-open body { overflow: hidden; }
 }
 
 /* =========================================================
@@ -745,6 +765,7 @@ body.surface-paper-body::before {
 
 /* research: problem / method / status per study */
 .entry-title {
+  margin: 0 0 var(--s1);
   font-family: var(--font-label);
   font-weight: 600;
   font-size: 19px;
@@ -948,15 +969,15 @@ body.surface-paper-body::before {
    motion
    ========================================================= */
 
-.reveal {
+.js .reveal {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity .7s var(--ease), transform .7s var(--ease);
 }
-.reveal.is-visible { opacity: 1; transform: translateY(0); }
+.js .reveal.is-visible { opacity: 1; transform: translateY(0); }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
   * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
 }
 
