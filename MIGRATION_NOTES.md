@@ -179,3 +179,19 @@ snow).
 | `/404.html` | 100 | 100 | 96 | 63 | 1.5 s | 0.001 |
 
 404's SEO/BP scores are the intended `noindex` and its 404 status.
+
+## After v3 (2026-09-24, at Ryan's request)
+
+- **All plates are blue.** Plate 001, contact and diary moved to the field
+  too, overriding v3's 1:2 paper rhythm. 001's snow photos are exposed
+  down so the light headline holds; its definition stays in the type
+  column. Pixel contrast check still 0 failures (1,024 text boxes).
+- **Dither, particles and ASCII are back**, deliberately this time
+  (`assets/js/texture.js`): a 2px Bayer dither in ice blue laid over each
+  plate's light, following the pointer and masked out of the type column
+  (not the old 9px cursor checkerboard); sparse dust motes drifting up
+  the page; ASCII density strips heading each navy sheet and the footer;
+  the home portrait is ASCII again and resolves from noise once per visit.
+  ASCII is drawn on canvas so it isn't read as tiny text by screen
+  readers or audits. Reduced motion: no particles, no animation.
+- Lighthouse after: home 99/100/100/100, contact 100/100/100/100.
