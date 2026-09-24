@@ -1,6 +1,6 @@
 // texture.js — the site's moving matter: an ordered-dither field in each
 // plate's light, dust motes drifting through it, ASCII density strips on
-// the reading surfaces, and the ASCII portrait resolving out of noise.
+// the reading sheets, and the ASCII portrait resolving out of noise.
 //
 // All of it is decoration: aria-hidden, pointer-events none, paused when
 // off-screen or in a background tab, and static (or absent) under
@@ -200,7 +200,7 @@
   }
 
   /* 3. ASCII density strips — three rows of type falling from dense to
-     sparse, heading each reading sheet and the footer. A few characters
+     sparse, heading each reading sheet. A few characters
      re-roll each tick, like film grain in type. */
   var BANDS = ["%#*@", "+=*-", ":.-. "];
   function stripRows(cols) {
@@ -245,8 +245,6 @@
     }, 140);
   }
   document.querySelectorAll(".sheet").forEach(function (s) { strip(s, false); });
-  var footer = document.querySelector(".site-footer");
-  if (footer) strip(footer, true);
 
   /* 4. ASCII portrait — the <pre> is the no-JS fallback; with JS it's
      drawn on a canvas sized to the frame, and resolves out of noise the
