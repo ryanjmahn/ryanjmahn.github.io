@@ -22,7 +22,6 @@
     built:       { dither: "lines",    particles: "lattice",       strip: ["[##]", "[==]", "[--]"], repeat: true },
     initiatives: { dither: "halftone", particles: "constellation", strip: ["@Oo.", "Oo. ", "o.  "] },
     research:    { dither: "stipple",  particles: "cells",         strip: ["ACGT", "ACGT", "acgt"] },
-    cv:          { dither: "bayer",    particles: "constellation", strip: ["01", "01", "0 1 "] },
     contact:     { dither: "halftone", particles: "ripples",       strip: ["~~=~", "~-~ ", "-.  "] },
     diary:       { dither: "stipple",  particles: "snow",          strip: ["abcdefg", "hijklmn", ".,;:' "] },
     "404":       { dither: "bayer",    particles: "dust",          strip: ["?!?#", "?-?.", ".?  "] }
