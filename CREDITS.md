@@ -26,9 +26,14 @@ downloaded from those pages, none from a screenshot. The untouched
 originals are in `assets/img/src/` under the output name; for files
 larger than 3840px, that's Wikimedia's 3840px rendition.
 
-Plate 001 sits on a paper plate (white quiet zones: snow and ice); plates
-002–005 and cv are dark plates (black quiet zones: silhouettes, night,
-caves), with a paper-coloured headline.
+Plate 001 sits on a paper plate (white quiet zones: snow and ice) and
+stays neutral black-and-white; plates 002–005 and cv are dark plates on
+the blue field, where the photo gets the `.grade-blueprint` duotone and
+blends `luminosity` over the field.
+
+## Blue-field reference
+`assets/img/src/backgrund.jpg` — Ryan's reference for the colour system.
+Not loaded by any page: the field is built in CSS and tuned against it.
 
 ### Regenerating the images
 
@@ -45,7 +50,8 @@ plate's 3:4 frame, converts to grayscale, levels (clipping 1% of shadows
 and 0.5% of highlights), applies an optional per-photo gamma so a plate's
 three variants carry the same tonal weight, then a steep S-curve for
 crushed blacks and clipped highlights. That baked grade is the final look;
-the CSS `.grade-silver` class only adds `grayscale(1)` as a safety net.
+on paper plates the CSS `.grade-silver` class only adds `grayscale(1)` as
+a safety net; on dark plates `.grade-blueprint` adds the blue duotone.
 Exports are AVIF + WebP + JPG at 1000/1600/2000px long edges, with AVIF
 stepped down in quality until each file is under ~180 KB.
 
