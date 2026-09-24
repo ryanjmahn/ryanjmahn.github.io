@@ -8,64 +8,25 @@ markup needs to change.
 
 ---
 
-## cv/index.html
-
-### Education
-
-Find:
-```html
-<span class="gutter-label">education</span>
-<div class="entry-body">
-  <p><!-- TODO(ryan): add school / grade / program --></p>
-</div>
-```
-
-Replace the `<p>` line with one paragraph per school/program (add more
-`<p>` tags for more than one):
-```html
-<p>[School name] — [grade/class, e.g. "11th grade"], [program or track, if any].</p>
-```
-Example:
-```html
-<p>Korea International School — 11th grade, STEM track.</p>
-```
-
-### CV PDF link
-
-Find:
-```html
-<p style="margin-top: var(--s3); font-family: var(--font-bracket); font-size: 15px; color: var(--ink-2);">
-  <!-- TODO(ryan): link a PDF version of this CV --> download cv (pdf) — coming soon
-</p>
-```
-Once you have a PDF, drop the file at `assets/cv-ryan-jaemin-ahn.pdf`
-and replace the whole `<p>` with:
-```html
-<p style="margin-top: var(--s3); font-family: var(--font-bracket); font-size: 15px; color: var(--ink-2);">
-  <a href="/assets/cv-ryan-jaemin-ahn.pdf">download cv (pdf) →</a>
-</p>
-```
-
----
-
 ## research/index.html
 
-Two `TODO(ryan)` comments, one per project, both inline after the
-existing sentence:
+Two entries: the NeurIPS paper (`#contaminated-ancestors`), then the KRAS
+G12D benchmark (`#kras-benchmark`).
+
+**Paper link.** When the OpenReview/proceedings page is live, replace
+the placeholder line (never link or host the submission PDF):
 ```html
-<p>PDAC tumor segmentation — CNN vs. transformer benchmarking. <!-- TODO(ryan): link / status --></p>
-...
-<p>KRAS G12D cryptic-pocket prediction — benchmarking study. <!-- TODO(ryan): link / status --></p>
+<p class="paper-link">Paper link coming after camera-ready.</p>
 ```
-If there's a paper, preprint, GitHub repo, or poster to link, replace
-the whole `<p>` with:
+with:
 ```html
-<p><a href="[url]" target="_blank" rel="noreferrer">PDAC tumor segmentation</a> — CNN vs. transformer benchmarking. [status, e.g. "in progress" / "preprint under review"]</p>
+<p class="paper-link"><a href="[openreview or proceedings url]" target="_blank" rel="noreferrer">read the paper ↗</a></p>
 ```
-If there's nothing to link yet, just swap the comment for a plain
-status word so it doesn't read as an oversight:
+
+**KRAS G12D benchmark.** When the submission lands, add the venue and
+paper link next to the code link:
 ```html
-<p>PDAC tumor segmentation — CNN vs. transformer benchmarking. (in progress)</p>
+<p class="paper-link"><a href="https://github.com/ryanjmahn/KRASG12DBenchmarking" target="_blank" rel="noreferrer">Code and data →</a> · <a href="[paper url]" target="_blank" rel="noreferrer">[venue] ↗</a></p>
 ```
 
 ---
