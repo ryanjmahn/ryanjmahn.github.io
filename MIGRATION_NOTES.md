@@ -84,10 +84,11 @@ See the bottom of this file, updated as the build proceeds — kept in one place
 Everything below is also marked `<!-- TODO(ryan): … -->` in the page source.
 
 - [ ] Korean line under the Probix pull quote (home + /built/) — machine-drafted, needs a native check: `혁신만을 위해서가 아니라, 사회에 책임 있게 기여하기 위해 만든다.` If you change it, re-run `tools/subset-fonts.sh`.
-- [ ] /built/ — your dates as co-founder/COO; 1–2 more sentences on what Probix ships and for whom; founding date, team size, current product status
-- [ ] /research/ — per study: dataset + imaging modality + metrics (PDAC), methods compared (KRAS G12D), status, collaborators, link/preprint (a commented-out `status` row is ready in each)
-- [ ] /initiatives/ — your role and dates at STEMise; hackathon names and years
-- [ ] /cv/ — education (commented-out row ready); a PDF link
+- [ ] /built/ — your dates as Co-Founder & COO; 1–2 more sentences on what Probix ships and for whom; founding date, team size, current product status
+- [ ] /research/ — paper: confirm the TAE workshop's full name; when the camera-ready PDF (with author names) arrives, host it and swap `Paper link coming after camera-ready.` for a `download paper (pdf) ↓` link; never host the anonymous "Do not distribute" submission copy. KRAS G12D: names of the three tools, status, any link (a commented-out `status` row is ready)
+- [ ] /research/ — plate 005 photos: new set per the trust brief (see the comment above the plate)
+- [ ] /initiatives/ — dates at STEMise and what a typical program looks like; year of each hackathon
+- [x] /cv/ — removed at Ryan's request (2026-09-24); not in the nav.
 - [ ] home — the "latest writing" line is hand-maintained; update it when you add a diary entry
 - [x] shelf/ — removed at Ryan's request (2026-09-22); not in the nav.
 - [x] Icon set license — noted in CREDITS.md
@@ -203,3 +204,101 @@ snow).
   diary — stipple, snow. Each reading panel closes with an ASCII echo of
   its plate photo. The strip floating above the footer is gone.
   Contrast check 0 failures; Lighthouse a11y/BP/SEO 100.
+
+## Content update — resume facts, research refocus, NeurIPS paper (2026-09-24)
+
+Content only; no visual-system changes beyond small hooks for the new
+copy (`.research-lede`, `.paper-venue`/`.paper-link`,
+`.highlights--facts`, `.hairline-list--next`, anchor `scroll-margin`).
+
+### Privacy calls (Ryan's, implemented as written)
+
+- **No phone number anywhere on the site** — not the CV page, not the
+  JSON-LD. Email only. (`grep` for digits-with-dashes / `tel:` is clean.)
+- **GPA and test scores are left off the public site.** A portfolio shows
+  what was built; scores belong in an application. The CV's education row
+  carries `<!-- TODO(ryan): confirm — GPA/SAT intentionally omitted -->`.
+  School and expected graduation are kept.
+- **The paper's PDF is not hosted.** The copy on hand is the anonymous
+  submission version, marked not for distribution. `/research/` shows
+  `Paper link coming after camera-ready.` until the official page exists.
+
+### Site record (resume is canonical — diff against it next pass)
+
+**Titles (exact resume wording)**
+- Founder & Executive Director, STEMise
+- Co-Founder & COO, Probix Labs
+- Organizer & Director, DSH Hacks & UnivaBio
+- Head of Journalism, Synthify (2024–present)
+- Project Intern, Project UNISON (2026), mentored by Prof. Mark Santolucito, Barnard College
+- Independent Research, Hanyang University, mentored by Prof. Se-Jin Hwang (2026–present)
+
+**STEMise** — 4,750+ youths, 130 nations, 6 continents · 130+ chapters
+across 35+ nations · 50+ staff led directly · $40k raised in sponsorship
+(Hudson River Trading and others) · 300k+ impressions from educational
+content
+
+**Hackathons** — 3 directed · 2,000+ participants · 80+ nations · 340+
+projects built · 120+ judges · $200k+ prizes · 15+ sponsors · 15+ staff led
+
+**Probix Labs** — product lab for reproducible science · 260+ waitlist
+signups · YC F26 Top 10% · Founders Inc Off Season Top 10% · $2,500 grant
+from Todd
+
+**Synthify** — 25+ writers across 15+ nations · 9 magazine editions · 60+
+published articles · 350+ copies to 50+ institutions in 5 nations · club
+membership +200%
+
+**Project UNISON** — AI pipeline generating an 8-week UN SDG curriculum
+tailored to age, learning field and personality type; AI × Biomedicine
+curriculum tied to UN SDG 3
+
+**Home now-strip** — `4,750+ youths reached` · `130 nations` ·
+`$200k+ in prizes` · `3 hackathons directed` (same four on /initiatives/)
+
+**Research (exactly two entries)**
+1. *Contaminated Ancestors: Seven Ways Our Own Evaluation Protocol Nearly
+   Told Us the Wrong Thing* — NeurIPS 2026 · TAE workshop · accepted.
+   Anchor `/research/#contaminated-ancestors` (linked from home).
+   Pull facts: `2/15 vs 2/15`, `0.048 → 0.952`, `11`.
+2. KRAS G12D Switch-II pocket, three-tool benchmark across conformational
+   states in PDAC (Hanyang University). Anchor `#kras-benchmark`.
+   Tools: fpocket, P2Rank, PocketMiner; code and data at
+   github.com/ryanjmahn/KRASG12DBenchmarking.
+- Removed: PDAC tumor segmentation / CNN-vs-transformer (discontinued) —
+  from /research/, /cv/, CONTENT_TEMPLATES.md.
+- Plate 005: headline `Trust, measured.` (alternates `Check the checker.` /
+  `Verify.` in a comment), `PDAC.` definition block retired, caption
+  `Research · Can you trust what the method says? · 05`, meta
+  `(2 studies) — trust`. OG image regenerated with the new headline.
+  The cave photos stay until a new set is sourced (brief in the comment
+  above the plate).
+
+**Education** — Yongsan International School of Seoul, expected May 2027.
+
+**Honors (verbatim)** — NeurIPS TAE '26 acceptance; YC F26 Top 10%;
+Founders Inc Off Season Top 10%; National Merit Commended Scholar; AP
+Scholar with Distinction; 2026 Korean Youth Honor Society Achievement
+Award; 2025 Korean Youth Honor Society Best Writer Award; 2024 Korean
+Science Olympiad Engineering Challenge, 3rd Place Team.
+
+**Languages** — English & Korean native; Spanish & Chinese intermediate.
+
+### Consistency grep
+
+`4,500`, `132 nations`, `segmentation`, `transformer`, `PDAC.` — no hits
+in any page, script or CONTENT_TEMPLATES.md. The remaining hits are in
+the earlier build briefs (`personal-revamp.md`, `revamp2.0.md`,
+`portfolio-fix-pass-2.md`, `portfolio-polish-prompt.md`,
+`assets/portfolio-punchlist.md`) and in the "Facts and copy" audit at the
+top of this file; those are historical records and were left as written.
+
+## /cv/ removed (2026-09-24, at Ryan's request)
+
+The page, its nav link on every page, its sitemap entry, share image,
+plate 006 photo set (and its CREDITS row), and its texture/contrast-check
+entries are gone. Content that lived only there is no longer on the site:
+education (Yongsan International School of Seoul, expected May 2027), the
+honors list, and the languages line. The record of them above stays as
+reference. The GPA/SAT TODO marker went with the page; no scores appear
+anywhere on the site.
