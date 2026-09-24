@@ -284,6 +284,41 @@ body.surface-field::before {
   padding: var(--s1) 0 var(--s2);
   background: var(--navy);
 }
+/* contact + diary: the reading sheet itself is lit by the field. The
+   light comes up from the bottom-right corner and a navy shade holds the
+   centred text column, so body text still sits on navy (A6). */
+.sheet--field {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: var(--abyss);
+  background-image: var(--field-base);
+}
+.sheet--field::before,
+.sheet--field::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+.sheet--field::before {
+  inset: -12%;
+  background: var(--field-light);
+  filter: blur(60px);
+  animation: field-drift 60s ease-in-out infinite alternate;
+}
+.sheet--field::after {
+  inset: 0;
+  background:
+    radial-gradient(ellipse 46% 70% at 50% 45%, color-mix(in srgb, var(--navy) 86%, transparent) 0%, color-mix(in srgb, var(--navy) 70%, transparent) 60%, transparent 100%),
+    radial-gradient(ellipse at 70% 80%, transparent 45%, color-mix(in srgb, var(--abyss) 55%, transparent) 100%);
+}
+@media (prefers-reduced-motion: reduce) { .sheet--field::before { animation: none; } }
+@media (max-width: 720px) {
+  .sheet--field::after {
+    background: linear-gradient(to bottom, color-mix(in srgb, var(--navy) 88%, transparent) 0%, color-mix(in srgb, var(--navy) 75%, transparent) 70%, transparent 100%);
+  }
+}
 .sheet > .quiet-column { margin-top: var(--s4); padding-bottom: var(--s4); }
 .sheet > .intro-block { padding-top: var(--s4); }
 .sheet > .latest-writing { padding-bottom: var(--s4); }
