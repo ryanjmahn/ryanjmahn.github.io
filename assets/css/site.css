@@ -1082,4 +1082,6 @@ body.surface-field::before {
 
 /* ASCII density strips heading the reading sheets (canvas) */
 .ascii-strip { display: block; margin: var(--s2) var(--s2) 0; pointer-events: none; }
+/* ASCII echo of the section's plate photo, closing its reading panel */
+.ascii-echo { display: block; margin: var(--s4) 0 0; pointer-events: none; }
 .ascii-portrait-canvas { display: block; }
