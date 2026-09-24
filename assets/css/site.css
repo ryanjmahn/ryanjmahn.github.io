@@ -1187,6 +1187,28 @@ body.surface-field::before {
   color: var(--on-dark-2);
 }
 
+/* research: the paper entry — serif intro line, venue, pull facts */
+.research-lede {
+  margin: 0 0 var(--s4);
+  font-family: var(--font-caption);
+  font-size: 24px;
+  line-height: 1.35;
+  color: var(--on-dark);
+}
+.paper-venue,
+.paper-link {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: .01em;
+  color: var(--on-dark-2);
+}
+.highlights--facts { margin: var(--s3) 0; }
+.highlights--facts .highlights__label { font-family: var(--font-caption); font-size: 17px; }
+/* a second project after the outbound block (built) */
+.hairline-list--next { margin-top: var(--s5); }
+/* anchors land below the sticky nav */
+.hairline-list > li[id] { scroll-margin-top: 72px; }
+
 /* social links with their names, not bare icons */
 .icon-row--labelled { flex-wrap: wrap; gap: var(--s1) var(--s3); }
 .icon-row--labelled a {
