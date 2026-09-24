@@ -42,6 +42,8 @@
   --font-bracket: "Tinos", "Times New Roman", Times, serif;
   --font-caption: "Instrument Serif", "Tinos", "Times New Roman", Times, serif;
   --font-kr-sans: "Pretendard", "Instrument Sans", sans-serif;
+  /* reading text: the sans, not the condensed display serif */
+  --font-text: "Instrument Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   /* the one light source. It rises from the bottom and peaks low-right,
      behind the photos, so the left column where every plate keeps its
@@ -110,9 +112,9 @@ html {
 body {
   margin: 0;
   color: var(--on-dark);
-  font-family: var(--font-caption);
-  font-size: 19px;
-  line-height: 1.5;
+  font-family: var(--font-text);
+  font-size: 18px;
+  line-height: 1.65;
   background: var(--abyss);
   position: relative;
 }
@@ -453,7 +455,7 @@ body.surface-field::before {
 }
 
 .quiet-column {
-  max-width: 680px;
+  max-width: 640px;
   margin: var(--s5) auto 0;
   padding: 0 var(--s2) var(--s5);
 }
@@ -477,12 +479,14 @@ body.surface-field::before {
 }
 
 .gutter-label {
-  font-family: var(--font-bracket);
-  font-size: 15px;
+  font-family: var(--font-text);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: .01em;
   color: var(--on-dark-2);
-  padding-top: .2em;
+  padding-top: .3em;
 }
-.entry-body { margin: 0; font-size: 19px; line-height: 1.5; }
+.entry-body { margin: 0; font-size: 18px; line-height: 1.65; }
 .entry-body p { margin: 0 0 var(--s2); }
 .entry-body p:last-child { margin-bottom: 0; }
 .entry-body a { text-decoration-color: var(--rule-on-dark); }
@@ -654,6 +658,9 @@ body.surface-field::before {
   color: var(--ink-2);
   margin-bottom: 4px;
 }
+/* keep definitions inside the navy-shaded type column */
+.plate--dark .plate__definition { max-width: min(42ch, 48%); }
+@media (max-width: 720px) { .plate--dark .plate__definition { max-width: calc(100% - 2 * var(--s2)); } }
 .plate--dark .plate__definition .bracket { color: var(--on-dark-2); }
 .plate__definition .sub {
   display: block;
@@ -665,6 +672,7 @@ body.surface-field::before {
 }
 .plate__definition .def {
   display: block;
+  line-height: 1.45;
   font-family: var(--font-def);
   font-style: italic;
   font-size: 18px;
@@ -687,15 +695,15 @@ body.surface-field::before {
 .plate__quote p {
   margin: 0;
   color: var(--on-dark);
-  font-family: var(--font-bracket);
+  font-family: var(--font-text);
   font-size: 16px;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 .plate__quote .kr {
   margin-top: 6px;
   font-family: var(--font-kr-sans);
-  font-size: 12px;
-  line-height: 1.5;
+  font-size: 13px;
+  line-height: 1.6;
   color: var(--on-dark-2);
 }
 @media (min-width: 721px) {
@@ -802,10 +810,12 @@ body.surface-field::before {
   margin: 0;
 }
 .study dt {
-  font-family: var(--font-bracket);
-  font-size: 15px;
+  font-family: var(--font-text);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: .01em;
   color: var(--on-dark-2);
-  padding-top: .25em;
+  padding-top: .3em;
 }
 .study dd { margin: 0; }
 @media (max-width: 560px) {
@@ -824,7 +834,7 @@ body.surface-field::before {
   border-bottom: 1px solid var(--on-dark);
   text-decoration: none;
 }
-.outbound__label { font-family: var(--font-bracket); font-size: 15px; color: var(--on-dark-2); }
+.outbound__label { font-family: var(--font-text); font-size: 14px; font-weight: 500; color: var(--on-dark-2); }
 .outbound__url {
   flex: 1;
   font-family: var(--font-display);
@@ -880,9 +890,9 @@ body.surface-field::before {
 }
 .intro-block__bio {
   margin: var(--s2) 0 0;
-  font-family: var(--font-caption);
-  font-size: 19px;
-  line-height: 1.5;
+  font-family: var(--font-text);
+  font-size: 18px;
+  line-height: 1.65;
   max-width: 46ch;
 }
 .icon-row {
@@ -954,8 +964,8 @@ body.surface-field::before {
 .now-strip__label {
   display: block;
   margin-top: var(--s1);
-  font-family: var(--font-caption);
-  font-size: 16px;
+  font-family: var(--font-text);
+  font-size: 15px;
   color: var(--on-dark-2);
 }
 @media (max-width: 720px) {
@@ -969,8 +979,8 @@ body.surface-field::before {
   display: flex;
   align-items: baseline;
   gap: var(--s2);
-  font-family: var(--font-bracket);
-  font-size: 17px;
+  font-family: var(--font-text);
+  font-size: 16px;
 }
 .latest-writing .date { color: var(--on-dark-2); }
 .latest-writing .all-posts { margin-left: auto; font-family: var(--font-label); font-size: 14px; }
@@ -984,8 +994,8 @@ body.surface-field::before {
   justify-content: space-between;
   margin: 0 var(--gutter);
   padding: var(--s3) var(--s2) var(--s4);
-  font-family: var(--font-caption);
-  font-size: 15px;
+  font-family: var(--font-text);
+  font-size: 14px;
   color: var(--on-dark-2);
   /* the deepest end of the field, fading into the abyss */
   background: linear-gradient(to bottom, var(--navy), var(--abyss));
@@ -1042,8 +1052,8 @@ body.surface-field::before {
   .plate--paper .plate__headline.tech-straddle,
   .plate--dark .plate__headline.tech-straddle { bottom: 29%; }
 
-  .plate__definition .bracket { font-size: 15px; }
-  .plate__definition .def { font-size: 15px; }
+  .plate__definition .bracket { font-size: 16px; }
+  .plate__definition .def { font-size: 16px; line-height: 1.45; }
   .plate__definition .sub { font-size: 18px; }
 }
 
@@ -1120,3 +1130,7 @@ body.surface-field::before {
 /* ASCII echo of the section's plate photo, closing its reading panel */
 .ascii-echo { display: block; margin: var(--s4) 0 0; pointer-events: none; }
 .ascii-portrait-canvas { display: block; }
+
+@media (max-width: 560px) {
+  body, .entry-body, .intro-block__bio { font-size: 17px; }
+}
