@@ -33,7 +33,7 @@
       ]
     },
     "002": {
-      sizes: [1000, 1600, 2000], w: 1200, h: 1600, grade: "silver",
+      sizes: [1000, 1600, 2000], w: 1200, h: 1600, grade: "blueprint",
       variants: [
         { id: "a", scrim: "22%", fade: "50%", alt: "A photographer and tripod silhouetted against a pale, glowing horizon at dusk." },
         { id: "b", scrim: "22%", fade: "50%", alt: "A tiny figure on a ridge, silhouetted against a bright band of sky under dark cloud." },
@@ -41,7 +41,7 @@
       ]
     },
     "003": {
-      sizes: [1000, 1600, 2000], w: 1200, h: 1600, grade: "silver",
+      sizes: [1000, 1600, 2000], w: 1200, h: 1600, grade: "blueprint",
       variants: [
         { id: "a", scrim: "22%", fade: "50%", alt: "A lone figure silhouetted on a hilltop against a starfield and a glowing horizon." },
         { id: "b", scrim: "22%", fade: "50%", alt: "A figure with a headlamp standing under the Milky Way, a thin beam of light cutting the dark." },
@@ -49,7 +49,7 @@
       ]
     },
     "004": {
-      sizes: [1000, 1600, 2000], w: 1200, h: 1600, grade: "silver",
+      sizes: [1000, 1600, 2000], w: 1200, h: 1600, grade: "blueprint",
       variants: [
         { id: "a", scrim: "22%", fade: "50%", alt: "A kayaker silhouetted in the glare of a low sun on open water." },
         { id: "b", scrim: "22%", fade: "50%", alt: "Two tiny paddlers on a flat horizon under a pale, empty sky." },
@@ -57,7 +57,7 @@
       ]
     },
     "005": {
-      sizes: [1000, 1600, 2000], w: 1200, h: 1600, grade: "silver",
+      sizes: [1000, 1600, 2000], w: 1200, h: 1600, grade: "blueprint",
       variants: [
         { id: "a", scrim: "22%", fade: "50%", alt: "A tiny figure on a cave ledge beneath a vast, slanting shaft of daylight." },
         { id: "b", scrim: "22%", fade: "50%", alt: "Inside an immense cave, a small figure on the rocks under a column of light pouring through the roof." },
