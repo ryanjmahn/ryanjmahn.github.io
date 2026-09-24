@@ -4,21 +4,21 @@
 <meta charset="UTF-8" />
 <script>document.documentElement.classList.add("js")</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>research · 재민</title>
-<meta name="description" content="PDAC tumor segmentation and KRAS G12D cryptic-pocket prediction." />
+<title>research · NeurIPS 2026 TAE paper · 재민</title>
+<meta name="description" content="Accepted to the NeurIPS 2026 TAE workshop: Contaminated Ancestors, an audit of our own evaluation protocol. Plus a KRAS G12D Switch-II pocket benchmark." />
 <link rel="canonical" href="https://ryanjmahn.github.io/research/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ryan jaemin ahn" />
-<meta property="og:title" content="research · 재민" />
-<meta property="og:description" content="PDAC tumor segmentation and KRAS G12D cryptic-pocket prediction." />
+<meta property="og:title" content="research · NeurIPS 2026 TAE paper · 재민" />
+<meta property="og:description" content="Accepted to the NeurIPS 2026 TAE workshop: Contaminated Ancestors, an audit of our own evaluation protocol. Plus a KRAS G12D Switch-II pocket benchmark." />
 <meta property="og:url" content="https://ryanjmahn.github.io/research/" />
 <meta property="og:image" content="https://ryanjmahn.github.io/assets/img/og/research.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="A tiny figure at a cave opening under a shaft of light, with the headline “PDAC.”" />
+<meta property="og:image:alt" content="A tiny figure at a cave opening under a shaft of light, with the headline “Trust, measured.”" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="research · 재민" />
-<meta name="twitter:description" content="PDAC tumor segmentation and KRAS G12D cryptic-pocket prediction." />
+<meta name="twitter:title" content="research · NeurIPS 2026 TAE paper · 재민" />
+<meta name="twitter:description" content="Accepted to the NeurIPS 2026 TAE workshop: Contaminated Ancestors, an audit of our own evaluation protocol. Plus a KRAS G12D Switch-II pocket benchmark." />
 <meta name="twitter:image" content="https://ryanjmahn.github.io/assets/img/og/research.jpg" />
 <meta name="theme-color" content="#00050F" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -64,47 +64,53 @@
 
   <h1 class="sr-only">research</h1>
 
+  <!-- COPY: headline alternates — "Trust, measured." (chosen) / "Check the checker." / "Verify." -->
+  <!-- PHOTO BRIEF (TODO(ryan)): the cave photos predate the trust framing. Replace with a subject about scrutiny
+       or verification, same rules as every plate (tiny figure, atmosphere, crushed blacks): a figure under a single
+       inspection light, a dark archive of identical drawers or ledgers, a lone figure in a vast instrument hall.
+       Queries: "dark archive drawers black and white", "figure under inspection light", "observatory interior silhouette". -->
   <!-- Plate 005 — Research — paper, straddle -->
   <figure class="plate-unit plate-unit--full reveal">
     <div class="plate plate--dark plate--full">
       <div class="local-grain" aria-hidden="true"></div>
       <div class="plate__kicker">research</div>
       <div class="plate__index">005<span class="tri" aria-hidden="true">▼</span></div>
-      <div class="plate__meta"><b>(kras g12d)</b> <span class="meta-arrow" aria-hidden="true">▾</span> — binding</div>
+      <div class="plate__meta"><b>(2 studies)</b> <span class="meta-arrow" aria-hidden="true">▾</span> — trust</div>
       <div class="plate__inset" data-plate="005" data-sizes="(max-width: 720px) 68vw, 52vw" data-load="high">
         <script>plateInset()</script>
         <noscript><picture><source type="image/avif" srcset="/assets/img/plate-005-a-1000.avif 750w, /assets/img/plate-005-a-1600.avif 1200w, /assets/img/plate-005-a-2000.avif 1500w" sizes="(max-width: 720px) 68vw, 52vw" /><source type="image/webp" srcset="/assets/img/plate-005-a-1000.webp 750w, /assets/img/plate-005-a-1600.webp 1200w, /assets/img/plate-005-a-2000.webp 1500w" sizes="(max-width: 720px) 68vw, 52vw" /><img src="/assets/img/plate-005-a-1000.jpg" srcset="/assets/img/plate-005-a-1000.jpg 750w, /assets/img/plate-005-a-1600.jpg 1200w, /assets/img/plate-005-a-2000.jpg 1500w" sizes="(max-width: 720px) 68vw, 52vw" alt="A tiny figure on a cave ledge beneath a vast, slanting shaft of daylight." class="plate__photo grade-blueprint" width="1200" height="1600" loading="eager" fetchpriority="high" /></picture></noscript>
       </div>
-      <h2 class="plate__headline tech-straddle">PDAC.</h2>
-      <p class="plate__definition">
-        <span class="bracket">[abbrev.]</span>
-        <span class="def">pancreatic ductal adenocarcinoma — the most common pancreatic cancer, and one of the hardest to catch early.</span>
-      </p>
+      <h2 class="plate__headline tech-straddle">Trust, measured.</h2>
     </div>
     <figcaption class="caption-row">
       <span class="caption-row__label">Research</span>
-      <span class="caption-row__phrase">Pancreatic cancer, computationally.</span>
+      <span class="caption-row__phrase">Can you trust what the method says?</span>
       <span class="caption-row__num">05</span>
     </figcaption>
   </figure>
 
   <section class="sheet">
 
+    <p class="research-lede">Two projects, one question: when a computational result has no outside referee, what makes it trustworthy?</p>
+
   <div class="quiet-column">
     <ul class="hairline-list">
-      <li>
-        <span class="gutter-label">segmentation</span>
+      <li id="contaminated-ancestors">
+        <span class="gutter-label">paper</span>
         <div class="entry-body">
-          <h3 class="entry-title">PDAC tumor segmentation</h3>
-          <dl class="study">
-            <dt>problem</dt>
-            <dd>PDAC tumors are small and low-contrast against the tissue around them, so outlining them by hand is slow and varies from reader to reader.</dd>
-            <dt>method</dt>
-            <dd>Benchmarking convolutional (CNN) and transformer segmentation models against each other on the same task. <!-- TODO(ryan): dataset, imaging modality (CT / MRI), metrics --></dd>
-            <!-- TODO(ryan): status (in progress / submitted / published), collaborators, link or preprint — then uncomment:
-            <dt>status</dt>
-            <dd>…</dd> -->
-          </dl>
+          <h3 class="entry-title">Contaminated Ancestors: Seven Ways Our Own Evaluation Protocol Nearly Told Us the Wrong Thing</h3>
+          <!-- TODO(ryan): confirm the workshop's full name and add the OpenReview/proceedings link when it's live.
+               Do not host the PDF: the copy on hand is the anonymous submission version, marked not for distribution. -->
+          <p class="paper-venue">NeurIPS 2026 · TAE workshop · accepted</p>
+          <p><strong>What we were doing.</strong> Ancestral reconstruction infers what a protein looked like millions of years ago, assuming every lineage has one parent. When two histories have merged, the method doesn't fail loudly — it returns a confident chimera. We built a detector for that, then wrote the paper about our evaluation instead of our result.</p>
+          <p><strong>What we found.</strong> Our detector flagged 2 of 15 contaminated cases — and 2 of 15 in a control with nothing to find, because a calibrated test is <em>supposed</em> to fire at its threshold on empty data. What really separated signal from noise was where the flag landed: 81% overlap with the true block, versus 8% for the control. Six more failures followed, from an unchecked sign convention that inverted a score (0.048 where the truth was 0.952) to seed noise larger than every effect we studied. Plain string comparison even beat the neural network (36/40 vs 11/40), and a laptop GPU silently turned p = 0.030 into p = 1.000.</p>
+          <p><strong>Why it matters.</strong> Scientific ML often has one dataset, one lab, a few seeds, and nobody outside positioned to check. A protocol can be locally correct and globally misleading, and still get published. The paper closes with an 11-question checklist any lab can run on its own protocol — none of it requires the biology.</p>
+          <ul class="highlights highlights--facts">
+            <li><span class="highlights__big">2/15 vs 2/15</span><span class="highlights__label">detection rate on real contamination versus on nothing at all</span></li>
+            <li><span class="highlights__big">0.048 → 0.952</span><span class="highlights__label">a score inverted by an unchecked sign convention</span></li>
+            <li><span class="highlights__big">11</span><span class="highlights__label">questions in the resulting protocol checklist</span></li>
+          </ul>
+          <p class="paper-link">Paper link coming after camera-ready.</p>
         </div>
       </li>
       <li>
