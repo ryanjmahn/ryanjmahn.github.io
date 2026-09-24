@@ -26,10 +26,9 @@ downloaded from those pages, none from a screenshot. The untouched
 originals are in `assets/img/src/` under the output name; for files
 larger than 3840px, that's Wikimedia's 3840px rendition.
 
-Plate 001 sits on a paper plate (white quiet zones: snow and ice) and
-stays neutral black-and-white; plates 002–005 and cv are dark plates on
-the blue field, where the photo gets the `.grade-blueprint` duotone and
-blends `luminosity` over the field.
+Every plate sits on the blue field: the photo gets the `.grade-blueprint`
+duotone and blends `luminosity` over it. Plate 001's snow/ice photos are
+also exposed down (`brightness(.58)`) so a light headline holds on them.
 
 ## Blue-field reference
 `assets/img/src/backgrund.jpg` — Ryan's reference for the colour system.
