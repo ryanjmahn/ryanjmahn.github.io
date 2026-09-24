@@ -195,3 +195,11 @@ snow).
   ASCII is drawn on canvas so it isn't read as tiny text by screen
   readers or audits. Reduced motion: no particles, no animation.
 - Lighthouse after: home 99/100/100/100, contact 100/100/100/100.
+- **Per-section textures (2026-09-24).** Each section's dither, particles
+  and ASCII now echo its subject (table in `assets/js/texture.js`,
+  `SECTIONS`): built — line screen, lockstep lattice, repeated `[##]`;
+  initiatives — halftone, constellation; research — stipple, drifting
+  cells, `ACGT`; cv — constellation, `01`; contact — halftone, ripples;
+  diary — stipple, snow. Each reading panel closes with an ASCII echo of
+  its plate photo. The strip floating above the footer is gone.
+  Contrast check 0 failures; Lighthouse a11y/BP/SEO 100.
