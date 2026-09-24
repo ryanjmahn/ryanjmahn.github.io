@@ -128,7 +128,8 @@ a {
   text-decoration-line: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
-  text-decoration-color: var(--rule-on-dark);
+  text-decoration-color: var(--on-dark-2);
+  text-underline-offset: 4px;
   transition: color .2s var(--ease), text-decoration-color .2s var(--ease);
 }
 a:hover { text-decoration-color: var(--on-dark); }
@@ -497,7 +498,7 @@ body.surface-field::before {
 .entry-body { margin: 0; font-size: 18px; line-height: 1.65; }
 .entry-body p { margin: 0 0 var(--s2); }
 .entry-body p:last-child { margin-bottom: 0; }
-.entry-body a { text-decoration-color: var(--rule-on-dark); }
+.entry-body a { text-decoration-color: var(--on-dark-2); }
 
 /* =========================================================
    plate component
@@ -1144,3 +1145,43 @@ body.surface-field::before {
 @media (max-width: 560px) {
   body, .entry-body, .intro-block__bio { font-size: 17px; }
 }
+
+/* =========================================================
+   hierarchy: paragraphs a step softer, the facts that matter at full
+   strength, so they're what the eye lands on
+   ========================================================= */
+.entry-body,
+.intro-block__bio,
+.study dd { color: color-mix(in srgb, var(--on-dark) 84%, transparent); }
+.entry-body strong,
+.intro-block__bio strong,
+.study dd strong { color: var(--on-dark); font-weight: 600; }
+.entry-body a strong { font-weight: 600; }
+
+/* recognition / key numbers as a highlight row */
+.highlights {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--s2) var(--s3);
+}
+.highlights li { border-top: 1px solid var(--rule-on-dark); padding-top: var(--s1); }
+.highlights__big {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 30px;
+  letter-spacing: -.04em;
+  line-height: 1.1;
+  color: var(--on-dark);
+}
+.highlights__label {
+  display: block;
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--on-dark-2);
+}
+
