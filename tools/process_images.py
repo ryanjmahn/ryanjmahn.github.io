@@ -6,12 +6,13 @@ For every entry in tools/images.json:
   1. open the untouched original from assets/img/src/
   2. crop to the plate's 3:4 frame (crop centre + zoom from the manifest, so
      every variant of a plate is framed the same way)
-  3. grayscale -> contrast curve (auto-levels, 0.5% clip each end), plus an
+  3. grayscale -> levels (clip 1% of shadows, 0.5% of highlights) ->
      optional per-photo "gamma" so the three variants of a plate carry the
-     same overall tonal weight (<1 lightens, >1 darkens)
-  4. lift the blacks to ~12% so that after the CSS grade (.grade-silver:
-     contrast 1.22, brightness .95) the darkest tone lands near 4%, not #000
-  5. resize to each long edge in SIZES and export AVIF + WebP + JPG
+     same tonal weight (<1 lightens, >1 darkens) -> a steep S-curve
+     ("contrast", default 7): crushed blacks, clipped highlights, very
+     little mid-grey. This is the final look; the CSS grade class only
+     adds grayscale(1) as a safety net.
+  4. resize to each long edge in SIZES and export AVIF + WebP + JPG
 
 AVIF quality is stepped down until the file fits AVIF_BUDGET, which keeps
 the random hero (plate 001, the LCP element) under ~180 KB whichever
@@ -21,6 +22,7 @@ Requires Pillow >= 11 with AVIF support (pip install pillow).
 """
 
 import json
+import math
 import pathlib
 import sys
 
@@ -31,16 +33,18 @@ SRC = ROOT / "assets/img/src"
 OUT = ROOT / "assets/img"
 SIZES = (1000, 1600, 2000)  # long edge, px
 ASPECT = 3 / 4  # width / height of every plate photo
-BLACK_LIFT = 32  # 0-255; ~12.5%, lands at ~4% after the CSS grade
+CONTRAST = 7  # S-curve steepness; higher = less mid-grey
 AVIF_BUDGET = 180_000  # bytes
 
 
-def grade(img, gamma=1.0):
+def grade(img, gamma=1.0, contrast=CONTRAST):
     img = ImageOps.grayscale(img)
-    img = ImageOps.autocontrast(img, cutoff=0.5)
+    img = ImageOps.autocontrast(img, cutoff=(1.0, 0.5))
     if gamma != 1.0:
         img = img.point(lambda v: round(255 * (v / 255) ** gamma))
-    return img.point(lambda v: BLACK_LIFT + v * (255 - BLACK_LIFT) // 255)
+    lo = 1 / (1 + math.exp(contrast / 2))
+    hi = 1 / (1 + math.exp(-contrast / 2))
+    return img.point(lambda v: round(255 * ((1 / (1 + math.exp(-contrast * (v / 255 - .5)))) - lo) / (hi - lo)))
 
 
 def crop(img, cx, cy, zoom, aspect):
@@ -61,7 +65,7 @@ def crop(img, cx, cy, zoom, aspect):
 
 
 def save_avif(img, path):
-    for q in (62, 55, 48, 42, 36, 30):
+    for q in (62, 55, 48, 42, 36, 30, 24):
         img.save(path, "AVIF", quality=q, speed=4)
         if path.stat().st_size <= AVIF_BUDGET:
             return q
@@ -73,7 +77,7 @@ def process(name, spec):
     src = ImageOps.exif_transpose(src).convert("RGB")
     framed = crop(src, spec.get("cx", 0.5), spec.get("cy", 0.5), spec.get("zoom", 1.0),
                   spec.get("aspect", ASPECT))
-    graded = grade(framed, spec.get("gamma", 1.0))
+    graded = grade(framed, spec.get("gamma", 1.0), spec.get("contrast", CONTRAST))
     report = []
     for long_edge in spec.get("sizes", SIZES):
         w, h = graded.size

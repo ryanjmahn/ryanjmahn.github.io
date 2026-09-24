@@ -12,8 +12,8 @@
 //
 // Per-variant fields:
 //   alt    describes the photo itself (it travels with the image)
-//   scrim  how far the paper fade on the inset's left edge reaches, so a
-//          straddle headline stays legible on this particular photo
+//   scrim  how far the plate-coloured fade on the inset's left edge
+//          reaches, so a straddle headline stays legible on this photo
 //   fade   bright-band position for .plate--dark tonal-fade headlines
 //          (unused by the current paper plates; kept per variant so a dark
 //          plate can use the set without hardcoding one value)
@@ -27,41 +27,41 @@
     "001": {
       sizes: [1000, 1600, 2000], w: 1200, h: 1600, grade: "silver",
       variants: [
-        { id: "a", scrim: "22%", fade: "50%", alt: "A lone hiker, tiny on a grassy slope under a sky filled with towering cumulus clouds." },
-        { id: "b", scrim: "26%", fade: "50%", alt: "Two hikers, small on the skyline, crossing a wide grassy ridge beneath scattered clouds." },
-        { id: "c", scrim: "22%", fade: "50%", alt: "A lone hiker standing on top of a tall rock pillar above a wide valley, a raven in flight beside them and clouds overhead." }
+        { id: "a", scrim: "22%", fade: "50%", alt: "A tiny figure and a dog crossing an empty, snow-white field below a dark band of forest." },
+        { id: "b", scrim: "22%", fade: "50%", alt: "An ice climber, small and dark, roped to a sheer wall of white ice." },
+        { id: "c", scrim: "22%", fade: "50%", alt: "A lone hiker crossing a bright snowfield beneath a dark, jagged mountain." }
       ]
     },
     "002": {
-      sizes: [1000, 1600, 2000], w: 1200, h: 1600, grade: "warm",
+      sizes: [1000, 1600, 2000], w: 1200, h: 1600, grade: "silver",
       variants: [
-        { id: "a", scrim: "22%", fade: "50%", alt: "A wooden test tube rack, a row of identical holes above a row of identical drying pegs, on a plain white ground." },
-        { id: "b", scrim: "22%", fade: "50%", alt: "A dark wooden test tube rack drilled with two rows of identical round holes, on a plain white ground." },
-        { id: "c", scrim: "22%", fade: "50%", alt: "A wooden test tube rack seen side-on, its drying pegs standing in an even row beneath the holes." }
+        { id: "a", scrim: "22%", fade: "50%", alt: "A photographer and tripod silhouetted against a pale, glowing horizon at dusk." },
+        { id: "b", scrim: "22%", fade: "50%", alt: "A tiny figure on a ridge, silhouetted against a bright band of sky under dark cloud." },
+        { id: "c", scrim: "22%", fade: "50%", alt: "A tiny walker silhouetted on a fenced ridgeline under a blank white sky." }
       ]
     },
     "003": {
-      sizes: [1000, 1600, 2000], w: 1200, h: 1600, grade: "warm",
+      sizes: [1000, 1600, 2000], w: 1200, h: 1600, grade: "silver",
       variants: [
-        { id: "a", scrim: "26%", fade: "50%", alt: "A 19th-century engraved map of the western hemisphere, the Americas drawn inside a ruled circle of meridians." },
-        { id: "b", scrim: "26%", fade: "50%", alt: "A 19th-century engraved map of the eastern hemisphere: Europe, Africa, Asia and Australia inside a circle of meridians." },
-        { id: "c", scrim: "26%", fade: "50%", alt: "A 1682 engraved world map, the western hemisphere filling the frame, coastlines and meridians drawn in fine line." }
+        { id: "a", scrim: "22%", fade: "50%", alt: "A lone figure silhouetted on a hilltop against a starfield and a glowing horizon." },
+        { id: "b", scrim: "22%", fade: "50%", alt: "A figure with a headlamp standing under the Milky Way, a thin beam of light cutting the dark." },
+        { id: "c", scrim: "22%", fade: "50%", alt: "A figure on a dark hill holding a blinding light up against a star-filled sky." }
       ]
     },
     "004": {
       sizes: [1000, 1600, 2000], w: 1200, h: 1600, grade: "silver",
       variants: [
-        { id: "a", scrim: "22%", fade: "50%", alt: "An 1870s drafting room: architects seated around a long table covered in drawings, plaster casts on the wall behind them." },
-        { id: "b", scrim: "22%", fade: "50%", alt: "The same 1870s drafting room from another angle, the team gathered at a table strewn with set squares and plans." },
-        { id: "c", scrim: "30%", fade: "50%", alt: "A mid-century government drafting room, draftsmen in shirtsleeves bent over rows of large drawing tables." }
+        { id: "a", scrim: "22%", fade: "50%", alt: "A kayaker silhouetted in the glare of a low sun on open water." },
+        { id: "b", scrim: "22%", fade: "50%", alt: "Two tiny paddlers on a flat horizon under a pale, empty sky." },
+        { id: "c", scrim: "22%", fade: "50%", alt: "A surfer carrying a board along black sand, the sea behind lit silver by a low sun." }
       ]
     },
     "005": {
-      sizes: [1000, 1600, 1840], w: 1200, h: 1600, grade: "silver",
+      sizes: [1000, 1600, 2000], w: 1200, h: 1600, grade: "silver",
       variants: [
-        { id: "a", scrim: "30%", fade: "50%", alt: "Micrograph of human pancreas: dense clusters of glandular cells divided by pale, branching bands of connective tissue." },
-        { id: "b", scrim: "30%", fade: "50%", alt: "Micrograph of human pancreas, pale islets of hormone-producing cells scattered among darker glandular tissue." },
-        { id: "c", scrim: "30%", fade: "50%", alt: "Micrograph of human pancreas, lobules of glandular tissue parted by a pale, branching duct system." }
+        { id: "a", scrim: "22%", fade: "50%", alt: "A tiny figure on a cave ledge beneath a vast, slanting shaft of daylight." },
+        { id: "b", scrim: "22%", fade: "50%", alt: "Inside an immense cave, a small figure on the rocks under a column of light pouring through the roof." },
+        { id: "c", scrim: "22%", fade: "50%", alt: "A figure walking out of a dark tunnel into blinding white light." }
       ]
     }
   };
