@@ -1080,7 +1080,6 @@ body.surface-field::before {
   mix-blend-mode: screen;
 }
 
-/* ASCII density strips heading the reading sheets and the footer (canvas) */
+/* ASCII density strips heading the reading sheets (canvas) */
 .ascii-strip { display: block; margin: var(--s2) var(--s2) 0; pointer-events: none; }
-main > .ascii-strip { margin: var(--s4) calc(var(--gutter) + var(--s2)) 0; }
 .ascii-portrait-canvas { display: block; }
