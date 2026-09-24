@@ -873,12 +873,14 @@ body.surface-field::before {
   max-width: 380px;
   container-type: inline-size;
 }
-.portrait-frame .plate__meta { color: var(--ink); z-index: 3; }  /* sits on the photo's white ground */
-.portrait-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.portrait-frame .plate__meta { color: var(--on-dark-2); z-index: 3; }
+.portrait-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+/* 72 columns x .6em per character fills the frame's width */
+.portrait-frame .ascii-portrait { font-size: calc(100cqi / 43.2); }
 
 /* ASCII portrait — /404.html only (and the console easter egg) */
 .ascii-portrait {
@@ -1077,3 +1079,8 @@ body.surface-field::before {
   pointer-events: none;
   mix-blend-mode: screen;
 }
+
+/* ASCII density strips heading the reading sheets and the footer (canvas) */
+.ascii-strip { display: block; margin: var(--s2) var(--s2) 0; pointer-events: none; }
+main > .ascii-strip { margin: var(--s4) calc(var(--gutter) + var(--s2)) 0; }
+.ascii-portrait-canvas { display: block; }
