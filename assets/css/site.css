@@ -160,9 +160,9 @@ button {
 .grain-global {
   position: fixed;
   inset: 0;
-  z-index: 50;
+  z-index: 44;
   pointer-events: none;
-  opacity: .12;
+  opacity: .1;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch' result='t'/%3E%3CfeColorMatrix in='t' type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 180px 180px;
@@ -282,6 +282,8 @@ body.surface-field::before {
 
 /* reading surfaces: flat navy. Long-form text never sits on a gradient. */
 .sheet {
+  position: relative;
+  z-index: 46;
   margin: var(--s4) var(--gutter) 0;
   padding: var(--s1) 0 var(--s2);
   background: var(--navy);
@@ -290,11 +292,14 @@ body.surface-field::before {
    light comes up from the bottom-right corner and a navy shade holds the
    centred text column, so body text still sits on navy (A6). */
 .sheet--field {
-  position: relative;
   isolation: isolate;
   overflow: hidden;
   background-color: var(--abyss);
-  background-image: var(--field-base);
+  /* grain blended into the base, since the global grain now sits under
+     reading surfaces */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch' result='t'/%3E%3CfeColorMatrix in='t' type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"), var(--field-base);
+  background-size: 180px 180px, auto;
+  background-blend-mode: soft-light, normal;
 }
 .sheet--field::before,
 .sheet--field::after {
@@ -333,7 +338,7 @@ body.surface-field::before {
 .site-nav {
   position: sticky;
   top: 0;
-  z-index: 40;
+  z-index: 48;
   height: 56px;
   display: flex;
   align-items: center;
@@ -442,7 +447,10 @@ body.surface-field::before {
    layout primitives
    ========================================================= */
 
-.page { position: relative; z-index: 1; }
+/* layering: the page itself doesn't form a stacking context, so the
+   reading surfaces (sheets, nav, footer) can sit above the fixed grain
+   and particle layers, which then only cross plates and the field */
+.page { position: relative; }
 
 .plate-pair {
   display: grid;
@@ -997,6 +1005,8 @@ body.surface-field::before {
   font-family: var(--font-text);
   font-size: 14px;
   color: var(--on-dark-2);
+  position: relative;
+  z-index: 46;
   /* the deepest end of the field, fading into the abyss */
   background: linear-gradient(to bottom, var(--navy), var(--abyss));
 }
