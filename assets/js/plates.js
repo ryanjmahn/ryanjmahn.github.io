@@ -25,7 +25,7 @@
 (function () {
   var PLATES = {
     "001": {
-      sizes: [1000, 1600, 2000], w: 1200, h: 1600, grade: "silver",
+      sizes: [1000, 1600, 2000], w: 1200, h: 1600, grade: "blueprint",
       variants: [
         { id: "a", scrim: "22%", fade: "50%", alt: "A tiny figure and a dog crossing an empty, snow-white field below a dark band of forest." },
         { id: "b", scrim: "22%", fade: "50%", alt: "An ice climber, small and dark, roped to a sheer wall of white ice." },

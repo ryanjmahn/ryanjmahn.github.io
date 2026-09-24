@@ -551,6 +551,13 @@ body.surface-field::before {
 @media (max-width: 720px) {
   .plate__inset { top: 10%; right: 6%; width: 60%; height: 72%; }
 }
+/* plate 001's photos are snow and ice: on the blue field they're exposed
+   down to blue-hour snow so a light headline holds across them, and the
+   definition stays in the text column, clear of the bleeding photo */
+.plate__inset[data-plate="001"] img { filter: url(#blueprint) brightness(.58); }
+@media (min-width: 721px) {
+  .plate:has(> .plate__inset[data-plate="001"]) .plate__definition { max-width: 40%; }
+}
 /* plate 001: the photo takes the right 55% and bleeds off the plate's
    bottom and right edges; the headline overlaps its left edge */
 .plate__inset[data-plate="001"],
@@ -558,8 +565,6 @@ body.surface-field::before {
 @media (max-width: 720px) {
   .plate__inset[data-plate="001"],
   .plate__inset[data-plate="001"] + .plate__advance { top: 10%; width: 62%; }
-  /* all three 001 photos are snow/ice in their lower third: sit there */
-  .plate:has(> .plate__inset[data-plate="001"]) .plate__headline.tech-straddle { bottom: 14%; }
 }
 
 /* headline-meets-photo techniques — exactly one per plate */
