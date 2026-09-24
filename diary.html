@@ -20,19 +20,31 @@
 <meta name="twitter:title" content="diary · 재민" />
 <meta name="twitter:description" content="재민's diary — short entries, roughly chronological." />
 <meta name="twitter:image" content="https://ryanjmahn.github.io/assets/img/og/diary.jpg" />
-<meta name="theme-color" content="#E9E7E2" />
+<meta name="theme-color" content="#00050F" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="preload" href="/assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="/assets/css/site.css" />
 </head>
-<body data-page="diary" class="surface-paper-body">
+<body data-page="diary" class="surface-field">
+<svg class="svg-defs" aria-hidden="true" focusable="false">
+  <!-- .grade-blueprint: duotone, shadows #00102E -> highlights #DCEEFF at 65% -->
+  <filter id="blueprint" color-interpolation-filters="sRGB">
+    <feColorMatrix type="saturate" values="0" result="gray"/>
+    <feComponentTransfer in="gray" result="duo">
+      <feFuncR type="table" tableValues="0 .863"/>
+      <feFuncG type="table" tableValues=".063 .933"/>
+      <feFuncB type="table" tableValues=".18 1"/>
+    </feComponentTransfer>
+    <feComposite in="duo" in2="gray" operator="arithmetic" k2=".65" k3=".35"/>
+  </filter>
+</svg>
 <div class="grain-global" aria-hidden="true"></div>
 
 <!-- NAV: keep in sync across pages (only aria-current differs) -->
 <a class="skip-link" href="#main">Skip to content</a>
-<nav class="site-nav surface-paper-thin" aria-label="primary">
+<nav class="site-nav" aria-label="primary">
   <a href="/" class="site-nav__mark">/재민<span class="sr-only"> — ryan jaemin ahn</span></a>
   <button class="site-nav__toggle" type="button" aria-expanded="false" aria-controls="site-menu">menu</button>
   <ul class="site-nav__links" id="site-menu">
@@ -78,8 +90,10 @@
     </figcaption>
   </figure>
 
+  <section class="sheet">
+
   <div class="quiet-column">
-    <p class="entry-body" style="color: var(--ink-2); margin-bottom: var(--s3);">short entries, roughly chronological. nothing curated.</p>
+    <p class="entry-body" style="color: var(--on-dark-2); margin-bottom: var(--s3);">short entries, roughly chronological. nothing curated.</p>
 
     <ol class="hairline-list" style="list-style:none;">
       <li id="post-2026-09-14">
@@ -91,7 +105,9 @@
     </ol>
   </div>
 
-  <footer class="site-footer surface-paper-thin">
+  </section>
+
+  <footer class="site-footer">
     <span>© 2026 · ryan jaemin ahn</span>
     <span>built in seoul</span>
   </footer>
