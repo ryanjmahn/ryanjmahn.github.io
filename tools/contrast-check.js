@@ -9,7 +9,7 @@
 const puppeteer = require("puppeteer-core");
 const fs = require("fs");
 const out = process.argv[2];
-const pages = ["/", "/built/", "/initiatives/", "/research/", "/cv/", "/contact/", "/diary.html", "/404.html"];
+const pages = ["/", "/built/", "/initiatives/", "/research/", "/contact/", "/diary.html", "/404.html"];
 (async () => {
   const b = await puppeteer.launch({ executablePath: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", headless: "new" });
   const results = [];

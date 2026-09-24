@@ -83,7 +83,6 @@ row here.
 
 | file | shows | source | photographer | license |
 |---|---|---|---|---|
-| `plate-006` (cv) | figure standing in fog on a shore | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Into_A_Fog_(Unsplash).jpg) | frank mckenna frankiefoto | CC0 1.0 |
 | `plate-008` (contact) | figure on a ledge mirrored in still water | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Man_silhouette_standing_(Unsplash).jpg) | Seth Willingham waterproject | CC0 1.0 |
 | `plate-009` (diary) | hiker on a ski track in snowy mountains | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Mountain_hiker_(Unsplash).jpg) | Sujitkun Khantayana parkkun | CC0 1.0 |
 

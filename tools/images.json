@@ -54,13 +54,6 @@
   "plate-005-c": {
     "src": "plate-005-c.jpg"
   },
-  "plate-006": {
-    "src": "plate-006.jpg",
-    "sizes": [
-      1000,
-      1600
-    ]
-  },
   "plate-008": {
     "src": "plate-008.jpg",
     "sizes": [
