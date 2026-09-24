@@ -38,7 +38,6 @@ PAGES = {
     "built": ("plate-002-a.jpg", 0.5, 0.5, "probix labs", "002", "Reproducible.", True),
     "initiatives": ("plate-003-a.jpg", 0.5, 0.6, "stemise · hackathons", "003", "Reach.", True),
     "research": ("plate-005-a.jpg", 0.5, 0.5, "research", "005", "Trust, measured.", True),
-    "cv": ("plate-006.jpg", 0.5, 0.6, "roles & projects", "006", "cv.", True),
     "contact": ("plate-008.jpg", 0.5, 0.5, "say hello", "008", "Reach out.", True),
     "diary": ("plate-009.jpg", 0.5, 0.5, "entries", "009", "Diary.", True),
 }
