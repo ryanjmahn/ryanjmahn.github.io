@@ -109,3 +109,73 @@ Remaining suggestions are all outside what the page can control or were
 accepted on purpose: short cache TTLs (GitHub Pages sets them),
 `plates.js` as a small render-blocking script (it has to pick the photo
 before first paint), and ~3 KB of unminified CSS.
+
+
+## Build prompt v3 — blue-field colour system (2026-09-23)
+
+### Decisions
+
+- **Where the light sits.** A4 asks for the field's light low-left, like
+  the reference; A6 asks for the bright core *where the photo is, not
+  where the text is*. On every plate the photo is on the right and all
+  the type (kicker, meta strip, headline, definition, quote) is in the
+  left column, and `--on-dark` on `--blue-300` is only ~2.5:1. So A6
+  wins: the light rises from the bottom and peaks low-right behind the
+  photo, and a navy shade holds the type column (and, on phones, the
+  bottom edge, where the definition runs full width). The geometry is
+  the same `--field-base` / `--field-light` on every surface, so the
+  whole site is lit from one place. Side-by-side with the reference:
+  `screenshots/reference-vs-plate-005.png`.
+- **White on `--blue-500`** measures 5.6:1, not the ~3:1 the prompt
+  estimates; `--blue-300` and `--blue-100` are the real traps.
+- **Duotone + luminosity.** `.grade-blueprint` is an inline SVG filter
+  (`#blueprint`, 65%) on the photo; the inset then blends `luminosity`
+  over the field, so the field's hue shows through the mid-tones. The
+  inset's paper-coloured edge overlay became a mask, so photos fade into
+  whatever is behind them (paper or field).
+- **Paper plates:** plate 001, contact, diary (3) against 6 blue plates
+  (002–005, cv, 404) plus the navy reading sheets: roughly 1:2.
+- Paper plates had been silently flat (a later `background:` shorthand
+  wiped their fibre texture); the rewrite kept them flat on purpose —
+  cool paper + grain + the 6% blue shadow tint, as specified.
+
+### Contrast check (A6)
+
+Two checks, both on every page:
+
+1. **Lighthouse / axe `color-contrast`:** pass on all 8 pages (axe skips
+   text over gradients and images, marking it "needs review").
+2. **Pixel check** (`tools/contrast-check.js` + `.py`): every visible
+   text box (1,012 across 32 renders: 8 pages at 1440px, the four
+   rotating pages also at 390px, each rotating page in all three
+   variants) measured against the 10th-percentile of the pixels actually
+   behind it, halos included, WCAG 4.5:1 for body text and 3:1 for
+   ≥24px / ≥18.66px bold. **0 failures.** Tightest results:
+
+| ratio | needs | element | where |
+|---|---|---|---|
+| 3.77 | 3.0 | straddle headline "Reach out." (paper) | /contact/ 390px |
+| 4.14 | 3.0 | straddle headline "Reproducible." (dark) | / 1440px, variant b |
+| 6.14 | 4.5 | definition text on a dark plate | /initiatives/ 1440px, variant c |
+| 6.26 | 4.5 | meta strip on a dark plate | / 390px, variant c |
+| 7.12 | 4.5 | Korean quote line | / 1440px |
+
+Fixed along the way: two inline `--ink-2` styles left on navy (cv, diary),
+the definition line on dark plates at 390px (3.8 → navy bottom shade),
+and plate 001's headline crossing the tree line at 390px (moved onto the
+snow).
+
+### Lighthouse (mobile, v3 build)
+
+| page | Perf | A11y | BP | SEO | LCP | CLS |
+|---|---|---|---|---|---|---|
+| `/` | 98 | 100 | 100 | 100 | 2.3 s | 0 |
+| `/built/` | 99 | 100 | 100 | 100 | 1.8 s | 0 |
+| `/initiatives/` | 97 | 100 | 100 | 100 | 2.4 s | 0 |
+| `/research/` | 99 | 100 | 100 | 100 | 1.8 s | 0 |
+| `/cv/` | 100 | 100 | 100 | 100 | 1.5 s | 0 |
+| `/contact/` | 100 | 100 | 100 | 100 | 1.5 s | 0.009 |
+| `/diary.html` | 99 | 100 | 100 | 100 | 2.0 s | 0 |
+| `/404.html` | 100 | 100 | 96 | 63 | 1.5 s | 0.001 |
+
+404's SEO/BP scores are the intended `noindex` and its 404 status.
