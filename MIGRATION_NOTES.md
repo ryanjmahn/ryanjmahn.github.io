@@ -95,11 +95,13 @@ Everything below is also marked `<!-- TODO(ryan): … -->` in the page source.
 ## Lighthouse (punch list item 39)
 
 Lighthouse 12, mobile emulation (default throttling), headless Chrome,
-served locally with gzip to approximate GitHub Pages. Run 2026-09-23.
+served locally with gzip to approximate GitHub Pages. Run 2026-09-23
+(home re-run after the silhouette photo set; /built/ and /research/ from
+the previous set, whose images were heavier).
 
 | page | Performance | Accessibility | Best Practices | SEO | LCP | CLS | TBT |
 |---|---|---|---|---|---|---|---|
-| `/` | 97 | 100 | 100 | 100 | 2.4 s | 0 | 0 ms |
+| `/` | 98 | 100 | 100 | 100 | 2.3 s | 0 | 0 ms |
 | `/built/` | 99 | 100 | 100 | 100 | 1.8 s | 0 | 0 ms |
 | `/research/` | 97 | 100 | 100 | 100 | 2.6 s | 0 | 0 ms |
 
