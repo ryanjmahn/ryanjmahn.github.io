@@ -34,13 +34,13 @@ FONTS = ROOT / "assets/fonts"
 
 PAGES = {
     # page: (source image, crop centre x, crop centre y, kicker, index, headline, dark plate[, zoom])
-    "home": ("plate-001-a.jpg", 0.15, 0.8, "ryan jaemin ahn", "001", "Build responsibly.", False, 1.4),
+    "home": ("plate-001-a.jpg", 0.15, 0.8, "ryan jaemin ahn", "001", "Build responsibly.", True, 1.4),
     "built": ("plate-002-a.jpg", 0.5, 0.5, "probix labs", "002", "Reproducible.", True),
     "initiatives": ("plate-003-a.jpg", 0.5, 0.6, "stemise · hackathons", "003", "Reach.", True),
     "research": ("plate-005-a.jpg", 0.5, 0.5, "research", "005", "PDAC.", True),
     "cv": ("plate-006.jpg", 0.5, 0.6, "roles & projects", "006", "cv.", True),
-    "contact": ("plate-008.jpg", 0.5, 0.5, "say hello", "008", "Reach out.", False),
-    "diary": ("plate-009.jpg", 0.5, 0.5, "entries", "009", "Diary.", False),
+    "contact": ("plate-008.jpg", 0.5, 0.5, "say hello", "008", "Reach out.", True),
+    "diary": ("plate-009.jpg", 0.5, 0.5, "entries", "009", "Diary.", True),
 }
 
 
