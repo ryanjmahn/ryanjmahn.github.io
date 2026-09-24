@@ -524,13 +524,10 @@ body.surface-paper-body::before {
   object-fit: cover;
 }
 
-/* photo grade presets — the only two allowed. The image files are
-   already grayscale (tools/process-images.sh bakes it in), with their
-   blacks lifted to ~12% so that after this contrast curve the darkest
-   tone still lands around 4% rather than clipping to pure #000.
-   .grade-warm is for at most two paper plates. */
-.grade-silver { filter: grayscale(1) contrast(1.22) brightness(.95); }
-.grade-warm   { filter: grayscale(1) sepia(.18) contrast(1.15); }
+/* photo grade: the look (crushed blacks, clipped highlights, little
+   mid-grey) is baked into the files by tools/process-images.sh. This
+   class is only a grayscale safety net for any contexts that re-color. */
+.grade-silver { filter: grayscale(1); }
 
 /* placeholder photo block — used until real licensed photography is dropped in */
 .plate__photo-placeholder {
@@ -555,7 +552,7 @@ body.surface-paper-body::before {
   background: linear-gradient(90deg, var(--paper) 0%, transparent 22%);
   opacity: .8;
 }
-.plate--dark .plate__inset::after { background: linear-gradient(90deg, var(--ink) 0%, transparent 22%); }
+.plate--dark .plate__inset::after { background: linear-gradient(90deg, var(--ink) 0%, transparent var(--scrim, 22%)); }
 .plate--dark .plate__photo-placeholder { background: color-mix(in srgb, var(--ink) 90%, var(--paper)); }
 .plate__photo-placeholder span {
   font-family: var(--font-bracket);
@@ -639,7 +636,8 @@ body.surface-paper-body::before {
    enough for that alone — a soft paper-colored halo (invisible against
    the actual paper, since it matches --paper exactly) boosts contrast
    wherever the letters fall over a darker patch of the photo. */
-.plate--paper .plate__headline.tech-straddle {
+.plate--paper .plate__headline.tech-straddle,
+.plate--dark .plate__headline.tech-straddle {
   left: 44px;
   bottom: 22%;
   max-width: 78%;
@@ -660,7 +658,6 @@ body.surface-paper-body::before {
   max-width: 42ch;
   margin: 0;
 }
-.plate--dark .plate__definition { right: var(--s2); left: auto; text-align: right; }
 .plate__definition .bracket {
   display: block;
   font-family: var(--font-bracket);
@@ -1060,7 +1057,8 @@ body.surface-paper-body::before {
     white-space: normal;
   }
 
-  .plate--paper .plate__headline.tech-straddle { bottom: 34%; }
+  .plate--paper .plate__headline.tech-straddle,
+  .plate--dark .plate__headline.tech-straddle { bottom: 29%; }
 
   .plate__definition .bracket { font-size: 15px; }
   .plate__definition .def { font-size: 15px; }
@@ -1103,4 +1101,17 @@ body.surface-paper-body::before {
 .plate__count { font-weight: 500; }
 @media (prefers-reduced-motion: reduce) {
   .plate__incoming { transition: none; }
+}
+
+/* dark straddle plates: the same composition in reverse — paper headline
+   with an ink halo, so it holds over the crushed blacks of a night / cave
+   / silhouette photo */
+.plate--dark .plate__headline.tech-straddle {
+  color: var(--paper);
+  text-shadow: 0 0 14px var(--ink), 0 0 28px var(--ink), 0 1px 2px var(--ink);
+}
+.plate--dark :focus-visible { outline-color: var(--paper); }
+@media (min-width: 721px) {
+  .plate-unit:has(.plate--dark) .plate__quote p { color: var(--paper); }
+  .plate-unit:has(.plate--dark) .plate__quote .kr { color: color-mix(in srgb, var(--paper) 70%, transparent); }
 }
