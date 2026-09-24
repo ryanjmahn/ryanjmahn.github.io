@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="built · 재민" />
 <meta name="twitter:description" content="Probix Labs — a product lab promoting reproducible science." />
 <meta name="twitter:image" content="https://ryanjmahn.github.io/assets/img/og/built.jpg" />
-<meta name="theme-color" content="#E9E7E2" />
+<meta name="theme-color" content="#00050F" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -28,12 +28,24 @@
 <link rel="stylesheet" href="/assets/css/site.css" />
 <script src="/assets/js/plates.js"></script>
 </head>
-<body data-page="built" class="surface-paper-body">
+<body data-page="built" class="surface-field">
+<svg class="svg-defs" aria-hidden="true" focusable="false">
+  <!-- .grade-blueprint: duotone, shadows #00102E -> highlights #DCEEFF at 65% -->
+  <filter id="blueprint" color-interpolation-filters="sRGB">
+    <feColorMatrix type="saturate" values="0" result="gray"/>
+    <feComponentTransfer in="gray" result="duo">
+      <feFuncR type="table" tableValues="0 .863"/>
+      <feFuncG type="table" tableValues=".063 .933"/>
+      <feFuncB type="table" tableValues=".18 1"/>
+    </feComponentTransfer>
+    <feComposite in="duo" in2="gray" operator="arithmetic" k2=".65" k3=".35"/>
+  </filter>
+</svg>
 <div class="grain-global" aria-hidden="true"></div>
 
 <!-- NAV: keep in sync across pages (only aria-current differs) -->
 <a class="skip-link" href="#main">Skip to content</a>
-<nav class="site-nav surface-paper-thin" aria-label="primary">
+<nav class="site-nav" aria-label="primary">
   <a href="/" class="site-nav__mark">/재민<span class="sr-only"> — ryan jaemin ahn</span></a>
   <button class="site-nav__toggle" type="button" aria-expanded="false" aria-controls="site-menu">menu</button>
   <ul class="site-nav__links" id="site-menu">
@@ -61,7 +73,7 @@
       <div class="plate__meta"><b>(co-founder, coo)</b> <span class="meta-arrow" aria-hidden="true">▾</span> — probix</div>
       <div class="plate__inset" data-plate="002" data-sizes="(max-width: 720px) 68vw, 52vw" data-load="high">
         <script>plateInset()</script>
-        <noscript><picture><source type="image/avif" srcset="/assets/img/plate-002-a-1000.avif 750w, /assets/img/plate-002-a-1600.avif 1200w, /assets/img/plate-002-a-2000.avif 1500w" sizes="(max-width: 720px) 68vw, 52vw" /><source type="image/webp" srcset="/assets/img/plate-002-a-1000.webp 750w, /assets/img/plate-002-a-1600.webp 1200w, /assets/img/plate-002-a-2000.webp 1500w" sizes="(max-width: 720px) 68vw, 52vw" /><img src="/assets/img/plate-002-a-1000.jpg" srcset="/assets/img/plate-002-a-1000.jpg 750w, /assets/img/plate-002-a-1600.jpg 1200w, /assets/img/plate-002-a-2000.jpg 1500w" sizes="(max-width: 720px) 68vw, 52vw" alt="A photographer and tripod silhouetted against a pale, glowing horizon at dusk." class="plate__photo grade-silver" width="1200" height="1600" loading="eager" fetchpriority="high" /></picture></noscript>
+        <noscript><picture><source type="image/avif" srcset="/assets/img/plate-002-a-1000.avif 750w, /assets/img/plate-002-a-1600.avif 1200w, /assets/img/plate-002-a-2000.avif 1500w" sizes="(max-width: 720px) 68vw, 52vw" /><source type="image/webp" srcset="/assets/img/plate-002-a-1000.webp 750w, /assets/img/plate-002-a-1600.webp 1200w, /assets/img/plate-002-a-2000.webp 1500w" sizes="(max-width: 720px) 68vw, 52vw" /><img src="/assets/img/plate-002-a-1000.jpg" srcset="/assets/img/plate-002-a-1000.jpg 750w, /assets/img/plate-002-a-1600.jpg 1200w, /assets/img/plate-002-a-2000.jpg 1500w" sizes="(max-width: 720px) 68vw, 52vw" alt="A photographer and tripod silhouetted against a pale, glowing horizon at dusk." class="plate__photo grade-blueprint" width="1200" height="1600" loading="eager" fetchpriority="high" /></picture></noscript>
       </div>
       <h2 class="plate__headline tech-straddle">Reproducible.</h2>
       <p class="plate__definition">
@@ -80,6 +92,8 @@
       <span class="caption-row__num">02</span>
     </figcaption>
   </figure>
+
+  <section class="sheet">
 
   <div class="quiet-column">
     <ul class="hairline-list">
@@ -112,7 +126,9 @@
     </a>
   </div>
 
-  <footer class="site-footer surface-paper-thin">
+  </section>
+
+  <footer class="site-footer">
     <span>© 2026 · ryan jaemin ahn</span>
     <span>built in seoul</span>
   </footer>

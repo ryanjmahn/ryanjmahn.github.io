@@ -1,16 +1,31 @@
 /* =========================================================
-   tokens — poster plates system, strict monochrome.
-   the five colors below are the whole palette. every other tone in
-   this file is derived from them with color-mix(); no other hex,
-   rgb() or hsl() values are allowed outside this block.
+   tokens — poster plates, blue-field system (build prompt v3)
+   these are the only color values in the site. every other tone in
+   this file is derived from them with color-mix().
    ========================================================= */
 
 :root {
-  --paper: #E9E7E2;
-  --paper-2: #DEDBD4;
-  --ink: #111110;
-  --ink-2: #5B5A56;
-  --rule: rgba(17, 17, 16, .18);
+  /* blue field — sampled from the reference (assets/img/src/backgrund.jpg) */
+  --abyss:    #00050F;
+  --navy:     #001233;
+  --blue-700: #012C86;
+  --blue-500: #0A5BD3;
+  --blue-300: #2BA6F0;
+  --blue-100: #9EDCFF;
+
+  /* neutrals — cooled, so paper plates belong to the same world */
+  --paper:    #E9EEF4;
+  --paper-2:  #DCE3EC;
+  --ink:      #0A1020;
+  --ink-2:    #49566B;
+  --rule:     rgba(10,16,32,.18);
+
+  /* on dark surfaces */
+  --on-dark:      #F2F6FB;
+  --on-dark-2:    rgba(242,246,251,.72);
+  --rule-on-dark: rgba(242,246,251,.22);
+
+  color-scheme: dark;
 
   --s1: 8px;
   --s2: 16px;
@@ -27,6 +42,18 @@
   --font-bracket: "Tinos", "Times New Roman", Times, serif;
   --font-caption: "Instrument Serif", "Tinos", "Times New Roman", Times, serif;
   --font-kr-sans: "Pretendard", "Instrument Sans", sans-serif;
+
+  /* the one light source. It rises from the bottom and peaks low-right,
+     behind the photos, so the left column where every plate keeps its
+     type stays in the navy/abyss end (build prompt A6 over A4's
+     low-left: see MIGRATION_NOTES). Same geometry on every surface. */
+  --field-base:
+    radial-gradient(140% 120% at 52% 58%, var(--blue-700) 0%, transparent 72%),
+    linear-gradient(160deg, var(--abyss) 0%, var(--navy) 55%, var(--abyss) 100%);
+  --field-light:
+    radial-gradient(90% 70% at 92% 112%, var(--blue-100) 0%, transparent 45%),
+    radial-gradient(85% 70% at 72% 92%, var(--blue-300) 0%, transparent 58%),
+    radial-gradient(110% 90% at 62% 76%, var(--blue-500) 0%, transparent 70%);
 }
 
 /* four self-hosted families, latin subsets (Pretendard: only the Korean
@@ -77,37 +104,38 @@
 html {
   -webkit-text-size-adjust: 100%;
   overflow-x: hidden;
-  background: var(--paper);
+  background: var(--abyss);
 }
 
 body {
   margin: 0;
-  color: var(--ink);
+  color: var(--on-dark);
   font-family: var(--font-caption);
   font-size: 19px;
   line-height: 1.5;
-  background: var(--paper);
+  background: var(--abyss);
   position: relative;
 }
 
 img { max-width: 100%; display: block; }
 
-::selection { background: var(--ink); color: var(--paper); }
+::selection { background: var(--on-dark); color: var(--abyss); }
 
 a {
   color: inherit;
   text-decoration-line: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
-  text-decoration-color: var(--rule);
+  text-decoration-color: var(--rule-on-dark);
   transition: color .2s var(--ease), text-decoration-color .2s var(--ease);
 }
-a:hover { text-decoration-color: var(--ink); }
+a:hover { text-decoration-color: var(--on-dark); }
 
 :focus-visible {
-  outline: 2px solid var(--ink);
+  outline: 2px solid var(--on-dark);
   outline-offset: 3px;
 }
+.plate--paper :focus-visible { outline-color: var(--ink); }
 
 button {
   font: inherit;
@@ -118,19 +146,22 @@ button {
   padding: 0;
 }
 
+.svg-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
 /* =========================================================
-   grain + paper texture (data-uri feTurbulence layers)
-   every surface is textured or lit — never flat, per §4.8
+   grain, field and paper
+   grain sits on top of every gradient: a smooth gradient looks like a
+   design tool, a grained one looks like a photograph of light.
    ========================================================= */
 
-/* fixed full-viewport grain, on everything including the page itself */
+/* fixed full-viewport grain, over everything */
 .grain-global {
   position: fixed;
   inset: 0;
   z-index: 50;
   pointer-events: none;
-  opacity: .08;
-  mix-blend-mode: multiply;
+  opacity: .12;
+  mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch' result='t'/%3E%3CfeColorMatrix in='t' type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 180px 180px;
   animation: grain-shift 1.6s steps(4) infinite;
@@ -144,121 +175,95 @@ button {
   100% { transform: translate(0, 0); }
 }
 
-/* paper fiber noise, shared by page body / nav / paper plates / mobile
-   menu. .plate--paper gets it directly, same reasoning as .plate--dark
-   above — one class in markup, texture included. */
-.surface-paper,
+/* the page: abyss, with the field as a faint fixed wash (same light, far
+   away) — never bright enough to compete with text on it */
+body.surface-field::before {
+  content: "";
+  position: fixed;
+  inset: -10%;
+  z-index: -1;
+  background: var(--field-light), var(--field-base);
+  opacity: .28;
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+/* paper plates: cool paper, fiber, faint blue in the shadows. These are
+   the breath between blue plates — no gradient. */
 .plate--paper {
+  color: var(--ink);
   background-color: var(--paper);
-  background-image:
-    radial-gradient(ellipse at 50% 40%, transparent 55%, color-mix(in srgb, var(--ink) 8%, transparent) 100%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='4' stitchTiles='stitch' result='t'/%3E%3CfeColorMatrix in='t' type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='.6' intercept='.1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
-  background-size: cover, 100% 100%;
-  background-repeat: no-repeat, no-repeat;
+  background-image: radial-gradient(ellipse at 50% 40%, transparent 55%, color-mix(in srgb, var(--ink) 8%, transparent) 100%);
   position: relative;
 }
-.surface-paper::before,
 .plate--paper::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: var(--paper-2);
-  opacity: .15;
+  background: color-mix(in srgb, var(--blue-700) 6%, transparent);
   mix-blend-mode: multiply;
   pointer-events: none;
 }
 
-/* thin bars (nav, footer): fiber grain only — the vignette in
-   .surface-paper is tuned for large, roughly-square surfaces and
-   distorts badly into a "puddle" shape on a short wide strip */
-.surface-paper-thin {
-  background-color: var(--paper);
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='4' stitchTiles='stitch' result='t'/%3E%3CfeColorMatrix in='t' type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='.6' intercept='.1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
-  background-size: cover;
-  background-repeat: no-repeat;
-  position: relative;
-}
-.surface-paper-thin::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--paper-2);
-  opacity: .15;
-  mix-blend-mode: multiply;
-  pointer-events: none;
-}
-
-body { background: var(--paper); }
-body.surface-paper-body {
-  background-color: var(--paper);
-  background-image:
-    radial-gradient(ellipse at 50% 30%, transparent 55%, color-mix(in srgb, var(--ink) 8%, transparent) 100%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='4' stitchTiles='stitch' result='t'/%3E%3CfeColorMatrix in='t' type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='.6' intercept='.1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
-  background-size: cover, 100% 100%;
-  background-repeat: no-repeat, no-repeat;
-  background-attachment: fixed;
-}
-body.surface-paper-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background: var(--paper-2);
-  opacity: .15;
-  mix-blend-mode: multiply;
-  pointer-events: none;
-}
-
-/* dark surfaces: never pure black, always lit + grained + vignetted.
-   .plate--dark gets this directly (rather than needing a second
-   .surface-dark class in markup); .surface-dark stays available for
-   any future non-plate dark section. */
-.surface-dark,
+/* dark plates: the field at full strength. Base layers on the plate;
+   the bright layers on ::before, defocused and slowly drifting; the
+   vignette on ::after over the photo; grain over all of it. */
 .plate--dark {
-  background-color: var(--ink);
+  color: var(--on-dark);
+  background-color: var(--abyss);
+  background-image: var(--field-base);
   position: relative;
-  color: var(--paper);
 }
-.surface-dark::before,
 .plate--dark::before {
   content: "";
   position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: radial-gradient(ellipse 70% 55% at 50% 38%, color-mix(in srgb, var(--paper) 10%, transparent), transparent 70%);
+  inset: -12%;
+  z-index: 0;
+  background: var(--field-light);
+  filter: blur(60px);
+  animation: field-drift 60s ease-in-out infinite alternate;
   pointer-events: none;
 }
-.surface-dark::after,
 .plate--dark::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 1;
-  /* the vignette, plus a bottom scrim: tonal-fade headlines are bottom-
-     anchored (§4.4) and a photo's lower third isn't reliably dark or
-     light on its own — this guarantees enough separation underneath
-     them no matter what the photo is doing there. */
   background:
-    linear-gradient(to top, color-mix(in srgb, var(--ink) 50%, transparent) 0%, color-mix(in srgb, var(--ink) 22%, transparent) 22%, transparent 42%),
-    radial-gradient(ellipse at 50% 50%, transparent 50%, color-mix(in srgb, var(--ink) 45%, transparent) 100%);
+    /* the type column stays navy: body-size text never sits on a bright
+       zone of the field (A6) */
+    linear-gradient(90deg, color-mix(in srgb, var(--navy) 88%, transparent) 0%, color-mix(in srgb, var(--navy) 70%, transparent) 30%, transparent 52%),
+    radial-gradient(ellipse at 70% 80%, transparent 45%, color-mix(in srgb, var(--abyss) 55%, transparent) 100%);
   pointer-events: none;
 }
-.surface-dark .local-grain,
 .plate--dark .local-grain {
   position: absolute;
   inset: 0;
   z-index: 2;
-  opacity: .14;
+  opacity: .12;
   mix-blend-mode: overlay;
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch' result='t'/%3E%3CfeColorMatrix in='t' type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 180px 180px;
   animation: grain-shift 1.6s steps(4) infinite;
 }
+/* phones: the definition runs the full plate width along the bottom, so
+   the bottom edge gets the same navy shade the type column has */
+@media (max-width: 720px) {
+  .plate--dark::after {
+    background:
+      linear-gradient(to top, color-mix(in srgb, var(--navy) 90%, transparent) 0%, color-mix(in srgb, var(--navy) 70%, transparent) 24%, transparent 42%),
+      linear-gradient(90deg, color-mix(in srgb, var(--navy) 88%, transparent) 0%, color-mix(in srgb, var(--navy) 70%, transparent) 30%, transparent 52%),
+      radial-gradient(ellipse at 70% 80%, transparent 45%, color-mix(in srgb, var(--abyss) 55%, transparent) 100%);
+  }
+}
+@keyframes field-drift {
+  from { transform: translate3d(-2%, 1%, 0); }
+  to   { transform: translate3d(2%, -1%, 0); }
+}
 
-/* dust + hairline scratches — paper plates only, fixed (seeded), not randomized on reload */
+/* dust + hairline scratches — paper plates only, fixed (seeded) */
 .plate--paper .plate__dust {
   position: absolute;
   inset: 0;
@@ -266,10 +271,23 @@ body.surface-paper-body::before {
   overflow: hidden;
 }
 .plate--paper .plate__dust svg { width: 100%; height: 100%; }
+.plate__dust line { stroke: var(--paper); }
+.plate__dust circle { fill: var(--ink); }
 
 @media (prefers-reduced-motion: reduce) {
-  .grain-global, .local-grain { animation: none; }
+  .grain-global, .local-grain, .plate--dark::before { animation: none; }
 }
+
+/* reading surfaces: flat navy. Long-form text never sits on a gradient. */
+.sheet {
+  margin: var(--s4) var(--gutter) 0;
+  padding: var(--s1) 0 var(--s2);
+  background: var(--navy);
+}
+.sheet > .quiet-column { margin-top: var(--s4); padding-bottom: var(--s4); }
+.sheet > .intro-block { padding-top: var(--s4); }
+.sheet > .latest-writing { padding-bottom: var(--s4); }
+.sheet > .now-strip { padding-top: var(--s4); }
 
 /* =========================================================
    nav — quiet, sticky, identical on every page
@@ -284,17 +302,11 @@ body.surface-paper-body::before {
   align-items: center;
   justify-content: space-between;
   padding: 0 var(--s2);
+  background: color-mix(in srgb, var(--abyss) 85%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule-on-dark);
 }
-.site-nav::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 1px;
-  background: var(--rule);
-  opacity: 0;
-  transition: opacity .2s var(--ease);
-}
-.site-nav.is-scrolled::after { opacity: 1; }
 
 .site-nav__mark {
   position: relative;
@@ -304,7 +316,7 @@ body.surface-paper-body::before {
   font-size: 16px;
   letter-spacing: -.02em;
   text-decoration: none;
-  color: var(--ink);
+  color: var(--on-dark);
 }
 
 /* one link list for every width: inline on desktop, a full-screen menu
@@ -324,18 +336,18 @@ body.surface-paper-body::before {
 .site-nav__links a {
   display: inline-block;
   text-decoration: none;
-  color: var(--ink-2);
+  color: var(--on-dark-2);
   padding-bottom: 4px;
   border-bottom: 1px solid transparent;
 }
-.site-nav__links a:hover { color: var(--ink); border-bottom-color: var(--rule); }
+.site-nav__links a:hover { color: var(--on-dark); border-bottom-color: var(--rule-on-dark); }
 .site-nav__links a[aria-current="page"] {
-  color: var(--ink);
-  border-bottom: 1px solid var(--ink);
+  color: var(--on-dark);
+  border-bottom: 1px solid var(--on-dark);
 }
 .site-nav__sep {
   padding-left: var(--s2);
-  border-left: 1px solid var(--rule);
+  border-left: 1px solid var(--rule-on-dark);
 }
 
 .site-nav__toggle {
@@ -345,7 +357,7 @@ body.surface-paper-body::before {
   font-family: var(--font-label);
   font-size: 14px;
   font-weight: 500;
-  color: var(--ink);
+  color: var(--on-dark);
   padding: 8px 0 8px 8px;
 }
 
@@ -355,8 +367,8 @@ body.surface-paper-body::before {
   left: 8px;
   z-index: 100;
   padding: 8px 14px;
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--on-dark);
+  color: var(--abyss);
   font-family: var(--font-label);
   font-size: 14px;
   text-decoration: none;
@@ -381,10 +393,10 @@ body.surface-paper-body::before {
     justify-content: center;
     gap: var(--s2);
     padding: var(--s2);
-    background: var(--paper);
+    background: var(--abyss);
     font-size: 32px;
   }
-  .js .site-nav.is-open .site-nav__links a { color: var(--ink); padding-bottom: 2px; }
+  .js .site-nav.is-open .site-nav__links a { color: var(--on-dark); padding-bottom: 2px; }
   .js .site-nav.is-open .site-nav__sep { padding-left: 0; border-left: 0; }
   .nav-open, .nav-open body { overflow: hidden; }
 }
@@ -421,7 +433,7 @@ body.surface-paper-body::before {
   grid-template-columns: 96px 1fr;
   column-gap: var(--s2);
   padding: var(--s3) 0;
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--rule-on-dark);
 }
 .hairline-list > li:first-child { border-top: none; padding-top: 0; }
 .hairline-list > li:last-child { padding-bottom: 0; }
@@ -432,13 +444,13 @@ body.surface-paper-body::before {
 .gutter-label {
   font-family: var(--font-bracket);
   font-size: 15px;
-  color: var(--ink-2);
+  color: var(--on-dark-2);
   padding-top: .2em;
 }
 .entry-body { margin: 0; font-size: 19px; line-height: 1.5; }
 .entry-body p { margin: 0 0 var(--s2); }
 .entry-body p:last-child { margin-bottom: 0; }
-.entry-body a { text-decoration-color: var(--rule); }
+.entry-body a { text-decoration-color: var(--rule-on-dark); }
 
 /* =========================================================
    plate component
@@ -461,27 +473,6 @@ body.surface-paper-body::before {
   .plate, .plate--full { aspect-ratio: 4 / 5; }
 }
 
-/* .plate--dark's background/color/lighting come from the merged
-   .surface-dark rule above */
-.plate--paper { background: var(--paper); color: var(--ink); }
-
-.plate__wordmark {
-  position: absolute;
-  top: var(--s2);
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  gap: var(--s1);
-  font-family: var(--font-label);
-  font-weight: 600;
-  font-size: 12px;
-  letter-spacing: .04em;
-  white-space: nowrap;
-  color: var(--paper);
-}
-.plate__wordmark .rule { width: 40px; height: 2px; background: currentColor; opacity: .7; }
 
 .plate__kicker {
   position: absolute;
@@ -532,44 +523,14 @@ body.surface-paper-body::before {
   object-fit: cover;
 }
 
-/* photo grade: the look (crushed blacks, clipped highlights, little
-   mid-grey) is baked into the files by tools/process-images.sh. This
-   class is only a grayscale safety net for any contexts that re-color. */
+/* photo grades. The black-and-white look (crushed blacks, clipped
+   highlights) is baked into the files by tools/process-images.sh.
+   .grade-silver: paper plates, neutral — just a grayscale safety net.
+   .grade-blueprint: dark plates — duotone, shadows to deep navy and
+   highlights to ice (SVG filter #blueprint in each page, 65% strength). */
 .grade-silver { filter: grayscale(1); }
+.grade-blueprint { filter: url(#blueprint); }
 
-/* placeholder photo block — used until real licensed photography is dropped in */
-.plate__photo-placeholder {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: var(--paper-2);
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  text-align: center;
-  padding: var(--s3);
-}
-/* keeps the straddle headline legible where it overlaps the inset's
-   left edge, on both the placeholder and a real photo later (§4.4) */
-.plate__inset::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  background: linear-gradient(90deg, var(--paper) 0%, transparent 22%);
-  opacity: .8;
-}
-.plate--dark .plate__inset::after { background: linear-gradient(90deg, var(--ink) 0%, transparent var(--scrim, 22%)); }
-.plate--dark .plate__photo-placeholder { background: color-mix(in srgb, var(--ink) 90%, var(--paper)); }
-.plate__photo-placeholder span {
-  font-family: var(--font-bracket);
-  font-style: italic;
-  font-size: 14px;
-  color: var(--ink-2);
-  max-width: 30ch;
-}
-.plate--dark .plate__photo-placeholder span { color: color-mix(in srgb, var(--paper) 55%, transparent); }
 
 .plate__inset {
   position: absolute;
@@ -579,7 +540,14 @@ body.surface-paper-body::before {
   height: 76%;
   z-index: 1;
   overflow: hidden;
+  /* the photo's left edge fades into whatever is behind it (paper, or
+     the field), so the straddle headline has a quiet edge to sit on */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, var(--ink) var(--scrim, 22%));
+  mask-image: linear-gradient(90deg, transparent 0, var(--ink) var(--scrim, 22%));
 }
+/* on dark plates the photo and the field are one exposure: the photo
+   supplies the light and dark, the field shows through the mid-tones */
+.plate--dark .plate__inset { mix-blend-mode: luminosity; }
 @media (max-width: 720px) {
   .plate__inset { top: 10%; right: 6%; width: 60%; height: 72%; }
 }
@@ -590,6 +558,8 @@ body.surface-paper-body::before {
 @media (max-width: 720px) {
   .plate__inset[data-plate="001"],
   .plate__inset[data-plate="001"] + .plate__advance { top: 10%; width: 62%; }
+  /* all three 001 photos are snow/ice in their lower third: sit there */
+  .plate:has(> .plate__inset[data-plate="001"]) .plate__headline.tech-straddle { bottom: 14%; }
 }
 
 /* headline-meets-photo techniques — exactly one per plate */
@@ -610,48 +580,11 @@ body.surface-paper-body::before {
   font-size: clamp(32px, 7vw, 80px);
   font-size: clamp(32px, 17cqi, 96px);
 }
-.plate__headline.is-huge {
-  letter-spacing: -.055em;
-  font-size: clamp(36px, 7vw, 90px);
-  font-size: clamp(36px, 15cqi, 130px);
-}
 
-/* tonal fade: dark plates, headline dissolves into the photo's bright zone.
-   --fade-pos is a percentage of the headline's OWN rendered width, not
-   the plate's — deliberately no `right` offset here (only `left`, plus
-   the inherited max-width), so the box shrinks to the actual glyphs
-   instead of stretching across the full plate. With `right` also set,
-   a short word (or one line that doesn't fill the plate) would only
-   ever sample the gradient's dark end, since the bright peak at 50%
-   of a full-width box falls past where the letters actually are.
-   The "shoulder" tone is near-ink (not mid-grey) so the letters stay
-   legible against light photo areas even outside the dissolve band,
-   and a dark drop-shadow grounds the glyph edges regardless of what's
-   directly behind them — background-clip:text fills the shape with
-   the gradient, but drop-shadow follows the glyphs' own alpha, so it
-   still reads even where the fill goes light. */
-.plate--dark .plate__headline.tech-fade {
-  --fade-pos: 50%;
-  left: var(--s2);
-  bottom: var(--s3);
-  background: linear-gradient(90deg,
-    var(--ink) 0%,
-    var(--ink) calc(var(--fade-pos) - 26%),
-    var(--paper) var(--fade-pos),
-    var(--ink) calc(var(--fade-pos) + 28%),
-    var(--ink) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  filter: drop-shadow(0 2px 10px color-mix(in srgb, var(--ink) 55%, transparent));
-}
-.plate--dark .plate__headline.tech-fade.has-body-line { bottom: calc(var(--s3) + 2.2em); }
-
-/* straddle: paper plates, headline overlaps the inset photo's left edge.
-   Solid ink text, but the photo edge it straddles isn't always light
-   enough for that alone — a soft paper-colored halo (invisible against
-   the actual paper, since it matches --paper exactly) boosts contrast
-   wherever the letters fall over a darker patch of the photo. */
+/* straddle: the headline overlaps the inset photo's left edge. Solid
+   ink on paper plates (with a paper halo), solid --on-dark on dark
+   plates (with an abyss halo), so it holds wherever the letters cross
+   a busy patch of the photo. */
 .plate--paper .plate__headline.tech-straddle,
 .plate--dark .plate__headline.tech-straddle {
   left: 44px;
@@ -681,7 +614,7 @@ body.surface-paper-body::before {
   color: var(--ink-2);
   margin-bottom: 4px;
 }
-.plate--dark .plate__definition .bracket { color: color-mix(in srgb, var(--paper) 70%, transparent); }
+.plate--dark .plate__definition .bracket { color: var(--on-dark-2); }
 .plate__definition .sub {
   display: block;
   margin-top: 6px;
@@ -699,7 +632,7 @@ body.surface-paper-body::before {
   color: color-mix(in srgb, var(--ink) 85%, transparent);
 }
 .plate--dark .plate__definition .def,
-.plate--dark .plate__definition .sub { color: color-mix(in srgb, var(--paper) 85%, transparent); }
+.plate--dark .plate__definition .sub { color: var(--on-dark); }
 
 /* pull quote: lives in the .plate-unit, not the .plate, so on wide
    screens it can share the plate's grid cell and sit in the bottom-left
@@ -713,6 +646,7 @@ body.surface-paper-body::before {
 }
 .plate__quote p {
   margin: 0;
+  color: var(--on-dark);
   font-family: var(--font-bracket);
   font-size: 16px;
   line-height: 1.4;
@@ -722,7 +656,7 @@ body.surface-paper-body::before {
   font-family: var(--font-kr-sans);
   font-size: 12px;
   line-height: 1.5;
-  color: var(--ink-2);
+  color: var(--on-dark-2);
 }
 @media (min-width: 721px) {
   .plate__quote {
@@ -737,16 +671,6 @@ body.surface-paper-body::before {
   /* make room: headline and definition move up the plate */
   .plate--quoted .plate__headline.tech-straddle { bottom: 42%; }
   .plate--quoted .plate__definition { bottom: 24%; }
-}
-
-.plate__body-line {
-  position: absolute;
-  left: var(--s2);
-  right: var(--s2);
-  bottom: var(--s3);
-  z-index: 2;
-  font-family: var(--font-caption);
-  font-size: 22px;
 }
 
 /* plate + its caption (and quote, if any) travel together as one figure.
@@ -765,7 +689,7 @@ body.surface-paper-body::before {
   border-bottom: 1px solid transparent;
   transition: border-color .2s var(--ease);
 }
-.caption-row:hover { border-bottom-color: var(--rule); }
+.caption-row:hover { border-bottom-color: var(--rule-on-dark); }
 .caption-row__label {
   font-family: var(--font-label);
   font-weight: 600;
@@ -782,7 +706,7 @@ body.surface-paper-body::before {
 .caption-row__num {
   font-family: var(--font-label);
   font-size: 22px;
-  color: var(--ink-2);
+  color: var(--on-dark-2);
 }
 
 /* typographic plates (cv / shelf / contact / diary) */
@@ -796,11 +720,6 @@ body.surface-paper-body::before {
   padding: var(--s3) var(--s2);
 }
 .plate--type .plate__headline { font-size: clamp(56px, 12vw, 160px); }
-.plate--type.surface-blur-bg {
-  background-size: cover;
-  background-position: center;
-}
-.plate--type.surface-blur-bg::before { content: none; }
 
 /* initiatives: one entry = one plate + its own detail block, side by side,
    alternating sides down the page */
@@ -813,11 +732,18 @@ body.surface-paper-body::before {
   margin-bottom: var(--s5);
 }
 .entry--flip .plate-unit { order: 2; }
-.entry__detail { padding: 0 var(--s2); max-width: 560px; }
+.entry__detail {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--s4) var(--s3);
+  background: var(--navy);
+}
 @media (max-width: 900px) {
   .entry { grid-template-columns: 1fr; gap: var(--s3); margin-bottom: var(--s4); }
   .entry--flip .plate-unit { order: 0; }
-  .entry__detail { padding: 0 var(--s1); }
+  .entry__detail { padding: var(--s3) var(--s2); }
 }
 
 /* research: problem / method / status per study */
@@ -838,7 +764,7 @@ body.surface-paper-body::before {
 .study dt {
   font-family: var(--font-bracket);
   font-size: 15px;
-  color: var(--ink-2);
+  color: var(--on-dark-2);
   padding-top: .25em;
 }
 .study dd { margin: 0; }
@@ -854,11 +780,11 @@ body.surface-paper-body::before {
   gap: var(--s2);
   margin-top: var(--s4);
   padding: var(--s2) 0;
-  border-top: 1px solid var(--ink);
-  border-bottom: 1px solid var(--ink);
+  border-top: 1px solid var(--on-dark);
+  border-bottom: 1px solid var(--on-dark);
   text-decoration: none;
 }
-.outbound__label { font-family: var(--font-bracket); font-size: 15px; color: var(--ink-2); }
+.outbound__label { font-family: var(--font-bracket); font-size: 15px; color: var(--on-dark-2); }
 .outbound__url {
   flex: 1;
   font-family: var(--font-display);
@@ -910,7 +836,7 @@ body.surface-paper-body::before {
   font-weight: 500;
   font-size: 18px;
   letter-spacing: -.02em;
-  color: var(--ink-2);
+  color: var(--on-dark-2);
 }
 .intro-block__bio {
   margin: var(--s2) 0 0;
@@ -928,10 +854,10 @@ body.surface-paper-body::before {
 .icon-row a {
   display: flex;
   text-decoration: none;
-  color: var(--ink);
+  color: var(--on-dark);
 }
 .icon-row svg { width: 20px; height: 20px; }
-.icon-row a:hover { color: var(--ink-2); }
+.icon-row a:hover { color: var(--on-dark-2); }
 
 .portrait-frame {
   position: relative;
@@ -942,7 +868,7 @@ body.surface-paper-body::before {
   max-width: 380px;
   container-type: inline-size;
 }
-.portrait-frame .plate__meta { color: var(--ink); z-index: 3; }
+.portrait-frame .plate__meta { color: var(--ink); z-index: 3; }  /* sits on the photo's white ground */
 .portrait-frame img {
   width: 100%;
   height: 100%;
@@ -956,7 +882,7 @@ body.surface-paper-body::before {
   line-height: 1;
   white-space: pre;
   user-select: none;
-  color: var(--ink);
+  color: var(--on-dark);
 }
 
 /* =========================================================
@@ -973,7 +899,7 @@ body.surface-paper-body::before {
 }
 .now-strip__item {
   padding: var(--s2) var(--s2) 0 0;
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--rule-on-dark);
 }
 .now-strip__num {
   display: block;
@@ -988,7 +914,7 @@ body.surface-paper-body::before {
   margin-top: var(--s1);
   font-family: var(--font-caption);
   font-size: 16px;
-  color: var(--ink-2);
+  color: var(--on-dark-2);
 }
 @media (max-width: 720px) {
   .now-strip { grid-template-columns: repeat(2, 1fr); gap: var(--s2); }
@@ -1004,7 +930,7 @@ body.surface-paper-body::before {
   font-family: var(--font-bracket);
   font-size: 17px;
 }
-.latest-writing .date { color: var(--ink-2); }
+.latest-writing .date { color: var(--on-dark-2); }
 .latest-writing .all-posts { margin-left: auto; font-family: var(--font-label); font-size: 14px; }
 
 /* =========================================================
@@ -1014,12 +940,13 @@ body.surface-paper-body::before {
 .site-footer {
   display: flex;
   justify-content: space-between;
-  max-width: 1080px;
-  margin: 0 auto;
+  margin: 0 var(--gutter);
   padding: var(--s3) var(--s2) var(--s4);
   font-family: var(--font-caption);
   font-size: 15px;
-  color: var(--ink-2);
+  color: var(--on-dark-2);
+  /* the deepest end of the field, fading into the abyss */
+  background: linear-gradient(to bottom, var(--navy), var(--abyss));
 }
 
 /* =========================================================
@@ -1057,16 +984,6 @@ body.surface-paper-body::before {
    a much bigger share of a short plate, so the straddle headline moves
    up to clear it. */
 @media (max-width: 720px) {
-  .plate__wordmark {
-    font-size: 10px;
-    gap: 4px;
-    left: var(--s2);
-    right: 52px;
-    transform: none;
-    justify-content: center;
-  }
-  .plate__wordmark .rule { width: 18px; }
-
   .plate__meta .meta-arrow { transform: none; }
   .plate__meta {
     position: absolute;
@@ -1088,18 +1005,14 @@ body.surface-paper-body::before {
   .plate__definition .sub { font-size: 18px; }
 }
 
-/* dust + scratch marks: light scratches, dark specks, colored from tokens */
-.plate__dust line { stroke: var(--paper); }
-.plate__dust circle { fill: var(--ink); }
 
 @media (max-width: 720px) {
   /* on the portrait the horizontal meta line would sit on the hair */
-  .portrait-frame .plate__meta { right: auto; background: var(--paper); padding: 2px 6px; }
+  .portrait-frame .plate__meta { right: auto; color: var(--on-dark); background: var(--navy); padding: 2px 6px; }
 }
 
 /* rotating plate photos (assets/js/plates.js) */
 .plate__inset picture { display: block; width: 100%; height: 100%; }
-.plate__inset::after { background: linear-gradient(90deg, var(--paper) 0%, transparent var(--scrim, 22%)); }
 .plate__incoming {
   position: absolute;
   inset: 0;
@@ -1126,15 +1039,7 @@ body.surface-paper-body::before {
   .plate__incoming { transition: none; }
 }
 
-/* dark straddle plates: the same composition in reverse — paper headline
-   with an ink halo, so it holds over the crushed blacks of a night / cave
-   / silhouette photo */
 .plate--dark .plate__headline.tech-straddle {
-  color: var(--paper);
-  text-shadow: 0 0 14px var(--ink), 0 0 28px var(--ink), 0 1px 2px var(--ink);
-}
-.plate--dark :focus-visible { outline-color: var(--paper); }
-@media (min-width: 721px) {
-  .plate-unit:has(.plate--dark) .plate__quote p { color: var(--paper); }
-  .plate-unit:has(.plate--dark) .plate__quote .kr { color: color-mix(in srgb, var(--paper) 70%, transparent); }
+  color: var(--on-dark);
+  text-shadow: 0 0 14px var(--abyss), 0 0 28px var(--abyss), 0 1px 2px var(--abyss);
 }
