@@ -63,12 +63,12 @@
 
   <h1 class="sr-only">research</h1>
 
+  <!-- Plate 005 — Research — paper, straddle -->
   <!-- COPY: headline alternates — "Trust, measured." (chosen) / "Check the checker." / "Verify." -->
   <!-- PHOTO BRIEF (TODO(ryan)): the cave photos predate the trust framing. Replace with a subject about scrutiny
        or verification, same rules as every plate (tiny figure, atmosphere, crushed blacks): a figure under a single
        inspection light, a dark archive of identical drawers or ledgers, a lone figure in a vast instrument hall.
        Queries: "dark archive drawers black and white", "figure under inspection light", "observatory interior silhouette". -->
-  <!-- Plate 005 — Research — paper, straddle -->
   <figure class="plate-unit plate-unit--full reveal">
     <div class="plate plate--dark plate--full">
       <div class="local-grain" aria-hidden="true"></div>
@@ -90,9 +90,9 @@
 
   <section class="sheet">
 
+  <div class="quiet-column">
     <p class="research-lede">Two projects, one question: when a computational result has no outside referee, what makes it trustworthy?</p>
 
-  <div class="quiet-column">
     <ul class="hairline-list">
       <li id="contaminated-ancestors">
         <span class="gutter-label">paper</span>
@@ -112,19 +112,37 @@
           <p class="paper-link">Paper link coming after camera-ready.</p>
         </div>
       </li>
-      <li>
-        <span class="gutter-label">binding<br />prediction</span>
+      <li id="kras-benchmark">
+        <span class="gutter-label">benchmark</span>
         <div class="entry-body">
-          <h3 class="entry-title">KRAS G12D cryptic-pocket prediction</h3>
-          <dl class="study">
-            <dt>problem</dt>
-            <dd>KRAS G12D is a common driver mutation in pancreatic cancer, and KRAS has few obvious drug-binding sites; cryptic pockets, which open only transiently, are one way in.</dd>
-            <dt>method</dt>
-            <dd>A benchmarking study of cryptic-pocket prediction methods on KRAS G12D. <!-- TODO(ryan): which methods / tools were compared --></dd>
-            <!-- TODO(ryan): status (in progress / submitted / published), collaborators, link or preprint — then uncomment:
-            <dt>status</dt>
-            <dd>…</dd> -->
-          </dl>
+          <!-- Standalone project: separate work, venue and authorship from the NeurIPS paper above. Don't cross-reference. -->
+          <p class="paper-venue">Independent Research — Hanyang University, mentored by Professor Se-Jin Hwang (2026–present)</p>
+          <!-- TODO(ryan): if the RQ1 coupling threshold (the openness value at which the drug first redocks to native pose) lands, it becomes this standfirst -->
+          <h3 class="entry-title">The specialist tool lost on its own home turf.</h3>
+          <p class="paper-venue">Benchmarking three MD-free pocket predictors on the KRAS G12D Switch-II cryptic pocket · code and data public</p>
+          <p><strong>What I did.</strong> KRAS was called undruggable for thirty years. What changed was the discovery of a <strong>cryptic pocket</strong> — a binding site absent from the protein's resting shape that only forms as the protein flexes. The tools researchers use to hunt such sites were mostly built on pockets you can already see, so I tested how three of them behave on one that isn't there yet.</p>
+          <p>I built a 24-step ladder of structures running from closed to open, generated from the closed structure alone by normal mode analysis, with no molecular dynamics anywhere. That turns "how open is the pocket" into a measurable axis rather than a label. I ran three tools across every rung and on both real experimental structures: <strong>fpocket</strong> (pure geometry, the floor), <strong>P2Rank</strong> (general-purpose machine learning, what most labs already use), and <strong>PocketMiner</strong> (machine learning built specifically for cryptic pockets, the specialist).</p>
+          <p><strong>What I found.</strong></p>
+          <ul style="margin: 0 0 var(--s2);">
+            <li><strong>P2Rank localized it best.</strong> On the real open structure it recovered the pocket at 0.80 recall and 0.61 MCC, and treated it as one unified site rather than pieces.</li>
+            <li><strong>fpocket fragmented it.</strong> The geometric baseline found the region but split the extended pocket into disconnected sub-pockets, averaging about 0.25 recall across the ladder, and its predicted center sat offset from the true site.</li>
+            <li><strong>PocketMiner over-predicted.</strong> The specialist flagged 40+ residues at its 0.7 threshold — a large share of the whole protein — so it swept up true residues without localizing them, scoring 0.12 MCC. Its confidence on the true pocket residues barely exceeded its protein-wide average, and the same behavior held on the real open structure, so it isn't an artifact of my generated conformers.
+              <!-- TODO(ryan): state which structure the 40+ residues and 0.12 MCC were measured on (ladder average or real open structure) -->
+            </li>
+            <li><strong>Detection tracked openness.</strong> Both pocket-based tools improved as the pocket opened, confirming the ladder captured real pocket formation; PocketMiner stayed flat, consistent with flagging broadly regardless of shape.</li>
+          </ul>
+          <!-- TODO(ryan): confirm PocketMiner's and fpocket's recall on the real open structure, so all three tools compare on identical footing there -->
+          <p>The counterintuitive result is the one worth keeping: the tool built for cryptic pockets localized this cryptic pocket worse than the general-purpose one. Cryptic detection is the capability that made KRAS druggable, and KRAS G12D drives treatment-resistant pancreatic cancer — so which tool a lab reaches for on a hard target is a decision with consequences, and specialization turned out to be assumed rather than verified.</p>
+          <p style="font-family: var(--font-caption); font-size: 19px; line-height: 1.5;">One target and one pocket, so this is not a general claim about any tool. Conformers come from normal mode analysis alone, without further refinement. Comparing a tool that returns per-residue probabilities against tools that return pockets requires a threshold, which is a choice I made — though the result holds without it, since the specialist's confidence on the true pocket residues barely exceeds its average across the whole protein. And KRAS is genuinely flexible in more than one region, which may account for part of the broad flagging.</p>
+          <ul class="highlights highlights--facts">
+            <li><span class="highlights__big">0.80 / 0.61</span><span class="highlights__label">recall and MCC for the general-purpose tool on the real open structure</span></li>
+            <li><span class="highlights__big">0.12</span><span class="highlights__label">MCC for the tool built specifically for cryptic pockets</span></li>
+            <li><span class="highlights__big">245 → 822 Å³</span><span class="highlights__label">pocket volume, closed crystal structure to open</span></li>
+          </ul>
+          <p><strong>Methods integrity.</strong> The open structure is the answer key, so it never touched the pipeline that produces the test data: every conformer is built from the closed structure only, and the open one sits in a folder named so it can't be used by accident. Before any tool comparison, I re-docked the known drug into the real open structure and confirmed it landed within 0.96 Å of its crystal pose. If the pipeline can't reproduce a known answer, nothing downstream of it means anything.</p>
+          <!-- TODO(ryan): the repo README is out of date — it still says Phase 1 complete with Phase 2 starting, names IJHSR/NHSJS as the venue, and includes a two-person task split. Update it before this link goes live. -->
+          <!-- TODO(ryan): add the venue and paper link once the submission lands -->
+          <p class="paper-link"><a href="https://github.com/ryanjmahn/KRASG12DBenchmarking" target="_blank" rel="noreferrer">Code and data →</a></p>
         </div>
       </li>
     </ul>
