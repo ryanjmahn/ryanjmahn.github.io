@@ -1184,4 +1184,16 @@ body.surface-field::before {
   line-height: 1.4;
   color: var(--on-dark-2);
 }
-
+/* social links with their names, not bare icons */
+.icon-row--labelled { flex-wrap: wrap; gap: var(--s1) var(--s3); }
+.icon-row--labelled a {
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  font-family: var(--font-label);
+  font-size: 15px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--on-dark-2);
+}
+.icon-row--labelled a:hover { color: var(--on-dark); border-bottom-color: var(--on-dark); }
+.icon-row--labelled svg { width: 18px; height: 18px; }
