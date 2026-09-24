@@ -7,10 +7,10 @@ external license needed.
 
 ## ASCII portrait easter egg
 `assets/img/src/ryan.png` — personal photo, converted offline by
-`tools/ascii.py photo --plain` into plain monochrome ASCII (no per-character
-color, to match the black-and-white site). It lives only in the browser
-console (`assets/js/site.js`) and on `/404.html`; the source photo is not
-loaded by any page.
+`tools/ascii.py photo --plain` into plain ASCII. It's the home-page
+portrait (72 columns, drawn on canvas by `assets/js/texture.js`, with the
+`<pre>` as the no-JS fallback), the `/404.html` portrait, and the console
+easter egg. The source photo is not loaded by any page.
 
 ## Plate photography
 
