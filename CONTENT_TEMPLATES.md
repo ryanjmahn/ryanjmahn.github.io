@@ -29,26 +29,6 @@ paper link next to the code link:
 <p class="paper-link"><a href="https://github.com/ryanjmahn/KRASG12DBenchmarking" target="_blank" rel="noreferrer">Code and data →</a> · <a href="[paper url]" target="_blank" rel="noreferrer">[venue] ↗</a></p>
 ```
 
----
-
-## Korean quote verification (index.html was simplified — this line
-currently only appears if you re-add Plate 002's quote block)
-
-The build brief's Plate 002 spec included a Korean translation of the
-thesis line that was flagged for verification:
-```
-혁신만을 위해서가 아니라, 사회에 책임 있게 기여하기 위해 만든다.
-```
-This isn't currently rendered anywhere on the live pages (it was part
-of an optional `.plate__quote` block that didn't make it into the
-final home/built markup). If you want to add it back under the
-thesis line anywhere, the pattern used elsewhere for a Korean gloss is:
-```html
-<p class="entry-body">i build not only to innovate, but also to responsibly serve society.</p>
-<p style="font-family: var(--font-kr-serif); font-size: 13px; color: var(--ink-2);">[verified Korean phrasing]</p>
-```
-Have a native speaker (or your own gut) check the phrasing above
-before using it — it was machine-drafted, not verified.
 
 ---
 

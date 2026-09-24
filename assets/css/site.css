@@ -41,7 +41,6 @@
   --font-def: "Instrument Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-bracket: "Tinos", "Times New Roman", Times, serif;
   --font-caption: "Instrument Serif", "Tinos", "Times New Roman", Times, serif;
-  --font-kr-sans: "Pretendard", "Instrument Sans", sans-serif;
   /* reading text: the sans, not the condensed display serif */
   --font-text: "Instrument Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
@@ -58,8 +57,7 @@
     radial-gradient(110% 90% at 62% 76%, var(--blue-500) 0%, transparent 70%);
 }
 
-/* four self-hosted families, latin subsets (Pretendard: only the Korean
-   glyphs the site uses — regenerate with tools/subset-fonts.sh) */
+/* four self-hosted families, latin subsets */
 @font-face {
   font-family: "Instrument Sans";
   font-style: normal;
@@ -87,14 +85,6 @@
   font-weight: 400;
   font-display: swap;
   src: url("/assets/fonts/tinos.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Pretendard";
-  font-style: normal;
-  font-weight: 45 920;
-  font-display: swap;
-  src: url("/assets/fonts/pretendard-subset.woff2") format("woff2");
-  unicode-range: U+AC00-D7A3;
 }
 
 /* =========================================================
@@ -354,7 +344,7 @@ body.surface-field::before {
 .site-nav__mark {
   position: relative;
   z-index: 2;
-  font-family: var(--font-kr-sans);
+  font-family: var(--font-label);
   font-weight: 600;
   font-size: 16px;
   letter-spacing: -.02em;
@@ -708,13 +698,6 @@ body.surface-field::before {
   font-size: 16px;
   line-height: 1.5;
 }
-.plate__quote .kr {
-  margin-top: 6px;
-  font-family: var(--font-kr-sans);
-  font-size: 13px;
-  line-height: 1.6;
-  color: var(--on-dark-2);
-}
 @media (min-width: 721px) {
   .plate__quote {
     grid-area: 1 / 1;
@@ -886,7 +869,7 @@ body.surface-field::before {
 
 .intro-block__mark {
   margin: 0;
-  font-family: var(--font-kr-sans);
+  font-family: var(--font-label);
   font-weight: 700;
   font-size: clamp(64px, 10vw, 140px);
   line-height: .9;
