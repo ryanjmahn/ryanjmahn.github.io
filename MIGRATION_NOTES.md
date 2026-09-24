@@ -17,7 +17,7 @@ landing somewhere in the new structure.
 - Tagline: `17 · builder · seoul`
 - Status line: `building probix · seoul` + live Seoul time (via `script.js`, updates every 60s)
 - Title tag: `ryan jaemin ahn`
-- Meta description: `재민 — i build startups, run hackathons, and somehow keep ending up in health tech.`
+- Meta description: `ryan jaemin ahn — i build startups, run hackathons, and somehow keep ending up in health tech.`
 - Thesis line: `i build not only to innovate, but also to responsibly serve society.`
 
 **Contact / links**
@@ -53,8 +53,8 @@ landing somewhere in the new structure.
 - Copyright: `© 2026 ryan jaemin ahn`
 
 **diary.html**
-- Title: `diary · 재민`
-- Meta description: `재민's diary — short entries, roughly chronological.`
+- Title: `diary · ryan jaemin ahn`
+- Meta description: `ryan's diary — short entries, roughly chronological.`
 - Tagline: `short entries, roughly chronological. nothing curated.`
 - Entry `post-2026-09-14`, dated `2026-09-14`: "day 1. will be documenting my life journey as I reach for the stars."
 
@@ -83,7 +83,6 @@ See the bottom of this file, updated as the build proceeds — kept in one place
 
 Everything below is also marked `<!-- TODO(ryan): … -->` in the page source.
 
-- [ ] Korean line under the Probix pull quote (home + /built/) — machine-drafted, needs a native check: `혁신만을 위해서가 아니라, 사회에 책임 있게 기여하기 위해 만든다.` If you change it, re-run `tools/subset-fonts.sh`.
 - [ ] /built/ — your dates as Co-Founder & COO; 1–2 more sentences on what Probix ships and for whom; founding date, team size, current product status
 - [ ] /research/ — paper: confirm the TAE workshop's full name; when the camera-ready PDF (with author names) arrives, host it and swap `Paper link coming after camera-ready.` for a `download paper (pdf) ↓` link; never host the anonymous "Do not distribute" submission copy. KRAS G12D: names of the three tools, status, any link (a commented-out `status` row is ready)
 - [ ] /research/ — plate 005 photos: new set per the trust brief (see the comment above the plate)

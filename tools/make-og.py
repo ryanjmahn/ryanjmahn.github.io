@@ -137,8 +137,8 @@ def favicons():
     def icon(size):
         im = Image.new("RGB", (size, size), ABYSS)
         d = ImageDraw.Draw(im)
-        f = font("pretendard-subset.woff2", round(size * .74), 700)
-        d.text((size / 2, size / 2), "재", font=f, fill=ON_DARK, anchor="mm")
+        f = font("instrument-sans.woff2", round(size * .74), 700)
+        d.text((size / 2, size / 2), "j", font=f, fill=ON_DARK, anchor="mm")
         return im
     icon(180).save(ROOT / "apple-touch-icon.png")
     icon(32).save(ROOT / "favicon-32.png")
