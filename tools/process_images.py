@@ -31,7 +31,7 @@ from PIL import Image, ImageOps
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC = ROOT / "assets/img/src"
 OUT = ROOT / "assets/img"
-SIZES = (1000, 1600, 2000)  # long edge, px
+SIZES = (800, 1000, 1600, 2000)  # long edge, px; 800 serves phones
 ASPECT = 3 / 4  # width / height of every plate photo
 CONTRAST = 7  # S-curve steepness; higher = less mid-grey
 AVIF_BUDGET = 180_000  # bytes
