@@ -1008,7 +1008,74 @@ body.surface-field::before {
 }
 .js .reveal.is-visible { opacity: 1; transform: translateY(0); }
 
+/* plate choreography: once a plate is revealed its parts arrive in order —
+   the photo prints up into its frame, the headline rises through a mask,
+   then the labels, the definition and the caption row. `translate` (not
+   `transform`) so it composes with the headline parallax in site.js;
+   `backwards` fill so nothing is left clipped once it has played. */
+@keyframes print-in { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0); } }
+@keyframes rise-mask {
+  from { translate: 0 .45em; clip-path: inset(-30% -10% 100% -10%); }
+  to   { translate: 0 0;     clip-path: inset(-30% -10% -30% -10%); }
+}
+@keyframes rise { from { opacity: 0; translate: 0 14px; } to { opacity: 1; translate: 0 0; } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes row-in {
+  from { opacity: 0; clip-path: inset(0 100% 0 0); }
+  to   { opacity: 1; clip-path: inset(0 0 0 0); }
+}
+
+.js .reveal.is-visible .plate__inset { animation: print-in 1.1s var(--ease) .08s backwards; }
+.js .reveal.is-visible .plate__headline { animation: rise-mask .9s var(--ease) .38s backwards; }
+.js .reveal.is-visible .plate__kicker { animation: fade-in .6s var(--ease) .5s backwards; }
+.js .reveal.is-visible .plate__index { animation: fade-in .6s var(--ease) .6s backwards; }
+.js .reveal.is-visible .plate__meta { animation: fade-in .6s var(--ease) .7s backwards; }
+.js .reveal.is-visible .plate__definition,
+.js .reveal.is-visible .plate__quote { animation: rise .7s var(--ease) .65s backwards; }
+.js .reveal.is-visible .caption-row > * { animation: rise .6s var(--ease) backwards; }
+.js .reveal.is-visible .caption-row > :nth-child(1) { animation-delay: .75s; }
+.js .reveal.is-visible .caption-row > :nth-child(2) { animation-delay: .85s; }
+.js .reveal.is-visible .caption-row > :nth-child(3) { animation-delay: .95s; }
+
+/* rows arrive one after another as they scroll in (site.js stagger(),
+   which sets --stagger per batch): hairline rows wipe in left to right
+   like a rule being drawn; facts and numbers rise */
+.js .hairline-list > li,
+.js .highlights > li,
+.js .now-strip__item { opacity: 0; }
+.js .hairline-list > li.is-in { opacity: 1; animation: row-in .9s var(--ease) var(--stagger, 0ms) backwards; }
+.js .highlights > li.is-in,
+.js .now-strip__item.is-in { opacity: 1; animation: rise .7s var(--ease) calc(var(--stagger, 0ms) + 120ms) backwards; }
+
+/* reading progress: a 1px line under the nav, driven by scroll alone */
+@supports (animation-timeline: scroll()) {
+  @keyframes read-progress { from { scale: 0 1; } to { scale: 1 1; } }
+  .site-nav::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    background: var(--blue-300);
+    transform-origin: 0 50%;
+    animation: read-progress linear both;
+    animation-timeline: scroll(root);
+  }
+  .site-nav.is-open::after { display: none; }
+}
+
+/* page to page: the nav holds still, the page cross-fades */
+@view-transition { navigation: auto; }
+.site-nav { view-transition-name: site-nav; }
+@keyframes vt-out { to { opacity: 0; translate: 0 -8px; } }
+@keyframes vt-in { from { opacity: 0; translate: 0 12px; } }
+::view-transition-old(root) { animation: vt-out .22s var(--ease) both; }
+::view-transition-new(root) { animation: vt-in .42s var(--ease) both; }
+
 @media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+  .site-nav::after { display: none; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
   * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
 }
