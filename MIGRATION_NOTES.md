@@ -317,4 +317,8 @@ plate or other page touched. Copy blocks are verbatim. Deviations:
   TODO: the finding says tie-breaking rule, the label says sign convention.
 - The Hanyang / Prof. Hwang line stays above the KRAS title.
 - The spec's CV line is moot — /cv/ was removed on 2026-09-24.
+- The submitted manuscript is self-hosted at
+  `assets/papers/kras-g12d-switch-ii-benchmark.pdf` and linked from the
+  entry. Open questions (TODO in the page): CJSJ's exclusive-distribution
+  clause if selected, and the school email in the PDF's footnote.
 
