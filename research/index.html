@@ -98,24 +98,23 @@
         <span class="gutter-label">paper</span>
         <div class="entry-body">
           <h3 class="entry-title">Contaminated Ancestors: Seven Ways Our Own Evaluation Protocol Nearly Told Us the Wrong Thing</h3>
-          <p class="paper-venue">Accepted, NeurIPS 2026 TAE workshop · co-authored</p>
+          <p class="paper-venue">Accepted, NeurIPS 2026 <a href="https://tai-eval.github.io/" target="_blank" rel="noreferrer">TAE workshop</a> · co-authored</p>
           <p class="paper-venue">An audit of our own experiment rather than its result</p>
           <p><strong>What we did.</strong> Ancestral reconstruction infers what a protein looked like millions of years ago. It assumes every lineage has one parent, so when two histories have merged it doesn't fail loudly — it returns a confident sequence stitched from both. We built a detector for that, then wrote the paper about our evaluation instead of our result.</p>
           <p><strong>What we found.</strong></p>
           <ul style="margin: 0 0 var(--s2);">
             <li><strong>The headline number measured nothing.</strong> Our detector flagged 2 of 15 contaminated cases; the control, with nothing to find, also flagged 2 of 15. A properly calibrated test is <em>supposed</em> to fire at its threshold on empty data. What actually separated real hits from false alarms was where the flagged region landed — 81% overlap with the truth versus 8%.</li>
-            <li><strong>Six more failures followed</strong>, including a tie-breaking rule that inverted a score from 0.952 to 0.048, a control that only looked clean because we'd run too few seeds, and a summary file describing an experiment no committed data supported.</li>
+            <li><strong>Six more failures followed</strong>, including a sign convention that inverted a score from 0.952 to 0.048, a control that only looked clean because we'd run too few seeds, and a summary file describing an experiment no committed data supported.</li>
             <li><strong>Plain string comparison beat the neural network</strong> (36 of 40 versus 11 of 40), relocating the method's power from the model to an earlier step.</li>
             <li><strong>A laptop GPU corrupted numbers mid-run</strong> without raising an error, turning p = 0.030 into p = 1.000.</li>
           </ul>
           <p><strong>Why it matters.</strong> In scientific machine learning there is usually one dataset, one lab, a few random seeds, a metric invented for the paper, and nobody outside positioned to notice a problem. A protocol can be locally correct and globally misleading, and the result still gets published. The paper ends with an 11-question checklist any lab can run against its own protocol — none of the failures required the biology.</p>
           <ul class="highlights highlights--facts">
             <li><span class="highlights__big">2/15 vs 2/15</span><span class="highlights__label">detection rate on real contamination versus on nothing at all</span></li>
-            <!-- TODO(ryan): the finding above blames a tie-breaking rule; this label (from the earlier copy) says a sign convention. Confirm which, and make them match. -->
             <li><span class="highlights__big">0.952 → 0.048</span><span class="highlights__label">a score inverted by an unchecked sign convention</span></li>
             <li><span class="highlights__big">11</span><span class="highlights__label">questions in the resulting protocol checklist</span></li>
           </ul>
-          <!-- TODO(ryan): confirm the workshop's full name, and add the OpenReview or proceedings link once it's live. Don't host the PDF:
+          <!-- TODO(ryan): add the OpenReview or proceedings link once it's live. Don't host the PDF:
                the copy on hand is the anonymous submission version, marked not for distribution. -->
           <p class="paper-link">Paper link coming after camera-ready.</p>
         </div>
