@@ -23,10 +23,17 @@ with:
 <p class="paper-link"><a href="[openreview or proceedings url]" target="_blank" rel="noreferrer">read the paper ↗</a></p>
 ```
 
-**KRAS G12D benchmark.** When the submission lands, add the venue and
-paper link next to the code link:
+**KRAS G12D benchmark.** Under review at the Columbia Junior Science
+Journal. When a decision comes back, replace the status line under the
+entry title:
 ```html
-<p class="paper-link"><a href="https://github.com/ryanjmahn/KRASG12DBenchmarking" target="_blank" rel="noreferrer">Code and data →</a> · <a href="[paper url]" target="_blank" rel="noreferrer">[venue] ↗</a></p>
+<p class="paper-venue">Manuscript under review, Columbia Junior Science Journal · sole author</p>
+```
+If accepted, swap it for the citation and add the paper link next to the
+code link:
+```html
+<p class="paper-venue">[citation] · sole author</p>
+<p class="paper-link"><a href="[paper url]" target="_blank" rel="noreferrer">[venue] ↗</a> · <a href="https://github.com/ryanjmahn/KRASG12DBenchmarking" target="_blank" rel="noreferrer">Code and data →</a></p>
 ```
 
 

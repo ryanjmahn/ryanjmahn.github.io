@@ -84,7 +84,7 @@ See the bottom of this file, updated as the build proceeds — kept in one place
 Everything below is also marked `<!-- TODO(ryan): … -->` in the page source.
 
 - [ ] /built/ — your dates as Co-Founder & COO; 1–2 more sentences on what Probix ships and for whom; founding date, team size, current product status
-- [ ] /research/ — paper: confirm the TAE workshop's full name; when the camera-ready PDF (with author names) arrives, host it and swap `Paper link coming after camera-ready.` for a `download paper (pdf) ↓` link; never host the anonymous "Do not distribute" submission copy. KRAS G12D: names of the three tools, status, any link (a commented-out `status` row is ready)
+- [ ] /research/ — paper: confirm the TAE workshop's full name; when the camera-ready PDF (with author names) arrives, host it and swap `Paper link coming after camera-ready.` for a `download paper (pdf) ↓` link; never host the anonymous "Do not distribute" submission copy. KRAS G12D: swap the "Manuscript under review" status line for the citation once the journal decides; update the repo README before the code link goes live
 - [ ] /research/ — plate 005 photos: new set per the trust brief (see the comment above the plate)
 - [ ] /initiatives/ — dates at STEMise and what a typical program looks like; year of each hackathon
 - [x] /cv/ — removed at Ryan's request (2026-09-24); not in the nav.
@@ -257,12 +257,14 @@ curriculum tied to UN SDG 3
 
 **Research (exactly two entries)**
 1. *Contaminated Ancestors: Seven Ways Our Own Evaluation Protocol Nearly
-   Told Us the Wrong Thing* — NeurIPS 2026 · TAE workshop · accepted.
-   Anchor `/research/#contaminated-ancestors` (linked from home).
-   Pull facts: `2/15 vs 2/15`, `0.048 → 0.952`, `11`.
-2. KRAS G12D Switch-II pocket, three-tool benchmark across conformational
-   states in PDAC (Hanyang University). Anchor `#kras-benchmark`.
-   Tools: fpocket, P2Rank, PocketMiner; code and data at
+   Told Us the Wrong Thing* — Accepted, NeurIPS 2026 TAE workshop ·
+   co-authored. Anchor `/research/#contaminated-ancestors` (linked from home).
+   Pull facts: `2/15 vs 2/15`, `0.952 → 0.048`, `11`.
+2. *The specialist tool lost on its own home turf.* — KRAS G12D Switch-II
+   pocket, three MD-free pocket predictors (Hanyang University). Manuscript
+   under review, Columbia Junior Science Journal · sole author. Anchor
+   `#kras-benchmark`. Tools: fpocket, P2Rank, AE-PocketMiner. Pull facts:
+   `0.95 / 0.12`, `245 → 822 Å³`, `0.96 Å`. Code and data at
    github.com/ryanjmahn/KRASG12DBenchmarking.
 - Removed: PDAC tumor segmentation / CNN-vs-transformer (discontinued) —
   from /research/, /cv/, CONTENT_TEMPLATES.md.
@@ -301,3 +303,18 @@ education (Yongsan International School of Seoul, expected May 2027), the
 honors list, and the languages line. The record of them above stays as
 reference. The GPA/SAT TODO marker went with the page; no scores appear
 anywhere on the site.
+
+## Content update — KRAS entry final, NeurIPS entry trimmed (2026-09-26)
+
+`/research/` only, from `portfolio-research-entries.md`; no stylesheet,
+plate or other page touched. Copy blocks are verbatim. Deviations:
+
+- NeurIPS labels read "What we did / What we found" (co-authored paper).
+- The `0.96 Å` label names the open crystal structure, so every figure
+  states its structure (acceptance checklist).
+- The NeurIPS pull fact reads `0.952 → 0.048` to match the finding's
+  direction ("inverted a score from 0.952 to 0.048"). Open question in a
+  TODO: the finding says tie-breaking rule, the label says sign convention.
+- The Hanyang / Prof. Hwang line stays above the KRAS title.
+- The spec's CV line is moot — /cv/ was removed on 2026-09-24.
+
