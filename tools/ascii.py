@@ -77,7 +77,7 @@ def render_photo(path, cols, crop_bottom, plain=False, bare=False):
     body = "\n".join(lines)
     if bare:
         return body
-    return f'<pre class="ascii-portrait" role="img" aria-label="ASCII portrait of Ryan Jaemin Ahn">\n{body}\n</pre>'
+    return f'<pre class="ascii-portrait" role="img" aria-label="ASCII portrait of Ryan Ahn">\n{body}\n</pre>'
 
 
 def render_figure(path, cols):

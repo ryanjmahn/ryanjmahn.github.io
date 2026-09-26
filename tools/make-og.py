@@ -34,7 +34,7 @@ FONTS = ROOT / "assets/fonts"
 
 PAGES = {
     # page: (source image, crop centre x, crop centre y, kicker, index, headline, dark plate[, zoom])
-    "home": ("plate-001-a.jpg", 0.15, 0.8, "ryan jaemin ahn", "001", "Build responsibly.", True, 1.4),
+    "home": ("plate-001-a.jpg", 0.15, 0.8, "ryan ahn", "001", "Build responsibly.", True, 1.4),
     "built": ("plate-002-a.jpg", 0.5, 0.5, "probix labs", "002", "Reproducible.", True),
     "initiatives": ("plate-003-a.jpg", 0.5, 0.6, "stemise · hackathons", "003", "Reach.", True),
     "research": ("plate-005-a.jpg", 0.5, 0.5, "research", "005", "Trust, measured.", True),
@@ -138,7 +138,7 @@ def favicons():
         im = Image.new("RGB", (size, size), ABYSS)
         d = ImageDraw.Draw(im)
         f = font("instrument-sans.woff2", round(size * .74), 700)
-        d.text((size / 2, size / 2), "j", font=f, fill=ON_DARK, anchor="mm")
+        d.text((size / 2, size / 2), "r", font=f, fill=ON_DARK, anchor="mm")
         return im
     icon(180).save(ROOT / "apple-touch-icon.png")
     icon(32).save(ROOT / "favicon-32.png")

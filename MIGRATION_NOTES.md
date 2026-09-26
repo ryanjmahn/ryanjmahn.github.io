@@ -358,3 +358,17 @@ under prefers-reduced-motion):
 - 1px reading-progress line under the nav (scroll-driven animation,
   `@supports` guarded).
 - Cross-document view transition: nav holds, page cross-fades.
+
+## Name and home intro (2026-09-26)
+
+Ryan goes by **ryan ahn** on the site — never the full name. Replaced
+everywhere a page, script or share image shows it (titles, meta, JSON-LD,
+nav label, footer, home plate kicker/caption, ASCII-portrait labels,
+console easter egg, tools/ascii.py, tools/make-og.py). Home share image
+regenerated; the favicon letter is now "r" (was "j"). The KRAS manuscript
+PDF still carries the full author name — that's the submitted paper.
+
+Home intro rewritten after wenhao-lu.com: one line of who, one line of
+interests, links into /research/ and /initiatives/. The achievements it
+used to list live in the now-strip right below it. `intro-block__mark`
+reads "ryan". Home meta description matches the new intro.
