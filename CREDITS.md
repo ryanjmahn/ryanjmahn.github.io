@@ -105,3 +105,5 @@ in `assets/img/src/logos/`; trimmed, squared and exported to
 - `dsh-hacks.png` — DSH Hacks V1 thumbnail, dsh-hacks-v1.devpost.com
 - `univabio.png` — UnivaBio thumbnail, univabio.devpost.com
 - `synthify.jpg` — synthify-magazine.vercel.app (`/logo.jpg`)
+- `probix.png` — tryprobix.com (`/probix-logo.png`), on /built/; the
+  silver mark is composited onto black, since it is drawn for dark grounds
