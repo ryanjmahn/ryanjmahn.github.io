@@ -80,6 +80,29 @@
   targets.forEach(function (el) { io.observe(el); });
 })();
 
+(function stagger() {
+  // Rows are watched one by one rather than as a whole list: a long list
+  // on a phone can be taller than the viewport and would never reach a
+  // list-level threshold. Rows that enter together get increasing delays.
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var items = document.querySelectorAll(".hairline-list > li, .highlights > li, .now-strip__item");
+  if (!items.length) return;
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    items.forEach(function (el) { el.classList.add("is-in"); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    var n = 0;
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.style.setProperty("--stagger", (n++ * 90) + "ms");
+      entry.target.classList.add("is-in");
+      io.unobserve(entry.target);
+    });
+  }, { rootMargin: "0px 0px -8% 0px" });
+  items.forEach(function (el) { io.observe(el); });
+})();
+
 (function countUp() {
   // The real value is in the markup (e.g. "$200k+"), so no-JS readers,
   // crawlers and link previews see it. JS only reads the target from

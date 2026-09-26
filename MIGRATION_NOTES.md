@@ -334,3 +334,27 @@ STEMise, DSH Hacks, UnivaBio and Synthify are in, plus Probix Labs on
 black, Synthify on its navy). To add one: drop a PNG in `assets/img/src/logos/`,
 trim the white margin, pad to a square (~18%), and save 192px `.webp` +
 `.png` to `assets/img/logos/` (sources in CREDITS.md).
+
+## Motion pass and phone-size images (2026-09-26)
+
+**Images.** Rotating plates gain an 800px-long-edge tier (600w) in
+`tools/process_images.py` SIZES and `assets/js/plates.js`; noscript
+fallbacks re-synced with `node tools/sync-plates.js`. Phones were pulling
+the 1000px files (plate-003-b alone was 118 KB). Mobile Lighthouse on
+/initiatives/: perf 94 → 96, 332 → 266 KiB. Remaining Lighthouse flags are
+by design or host-side: site.css and plates.js block render (plates.js
+must, to write the photo before first paint), and compression/cache TTL
+are GitHub Pages' call.
+
+**Motion** (all CSS keyframes on opacity / translate / clip-path, all off
+under prefers-reduced-motion):
+- Plate choreography on reveal: photo prints up into its frame → headline
+  rises through a mask → kicker, index, meta → definition → caption row.
+  `translate`, not `transform`, so it composes with the headline parallax.
+- Rows stagger in as they scroll: `.hairline-list > li` wipe left to right,
+  `.highlights > li` and `.now-strip__item` rise. `stagger()` in site.js
+  watches each row (a long list can outgrow a list-level threshold on a
+  phone) and sets `--stagger` per batch.
+- 1px reading-progress line under the nav (scroll-driven animation,
+  `@supports` guarded).
+- Cross-document view transition: nav holds, page cross-fades.
