@@ -98,17 +98,25 @@
         <span class="gutter-label">paper</span>
         <div class="entry-body">
           <h3 class="entry-title">Contaminated Ancestors: Seven Ways Our Own Evaluation Protocol Nearly Told Us the Wrong Thing</h3>
-          <!-- TODO(ryan): confirm the workshop's full name and add the OpenReview/proceedings link when it's live.
-               Do not host the PDF: the copy on hand is the anonymous submission version, marked not for distribution. -->
-          <p class="paper-venue">NeurIPS 2026 · TAE workshop · accepted</p>
-          <p><strong>What we were doing.</strong> Ancestral reconstruction infers what a protein looked like millions of years ago, assuming every lineage has one parent. When two histories have merged, the method doesn't fail loudly — it returns a confident chimera. We built a detector for that, then wrote the paper about our evaluation instead of our result.</p>
-          <p><strong>What we found.</strong> Our detector flagged 2 of 15 contaminated cases — and 2 of 15 in a control with nothing to find, because a calibrated test is <em>supposed</em> to fire at its threshold on empty data. What really separated signal from noise was where the flag landed: 81% overlap with the true block, versus 8% for the control. Six more failures followed, from an unchecked sign convention that inverted a score (0.048 where the truth was 0.952) to seed noise larger than every effect we studied. Plain string comparison even beat the neural network (36/40 vs 11/40), and a laptop GPU silently turned p = 0.030 into p = 1.000.</p>
-          <p><strong>Why it matters.</strong> Scientific ML often has one dataset, one lab, a few seeds, and nobody outside positioned to check. A protocol can be locally correct and globally misleading, and still get published. The paper closes with an 11-question checklist any lab can run on its own protocol — none of it requires the biology.</p>
+          <p class="paper-venue">Accepted, NeurIPS 2026 TAE workshop · co-authored</p>
+          <p class="paper-venue">An audit of our own experiment rather than its result</p>
+          <p><strong>What we did.</strong> Ancestral reconstruction infers what a protein looked like millions of years ago. It assumes every lineage has one parent, so when two histories have merged it doesn't fail loudly — it returns a confident sequence stitched from both. We built a detector for that, then wrote the paper about our evaluation instead of our result.</p>
+          <p><strong>What we found.</strong></p>
+          <ul style="margin: 0 0 var(--s2);">
+            <li><strong>The headline number measured nothing.</strong> Our detector flagged 2 of 15 contaminated cases; the control, with nothing to find, also flagged 2 of 15. A properly calibrated test is <em>supposed</em> to fire at its threshold on empty data. What actually separated real hits from false alarms was where the flagged region landed — 81% overlap with the truth versus 8%.</li>
+            <li><strong>Six more failures followed</strong>, including a tie-breaking rule that inverted a score from 0.952 to 0.048, a control that only looked clean because we'd run too few seeds, and a summary file describing an experiment no committed data supported.</li>
+            <li><strong>Plain string comparison beat the neural network</strong> (36 of 40 versus 11 of 40), relocating the method's power from the model to an earlier step.</li>
+            <li><strong>A laptop GPU corrupted numbers mid-run</strong> without raising an error, turning p = 0.030 into p = 1.000.</li>
+          </ul>
+          <p><strong>Why it matters.</strong> In scientific machine learning there is usually one dataset, one lab, a few random seeds, a metric invented for the paper, and nobody outside positioned to notice a problem. A protocol can be locally correct and globally misleading, and the result still gets published. The paper ends with an 11-question checklist any lab can run against its own protocol — none of the failures required the biology.</p>
           <ul class="highlights highlights--facts">
             <li><span class="highlights__big">2/15 vs 2/15</span><span class="highlights__label">detection rate on real contamination versus on nothing at all</span></li>
-            <li><span class="highlights__big">0.048 → 0.952</span><span class="highlights__label">a score inverted by an unchecked sign convention</span></li>
+            <!-- TODO(ryan): the finding above blames a tie-breaking rule; this label (from the earlier copy) says a sign convention. Confirm which, and make them match. -->
+            <li><span class="highlights__big">0.952 → 0.048</span><span class="highlights__label">a score inverted by an unchecked sign convention</span></li>
             <li><span class="highlights__big">11</span><span class="highlights__label">questions in the resulting protocol checklist</span></li>
           </ul>
+          <!-- TODO(ryan): confirm the workshop's full name, and add the OpenReview or proceedings link once it's live. Don't host the PDF:
+               the copy on hand is the anonymous submission version, marked not for distribution. -->
           <p class="paper-link">Paper link coming after camera-ready.</p>
         </div>
       </li>
@@ -117,31 +125,28 @@
         <div class="entry-body">
           <!-- Standalone project: separate work, venue and authorship from the NeurIPS paper above. Don't cross-reference. -->
           <p class="paper-venue">Independent Research — Hanyang University, mentored by Professor Se-Jin Hwang (2026–present)</p>
-          <!-- TODO(ryan): if the RQ1 coupling threshold (the openness value at which the drug first redocks to native pose) lands, it becomes this standfirst -->
           <h3 class="entry-title">The specialist tool lost on its own home turf.</h3>
-          <p class="paper-venue">Benchmarking three MD-free pocket predictors on the KRAS G12D Switch-II cryptic pocket · code and data public</p>
-          <p><strong>What I did.</strong> KRAS was called undruggable for thirty years. What changed was the discovery of a <strong>cryptic pocket</strong> — a binding site absent from the protein's resting shape that only forms as the protein flexes. The tools researchers use to hunt such sites were mostly built on pockets you can already see, so I tested how three of them behave on one that isn't there yet.</p>
-          <p>I built a 24-step ladder of structures running from closed to open, generated from the closed structure alone by normal mode analysis, with no molecular dynamics anywhere. That turns "how open is the pocket" into a measurable axis rather than a label. I ran three tools across every rung and on both real experimental structures: <strong>fpocket</strong> (pure geometry, the floor), <strong>P2Rank</strong> (general-purpose machine learning, what most labs already use), and <strong>PocketMiner</strong> (machine learning built specifically for cryptic pockets, the specialist).</p>
+          <!-- TODO(ryan): update when a decision comes back. If accepted, replace with the citation and link. -->
+          <p class="paper-venue">Manuscript under review, Columbia Junior Science Journal · sole author</p>
+          <p class="paper-venue">Benchmarking three MD-free pocket predictors on the KRAS G12D Switch-II pocket · code and data public</p>
+          <p><strong>What I did.</strong> KRAS was called undruggable for thirty years. What changed was a <strong>cryptic pocket</strong> — a binding site absent from the protein's resting shape that forms only as it flexes. Because such pockets are invisible in the structure a lab actually has, researchers rely on software to find them, and most of that software was built on pockets you can already see.</p>
+          <p>I benchmarked three tools on the Switch-II pocket of KRAS G12D, the mutation behind most pancreatic cancers: <strong>fpocket</strong> (pure geometry, no machine learning), <strong>P2Rank</strong> (general-purpose machine learning), and <strong>AE-PocketMiner</strong> (a graph neural network built specifically for cryptic pockets). Each ran on two crystal structures bracketing the pocket's opening and on a 24-step ladder of intermediate structures generated from the closed one alone, with no molecular dynamics.</p>
           <p><strong>What I found.</strong></p>
           <ul style="margin: 0 0 var(--s2);">
-            <li><strong>P2Rank localized it best.</strong> On the real open structure it recovered the pocket at 0.80 recall and 0.61 MCC, and treated it as one unified site rather than pieces.</li>
-            <li><strong>fpocket fragmented it.</strong> The geometric baseline found the region but split the extended pocket into disconnected sub-pockets, averaging about 0.25 recall across the ladder, and its predicted center sat offset from the true site.</li>
-            <li><strong>PocketMiner over-predicted.</strong> The specialist flagged 40+ residues at its 0.7 threshold — a large share of the whole protein — so it swept up true residues without localizing them, scoring 0.12 MCC. Its confidence on the true pocket residues barely exceeded its protein-wide average, and the same behavior held on the real open structure, so it isn't an artifact of my generated conformers.
-              <!-- TODO(ryan): state which structure the 40+ residues and 0.12 MCC were measured on (ladder average or real open structure) -->
-            </li>
-            <li><strong>Detection tracked openness.</strong> Both pocket-based tools improved as the pocket opened, confirming the ladder captured real pocket formation; PocketMiner stayed flat, consistent with flagging broadly regardless of shape.</li>
+            <li><strong>The specialist came last.</strong> On the real open structure, pure geometry localized the pocket best (0.92 recall, 0.95 MCC) and the general-purpose model second (0.72, 0.83), both at perfect precision. The cryptic-pocket specialist flagged 45 residues for 0.40 recall at 0.12 MCC — it found the pocket without localizing it.</li>
+            <li><strong>The closed structure reversed the ranking.</strong> Where the pocket doesn't exist, only the general-purpose model correctly returned nothing; the geometric tool reported one anyway.</li>
+            <li><strong>Volume isn't enough.</strong> Four conformers at open-state volume returned no pocket at the site while neighbours of the same volume were found.</li>
+            <li><strong>Detection rate alone would have hidden all of it.</strong> By that metric the specialist "succeeded" and the general-purpose model "failed" on the closed structure. Both readings are backwards.</li>
           </ul>
-          <!-- TODO(ryan): confirm PocketMiner's and fpocket's recall on the real open structure, so all three tools compare on identical footing there -->
-          <p>The counterintuitive result is the one worth keeping: the tool built for cryptic pockets localized this cryptic pocket worse than the general-purpose one. Cryptic detection is the capability that made KRAS druggable, and KRAS G12D drives treatment-resistant pancreatic cancer — so which tool a lab reaches for on a hard target is a decision with consequences, and specialization turned out to be assumed rather than verified.</p>
-          <p style="font-family: var(--font-caption); font-size: 19px; line-height: 1.5;">One target and one pocket, so this is not a general claim about any tool. Conformers come from normal mode analysis alone, without further refinement. Comparing a tool that returns per-residue probabilities against tools that return pockets requires a threshold, which is a choice I made — though the result holds without it, since the specialist's confidence on the true pocket residues barely exceeds its average across the whole protein. And KRAS is genuinely flexible in more than one region, which may account for part of the broad flagging.</p>
+          <p style="font-family: var(--font-caption); font-size: 19px; line-height: 1.5;">One target and one pocket, so this shows the expected ranking can fail on a clinically important case, not that it fails as a rule. Conformers come from normal mode analysis alone. The openness axis is produced by one of the tools being tested, which doesn't affect scoring but isn't independent.</p>
           <ul class="highlights highlights--facts">
-            <li><span class="highlights__big">0.80 / 0.61</span><span class="highlights__label">recall and MCC for the general-purpose tool on the real open structure</span></li>
-            <li><span class="highlights__big">0.12</span><span class="highlights__label">MCC for the tool built specifically for cryptic pockets</span></li>
+            <li><span class="highlights__big">0.95 / 0.12</span><span class="highlights__label">MCC for the geometric tool and the cryptic-pocket specialist on the real open structure</span></li>
             <li><span class="highlights__big">245 → 822 Å³</span><span class="highlights__label">pocket volume, closed crystal structure to open</span></li>
+            <li><span class="highlights__big">0.96 Å</span><span class="highlights__label">redocking accuracy of the known drug in the open crystal structure, verified before any benchmarking</span></li>
           </ul>
-          <p><strong>Methods integrity.</strong> The open structure is the answer key, so it never touched the pipeline that produces the test data: every conformer is built from the closed structure only, and the open one sits in a folder named so it can't be used by accident. Before any tool comparison, I re-docked the known drug into the real open structure and confirmed it landed within 0.96 Å of its crystal pose. If the pipeline can't reproduce a known answer, nothing downstream of it means anything.</p>
-          <!-- TODO(ryan): the repo README is out of date — it still says Phase 1 complete with Phase 2 starting, names IJHSR/NHSJS as the venue, and includes a two-person task split. Update it before this link goes live. -->
-          <!-- TODO(ryan): add the venue and paper link once the submission lands -->
+          <p><strong>Methods integrity.</strong> The open structure is the answer key, so it never touched the pipeline that generates the test data — every conformer comes from the closed structure alone. Before any comparison, I re-docked the known drug into the open structure and confirmed it landed within 0.96 Å of its crystal pose: a pipeline that can't reproduce a known answer can't be trusted on an unknown one. All three tools are scored by one function over the same residue set, and every value regenerates from committed data.</p>
+          <!-- TODO(ryan): the repo README still describes an older phase and venue. Update it before this link goes live,
+               or the first person who clicks through sees a description that contradicts the site. -->
           <p class="paper-link"><a href="https://github.com/ryanjmahn/KRASG12DBenchmarking" target="_blank" rel="noreferrer">Code and data →</a></p>
         </div>
       </li>
