@@ -29,8 +29,9 @@ entry title:
 ```html
 <p class="paper-venue">Manuscript under review, Columbia Junior Science Journal · sole author</p>
 ```
-If accepted, swap it for the citation and add the paper link next to the
-code link:
+If accepted, swap it for the citation, and replace the self-hosted
+manuscript link (`/assets/papers/kras-g12d-switch-ii-benchmark.pdf`) with
+the journal's page, or with the published PDF if CJSJ allows it:
 ```html
 <p class="paper-venue">[citation] · sole author</p>
 <p class="paper-link"><a href="[paper url]" target="_blank" rel="noreferrer">[venue] ↗</a> · <a href="https://github.com/ryanjmahn/KRASG12DBenchmarking" target="_blank" rel="noreferrer">Code and data →</a></p>
