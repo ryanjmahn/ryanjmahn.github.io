@@ -84,7 +84,7 @@ See the bottom of this file, updated as the build proceeds — kept in one place
 Everything below is also marked `<!-- TODO(ryan): … -->` in the page source.
 
 - [ ] /built/ — your dates as Co-Founder & COO; 1–2 more sentences on what Probix ships and for whom; founding date, team size, current product status
-- [ ] /research/ — paper: confirm the TAE workshop's full name; when the camera-ready PDF (with author names) arrives, host it and swap `Paper link coming after camera-ready.` for a `download paper (pdf) ↓` link; never host the anonymous "Do not distribute" submission copy. KRAS G12D: swap the "Manuscript under review" status line for the citation once the journal decides; update the repo README before the code link goes live
+- [ ] /research/ — paper: when the camera-ready PDF (with author names) arrives, host it and swap `Paper link coming after camera-ready.` for a `download paper (pdf) ↓` link; never host the anonymous "Do not distribute" submission copy. KRAS G12D: swap the "Manuscript under review" status line for the citation once the journal decides; update the repo README before the code link goes live
 - [ ] /research/ — plate 005 photos: new set per the trust brief (see the comment above the plate)
 - [ ] /initiatives/ — dates at STEMise and what a typical program looks like; year of each hackathon
 - [x] /cv/ — removed at Ryan's request (2026-09-24); not in the nav.
@@ -313,8 +313,11 @@ plate or other page touched. Copy blocks are verbatim. Deviations:
 - The `0.96 Å` label names the open crystal structure, so every figure
   states its structure (acceptance checklist).
 - The NeurIPS pull fact reads `0.952 → 0.048` to match the finding's
-  direction ("inverted a score from 0.952 to 0.048"). Open question in a
-  TODO: the finding says tie-breaking rule, the label says sign convention.
+  direction ("inverted a score from 0.952 to 0.048"). The finding said
+  "tie-breaking rule"; it now says "sign convention", the paper's own name
+  for Failure 2 (§4.1), so it matches the pull-fact label.
+- TAE is "Trust-AI-Eval: Can We Trust AI Evaluation?" (tai-eval.github.io,
+  Sydney, Dec 2026); the status line links there.
 - The Hanyang / Prof. Hwang line stays above the KRAS title.
 - The spec's CV line is moot — /cv/ was removed on 2026-09-24.
 - The submitted manuscript is self-hosted at
