@@ -1189,6 +1189,21 @@ body.surface-field::before {
 .highlights--facts .highlights__label { font-family: var(--font-caption); font-size: 17px; }
 /* a second project after the outbound block (built) */
 .hairline-list--next { margin-top: var(--s5); }
+/* initiatives: organisation logos — square paper tiles, linked to each org */
+.org-marks { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 var(--s2); }
+.org-mark {
+  display: block;
+  width: 64px;
+  height: 64px;
+  background: #fff;
+  outline: 1px solid var(--rule-on-dark);
+  outline-offset: 4px;
+  transition: transform .35s var(--ease), outline-color .35s var(--ease);
+}
+.org-mark img { display: block; width: 100%; height: 100%; }
+.org-mark:hover,
+.org-mark:focus-visible { transform: translateY(-3px); outline-color: var(--blue-300); }
+@media (prefers-reduced-motion: reduce) { .org-mark { transition: none; } .org-mark:hover { transform: none; } }
 /* anchors land below the sticky nav */
 .hairline-list > li[id] { scroll-margin-top: 72px; }
 
