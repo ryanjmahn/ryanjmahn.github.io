@@ -96,3 +96,12 @@ site uses by `tools/subset-fonts.sh`).
 Home intro icon row (email / github / linkedin / diary) uses inline
 1px-stroke SVGs hand-drawn in the style of [Lucide](https://lucide.dev)
 (ISC license) — not copied directly from the Lucide source files.
+
+## Organisation logos (/initiatives/)
+Logos of organisations I founded or run, used to identify them. Originals
+in `assets/img/src/logos/`; trimmed, squared and exported to
+`assets/img/logos/<name>-192.{webp,png}`.
+- `stemise.png` — stemise.org (`/stemise-mark.png`)
+- `dsh-hacks.png` — DSH Hacks V1 thumbnail, dsh-hacks-v1.devpost.com
+- `univabio.png` — UnivaBio thumbnail, univabio.devpost.com
+- `synthify.jpg` — synthify-magazine.vercel.app (`/logo.jpg`)

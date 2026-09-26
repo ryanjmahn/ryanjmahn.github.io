@@ -322,3 +322,11 @@ plate or other page touched. Copy blocks are verbatim. Deviations:
   entry. Open questions (TODO in the page): CJSJ's exclusive-distribution
   clause if selected, and the school email in the PDF's footnote.
 
+## Initiative logos (2026-09-26)
+
+Square paper tiles (`.org-marks` / `.org-mark`, 64px, linked to each org)
+at the top of each initiative's "what" row, after wenhao-lu.com/initiatives.
+STEMise, DSH Hacks, UnivaBio and Synthify are in. Logos drawn for dark
+grounds keep their own dark tile (Synthify on its navy). To add one: drop a PNG in `assets/img/src/logos/`,
+trim the white margin, pad to a square (~18%), and save 192px `.webp` +
+`.png` to `assets/img/logos/` (sources in CREDITS.md).
