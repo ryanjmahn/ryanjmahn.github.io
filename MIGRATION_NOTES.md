@@ -372,3 +372,40 @@ Home intro rewritten after wenhao-lu.com: one line of who, one line of
 interests, links into /research/ and /initiatives/. The achievements it
 used to list live in the now-strip right below it. `intro-block__mark`
 reads "ryan". Home meta description matches the new intro.
+
+## One page, after allenxu.dev (2026-10-02, at Ryan's request)
+
+The poster plates, nav and section pages are gone. The site is one
+letter: a greeting, one `prev:` list of short verb-first bullets, three
+contact links.
+
+- **Structure.** `index.html` only. `/built/`, `/initiatives/`,
+  `/research/`, `/contact/` and `/diary.html` are redirect stubs to `/`
+  (noindex, canonical to home) so old links still land. The sitemap lists
+  home only. The long research write-ups, the Probix and STEMise detail
+  rows, the now-strip and the diary entry are no longer on the site; they
+  are in git history (last present at 5c260d6).
+- **Type.** Instrument Serif for everything read, Fragment Mono for
+  labels. Instrument Serif has one weight, so `<strong>` is full-strength
+  ink plus a hairline text-shadow, and `font-synthesis: none` stops the
+  browser faking a bold.
+- **Colour.** An H&E slide: hematoxylin ink `#2A2148`, eosin accent
+  `#C93A74`, paper `#FAF6F0`, with a counting-chamber grid. Follows the
+  system colour scheme (dark = the same slide in darkfield). Tokens are in
+  `:root`; the canvases read them from there.
+- **Bio elements.** Letterhead: a lead-II ECG sweep that quickens when a
+  link is hovered or focused. Foot of the page: fig. 1, a toy tumor in
+  cell-sheet form — normal cells hold a fixed population (the most crowded
+  is squeezed out, the least crowded divides), mutant cells divide on a
+  clock regardless, an inhibitor front clears the colony, and the pointer
+  doses cells under it. Both are `aria-hidden`, still under reduced
+  motion, and fig. 1 pauses off screen.
+- **Kept.** The portrait (fig. 0), redrawn as a field of cells sampled
+  from the photo — they settle on load and part around the pointer; the
+  ASCII version survives on the 404 — and the initiative
+  logos, now set inline at the head of each bullet.
+- **No longer loaded by any page** (left in the repo): `assets/js/plates.js`,
+  `assets/js/texture.js`, every `assets/img/plate-*` file, the section
+  share images in `assets/img/og/`, the Instrument Sans and Tinos fonts,
+  and the plate tooling in `tools/`. The home share image
+  (`assets/img/og/home.jpg`) still shows the old blue plate.

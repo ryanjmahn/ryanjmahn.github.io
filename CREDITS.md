@@ -107,3 +107,16 @@ in `assets/img/src/logos/`; trimmed, squared and exported to
 - `synthify.jpg` — synthify-magazine.vercel.app (`/logo.jpg`)
 - `probix.png` — tryprobix.com (`/probix-logo.png`), on /built/; the
   silver mark is composited onto black, since it is drawn for dark grounds
+
+## One-page letter (2026-10-02)
+
+The site is a single page now. Text is Instrument Serif (regular and
+italic, SIL OFL, self-hosted in `assets/fonts/`); labels and readouts are
+Fragment Mono (SIL OFL, self-hosted). Both latin subsets from Google Fonts.
+
+The ECG trace (`assets/js/site.js`) and the tumor-colony field
+(`assets/js/specimen.js`) are drawn in code: no images, no libraries.
+The home portrait (`assets/js/portrait.js`) is drawn as cells sampled
+from `assets/img/portrait-480.jpg`; the ASCII portrait remains on the 404. Initiative logos are the existing `assets/img/logos/` tiles.
+
+The plate photography below is no longer loaded by any page.
