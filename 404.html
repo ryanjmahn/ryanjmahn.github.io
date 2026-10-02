@@ -7,74 +7,29 @@
 <title>404 · ryan ahn</title>
 <meta name="description" content="Page not found." />
 <meta name="robots" content="noindex" />
-<meta name="theme-color" content="#00050F" />
+<meta name="theme-color" content="#FAF6F0" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-<link rel="preload" href="/assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/assets/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="/assets/css/site.css" />
-<style>
-  /* .ascii-portrait's shared rules (font, line-height, white-space) live
-     in site.css now that the home page also uses it; this page-specific
-     sizing/layout stays local. */
-  .ascii-portrait {
-    margin: var(--s3) auto 0;
-    max-width: 100%;
-    overflow: hidden;
-    font-size: 2.58px;
-    text-align: center;
-  }
-  @media (min-width: 720px) {
-    .ascii-portrait { font-size: 3.57px; }
-  }
-</style>
 </head>
-<body data-page="404" class="surface-field">
-<svg class="svg-defs" aria-hidden="true" focusable="false">
-  <!-- .grade-blueprint: duotone, shadows #00102E -> highlights #DCEEFF at 65% -->
-  <filter id="blueprint" color-interpolation-filters="sRGB">
-    <feColorMatrix type="saturate" values="0" result="gray"/>
-    <feComponentTransfer in="gray" result="duo">
-      <feFuncR type="table" tableValues="0 .863"/>
-      <feFuncG type="table" tableValues=".063 .933"/>
-      <feFuncB type="table" tableValues=".18 1"/>
-    </feComponentTransfer>
-    <feComposite in="duo" in2="gray" operator="arithmetic" k2=".65" k3=".35"/>
-  </filter>
-</svg>
-<div class="grain-global" aria-hidden="true"></div>
-
-<!-- NAV: keep in sync across pages (only aria-current differs) -->
+<body data-page="404">
 <a class="skip-link" href="#main">Skip to content</a>
-<nav class="site-nav" aria-label="primary">
-  <a href="/" class="site-nav__mark">/ra<span class="sr-only"> — ryan ahn</span></a>
-  <button class="site-nav__toggle" type="button" aria-expanded="false" aria-controls="site-menu">menu</button>
-  <ul class="site-nav__links" id="site-menu">
-    <li><a href="/">home</a></li>
-    <li><a href="/built/">built</a></li>
-    <li><a href="/initiatives/">initiatives</a></li>
-    <li><a href="/research/">research</a></li>
-    <li class="site-nav__sep"><a href="/diary.html">diary</a></li>
-    <li><a href="/contact/">contact</a></li>
-  </ul>
-</nav>
-<!-- /NAV -->
 
-<main class="page" id="main">
+<main class="letter" id="main">
 
-  <!-- Typographic plate — dark, no index (not one of the numbered plates) -->
-  <figure class="plate plate--dark plate--type plate--full reveal" style="margin: 0 var(--gutter);">
-    <div class="local-grain" aria-hidden="true"></div>
-    <h1 class="plate__headline">404.</h1>
-  </figure>
+  <header class="vitals">
+    <a class="vitals__id" href="/">← ryan ahn</a>
+    <canvas class="vitals__trace" aria-hidden="true"></canvas>
+    <span class="vitals__bpm" aria-hidden="true"><span class="vitals__heart">♥</span> <span class="vitals__bpm-num">62</span><span class="unit"> bpm · lead II</span></span>
+  </header>
 
-  <section class="sheet">
+  <h1 class="page-title arrive" style="--i:0">404.</h1>
+  <p class="arrive" style="--i:1">no specimen at this address. <a href="/">back to the letter</a></p>
 
-  <div class="quiet-column">
-    <p class="entry-body">This page doesn't exist. <a href="/">back to /ra →</a></p>
-  </div>
-
-  <pre class="ascii-portrait" role="img" aria-label="ASCII portrait of Ryan Ahn">
+  <figure class="portrait portrait--404 arrive" style="--i:2">
+    <pre class="ascii-portrait" role="img" aria-label="ASCII portrait of Ryan Ahn">
                                               ...
                                  .:=+*##*=-=+*#%###+=:
                                :+#%%%%%%%%%%%%%%%%%%%%#=.
@@ -122,16 +77,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 @@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   </pre>
-  </section>
-
-  <footer class="site-footer">
-    <span>© 2026 · ryan ahn</span>
-    <span>built in seoul</span>
-  </footer>
+  </figure>
 
 </main>
 
-<script src="/assets/js/texture.js" defer></script>
 <script src="/assets/js/site.js" defer></script>
 </body>
 </html>
