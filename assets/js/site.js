@@ -1,177 +1,145 @@
-// site.js — nav, scroll-reveal, parallax. Shared, byte-identical include
-// on every page. Respects prefers-reduced-motion throughout.
+// site.js — the letterhead's pulse. Shared, byte-identical include on
+// every page. Draws a lead-II ECG into .vitals__trace the way a bedside
+// monitor does: a sweep that overwrites the last pass. Decorative
+// (aria-hidden in the markup); a single still pass under reduced motion.
 
-(function nav() {
-  var navEl = document.querySelector(".site-nav");
-  if (!navEl) return;
-  var setScrolled = function () {
-    navEl.classList.toggle("is-scrolled", window.scrollY > 8);
-  };
-  setScrolled();
-  window.addEventListener("scroll", setScrolled, { passive: true });
+(function vitals() {
+  var canvas = document.querySelector(".vitals__trace");
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext("2d");
+  var bpmEl = document.querySelector(".vitals__bpm-num");
+  var heart = document.querySelector(".vitals__heart");
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // Mobile menu: the same link list, shown full-screen. While open, focus
-  // is trapped in the nav, Esc closes, the page behind is inert and
-  // doesn't scroll, and focus returns to the toggle on close.
-  var toggle = navEl.querySelector(".site-nav__toggle");
-  var menu = document.getElementById("site-menu");
-  var main = document.getElementById("main");
-  if (!toggle || !menu) return;
-  var isOpen = false;
+  var REST = 62;      // resting rate
+  var SPEED = 70;     // sweep, css px per second
+  var GAP = 16;       // blank stretch ahead of the sweep head
 
-  function focusables() {
-    return [navEl.querySelector(".site-nav__mark"), toggle].concat(
-      Array.prototype.slice.call(menu.querySelectorAll("a")));
+  var w = 0, h = 0, dpr = 1;
+  var samples = [];   // one value per css px, -1..1
+  var head = 0;       // sweep position, css px
+  var phase = 0;      // 0..1 through the current beat
+  var rate = REST, target = REST, beatLen = 60 / REST;
+  var ink = "#000", accent = "#f00";
+
+  function colours() {
+    var cs = getComputedStyle(document.documentElement);
+    ink = cs.getPropertyValue("--ink").trim() || ink;
+    accent = cs.getPropertyValue("--eosin").trim() || accent;
   }
 
-  function setOpen(open, restoreFocus) {
-    isOpen = open;
-    navEl.classList.toggle("is-open", open);
-    document.documentElement.classList.toggle("nav-open", open);
-    toggle.setAttribute("aria-expanded", String(open));
-    toggle.textContent = open ? "close" : "menu";
-    if (main) main.inert = open;
-    if (open) {
-      var first = menu.querySelector("a");
-      if (first) first.focus();
-    } else if (restoreFocus) {
-      toggle.focus();
+  function bump(p, mu, sigma) {
+    var d = (p - mu) / sigma;
+    return Math.exp(-.5 * d * d);
+  }
+  // P wave, QRS complex, T wave
+  function wave(p) {
+    return .11 * bump(p, .16, .028)
+         - .13 * bump(p, .268, .008)
+         + 1.0 * bump(p, .295, .0095)
+         - .24 * bump(p, .322, .011)
+         + .25 * bump(p, .53, .05);
+  }
+
+  function advance(dt) {
+    // ease toward the target rate; each beat's length wanders a little,
+    // as a real heart's does
+    rate += (target - rate) * Math.min(1, dt * 1.6);
+    phase += dt / beatLen;
+    if (phase >= 1) {
+      phase -= 1;
+      beatLen = 60 / rate * (1 + (Math.random() - .5) * .07);
+      onBeat(Math.round(60 / beatLen));
     }
+    return wave(phase);
   }
 
-  toggle.addEventListener("click", function () { setOpen(!isOpen, true); });
+  function onBeat(bpm) {
+    if (bpmEl) bpmEl.textContent = bpm;
+    if (!heart || reduceMotion) return;
+    heart.classList.remove("is-beat");
+    void heart.offsetWidth;
+    heart.classList.add("is-beat");
+  }
 
-  document.addEventListener("keydown", function (e) {
-    if (!isOpen) return;
-    if (e.key === "Escape") { e.preventDefault(); setOpen(false, true); return; }
-    if (e.key !== "Tab") return;
-    var items = focusables();
-    var i = items.indexOf(document.activeElement);
-    if (e.shiftKey && i <= 0) { e.preventDefault(); items[items.length - 1].focus(); }
-    else if (!e.shiftKey && i === items.length - 1) { e.preventDefault(); items[0].focus(); }
+  function sweep(px) {
+    // move the head on, writing every pixel it crosses exactly once
+    var to = head + px;
+    for (var x = Math.floor(head) + 1; x <= Math.floor(to); x++) {
+      samples[x % w] = advance(1 / SPEED);
+    }
+    head = to % w;
+  }
+
+  function draw() {
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, w, h);
+    var base = h * .68, amp = h * .56;
+    var hx = Math.floor(head);
+    ctx.lineWidth = 1.15;
+    ctx.lineJoin = "round";
+    ctx.strokeStyle = ink;
+    ctx.globalAlpha = .7;
+    ctx.beginPath();
+    var pen = false;
+    for (var x = 0; x < w; x++) {
+      var ahead = (x - hx + w) % w;
+      if (ahead < GAP && !reduceMotion) { pen = false; continue; }
+      var y = base - samples[x] * amp;
+      if (pen) ctx.lineTo(x + .5, y); else { ctx.moveTo(x + .5, y); pen = true; }
+    }
+    ctx.stroke();
+    if (reduceMotion) return;
+    // the head: a bright point where the trace is being written
+    var last = samples[(hx - 1 + w) % w];
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = accent;
+    ctx.beginPath();
+    ctx.arc(hx, base - last * amp, 2.1, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function resize() {
+    var rect = canvas.getBoundingClientRect();
+    var nw = Math.max(2, Math.round(rect.width)), nh = Math.round(rect.height);
+    if (nw === w && nh === h) return;
+    w = nw; h = nh;
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    // a full pass already on screen, so the page never opens on a flat line
+    samples = new Array(w);
+    head = 0;
+    for (var x = 0; x < w; x++) samples[x] = advance(1 / SPEED);
+    head = reduceMotion ? 0 : w * .82;
+    draw();
+  }
+
+  colours();
+  resize();
+  if ("ResizeObserver" in window) new ResizeObserver(resize).observe(canvas);
+  else window.addEventListener("resize", resize);
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () {
+    colours();
+    draw();
   });
+  if (reduceMotion) return;
 
-  menu.addEventListener("click", function (e) {
-    if (isOpen && e.target.closest("a")) setOpen(false, false);
-  });
+  // a link under the pointer or focus quickens the pulse
+  function excite(e) { if (e.target.closest && e.target.closest("a")) target = 96; }
+  function settle(e) { if (e.target.closest && e.target.closest("a")) target = REST; }
+  document.addEventListener("pointerover", excite);
+  document.addEventListener("pointerout", settle);
+  document.addEventListener("focusin", excite);
+  document.addEventListener("focusout", settle);
 
-  window.matchMedia("(min-width: 721px)").addEventListener("change", function (mq) {
-    if (mq.matches && isOpen) setOpen(false, false);
-  });
-})();
-
-(function reveal() {
-  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var targets = document.querySelectorAll(".reveal");
-  if (!targets.length) return;
-  if (reduceMotion || !("IntersectionObserver" in window)) {
-    targets.forEach(function (el) { el.classList.add("is-visible"); });
-    return;
+  var then = 0;
+  function frame(now) {
+    var dt = Math.min(.05, (now - then) / 1000 || 0);
+    then = now;
+    sweep(dt * SPEED);
+    draw();
+    requestAnimationFrame(frame);
   }
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-      var el = entry.target;
-      var delay = Number(el.dataset.revealDelay || 0);
-      setTimeout(function () { el.classList.add("is-visible"); }, delay);
-      io.unobserve(el);
-    });
-  }, { threshold: .15 });
-  targets.forEach(function (el) { io.observe(el); });
+  requestAnimationFrame(frame);
 })();
-
-(function stagger() {
-  // Rows are watched one by one rather than as a whole list: a long list
-  // on a phone can be taller than the viewport and would never reach a
-  // list-level threshold. Rows that enter together get increasing delays.
-  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var items = document.querySelectorAll(".hairline-list > li, .highlights > li, .now-strip__item");
-  if (!items.length) return;
-  if (reduceMotion || !("IntersectionObserver" in window)) {
-    items.forEach(function (el) { el.classList.add("is-in"); });
-    return;
-  }
-  var io = new IntersectionObserver(function (entries) {
-    var n = 0;
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-      entry.target.style.setProperty("--stagger", (n++ * 90) + "ms");
-      entry.target.classList.add("is-in");
-      io.unobserve(entry.target);
-    });
-  }, { rootMargin: "0px 0px -8% 0px" });
-  items.forEach(function (el) { io.observe(el); });
-})();
-
-(function countUp() {
-  // The real value is in the markup (e.g. "$200k+"), so no-JS readers,
-  // crawlers and link previews see it. JS only reads the target from
-  // data-count-to, swaps the number inside that text for 0 itself, and
-  // animates back up to the value that was already there.
-  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var nums = document.querySelectorAll("[data-count-to]");
-  if (!nums.length || reduceMotion || !("IntersectionObserver" in window)) return;
-
-  var NUMBER = /[\d,]+/;
-  function render(el, value) {
-    el.textContent = el.dataset.countText.replace(NUMBER, value.toLocaleString("en-US"));
-  }
-
-  nums.forEach(function (el) {
-    el.dataset.countText = el.textContent;
-    render(el, 0);
-  });
-
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-      var el = entry.target;
-      var target = Number(el.dataset.countTo);
-      var duration = 1100;
-      var start = null;
-      function step(ts) {
-        if (start === null) start = ts;
-        var progress = Math.min(1, (ts - start) / duration);
-        var eased = 1 - Math.pow(1 - progress, 3);
-        render(el, Math.round(target * eased));
-        if (progress < 1) requestAnimationFrame(step);
-        else el.textContent = el.dataset.countText;
-      }
-      requestAnimationFrame(step);
-      io.unobserve(el);
-    });
-  }, { threshold: .4 });
-  nums.forEach(function (el) { io.observe(el); });
-})();
-
-(function parallax() {
-  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduceMotion || window.innerWidth < 720) return;
-  var headlines = document.querySelectorAll(".plate--dark .plate__headline");
-  if (!headlines.length) return;
-  var ticking = false;
-  function update() {
-    headlines.forEach(function (el) {
-      var plate = el.closest(".plate");
-      var rect = plate.getBoundingClientRect();
-      var progress = 1 - (rect.top + rect.height / 2) / (window.innerHeight + rect.height);
-      var offset = Math.max(-1, Math.min(1, progress * 2 - 1)) * 15;
-      el.style.transform = "translateY(" + offset + "px)";
-    });
-    ticking = false;
-  }
-  window.addEventListener("scroll", function () {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(update);
-  }, { passive: true });
-  update();
-})();
-
-// ASCII-portrait easter egg, retired from the main layout per the
-// poster-plates revamp — survives here and on /404.html only.
-// Generated by: python3 tools/ascii.py photo assets/img/src/ryan.png --plain --cols 48 --bare
-console.log(
-  "%c" + "                    .:-:.:-=-:\n                 :+#%%%%%%%%%%%+:\n                =%%%%%%%%%%%%%%%%+\n               +%%%%%%%%%%%%%%%%%%*\n              :%%%%%%%%%%%%%%%%%%%#-\n              +%%%%#*****++*##%%%%%=\n              =%%%#+==+++=--=+#%%%%:\n               %%+=+===----====+#%*\n               #*=------::::-:---#-\n              :++--===:-:::-=--:-*-\n              :=+-::.::-:::...::-=-\n              .-==-:.:==:--:..::--.\n                .=-:::-=---:..:-.\n                 -=-:-=====-::--\n               -#%*=-:----:::-=*=.\n             -#@%@#*+-:::.::-==%%%-\n            *%%%%@#++*++===+=-=@%%%-\n          :#%%%%%%*=-=====--::-%%%%%+\n         +%%%%%%%%#=----::::::-#%%%%%#=.\n        #%%%%%%%%%%#=::::::::-#%%%%%%%%%=\n    .-+#%%%%%%%%%%%%%*-:::::-#%%%%%%%%%%%%*+-.\n.=*%%%%%%%%%%%%%%%%%%%%+::-+#%%%%%%%%%%%%%%%%%*-\n%%%%%%%%%%%%%%%%%%%%%%%%%#%%%%%%%%%%%%%%%%%%%%%%\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" + "\n\n%cryan ahn — builder, seoul.",
-  "font-family:monospace;line-height:1;", "font-weight:bold;"
-);
