@@ -247,20 +247,6 @@ html:not(.js) .vitals__trace { height: 1px; background: var(--rule); }
 .letter li { padding-left: .2em; margin-bottom: .16em; }
 .letter li::marker { color: var(--eosin); font-size: .7em; }
 
-/* an initiative's logo, set into the line like a wax seal */
-.seal {
-  display: inline-block;
-  width: 1.02em;
-  height: 1.02em;
-  margin-right: .12em;
-  vertical-align: -.16em;
-  border-radius: 3px;
-  background: #fff;
-  box-shadow: 0 0 0 1px var(--rule);
-  transition: transform .3s var(--ease);
-}
-li:hover .seal { transform: rotate(-6deg) scale(1.12); }
-
 .links {
   display: flex;
   flex-wrap: wrap;
