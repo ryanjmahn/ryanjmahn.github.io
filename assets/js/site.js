@@ -2,6 +2,41 @@
 // every page. Draws a lead-II ECG into .vitals__trace the way a bedside
 // monitor does: a sweep that overwrites the last pass. Decorative
 // (aria-hidden in the markup); a single still pass under reduced motion.
+// Also runs the light/dark toggle.
+
+// light / dark: follows the system until the toggle is used, then the
+// choice is kept in localStorage (read back by the inline script in
+// <head>). Canvases redraw on the "themechange" event.
+(function theme() {
+  var root = document.documentElement;
+  var button = document.querySelector(".theme-toggle");
+  var label = button && button.querySelector(".theme-toggle__label");
+  var meta = document.querySelector('meta[name="theme-color"]');
+  var system = window.matchMedia("(prefers-color-scheme: dark)");
+
+  function isDark() {
+    var t = root.getAttribute("data-theme");
+    return t ? t === "dark" : system.matches;
+  }
+  function sync() {
+    var dark = isDark();
+    if (label) label.textContent = dark ? "light" : "dark";
+    if (button) button.setAttribute("aria-label", "Switch to " + (dark ? "light" : "dark") + " mode");
+    if (meta) meta.setAttribute("content", dark ? "#0A0A0A" : "#FFFFFF");
+  }
+
+  sync();
+  system.addEventListener("change", sync);
+  if (!button) return;
+  button.addEventListener("click", function () {
+    var next = isDark() ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("theme", next); } catch (e) {}
+    sync();
+    document.dispatchEvent(new Event("themechange"));
+  });
+})();
+
 
 (function vitals() {
   var canvas = document.querySelector(".vitals__trace");
@@ -119,10 +154,12 @@
   resize();
   if ("ResizeObserver" in window) new ResizeObserver(resize).observe(canvas);
   else window.addEventListener("resize", resize);
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () {
+  function recolour() {
     colours();
     draw();
-  });
+  }
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", recolour);
+  document.addEventListener("themechange", recolour);
   if (reduceMotion) return;
 
   // a link under the pointer or focus quickens the pulse

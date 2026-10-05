@@ -41,7 +41,8 @@
     nucleus = cs.getPropertyValue("--nucleus").trim() || nucleus;
     karyon = cs.getPropertyValue("--karyon").trim() || ink;
     paper = cs.getPropertyValue("--paper").trim() || paper;
-    dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    var theme = document.documentElement.getAttribute("data-theme");
+    dark = theme ? theme === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
   }
 
   function makeCell(x, y, r) {
@@ -412,10 +413,12 @@
   resize();
   if ("ResizeObserver" in window) new ResizeObserver(resize).observe(canvas);
   else window.addEventListener("resize", resize);
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () {
+  function recolour() {
     colours();
     draw();
-  });
+  }
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", recolour);
+  document.addEventListener("themechange", recolour);
   if (reduceMotion) return;
 
   function point(e) {
