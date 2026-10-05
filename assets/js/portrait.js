@@ -24,7 +24,8 @@
     eosin = cs.getPropertyValue("--eosin").trim() || eosin;
     nucleus = cs.getPropertyValue("--nucleus").trim() || nucleus;
     karyon = cs.getPropertyValue("--karyon").trim() || karyon;
-    dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    var theme = document.documentElement.getAttribute("data-theme");
+    dark = theme ? theme === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
   }
 
   // sample the photo on the same hex grid the cells sit on
@@ -161,12 +162,15 @@
     resize();
     if ("ResizeObserver" in window) new ResizeObserver(resize).observe(canvas);
     else window.addEventListener("resize", resize);
-    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () {
+    function recolour() {
       colours();
       build();
       born = performance.now();
       draw(reduceMotion ? 99 : 0);
-    });
+      start();
+    }
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", recolour);
+    document.addEventListener("themechange", recolour);
     if (reduceMotion) return;
     function point(e) {
       var rect = canvas.getBoundingClientRect();
