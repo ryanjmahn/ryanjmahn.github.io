@@ -193,8 +193,8 @@ a:hover { color: var(--eosin); background-size: 100% 2px; }
 .letter li,
 .letter dd { color: color-mix(in srgb, var(--ink) 86%, var(--paper)); }
 
-/* letterhead: who it is, and a pulse. On the 404 the name is the way
-   back home. The trace is drawn by site.js. */
+/* letterhead: who it is, and a running automaton. On the 404 the name is the way
+   back home. The automaton is run by site.js. */
 .vitals {
   display: flex;
   align-items: center;
@@ -237,18 +237,7 @@ html:not(.js) .vitals__trace { height: 1px; background: var(--rule); }
 .theme-toggle__glyph { display: inline-block; transition: transform .45s var(--ease); }
 .theme-toggle:hover .theme-toggle__glyph { transform: rotate(180deg); }
 html:not(.js) .theme-toggle { display: none; }
-.vitals__bpm { white-space: nowrap; font-variant-numeric: tabular-nums; }
-.vitals__heart {
-  display: inline-block;
-  color: var(--eosin);
-  transform-origin: 50% 60%;
-}
-.vitals__heart.is-beat { animation: beat .32s var(--ease); }
-@keyframes beat {
-  0%   { transform: scale(1); }
-  30%  { transform: scale(1.38); }
-  100% { transform: scale(1); }
-}
+.vitals__readout { white-space: nowrap; font-variant-numeric: tabular-nums; }
 
 /* home: the letter, with the portrait in its margin */
 .letter--home { --measure: 78ch; }
@@ -339,7 +328,7 @@ html:not(.js) .portrait__cells { display: none; }
 .portrait--404 .ascii-portrait { font-size: calc(100cqi / 50.4); }
 
 /* =========================================================
-   motion — one page load, in order: the pulse, then the letter
+   motion — one page load, in order: the letterhead, then the letter
    line by line
    ========================================================= */
 
@@ -364,5 +353,5 @@ html:not(.js) .portrait__cells { display: none; }
 
 @media (max-width: 560px) {
   .letter { width: calc(100% - 2rem); }
-  .vitals__bpm .unit { display: none; }
+  .vitals__readout .unit { display: none; }
 }
