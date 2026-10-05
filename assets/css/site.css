@@ -3,8 +3,8 @@
    A monotone slide: ink on paper, with greys standing in for the stains.
    The variable names keep their histology roles (eosin = cytoplasm and
    the one accent, nucleus/karyon = the nuclei). These are the only colour
-   values in the site; the canvases (assets/js/site.js, portrait.js)
-   read them from here. The theme follows the system unless
+   values in the site; the canvases (assets/js/site.js, portrait.js,
+   worldmodel.js) read them from here. The theme follows the system unless
    the toggle has set data-theme on <html>.
    ========================================================= */
 
@@ -257,12 +257,73 @@ html:not(.js) .theme-toggle { display: none; }
 
 .milestones { margin-bottom: var(--flow); }
 .milestones > p { margin-bottom: .1em; color: var(--ink); }
+
+/* a section label, the way a notebook heads a page */
+.letter .label {
+  margin-bottom: .55rem;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
 .letter .milestones ul { margin-bottom: 0; }
 .milestones + .milestones { margin-top: var(--flow); }
 
 .letter ul { padding-left: 1.3em; list-style: disc outside; }
 .letter li { padding-left: .2em; margin-bottom: .16em; }
 .letter li::marker { color: var(--eosin); font-size: .7em; }
+
+/* the log: numbered entries, each with its own sketch in the margin */
+.letter .entries { padding-left: 2.1em; list-style: none; counter-reset: entry; }
+.entries li {
+  position: relative;
+  padding-left: 0;
+  margin-bottom: .5em;
+  counter-increment: entry;
+}
+.entries li::before {
+  content: counter(entry, decimal-leading-zero);
+  position: absolute;
+  left: -2.1em;
+  top: .42em;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-2);
+}
+.glyph {
+  display: none;
+  position: absolute;
+  top: .1em;
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  overflow: visible;
+  transition: stroke .3s var(--ease), transform .4s var(--ease);
+}
+.glyph .fill { fill: var(--ink-2); stroke: none; transition: fill .3s var(--ease); }
+.glyph .dash { stroke-dasharray: 2 2.5; }
+.entries li:hover .glyph { stroke: var(--ink); transform: rotate(-4deg) scale(1.08); }
+.entries li:hover .glyph .fill { fill: var(--ink); }
+@media (min-width: 960px) {
+  /* a ruled margin down the left of the page, sketches outside it */
+  .letter--home { position: relative; }
+  .letter--home::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -1.6rem;
+    width: 3px;
+    border-left: 1px solid var(--rule);
+    border-right: 1px solid var(--rule);
+  }
+  .glyph { display: block; left: calc(-2.1em - 1.6rem - 48px); }
+}
 
 .links {
   display: flex;
@@ -309,6 +370,46 @@ html:not(.js) .portrait__cells { display: none; }
   font-family: var(--font-mono);
   font-size: 11px;
   line-height: 1.4;
+  color: var(--ink-2);
+}
+
+/* =========================================================
+   fig. 1 — the world model (assets/js/worldmodel.js), home only
+   ========================================================= */
+
+.world { margin: clamp(2.2rem, 5vw, 3.2rem) 0 0; }
+.world__field {
+  display: block;
+  width: 100%;
+  height: clamp(170px, 22vw, 230px);
+  touch-action: pan-y;
+  cursor: crosshair;
+  background: color-mix(in srgb, var(--paper) 72%, transparent);
+  box-shadow: 0 0 0 1px var(--rule);
+}
+html:not(.js) .world { display: none; }
+.world figcaption {
+  margin-top: .7rem;
+  max-width: 62ch;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.world__err { display: inline-block; min-width: 3ch; text-align: right; color: var(--ink); font-variant-numeric: tabular-nums; }
+@media (hover: none) { .world__hint { display: none; } }
+
+/* sign-off at the foot of the page */
+.colophon {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .3rem 1.2rem;
+  margin-top: clamp(2rem, 5vw, 3rem);
+  padding-top: .8rem;
+  border-top: 1px dashed var(--rule);
+  font-family: var(--font-mono);
+  font-size: 11px;
   color: var(--ink-2);
 }
 
