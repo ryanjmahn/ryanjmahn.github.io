@@ -1,20 +1,22 @@
 /* =========================================================
-   tokens — the letter, on slide paper
-   A histology slide: hematoxylin (the violet-navy that stains nuclei)
-   is the ink, eosin (the pink that stains everything else) is the one
-   accent. These are the only colour values in the site; the canvases
-   (assets/js/site.js, specimen.js) read them from here.
+   tokens — the letter, in black and white
+   A monotone slide: ink on paper, with greys standing in for the stains.
+   The variable names keep their histology roles (eosin = cytoplasm and
+   the one accent, nucleus/karyon = the nuclei). These are the only colour
+   values in the site; the canvases (assets/js/site.js, portrait.js,
+   specimen.js) read them from here. The theme follows the system unless
+   the toggle has set data-theme on <html>.
    ========================================================= */
 
 :root {
-  --paper:    #FAF6F0;
-  --ink:      #2A2148;
-  --ink-2:    #6A6385;
-  --rule:     rgba(42, 33, 72, .16);
-  --grid:     rgba(42, 33, 72, .045);
-  --eosin:    #C93A74;
-  --nucleus:  #5A4A9C;
-  --karyon:   #2A2148;
+  --paper:    #FFFFFF;
+  --ink:      #0A0A0A;
+  --ink-2:    #6B6B6B;
+  --rule:     rgba(10, 10, 10, .16);
+  --grid:     rgba(10, 10, 10, .045);
+  --eosin:    #5C5C5C;
+  --nucleus:  #3A3A3A;
+  --karyon:   #000000;
 
   color-scheme: light;
 
@@ -31,17 +33,28 @@
 
 /* darkfield: the same slide with the lights off */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --paper:   #130F1D;
-    --ink:     #ECE6F5;
-    --ink-2:   #A59DBC;
-    --rule:    rgba(236, 230, 245, .18);
-    --grid:    rgba(236, 230, 245, .04);
-    --eosin:   #FF86B3;
-    --nucleus: #A999FF;
-    --karyon:  #1C0F26;
+  :root:not([data-theme="light"]) {
+    --paper:   #0A0A0A;
+    --ink:     #EDEDED;
+    --ink-2:   #9A9A9A;
+    --rule:    rgba(237, 237, 237, .18);
+    --grid:    rgba(237, 237, 237, .04);
+    --eosin:   #B4B4B4;
+    --nucleus: #E0E0E0;
+    --karyon:  #000000;
     color-scheme: dark;
   }
+}
+:root[data-theme="dark"] {
+  --paper:   #0A0A0A;
+  --ink:     #EDEDED;
+  --ink-2:   #9A9A9A;
+  --rule:    rgba(237, 237, 237, .18);
+  --grid:    rgba(237, 237, 237, .04);
+  --eosin:   #B4B4B4;
+  --nucleus: #E0E0E0;
+  --karyon:  #000000;
+  color-scheme: dark;
 }
 
 /* self-hosted, latin subsets */
@@ -209,6 +222,21 @@ a.vitals__id:hover { background-size: 100% 1px; }
 }
 /* without the script there is no trace; a plain rule holds its place */
 html:not(.js) .vitals__trace { height: 1px; background: var(--rule); }
+/* light / dark: a slide flipped between brightfield and darkfield */
+.theme-toggle {
+  flex: none;
+  padding: 2px 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: color .25s var(--ease);
+}
+.theme-toggle:hover { color: var(--ink); }
+.theme-toggle__glyph { display: inline-block; transition: transform .45s var(--ease); }
+.theme-toggle:hover .theme-toggle__glyph { transform: rotate(180deg); }
+html:not(.js) .theme-toggle { display: none; }
 .vitals__bpm { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .vitals__heart {
   display: inline-block;
