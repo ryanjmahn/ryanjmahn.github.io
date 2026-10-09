@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>diary · ryan ahn</title>
+<meta name="description" content="ryan ahn's diary — short entries, roughly chronological. nothing curated." />
+<link rel="canonical" href="https://ryanjmahn.github.io/diary/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ryan ahn" />
+<meta property="og:title" content="diary · ryan ahn" />
+<meta property="og:description" content="short entries, roughly chronological. nothing curated." />
+<meta property="og:url" content="https://ryanjmahn.github.io/diary/" />
+<meta property="og:image" content="https://ryanjmahn.github.io/assets/img/og/home.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#F7F7F7" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="preload" href="/assets/fonts/departure-mono.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/assets/css/site.css" />
+</head>
+<body data-page="diary">
+<a class="skip-link" href="#main">Skip to content</a>
+<canvas class="field" aria-hidden="true"></canvas>
+
+<main class="letter letter--diary" id="main">
+
+  <header class="vitals">
+    <a class="vitals__id" href="/">ryan ahn</a>
+    <canvas class="vitals__trace" aria-hidden="true"></canvas>
+    <nav class="vitals__nav" aria-label="Site">
+      <a href="https://openwm.vercel.app/" target="_blank" rel="noreferrer">openwm ↗</a>
+      <a href="/diary/" aria-current="page">diary</a>
+    </nav>
+    <button class="theme-toggle" type="button" aria-label="Switch to dark mode"><span class="theme-toggle__glyph" aria-hidden="true">◐</span> <span class="theme-toggle__label">dark</span></button>
+  </header>
+
+  <h1 class="lede arrive" style="--i:0">diary. <span class="lede__more">short entries, roughly chronological. nothing curated.</span></h1>
+
+  <!-- To add an entry, copy an <li> to the top of the list and change the
+       date (both the datetime and the text) and the body. Put the newest
+       one on the home page too, under § diary. -->
+  <ol class="posts arrive" style="--i:1">
+    <li id="post-2026-09-14"><article class="post"><time datetime="2026-09-14">2026-09-14</time><div class="post__body"><p>day 1. will be documenting my life journey as I reach for the stars.</p></div></article></li>
+  </ol>
+
+  <footer class="colophon arrive" style="--i:2">
+    <span><a href="/">← back to the letter</a></span>
+    <span>seoul · last revised oct 2026</span>
+  </footer>
+
+</main>
+
+<script src="/assets/js/site.js" defer></script>
+<script src="/assets/js/field.js" defer></script>
+</body>
+</html>
