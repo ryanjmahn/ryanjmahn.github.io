@@ -13,6 +13,15 @@
   if (!canvas || !canvas.getContext) return;
   var ctx = canvas.getContext("2d");
   var errEl = document.querySelector(".world__err");
+  // the drawing sheet: an HTML card over the canvas that follows the run
+  var sheet = document.querySelector(".sheet");
+  function part(c) { return sheet && sheet.querySelector(c); }
+  var sheetEls = {
+    no: part(".sheet__no"), kind: part(".sheet__kind"), bays: part(".sheet__bays"),
+    depth: part(".sheet__depth"), sag: part(".sheet__sag"), miss: part(".sheet__miss"),
+    steps: sheet ? sheet.querySelectorAll(".sheet__steps li") : []
+  };
+  var shown = {};
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   var SPAN = 24;       // m
@@ -25,7 +34,7 @@
   var FONT = '11px "Departure Mono", ui-monospace, Menlo, monospace';
 
   var w = 0, h = 0, dpr = 1, scale = 1, x0 = 0, deckY = 0;
-  var ink = "#000", ink2 = "#777", grid = "rgba(0,0,0,.05)";
+  var ink = "#000", ink2 = "#777", grid = "rgba(0,0,0,.05)", paper = "#fff";
   var coef = PRIOR.slice(), runNo = 0, errs = [], lastLoad = -1, shownErr = "";
   var run = null;
 
@@ -37,6 +46,7 @@
     ink = cs.getPropertyValue("--ink").trim() || ink;
     ink2 = cs.getPropertyValue("--ink-2").trim() || ink2;
     grid = cs.getPropertyValue("--grid").trim() || grid;
+    paper = cs.getPropertyValue("--card").trim() || paper;
   }
 
   // ---------- the design: a Warren or a Pratt truss, pinned left, on a roller right ----------
@@ -242,18 +252,116 @@
     ctx.fill();
   }
 
+  function put(key, el, text) {
+    if (el && shown[key] !== text) { el.textContent = text; shown[key] = text; }
+  }
+
+  function syncSheet() {
+    if (!sheet) return;
+    var t = run.t, u = run.sim.u, sag = 0;
+    for (var i = 1; i < u.length; i += 2) sag = Math.max(sag, -u[i]);
+    var no = String(run.no);
+    put("no", sheetEls.no, "000".slice(no.length) + no);
+    put("kind", sheetEls.kind, t.kind);
+    put("bays", sheetEls.bays, String(t.bays));
+    put("depth", sheetEls.depth, t.depth.toFixed(1) + " m");
+    put("sag", sheetEls.sag, run.stage === "guess" ? "—" : (sag * 1000).toFixed(1) + " mm");
+    put("miss", sheetEls.miss, run.err == null ? "—" : run.err.toFixed(1) + " mm");
+    // draft → model (the guess) → simulate (the solve) → next (learn, move on)
+    var step = run.stage === "guess" ? (run.clock < .2 ? 0 : 1) : run.stage === "sim" ? 2 : 3;
+    if (shown.step === step) return;
+    shown.step = step;
+    for (i = 0; i < sheetEls.steps.length; i++) {
+      sheetEls.steps[i].classList.toggle("is-on", i === step);
+      sheetEls.steps[i].classList.toggle("is-done", i < step);
+    }
+  }
+
+  // openwm's figure language, in grey: square pixels screened through a
+  // 4×4 Bayer matrix into three tones, so forms fray at their edges
+  var BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
+  var TONES = [0, .2, .45, .88];
+  var CELL = 3;
+  function dither(v, x, y) {
+    var q = Math.min(2.999, Math.max(0, v) * 3), base = Math.floor(q);
+    return base + (q - base > (BAYER[(y & 3) * 4 + (x & 3)] + .5) / 16 ? 1 : 0);
+  }
+
+  // faded blocks behind the drawing, like ghosts of earlier sheets; drawn
+  // once per size or theme into their own canvas
+  var ghosts = null;
+  function buildGhosts() {
+    ghosts = document.createElement("canvas");
+    ghosts.width = w * dpr; ghosts.height = h * dpr;
+    var g = ghosts.getContext("2d");
+    g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    g.fillStyle = ink;
+    [[.56, .2, .26, .26, .7], [.03, .7, .22, .26, .55], [.74, .66, .23, .3, .65], [.34, .86, .2, .14, .45]].forEach(function (b) {
+      var x0b = b[0] * w, y0b = b[1] * h, bw = b[2] * w, bh = b[3] * h;
+      for (var y = 0; y < bh; y += CELL) for (var x = 0; x < bw; x += CELL) {
+        // densest in the middle of each block, thinning to its edges
+        var ex = Math.min(x, bw - x) / bw, ey = Math.min(y, bh - y) / bh;
+        var v = b[4] * Math.min(1, Math.min(ex, ey) * 5);
+        var cx = (x0b + x) / CELL | 0, cy = (y0b + y) / CELL | 0;
+        if (v > (BAYER[(cy & 3) * 4 + (cx & 3)] + .5) / 16) g.fillRect(cx * CELL, cy * CELL, CELL - .7, CELL - .7);
+      }
+    });
+  }
+
+  // each member as a dithered band: the harder the bar works in the
+  // simulation, the darker its core. Before the solve, every bar is the
+  // same light grey, the draft
+  function bands(t, u) {
+    var segs = [], minX = w, maxX = 0, minY = h, maxY = 0, R = 11;
+    t.bars.forEach(function (b) {
+      var a = px(t.nodes[b[0]], u, b[0]), c = px(t.nodes[b[1]], u, b[1]), force = 0;
+      if (u) {
+        var A = t.nodes[b[0]], B = t.nodes[b[1]], dx = B.x - A.x, dy = B.y - A.y, l = Math.hypot(dx, dy);
+        var stretch = ((u[b[1] * 2] - u[b[0] * 2]) * dx + (u[b[1] * 2 + 1] - u[b[0] * 2 + 1]) * dy) / l;
+        force = Math.abs(EA * stretch / l);
+      }
+      segs.push({ ax: a[0], ay: a[1], dx: c[0] - a[0], dy: c[1] - a[1], v: .4 + .6 * Math.min(1, force / (LOAD * 1.1)) });
+      minX = Math.min(minX, a[0], c[0]); maxX = Math.max(maxX, a[0], c[0]);
+      minY = Math.min(minY, a[1], c[1]); maxY = Math.max(maxY, a[1], c[1]);
+    });
+    var gx0 = Math.max(0, (minX - R) / CELL | 0), gx1 = Math.min(w, maxX + R) / CELL | 0;
+    var gy0 = Math.max(0, (minY - R) / CELL | 0), gy1 = Math.min(h, maxY + R) / CELL | 0;
+    var lv = [], k;
+    for (var gy = gy0; gy <= gy1; gy++) for (var gx = gx0; gx <= gx1; gx++) {
+      var x = gx * CELL + CELL / 2, y = gy * CELL + CELL / 2, v = 0;
+      for (k = 0; k < segs.length; k++) {
+        var sg = segs[k], len2 = sg.dx * sg.dx + sg.dy * sg.dy;
+        var tt = Math.max(0, Math.min(1, ((x - sg.ax) * sg.dx + (y - sg.ay) * sg.dy) / len2));
+        var d = Math.hypot(x - sg.ax - tt * sg.dx, y - sg.ay - tt * sg.dy);
+        if (d > R) continue;
+        var f = d < 3.5 ? 1 : Math.pow(1 - (d - 3.5) / (R - 3.5), 1.4);
+        v = Math.max(v, sg.v * f);
+      }
+      if (v > 0) lv.push(gx, gy, dither(v, gx, gy));
+    }
+    ctx.fillStyle = ink;
+    for (var tone = 1; tone <= 3; tone++) {
+      ctx.globalAlpha = TONES[tone];
+      for (k = 0; k < lv.length; k += 3) if (lv[k + 2] === tone) ctx.fillRect(lv[k] * CELL, lv[k + 1] * CELL, CELL - .7, CELL - .7);
+    }
+    ctx.globalAlpha = 1;
+  }
+
   function draw() {
     var t = run.t, u = run.sim.u, i;
+    syncSheet();
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, w, h);
     ctx.lineJoin = "round";
 
-    // drafting paper: a fine grid, a heavier one every fifth line
+    // drafting paper: a coarse grid, kept quiet under the dither
     ctx.fillStyle = grid;
-    for (i = 0; i * 10 < w; i++) ctx.fillRect(i * 10, 0, 1, h);
-    for (i = 0; i * 10 < h; i++) ctx.fillRect(0, i * 10, w, 1);
     for (i = 0; i * 50 < w; i++) ctx.fillRect(i * 50, 0, 1, h);
     for (i = 0; i * 50 < h; i++) ctx.fillRect(0, i * 50, w, 1);
+    if (!ghosts) buildGhosts();
+    ctx.globalAlpha = .09;
+    ctx.drawImage(ghosts, 0, 0, w, h);
+    ctx.globalAlpha = 1;
 
     // the design as drawn: dashed, undeformed
     ctx.strokeStyle = ink2;
@@ -279,7 +387,7 @@
     });
 
     // the span, dimensioned above the truss
-    var dy = DIM_Y, mid = (left[0] + right[0]) / 2, label = SPAN.toFixed(1) + " m";
+    var dy = Math.round(deckY - t.depth * scale - 18), mid = (left[0] + right[0]) / 2, label = SPAN.toFixed(1) + " m";
     ctx.font = FONT;
     ctx.textBaseline = "middle";
     ctx.textAlign = "center";
@@ -295,17 +403,23 @@
     arrowhead(right[0], dy, 1, 0, 5);
     ctx.fillText(label, mid, dy + 1);
 
-    // what the simulator has worked out so far: solid, with round joints
+    // what the simulator has worked out so far: dithered bands, each with a
+    // thin paper line down its middle, and round joints
     var sim = run.stage === "guess" ? null : u;
-    ctx.globalAlpha = 1;
-    ctx.strokeStyle = ink;
-    ctx.lineWidth = 1.3;
+    bands(t, sim);
+    ctx.globalAlpha = .9;
+    ctx.strokeStyle = paper;
+    ctx.lineWidth = 1;
     frame(t, sim);
-    ctx.fillStyle = ink;
+    ctx.globalAlpha = 1;
     t.nodes.forEach(function (nd, k) {
       var p = px(nd, sim, k);
-      ctx.beginPath(); ctx.arc(p[0], p[1], 2.2, 0, 7); ctx.fill();
+      ctx.fillStyle = ink;
+      ctx.beginPath(); ctx.arc(p[0], p[1], 2.6, 0, 7); ctx.fill();
+      ctx.fillStyle = paper;
+      ctx.beginPath(); ctx.arc(p[0], p[1], 1, 0, 7); ctx.fill();
     });
+    ctx.fillStyle = ink;
 
     // the load, hung from its deck node
     var lp = px(t.nodes[run.load], sim, run.load);
@@ -341,24 +455,17 @@
     });
     ctx.globalAlpha = 1;
 
-    // title block: top left, the design; top right, the model's record
+    // top right: the exaggeration, and the model's record
     ctx.fillStyle = ink2;
     ctx.textBaseline = "alphabetic";
-    ctx.textAlign = "left";
-    var no = (run.no < 10 ? "0" : "") + run.no;
-    ctx.fillText("run " + no + " · " + t.kind + " · depth " + t.depth.toFixed(1) + " m", 10, 18);
-    var status = run.stage === "guess" ? "model guessing" :
-                 run.stage === "sim" ? "simulating · iter " + run.sim.iter :
-                 "solved in " + run.sim.iter + " iter · " + run.err.toFixed(1) + " mm off";
-    ctx.fillText(status, 10, 33);
     ctx.textAlign = "right";
-    ctx.fillText("δ ×" + EXAG, w - 10, 33);
+    ctx.fillText("δ ×" + EXAG, w - 12, 39);
 
     // error per run, newest on the right
-    var bw = 3, bg = 2, bh = 14, top = 9, n = errs.length, max = 0;
+    var bw = 3, bg = 2, bh = 14, top = 12, n = errs.length, max = 0;
     for (i = 0; i < n; i++) max = Math.max(max, errs[i]);
-    var bx = w - 10 - 14 * (bw + bg);
-    ctx.fillText("err", bx - 6, 18);
+    var bx = w - 12 - 14 * (bw + bg);
+    ctx.fillText("miss", bx - 6, 24);
     ctx.globalAlpha = .25;
     ctx.fillRect(bx, top + bh, 14 * (bw + bg) - bg, 1);
     ctx.globalAlpha = 1;
@@ -371,13 +478,14 @@
 
   // ---------- layout & loop ----------
 
-  // header on two lines, the span dimension under it, the truss, and room
+  // the sheet card on top, then the span dimension, the truss, and room
   // below the deck for the supports and the hung load
-  var DIM_Y = 52;
   function layout() {
+    var top = sheet ? sheet.offsetTop + sheet.offsetHeight + 28 : 52;
     deckY = h - 46;
-    scale = Math.min((w - 48) / SPAN, (deckY - DIM_Y - 14) / 4.4);
+    scale = Math.min((w - 48) / SPAN, (deckY - top) / 4.4);
     x0 = (w - SPAN * scale) / 2;
+    ghosts = null;
   }
 
   function resize() {
@@ -401,6 +509,7 @@
 
   function recolour() {
     colours();
+    ghosts = null;
     if (run) draw();
   }
 

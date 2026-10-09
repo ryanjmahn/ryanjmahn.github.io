@@ -1,8 +1,10 @@
-// portrait.js — fig. 0, the author as a tissue section. The photo is read
-// once into a hex grid of cells: the darker the photo, the bigger the
-// cell. Cells drift in and settle on load, breathe at rest, and move out
-// of the pointer's way. One still frame under reduced motion; paused
-// while off screen.
+// portrait.js — fig. 0, the author as a dithered plate. The photo is read
+// once onto a grid of square pixels and screened through a 4×4 Bayer
+// matrix into three tones of ink (light, mid, dark), so edges fray into
+// pixels the way openwm's figures do. On load the plate resolves from the
+// top down; under the pointer a lens pushes every pixel one tone darker.
+// Darkfield is a positive: there the light parts of the photo get the ink.
+// One still frame under reduced motion; idle once settled.
 
 (function portrait() {
   var canvas = document.querySelector(".portrait__cells");
@@ -10,164 +12,122 @@
   var ctx = canvas.getContext("2d");
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  var COLS = 50;       // cells across
+  var COLS = 64;                    // pixels across
+  var TONES = [0, .2, .48, .92];    // ink alpha for levels 0..3
+  var BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
+  var REVEAL = 1.1;                 // seconds to resolve top to bottom
+  var LENS = 34;                    // pointer lens radius, css px
+
   var size = 0, dpr = 1, pitch = 1;
-  var cells = [];
-  var tone = null;     // darkness per grid point, 0..1, read from the photo
-  var rowsN = 0;
-  var pointer = null;
-  var eosin = "#f00", nucleus = "#00f", karyon = "#000", dark = false;
-  var born = 0;
+  var tone = null;                  // darkness per pixel, 0..1, from the photo
+  var level = null;                 // dithered level per pixel, 0..3
+  var ink = "#000", dark = false;
+  var pointer = null, born = 0;
 
   function colours() {
     var cs = getComputedStyle(document.documentElement);
-    eosin = cs.getPropertyValue("--eosin").trim() || eosin;
-    nucleus = cs.getPropertyValue("--nucleus").trim() || nucleus;
-    karyon = cs.getPropertyValue("--karyon").trim() || karyon;
+    ink = cs.getPropertyValue("--ink").trim() || ink;
     var theme = document.documentElement.getAttribute("data-theme");
     dark = theme ? theme === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
   }
 
-  // sample the photo on the same hex grid the cells sit on
   function read(img) {
-    rowsN = Math.round(COLS / .866);
     var off = document.createElement("canvas");
-    off.width = COLS * 2; off.height = rowsN;
+    off.width = off.height = COLS;
     var o = off.getContext("2d");
-    o.drawImage(img, 0, 0, off.width, off.height);
-    var px = o.getImageData(0, 0, off.width, off.height).data;
-    tone = [];
-    for (var r = 0; r < rowsN; r++) {
-      for (var c = 0; c < COLS; c++) {
-        var x = Math.min(off.width - 1, c * 2 + (r % 2));
-        var i = (r * off.width + x) * 4;
-        tone.push(1 - (px[i] * .299 + px[i + 1] * .587 + px[i + 2] * .114) / 255);
-      }
+    o.drawImage(img, 0, 0, COLS, COLS);
+    var px = o.getImageData(0, 0, COLS, COLS).data;
+    tone = new Float32Array(COLS * COLS);
+    for (var i = 0; i < tone.length; i++) {
+      tone[i] = 1 - (px[i * 4] * .299 + px[i * 4 + 1] * .587 + px[i * 4 + 2] * .114) / 255;
     }
   }
 
-  function build() {
-    cells = [];
-    pitch = size / COLS;
-    for (var r = 0; r < rowsN; r++) {
-      for (var c = 0; c < COLS; c++) {
-        var d = tone[r * COLS + c];
-        if (d < .07) continue; // the white backdrop stays paper
-        // darkfield is a positive too: there the light parts of the
-        // photo get the big, bright cells
-        if (dark) d = Math.max(.1, 1.02 - d);
-        var hx = (c + (r % 2 ? .75 : .25)) * pitch, hy = (r + .5) * pitch * .866;
-        var a = Math.random() * Math.PI * 2, far = size * (.25 + Math.random() * .6);
-        cells.push({
-          hx: hx, hy: hy,
-          x: reduceMotion ? hx : hx + Math.cos(a) * far,
-          y: reduceMotion ? hy : hy + Math.sin(a) * far,
-          vx: 0, vy: 0,
-          r: pitch * (.2 + .46 * Math.pow(d, .75)),
-          d: d,
-          ph: Math.random() * Math.PI * 2,
-          // settle from the top of the head down
-          delay: reduceMotion ? 0 : hy / size * .9 + Math.random() * .35
-        });
+  // screen the photo into levels; a few stray pixels just off the
+  // silhouette, so the figure dissolves at its edge rather than stopping
+  function screen() {
+    level = new Uint8Array(COLS * COLS);
+    for (var r = 0; r < COLS; r++) for (var c = 0; c < COLS; c++) {
+      var i = r * COLS + c, d = tone[i];
+      var t = (BAYER[(r & 3) * 4 + (c & 3)] + .5) / 16;
+      if (d < .07) {
+        var near = (c && tone[i - 1] >= .07) || (c < COLS - 1 && tone[i + 1] >= .07) ||
+                   (r && tone[i - COLS] >= .07) || (r < COLS - 1 && tone[i + COLS] >= .07);
+        level[i] = near && t < .3 ? 1 : 0;
+        continue;
       }
-    }
-  }
-
-  function step(dt, t) {
-    var reach = pitch * 5.5;
-    for (var i = 0; i < cells.length; i++) {
-      var c = cells[i];
-      if (t < c.delay) continue;
-      // home, plus a slow breath so the tissue is never quite still
-      var tx = c.hx + Math.cos(t * .7 + c.ph) * pitch * .07;
-      var ty = c.hy + Math.sin(t * .9 + c.ph) * pitch * .07;
-      var ax = (tx - c.x) * 26, ay = (ty - c.y) * 26;
-      if (pointer) {
-        var dx = c.x - pointer.x, dy = c.y - pointer.y;
-        var d2 = dx * dx + dy * dy;
-        if (d2 < reach * reach) {
-          var d = Math.sqrt(d2) || .01, f = (1 - d / reach) * 900;
-          ax += dx / d * f; ay += dy / d * f;
-        }
-      }
-      c.vx = (c.vx + ax * dt) * .86;
-      c.vy = (c.vy + ay * dt) * .86;
-      c.x += c.vx * dt * 6;
-      c.y += c.vy * dt * 6;
+      if (dark) d = Math.max(.12, 1.02 - d);
+      var q = Math.min(2.999, d * 3), base = Math.floor(q);
+      level[i] = base + (q - base > t ? 1 : 0);
     }
   }
 
   function draw(t) {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, size, size);
-    var i, c, a;
-    // cytoplasm, then nuclei, so each pass keeps one fill style
-    ctx.fillStyle = eosin;
-    for (i = 0; i < cells.length; i++) {
-      c = cells[i];
-      a = Math.min(1, Math.max(0, (t - c.delay) * 2.2));
-      if (!a) continue;
-      ctx.globalAlpha = (.2 + .5 * c.d) * a;
-      ctx.beginPath();
-      ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    for (i = 0; i < cells.length; i++) {
-      c = cells[i];
-      a = Math.min(1, Math.max(0, (t - c.delay) * 2.2));
-      if (!a) continue;
-      // dense tissue gets the dark tumor-style nucleus on paper; in
-      // darkfield every nucleus glows instead
-      ctx.fillStyle = c.d > .6 && !dark ? karyon : nucleus;
-      ctx.globalAlpha = (.35 + .6 * c.d) * a;
-      ctx.beginPath();
-      ctx.arc(c.x, c.y, c.r * (.34 + .3 * c.d), 0, Math.PI * 2);
-      ctx.fill();
+    ctx.fillStyle = ink;
+    var s = Math.max(1, pitch * .78), front = t / REVEAL * (COLS + 8);
+    for (var k = 1; k <= 3; k++) {
+      // one pass per tone keeps a single alpha per pass
+      ctx.globalAlpha = TONES[k];
+      for (var r = 0; r < COLS; r++) {
+        // the resolving front: rows below it are not drawn yet, rows at it
+        // show only their lightest pixels
+        var lag = front - r;
+        if (lag < 0) break;
+        var y = r * pitch;
+        for (var c = 0; c < COLS; c++) {
+          var i = r * COLS + c, lv = level[i];
+          if (pointer) {
+            var dx = c * pitch - pointer.x, dy = y - pointer.y;
+            if (dx * dx + dy * dy < LENS * LENS && lv) lv = Math.min(3, lv + 1);
+          }
+          if (lag < 8) lv = Math.min(lv, 1 + (lag / 3 | 0));
+          if (lv === k) ctx.fillRect(c * pitch, y, s, s);
+        }
+      }
     }
     ctx.globalAlpha = 1;
+  }
+
+  function settled() { return (performance.now() - born) / 1000 > REVEAL + .2; }
+
+  var running = false;
+  function frame() {
+    draw((performance.now() - born) / 1000);
+    if (settled() && !pointer) { running = false; return; }
+    requestAnimationFrame(frame);
+  }
+  function start() {
+    if (running) return;
+    running = true;
+    requestAnimationFrame(frame);
   }
 
   function resize() {
     var w = Math.round(canvas.getBoundingClientRect().width);
     if (!w || w === size || !tone) return;
     size = w;
+    pitch = size / COLS;
     dpr = Math.min(2, window.devicePixelRatio || 1);
     canvas.width = canvas.height = size * dpr;
-    build();
-    born = performance.now();
-    draw(reduceMotion ? 99 : 0);
-  }
-
-  var visible = true, running = false, then = 0;
-  function frame(now) {
-    if (!visible) { running = false; return; }
-    var dt = Math.min(1 / 30, (now - then) / 1000 || 0);
-    then = now;
-    var t = (now - born) / 1000;
-    step(dt, t);
-    draw(t);
-    requestAnimationFrame(frame);
-  }
-  function start() {
-    if (running || reduceMotion || !tone) return;
-    running = true;
-    then = performance.now();
-    requestAnimationFrame(frame);
+    draw(reduceMotion || settled() ? 99 : 0);
+    if (!reduceMotion) start();
   }
 
   var img = new Image();
   img.onload = function () {
     colours();
     read(img);
+    screen();
+    born = performance.now();
     resize();
     if ("ResizeObserver" in window) new ResizeObserver(resize).observe(canvas);
     else window.addEventListener("resize", resize);
     function recolour() {
       colours();
-      build();
-      born = performance.now();
-      draw(reduceMotion ? 99 : 0);
-      start();
+      screen();
+      draw(99);
     }
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", recolour);
     document.addEventListener("themechange", recolour);
@@ -175,19 +135,14 @@
     function point(e) {
       var rect = canvas.getBoundingClientRect();
       pointer = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+      start();
     }
+    function leave() { pointer = null; draw(99); }
     canvas.addEventListener("pointermove", point);
     canvas.addEventListener("pointerdown", point);
-    canvas.addEventListener("pointerleave", function () { pointer = null; });
-    canvas.addEventListener("pointercancel", function () { pointer = null; });
-    canvas.addEventListener("pointerup", function (e) { if (e.pointerType !== "mouse") pointer = null; });
-    if ("IntersectionObserver" in window) {
-      new IntersectionObserver(function (entries) {
-        visible = entries[0].isIntersecting;
-        if (visible) start();
-      }).observe(canvas);
-    }
-    start();
+    canvas.addEventListener("pointerleave", leave);
+    canvas.addEventListener("pointercancel", leave);
+    canvas.addEventListener("pointerup", function (e) { if (e.pointerType !== "mouse") leave(); });
   };
   img.src = canvas.getAttribute("data-src");
 })();
