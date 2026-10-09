@@ -27,8 +27,9 @@
 
   /* reading text: the serif the plates used for their captions */
   --font-text: "Instrument Serif", "Tinos", "Times New Roman", Times, serif;
-  /* instrument readouts, labels, the ASCII portrait */
-  --font-mono: "Fragment Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  /* instrument readouts, labels, the blueprint: a pixel mono, crisp at
+     multiples of 11px (Departure Mono, Helena Zhang, OFL) */
+  --font-mono: "Departure Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
 /* darkfield: the same slide with the lights off */
@@ -73,11 +74,11 @@
   src: url("/assets/fonts/instrument-serif-italic.woff2") format("woff2");
 }
 @font-face {
-  font-family: "Fragment Mono";
+  font-family: "Departure Mono";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("/assets/fonts/fragment-mono.woff2") format("woff2");
+  src: url("/assets/fonts/departure-mono.woff2") format("woff2");
 }
 
 /* =========================================================
@@ -126,6 +127,18 @@ strong, b {
   font-weight: 400;
   color: var(--ink);
   text-shadow: .35px 0 currentColor, -.1px 0 currentColor;
+}
+
+/* the mix: sentences in the serif, links in running text in the pixel mono */
+.letter p a,
+.letter li a {
+  font-family: var(--font-mono);
+  /* matched to the serif's x-height; line-height 1 keeps the swap from
+     pushing lines apart */
+  font-size: .7em;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -.02em;
 }
 
 a {
@@ -201,7 +214,7 @@ a:hover { color: var(--eosin); background-size: 100% 2px; }
   gap: .9rem;
   margin-bottom: clamp(1.6rem, 4vw, 2.6rem);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: .01em;
   color: var(--ink-2);
 }
@@ -331,7 +344,10 @@ html:not(.js) .theme-toggle { display: none; }
   align-items: baseline;
   gap: .1rem .6rem;
   margin-top: calc(var(--flow) * 1.5);
-  font-size: .86em;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
   color: var(--ink-2);
 }
 .links a { color: var(--ink); white-space: nowrap; }
@@ -374,7 +390,7 @@ html:not(.js) .portrait__cells { display: none; }
 }
 
 /* =========================================================
-   fig. 1 — the world model (assets/js/worldmodel.js), home only
+   fig. 1 — the world model at the drafting table (assets/js/worldmodel.js), home only
    ========================================================= */
 
 .world { margin: clamp(2.2rem, 5vw, 3.2rem) 0 0; }
