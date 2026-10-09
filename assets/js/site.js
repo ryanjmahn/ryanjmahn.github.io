@@ -23,7 +23,7 @@
     var dark = isDark();
     if (label) label.textContent = dark ? "light" : "dark";
     if (button) button.setAttribute("aria-label", "Switch to " + (dark ? "light" : "dark") + " mode");
-    if (meta) meta.setAttribute("content", dark ? "#0A0A0A" : "#FFFFFF");
+    if (meta) meta.setAttribute("content", dark ? "#0A0A0A" : "#F7F7F7");
   }
 
   sync();
