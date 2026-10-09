@@ -9,9 +9,15 @@
    ========================================================= */
 
 :root {
-  --paper:    #FFFFFF;
-  --ink:      #0A0A0A;
-  --ink-2:    #6B6B6B;
+  --paper:    #F7F7F7;
+  --ink:      #1A1A1A;
+  --ink-2:    #8C8C8C;
+  /* raised surfaces: white cards on the off-white page, a dark pill */
+  --card:     #FFFFFF;
+  --card-edge: rgba(10, 10, 10, .08);
+  --shadow:   0 1px 2px rgba(10, 10, 10, .04), 0 12px 32px -12px rgba(10, 10, 10, .14);
+  --pill:     #1A1A1A;
+  --pill-ink: #F7F7F7;
   --rule:     rgba(10, 10, 10, .16);
   --grid:     rgba(10, 10, 10, .045);
   --eosin:    #5C5C5C;
@@ -20,13 +26,13 @@
 
   color-scheme: light;
 
-  --copy: clamp(1.08rem, 1.03rem + .22vw, 1.2rem);
+  --copy: 13px;
   --flow: 1em;
   --measure: 60ch;
   --ease: cubic-bezier(.2, .7, .2, 1);
 
-  /* reading text: the serif the plates used for their captions */
-  --font-text: "Instrument Serif", "Tinos", "Times New Roman", Times, serif;
+  /* one face for everything: reading text and readouts alike */
+  --font-text: "Departure Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   /* instrument readouts, labels, the blueprint: a pixel mono, crisp at
      multiples of 11px (Departure Mono, Helena Zhang, OFL) */
   --font-mono: "Departure Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -43,6 +49,11 @@
     --eosin:   #B4B4B4;
     --nucleus: #E0E0E0;
     --karyon:  #000000;
+    --card:    #141414;
+    --card-edge: rgba(237, 237, 237, .10);
+    --shadow:  0 1px 2px rgba(0, 0, 0, .4), 0 12px 32px -12px rgba(0, 0, 0, .7);
+    --pill:    #EDEDED;
+    --pill-ink: #0A0A0A;
     color-scheme: dark;
   }
 }
@@ -55,24 +66,15 @@
   --eosin:   #B4B4B4;
   --nucleus: #E0E0E0;
   --karyon:  #000000;
+  --card:  #141414;
+  --card-edge: rgba(237, 237, 237, .10);
+  --shadow:  0 1px 2px rgba(0, 0, 0, .4), 0 12px 32px -12px rgba(0, 0, 0, .7);
+  --pill:  #EDEDED;
+  --pill-ink: #0A0A0A;
   color-scheme: dark;
 }
 
 /* self-hosted, latin subsets */
-@font-face {
-  font-family: "Instrument Serif";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/assets/fonts/instrument-serif.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Instrument Serif";
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/assets/fonts/instrument-serif-italic.woff2") format("woff2");
-}
 @font-face {
   font-family: "Departure Mono";
   font-style: normal;
@@ -102,8 +104,8 @@ body {
   color: var(--ink);
   font-family: var(--font-text);
   font-size: var(--copy);
-  line-height: 1.32;
-  letter-spacing: .003em;
+  line-height: 1.65;
+  letter-spacing: 0;
   /* the face has one weight; never let the browser smear a fake bold */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -122,23 +124,10 @@ img { max-width: 100%; display: block; }
 
 ::selection { background: color-mix(in srgb, var(--eosin) 26%, transparent); }
 
-/* emphasis without a bold cut: full-strength ink and a hair of weight */
+/* emphasis without a bold cut: full-strength ink */
 strong, b {
   font-weight: 400;
   color: var(--ink);
-  text-shadow: .35px 0 currentColor, -.1px 0 currentColor;
-}
-
-/* the mix: sentences in the serif, links in running text in the pixel mono */
-.letter p a,
-.letter li a {
-  font-family: var(--font-mono);
-  /* matched to the serif's x-height; line-height 1 keeps the swap from
-     pushing lines apart */
-  font-size: .7em;
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: -.02em;
 }
 
 a {
@@ -264,7 +253,7 @@ html:not(.js) .theme-toggle { display: none; }
 @media (max-width: 720px) {
   .intro { grid-template-columns: 1fr; row-gap: 1.4rem; }
   .portrait { grid-row: 1; display: flex; align-items: flex-end; gap: 1rem; }
-  .portrait .portrait__cells, .portrait noscript img { flex: none; width: 150px; }
+  .portrait .portrait__stage { flex: none; width: 160px; padding: 8px; }
   .portrait figcaption { margin: 0; }
 }
 
@@ -341,20 +330,13 @@ html:not(.js) .theme-toggle { display: none; }
 .links {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
-  gap: .1rem .6rem;
+  align-items: center;
+  gap: .5rem;
   margin-top: calc(var(--flow) * 1.5);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--ink-2);
 }
-.links a { color: var(--ink); white-space: nowrap; }
-.links a:hover { color: var(--eosin); }
 
 /* =========================================================
-   fig. 0 — the portrait, in cells (assets/js/portrait.js); the ASCII
+   fig. 0 — the portrait, dithered (assets/js/portrait.js); the ASCII
    one survives on the 404
    ========================================================= */
 
@@ -369,6 +351,31 @@ html:not(.js) .portrait__cells { display: none; }
 .portrait {
   margin: 0;
   container-type: inline-size;
+}
+/* the plate sits on a card, labelled like a drawing */
+.portrait__stage {
+  position: relative;
+  padding: 12px;
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: 0 0 0 1px var(--card-edge), var(--shadow);
+}
+.portrait__stage img { display: block; width: 100%; height: auto; border-radius: 8px; }
+.chip {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--card) 88%, transparent);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 0 1px var(--card-edge);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.4;
+  letter-spacing: .08em;
+  color: var(--ink-2);
 }
 .ascii-portrait {
   margin: 0;
@@ -394,14 +401,19 @@ html:not(.js) .portrait__cells { display: none; }
    ========================================================= */
 
 .world { margin: clamp(2.2rem, 5vw, 3.2rem) 0 0; }
+.world__stage {
+  position: relative;
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: 0 0 0 1px var(--card-edge), var(--shadow);
+  overflow: hidden;
+}
 .world__field {
   display: block;
   width: 100%;
-  height: clamp(170px, 22vw, 230px);
+  height: clamp(250px, 30vw, 300px);
   touch-action: pan-y;
   cursor: crosshair;
-  background: color-mix(in srgb, var(--paper) 72%, transparent);
-  box-shadow: 0 0 0 1px var(--rule);
 }
 html:not(.js) .world { display: none; }
 .world figcaption {
@@ -414,6 +426,133 @@ html:not(.js) .world { display: none; }
 }
 .world__err { display: inline-block; min-width: 3ch; text-align: right; color: var(--ink); font-variant-numeric: tabular-nums; }
 @media (hover: none) { .world__hint { display: none; } }
+
+
+/* =========================================================
+   borrowed from openwm, in grey: the nav, pills, the two-tone
+   headline, and the drawing sheet card
+   ========================================================= */
+
+/* nav: small caps-style links, underlined */
+.vitals__nav { display: flex; align-items: center; gap: 1rem; }
+.vitals__nav a {
+  color: var(--ink-2);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  background-image: linear-gradient(var(--rule), var(--rule));
+}
+.vitals__nav a:hover,
+.vitals__nav a[aria-current="page"] { color: var(--ink); }
+
+/* pills: dark and solid for the main action, outlined for the rest,
+   each with its arrow in a small disc */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  padding: 5px 5px 5px 14px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ink);
+  background: var(--card);
+  background-image: none;
+  box-shadow: 0 0 0 1px var(--card-edge);
+  transition: box-shadow .25s var(--ease), transform .25s var(--ease);
+}
+.pill:hover { color: var(--ink); background-size: auto; box-shadow: 0 0 0 1px var(--ink-2); }
+.pill__arrow {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ink) 8%, transparent);
+  transition: transform .25s var(--ease);
+}
+.pill:hover .pill__arrow { transform: translateX(2px); }
+.pill--dark { color: var(--pill-ink); background: var(--pill); box-shadow: none; }
+.pill--dark:hover { color: var(--pill-ink); box-shadow: none; opacity: .88; }
+.pill--dark .pill__arrow { background: color-mix(in srgb, var(--pill-ink) 18%, transparent); }
+
+/* the headline: who, in ink; what, in grey */
+.letter .lede {
+  margin-bottom: .9rem;
+  font-size: 22px;
+  line-height: 1.3;
+  letter-spacing: -.01em;
+  color: var(--ink);
+}
+.lede__more { color: var(--ink-2); }
+.lede__more a { color: inherit; background-size: 100% 2px; }
+.lede__more a:hover { color: var(--ink); }
+.letter .intro__sub { color: var(--ink-2); }
+.intro__sub strong { color: var(--ink); }
+
+/* the drawing sheet: a card over fig. 1 that follows the run */
+.sheet {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: min(330px, calc(100% - 24px));
+  padding: 10px 12px 9px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--card) 88%, transparent);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 0 1px var(--card-edge), var(--shadow);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--ink-2);
+  pointer-events: none;
+}
+.sheet__id { letter-spacing: .08em; }
+.sheet__title { margin: 1px 0 6px; font-size: 13px; color: var(--ink); }
+.sheet__steps { display: flex; flex-wrap: wrap; gap: .2rem .9rem; margin: 0 0 4px; padding: 0; list-style: none; text-transform: uppercase; letter-spacing: .06em; }
+.sheet__steps li { margin: 0; padding: 0; color: var(--ink-2); opacity: .55; transition: opacity .25s var(--ease), color .25s var(--ease); }
+.sheet__steps li::before { content: "○ "; }
+.sheet__steps li.is-on { color: var(--ink); opacity: 1; }
+.sheet__steps li.is-on::before { content: "● "; }
+.sheet__steps li.is-done { opacity: 1; }
+.sheet__read { display: flex; flex-wrap: wrap; gap: 0 .45rem; margin: 0; text-transform: uppercase; letter-spacing: .04em; }
+.sheet__read dd { margin: 0 .5rem 0 0; color: var(--ink); font-variant-numeric: tabular-nums; }
+html:not(.js) .sheet { display: none; }
+/* on a phone the card keeps its title and steps; the truss needs the room */
+@media (max-width: 560px) { .sheet__read { display: none; } .sheet__steps { margin-bottom: 0; } }
+
+/* the dither field behind everything (assets/js/field.js) */
+.field { position: absolute; top: 0; left: 0; z-index: 0; pointer-events: none; }
+html:not(.js) .field { display: none; }
+.letter { position: relative; z-index: 1; }
+
+/* =========================================================
+   diary — short entries, newest first; a teaser on the home page
+   ========================================================= */
+
+.diary { margin-top: clamp(2.2rem, 5vw, 3.2rem); }
+.letter--diary .lede { margin-bottom: clamp(1.6rem, 4vw, 2.4rem); }
+.diary__head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+.diary__head a { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-2); }
+.letter .posts { margin: 0; padding: 0; list-style: none; display: grid; gap: .7rem; }
+.letter .posts li { margin: 0; padding: 0; }
+.post {
+  display: grid;
+  grid-template-columns: 11ch 1fr;
+  gap: .3rem 1.2rem;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow: 0 0 0 1px var(--card-edge), var(--shadow);
+}
+.post time { font-size: 11px; letter-spacing: .06em; color: var(--ink-2); padding-top: 2px; }
+.post__body > :last-child { margin-bottom: 0; }
+.letter .post__body p { color: var(--ink); }
+@media (max-width: 560px) { .post { grid-template-columns: 1fr; } }
 
 /* sign-off at the foot of the page */
 .colophon {
@@ -470,5 +609,6 @@ html:not(.js) .world { display: none; }
 
 @media (max-width: 560px) {
   .letter { width: calc(100% - 2rem); }
-  .vitals__readout .unit { display: none; }
+  .vitals__trace { display: none; }
+  .vitals__nav { margin-left: auto; }
 }
