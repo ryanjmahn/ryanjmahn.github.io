@@ -20,11 +20,10 @@
 <meta name="twitter:title" content="ryan ahn" />
 <meta name="twitter:description" content="ryan ahn — working on world models for physical design. proponent of accessible, trustworthy science, comp bio enthusiast, and high school senior in seoul." />
 <meta name="twitter:image" content="https://ryanjmahn.github.io/assets/img/og/home.jpg" />
-<meta name="theme-color" content="#FFFFFF" />
+<meta name="theme-color" content="#F7F7F7" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-<link rel="preload" href="/assets/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="/assets/fonts/departure-mono.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="/assets/css/site.css" />
 <script type="application/ld+json">
@@ -54,6 +53,7 @@
 </head>
 <body data-page="home">
 <a class="skip-link" href="#main">Skip to content</a>
+<canvas class="field" aria-hidden="true"></canvas>
 
 <main class="letter letter--home" id="main">
 
@@ -61,13 +61,17 @@
   <header class="vitals">
     <h1 class="vitals__id">ryan ahn</h1>
     <canvas class="vitals__trace" aria-hidden="true"></canvas>
-    <span class="vitals__readout" aria-hidden="true"><span class="unit">rule 110 · </span>gen <span class="vitals__gen">60</span></span>
+    <nav class="vitals__nav" aria-label="Site">
+      <a href="https://openwm.vercel.app/" target="_blank" rel="noreferrer">openwm ↗</a>
+      <a href="/diary/">diary</a>
+    </nav>
     <button class="theme-toggle" type="button" aria-label="Switch to dark mode"><span class="theme-toggle__glyph" aria-hidden="true">◐</span> <span class="theme-toggle__label">dark</span></button>
   </header>
 
   <div class="intro">
     <div class="intro__copy">
-      <p class="arrive" style="--i:0"><strong>sup! i'm ryan.</strong> i'm currently working on world models for physical design. i'm also a proponent of <strong>accessible, trustworthy science</strong>, a <strong>comp bio</strong> enthusiast, and a <strong>high school senior</strong>.</p>
+      <p class="lede arrive" style="--i:0">sup! i'm ryan. <span class="lede__more">i'm currently working on <a href="https://openwm.vercel.app/" target="_blank" rel="noreferrer">world models for physical design</a>.</span></p>
+      <p class="intro__sub arrive" style="--i:0">i'm also a proponent of <strong>accessible, trustworthy science</strong>, a <strong>comp bio</strong> enthusiast, and a <strong>high school senior</strong>.</p>
 
       <div class="milestones arrive" style="--i:1">
         <p class="label">§ prev</p>
@@ -83,27 +87,55 @@
       </div>
 
       <nav class="links arrive" style="--i:2" aria-label="Contact">
-        <a href="mailto:ryanjmahn1@gmail.com">email</a><span aria-hidden="true">·</span>
-        <a href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer">github</a><span aria-hidden="true">·</span>
-        <a href="https://www.linkedin.com/in/ryan-ahn-81322736a/" target="_blank" rel="noreferrer">linkedin</a>
+        <a class="pill pill--dark" href="mailto:ryanjmahn1@gmail.com">email me <span class="pill__arrow" aria-hidden="true">→</span></a>
+        <a class="pill" href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer">github <span class="pill__arrow" aria-hidden="true">↗</span></a>
+        <a class="pill" href="https://www.linkedin.com/in/ryan-ahn-81322736a/" target="_blank" rel="noreferrer">linkedin <span class="pill__arrow" aria-hidden="true">↗</span></a>
       </nav>
     </div>
 
     <figure class="portrait arrive" style="--i:1">
-      <!-- fig. 0: drawn by assets/js/portrait.js from the photo in data-src -->
-      <canvas class="portrait__cells" data-src="/assets/img/portrait-480.jpg" role="img" aria-label="Portrait of Ryan Ahn, drawn as a field of cells"></canvas>
-      <noscript><img src="/assets/img/portrait-480.jpg" alt="Portrait of Ryan Ahn" width="480" height="480" /></noscript>
+      <!-- fig. 0: dithered by assets/js/portrait.js from the photo in data-src -->
+      <div class="portrait__stage">
+        <canvas class="portrait__cells" data-src="/assets/img/portrait-480.jpg" role="img" aria-label="Portrait of Ryan Ahn, drawn in dithered pixels"></canvas>
+        <noscript><img src="/assets/img/portrait-480.jpg" alt="Portrait of Ryan Ahn" width="480" height="480" /></noscript>
+        <span class="chip" aria-hidden="true">FIG-000</span>
+      </div>
       <figcaption>fig. 0 — ryan ahn, specimen of a builder.</figcaption>
     </figure>
   </div>
 
   <!-- fig. 1: run by assets/js/worldmodel.js -->
   <figure class="world arrive" id="fig-1" style="--i:3">
-    <canvas class="world__field" aria-hidden="true"></canvas>
+    <div class="world__stage">
+      <canvas class="world__field" aria-hidden="true"></canvas>
+      <div class="sheet" aria-hidden="true">
+        <div class="sheet__id">DWG-<span class="sheet__no">002</span></div>
+        <div class="sheet__title"><span class="sheet__kind">pratt</span> truss · <span class="sheet__bays">8</span> bays</div>
+        <ol class="sheet__steps">
+          <li data-step="draft">draft</li><li data-step="model">model</li><li data-step="simulate">simulate</li><li data-step="next">next</li>
+        </ol>
+        <dl class="sheet__read">
+          <dt>depth</dt><dd class="sheet__depth">—</dd>
+          <dt>sag</dt><dd class="sheet__sag">—</dd>
+          <dt>miss</dt><dd class="sheet__miss">—</dd>
+        </dl>
+      </div>
+    </div>
     <figcaption>fig. 1 — a world model at the drafting table. it guesses how each truss bends (squares) before the simulator solves it (line), then learns from the miss. last miss <span class="world__err">0</span> mm<span class="world__hint"> · click to redesign</span></figcaption>
   </figure>
 
-  <footer class="colophon arrive" style="--i:4">
+  <section class="diary arrive" style="--i:4" aria-labelledby="diary-label">
+    <div class="diary__head">
+      <p class="label" id="diary-label">§ diary</p>
+      <a href="/diary/">all entries →</a>
+    </div>
+    <!-- the newest entry, copied from /diary/ -->
+    <ol class="posts">
+      <li><article class="post"><time datetime="2026-09-14">2026-09-14</time><div class="post__body"><p>day 1. will be documenting my life journey as I reach for the stars.</p></div></article></li>
+    </ol>
+  </section>
+
+  <footer class="colophon arrive" style="--i:5">
     <span>end of entry.</span>
     <span>seoul · last revised oct 2026</span>
   </footer>
@@ -111,6 +143,7 @@
 </main>
 
 <script src="/assets/js/site.js" defer></script>
+<script src="/assets/js/field.js" defer></script>
 <script src="/assets/js/portrait.js" defer></script>
 <script src="/assets/js/worldmodel.js" defer></script>
 </body>
