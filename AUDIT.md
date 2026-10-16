@@ -50,3 +50,7 @@ Pages would run Jekyll here (there's no `.nojekyll`), but Jekyll won't install a
 
 - style, after livetheresidency.com: lowercase sans headlines with the key word in serif italic, a pill nav with the current page in solid ink, dotted link underlines, an off-white page with room to breathe.
 - structure, after academy sites (idhant.dev, darshshri.dev, diwenhuang.ca): something interactive beside a short intro with email/github/linkedin right there (darsh's molecule → our truss), then a compact one-row-per-project list with dates (diwen). So the home page is figure + intro, the log, elsewhere — the "now" row is the top of the log.
+
+## second pass — carving
+
+The truss figure (DWG-002) moved off the home page to `/work/openwm/`, where it's the OpenWM demo (this overrides the brief's "must remain on the homepage", per your request). The home page's figure is now pl. 1, Rodin's *Pygmalion and Galatea* (Met Open Access, CC0). It starts as a rough block of stone and is carved away as the page scrolls (`assets/js/carve.js`): the block goes from the outside in, then the figure's surface resolves. Dragging across it carves by hand. On a phone the statue sits between the intro and the log and carves as it passes. Under reduced motion it's shown finished.

@@ -182,14 +182,31 @@ main { display: block; padding-bottom: clamp(3rem, 8vw, 6rem); }
    home
    ========================================================= */
 
-.hero { padding-top: clamp(2rem, 5vw, 3.5rem); row-gap: 2rem; align-items: start; }
-.hero__fig { grid-column: 1 / 8; }
-.hero__intro { grid-column: 8 / 13; }
-@media (max-width: 900px) { .hero__fig, .hero__intro { grid-column: 1 / -1; } .hero__intro { grid-row: 1; } }
+/* the home page: copy on the left, the statue pinned on the right while
+   the log scrolls past it (assets/js/carve.js) */
+.home { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: clamp(2rem, 4.5vw, 4.5rem); align-items: start; }
+.hero { padding-top: clamp(2rem, 5vw, 3.5rem); }
+.carve { position: sticky; top: 1.25rem; margin: clamp(2rem, 5vw, 3.5rem) 0 0; }
+@media (max-width: 900px) {
+  .home { grid-template-columns: minmax(0, 1fr); }
+  /* on a phone: who, then the statue, then the log */
+  .home__copy { display: contents; }
+  .hero { order: 1; }
+  .carve { order: 2; position: static; margin-top: 2rem; }
+  .home__copy > .section { order: 3; }
+}
+.carve__stage { position: relative; padding: clamp(10px, 2vw, 18px); border: 1px solid var(--rule); }
+.carve__cells { display: block; width: 100%; aspect-ratio: 520 / 546; touch-action: pan-y; cursor: crosshair; }
+html:not(.js) .carve__cells { display: none; }
+.carve__stage noscript img { width: 100%; height: auto; }
+.carve__read { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .3rem 1rem; margin-top: .6rem; font-size: 11px; }
+.carve__read .carve__steps { margin: 0; }
+.carve__pct { display: inline-block; min-width: 3ch; text-align: right; color: var(--ink); font-variant-numeric: tabular-nums; }
+.carve figcaption { margin-top: .35rem; }
+.carve figcaption em { font-style: italic; }
 .hero__name { font-size: clamp(56px, 7vw, 84px); line-height: .9; letter-spacing: -.03em; margin-bottom: 1.2rem; }
 .lede { font-family: var(--serif); font-size: clamp(22px, 2.2vw, 26px); line-height: 1.25; margin: 1.2rem 0 .6em; }
 .hero__links { display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; margin-top: 1.2rem; }
-.hero .world__field { height: clamp(300px, 34vw, 440px); }
 
 /* fig. 0 — the portrait, dithered by assets/js/portrait.js */
 .portrait { margin: 0; max-width: 168px; }
