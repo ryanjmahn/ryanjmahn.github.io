@@ -182,21 +182,21 @@ main { display: block; padding-bottom: clamp(3rem, 8vw, 6rem); }
    home
    ========================================================= */
 
-/* the home page: copy on the left, the statue pinned on the right while
-   the log scrolls past it (assets/js/carve.js) */
-.home { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: clamp(2rem, 4.5vw, 4.5rem); align-items: start; }
+/* copy on the left, a statue plate pinned on the right (assets/js/carve.js);
+   on the home page the log scrolls past it and carves it */
+.split { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: clamp(2rem, 4.5vw, 4.5rem); align-items: start; }
 .hero { padding-top: clamp(2rem, 5vw, 3.5rem); }
 .carve { position: sticky; top: 1.25rem; margin: clamp(2rem, 5vw, 3.5rem) 0 0; }
 @media (max-width: 900px) {
-  .home { grid-template-columns: minmax(0, 1fr); }
+  .split { grid-template-columns: minmax(0, 1fr); }
   /* on a phone: who, then the statue, then the log */
-  .home__copy { display: contents; }
+  .split__copy { display: contents; }
   .hero { order: 1; }
   .carve { order: 2; position: static; margin-top: 2rem; }
-  .home__copy > .section { order: 3; }
+  .split__copy > .section { order: 3; }
 }
 .carve__stage { position: relative; padding: clamp(10px, 2vw, 18px); border: 1px solid var(--rule); }
-.carve__cells { display: block; width: 100%; aspect-ratio: 520 / 546; touch-action: pan-y; cursor: crosshair; }
+.carve__cells { display: block; width: 100%; aspect-ratio: var(--ratio, 520 / 546); touch-action: pan-y; cursor: crosshair; }
 html:not(.js) .carve__cells { display: none; }
 .carve__stage noscript img { width: 100%; height: auto; }
 .carve__read { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .3rem 1rem; margin-top: .6rem; font-size: 11px; }
@@ -204,6 +204,14 @@ html:not(.js) .carve__cells { display: none; }
 .carve__pct { display: inline-block; min-width: 3ch; text-align: right; color: var(--ink); font-variant-numeric: tabular-nums; }
 .carve figcaption { margin-top: .35rem; }
 .carve figcaption em { font-style: italic; }
+/* the standing figures are tall: keep them inside the screen */
+.carve--tall .carve__stage, .carve--tall .carve__read, .carve--tall figcaption { width: min(100%, 300px); margin-left: auto; }
+@media (max-width: 900px) { .carve--tall .carve__stage, .carve--tall .carve__read, .carve--tall figcaption { margin-left: 0; } }
+/* the 404: one fragment, centred */
+.lost { display: grid; justify-items: center; text-align: center; padding-top: clamp(2rem, 6vw, 4rem); }
+.lost .carve { position: static; width: min(100%, 300px); }
+.lost .carve--tall .carve__stage, .lost .carve--tall .carve__read, .lost .carve--tall figcaption { margin: 0; width: 100%; }
+.lost .carve__read { justify-content: center; }
 .hero__name { font-size: clamp(56px, 7vw, 84px); line-height: .9; letter-spacing: -.03em; margin-bottom: 1.2rem; }
 .lede { font-family: var(--serif); font-size: clamp(22px, 2.2vw, 26px); line-height: 1.25; margin: 1.2rem 0 .6em; }
 .hero__links { display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; margin-top: 1.2rem; }
@@ -375,3 +383,11 @@ html:not(.js) .sheet { display: none; }
 }
 
 .page__title .lede__more { display: block; margin-top: .4em; font-family: var(--sans); font-weight: 400; font-size: clamp(17px, 2vw, 22px); letter-spacing: 0; color: var(--muted); }
+.carve--tall .carve__read { flex-wrap: nowrap; font-size: 10px; }
+.carve--tall .carve__steps { gap: .2rem .55rem; }
+/* on a phone the page's own content comes first; the tall plates follow it */
+@media (max-width: 900px) {
+  .carve--tall { order: 4; margin-top: 3rem; }
+  .carve--tall .carve__stage, .carve--tall .carve__read, .carve--tall figcaption { width: min(100%, 240px); }
+}
+.carve__read > span:last-child { white-space: nowrap; }
