@@ -45,3 +45,8 @@ Pages would run Jekyll here (there's no `.nojekyll`), but Jekyll won't install a
 - mono: **JetBrains Mono** 400, self-hosted. It's a Google Fonts subset covering latin plus the arrows (→ ← ↗) and `·`/`§`/`Å`. The stock latin subset lacks →.
 - fallbacks: `Georgia, serif` / `system-ui, sans-serif` / `ui-monospace, Menlo, monospace`.
 - self-hosted rather than linked from Google Fonts: fewer origins, better Lighthouse, same files.
+
+## references (added mid-build)
+
+- style, after livetheresidency.com: lowercase sans headlines with the key word in serif italic, a pill nav with the current page in solid ink, dotted link underlines, an off-white page with room to breathe.
+- structure, after academy sites (idhant.dev, darshshri.dev, diwenhuang.ca): something interactive beside a short intro with email/github/linkedin right there (darsh's molecule → our truss), then a compact one-row-per-project list with dates (diwen). So the home page is figure + intro, the log, elsewhere — the "now" row is the top of the log.
