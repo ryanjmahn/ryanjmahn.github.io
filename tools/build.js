@@ -188,17 +188,28 @@ log.forEach((p, i) => {
 
 // ---------- the home log ----------
 
+// a catalogue: roman numerals for sheets and years, the way a museum numbers its holdings
+const roman = (n) => [[1000, "m"], [900, "cm"], [500, "d"], [400, "cd"], [100, "c"], [90, "xc"], [50, "l"], [40, "xl"], [10, "x"], [9, "ix"], [5, "v"], [4, "iv"], [1, "i"]]
+  .reduce((out, [v, r]) => { while (n >= v) { out += r; n -= v; } return out; }, "");
+
 let year = null;
 const rows = log.map((p) => {
-  const y = p.start ? p.start.slice(0, 4) : "n.d.";
-  const marker = y !== year ? `<li class="row log__year" aria-hidden="true"><span class="gutter">${y}</span><span class="main"></span></li>\n` : "";
+  const y = p.start ? p.start.slice(0, 4) : null;
+  // a year is cut across the log like an inscription; undated sheets go under "sine data"
+  const label = y ? roman(+y).toUpperCase() : "sine data";
+  const marker = y !== year ? `<li class="log__year" aria-label="${y || "undated"}"><span aria-hidden="true">${label}</span></li>\n` : "";
   year = y;
   return `${marker}<li class="row entry reveal${p.now ? " entry--now" : ""}" data-category="${esc(p.category)}">
-  <p class="gutter mono">${p.dates ? esc(p.dates) : "<!-- TODO(ryan): dates -->"}</p>
+  <div class="gutter">
+    <p class="entry__no"><span aria-hidden="true">${roman(+p.sheet)}</span><span class="sr-only">sheet ${esc(p.sheet)}</span></p>
+    <p class="mono entry__dates">${p.dates ? esc(p.dates) : "<!-- TODO(ryan): dates -->"}</p>
+  </div>
   <div class="main">
-    <div class="entry__meta"><h3><a href="/work/${p.slug}/">${esc(p.title)}</a></h3><span class="mono entry__sheet">sheet ${esc(p.sheet)}</span>${chip(p.status)}</div>
-    ${p.oneliner ? `<p>${p.oneliner}</p>` : p.now ? slot("now", "one line — what are you building at openwm right now?") : slot("one-liner", `one line on ${esc(p.title)}.`)}
+    <p class="mono entry__label">${esc(p.category)}${p.status ? ` · <span class="entry__status">${esc(p.status)}</span>` : ""}</p>
+    <h3><a href="/work/${p.slug}/">${esc(p.title)}</a></h3>
+    ${p.oneliner ? `<p class="entry__line">${p.oneliner}</p>` : p.now ? slot("now", "one line — what are you building at openwm right now?") : slot("one-liner", `one line on ${esc(p.title)}.`)}
     ${p.numbers.length ? `<ul class="stats">${p.numbers.slice(0, 3).map((n) => `<li>${esc(n)}</li>`).join("")}</ul>` : ""}
+    <span class="entry__open mono" aria-hidden="true">open sheet →</span>
   </div>
 </li>`;
 });

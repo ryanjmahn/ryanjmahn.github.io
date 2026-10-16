@@ -84,6 +84,8 @@ a:hover { color: var(--accent); text-decoration-color: currentColor; }
 
 ::selection { background: color-mix(in srgb, var(--accent) 22%, transparent); }
 
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
 .skip-link {
   position: absolute; top: 8px; left: 8px; z-index: 10;
   padding: 6px 12px;
@@ -230,44 +232,69 @@ figcaption { margin-top: .6rem; font-family: var(--mono); font-size: 12px; line-
 .now h3 { font-size: clamp(32px, 4vw, 44px); display: inline; margin-right: .6rem; }
 .now .todo { margin-top: .8rem; }
 
-/* the log: newest at the top, a hairline spine, years in the gutter */
+/* the log, as a museum catalogue: sheets numbered in roman, years cut
+   across it like inscriptions, a hairline spine with a chisel mark per entry */
 .log { margin: 0; padding: 0; list-style: none; }
-.log__year .gutter { font-family: var(--serif); font-style: italic; font-size: 28px; line-height: 1; padding-top: 1rem; }
-.log__year .main { background: linear-gradient(var(--rule), var(--rule)) 3px 0 / 1px 100% no-repeat; }
-@media (max-width: 720px) { .log__year .main { display: none; } }
-.entry { position: relative; }
-.entry .gutter { padding-top: .95rem; }
-.entry--now .gutter { color: var(--accent); }
-/* the spine and its node are painted, not positioned, so the title's
-   ::after can stretch over the whole row */
+.log__year {
+  display: flex; align-items: center; gap: 1.1rem;
+  margin: 2.2rem 0 .4rem;
+  font-family: var(--serif); font-size: clamp(22px, 2.4vw, 28px); letter-spacing: .32em; color: var(--muted);
+}
+.log__year:first-child { margin-top: .4rem; }
+.log__year span { padding-left: .32em; } /* balance the tracking */
+.log__year::before, .log__year::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+.log__year::before { flex: 0 0 2.5rem; }
+
+.entry { position: relative; align-items: start; }
+.entry .gutter { padding: 1.1rem 0 0; }
+.entry__no {
+  margin: 0; font-family: var(--serif); font-style: italic;
+  font-size: clamp(44px, 5vw, 64px); line-height: .85; letter-spacing: -.02em;
+  color: color-mix(in srgb, var(--muted) 55%, var(--paper)); transition: color .3s var(--ease), transform .3s var(--ease);
+}
+.entry__dates { margin: .55rem 0 0; }
+.entry--now .entry__dates { color: var(--accent); }
 .entry .main {
   --node: var(--muted);
-  padding: .8rem 0 .9rem 1.6rem;
+  padding: 1.15rem 0 1.4rem 1.7rem;
+  /* the spine, and a chisel mark (a small diamond) at each entry */
   background:
-    linear-gradient(var(--node), var(--node)) 0 1.3rem / 7px 7px no-repeat,
-    linear-gradient(var(--rule), var(--rule)) 3px 0 / 1px 100% no-repeat;
+    linear-gradient(45deg, transparent 49%, var(--node) 49% 51%, transparent 51%) 0 0 / 0 0 no-repeat,
+    linear-gradient(var(--rule), var(--rule)) 3.5px 0 / 1px 100% no-repeat;
+  position: static;
+}
+.entry .main::before {
+  content: ""; position: absolute; margin: .55rem 0 0 calc(-1.7rem + .5px);
+  width: 7px; height: 7px; background: var(--paper); border: 1px solid var(--node); transform: rotate(45deg);
+  transition: background .3s var(--ease), border-color .3s var(--ease);
 }
 .entry--now .main { --node: var(--accent); }
-.entry__meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: .2rem .8rem; margin: 0 0 .15rem; }
-.entry__meta h3 { margin: 0 .2rem 0 0; }
-.entry__sheet { transition: color .2s var(--ease); }
-.entry h3 { font-size: clamp(24px, 2.4vw, 28px); }
-.entry .main > p { margin-bottom: .3rem; font-size: 15px; color: var(--muted); }
-.entry .main > p a { color: var(--ink); }
-.entry .todo { margin: .3rem 0; }
-.entry h3 a { text-decoration: none; display: inline-block; transition: transform .25s var(--ease); }
-/* the whole row opens the case study; links inside the one-liner stay on top */
+.entry--now .main::before { background: var(--accent); }
+.entry + .entry .main, .log__year + .entry .main { border-top: 0; }
+.entry + .entry { border-top: 1px dotted var(--rule); }
+.entry__label { margin: 0 0 .2rem; font-size: 11px; }
+.entry--now .entry__status { color: var(--accent); }
+.entry h3 { font-size: clamp(28px, 3vw, 36px); margin: 0 0 .35rem; }
+.entry h3 a { text-decoration: none; display: inline-block; transition: transform .3s var(--ease); }
+/* the whole row opens the sheet; links inside the line stay on top */
 .entry h3 a::after { content: ""; position: absolute; inset: 0; }
 .entry .main p a, .entry .main .todo { position: relative; z-index: 1; }
-.entry:hover h3 a { transform: translateX(4px); color: var(--ink); }
-.entry:hover .entry__sheet { color: var(--accent); }
-.entry .stats { margin-bottom: 0; font-size: 11px; color: var(--muted); }
+.entry__line { margin-bottom: .45rem; font-size: 15px; color: var(--muted); max-width: 54ch; }
+.entry__line a { color: var(--ink); }
+.entry .todo { margin: .3rem 0 .5rem; }
+.entry .stats { margin: 0; font-size: 11px; color: var(--muted); }
+.entry__open { display: inline-block; margin-top: .6rem; font-size: 11px; color: var(--accent); opacity: 0; transform: translateX(-4px); transition: opacity .25s var(--ease), transform .25s var(--ease); }
+.entry:hover .entry__no, .entry:focus-within .entry__no { color: var(--ink); transform: translateX(3px); }
+.entry:hover h3 a, .entry:focus-within h3 a { transform: translateX(4px); color: var(--ink); }
+.entry:hover .main::before, .entry:focus-within .main::before { background: var(--node); }
+.entry:hover .entry__open, .entry:focus-within .entry__open { opacity: 1; transform: none; }
 @media (max-width: 720px) {
-  .entry .gutter { padding-top: .9rem; }
-  .entry .main { padding-top: .2rem; }
-  .entry + .entry .main { border-top: 0; }
-  .entry + .entry .gutter { border-top: 1px solid var(--rule); }
-  .entry .main { background-position: 0 .75rem, 3px 0; }
+  .entry { grid-template-columns: 5.6rem minmax(0, 1fr); column-gap: .9rem; }
+  .entry .gutter, .entry .main { grid-column: auto; }
+  .entry__no { font-size: 40px; }
+  .entry__dates { font-size: 10px; }
+  .entry .main { padding-left: 1.3rem; }
+  .entry .main::before { margin-left: calc(-1.3rem + .5px); }
 }
 
 /* fig. 1 — the world model at the drafting table (assets/js/worldmodel.js) */
