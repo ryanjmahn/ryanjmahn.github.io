@@ -1,5 +1,5 @@
 {
-  "_comment": "Facts only: one entry per sheet. node tools/build.js renders the case studies, the home log and the sitemap from this. 'start' (yyyy-mm) orders the log, newest first; sheets without one sit at the foot under n.d. 'oneliner' is raw HTML, moved verbatim from the old site's § prev list; null renders a RYAN-WRITES slot. 'todo' lines become TODO(ryan) comments and are never rendered. 'key' is the one figure the home log sets large: the same fact as in numbers/facts, split into figure and label.",
+  "_comment": "Facts only: one entry per sheet. node tools/build.js renders the case studies, the home log and the sitemap from this. 'start' (yyyy-mm) orders the log, newest first; sheets without one sit at the foot under n.d. 'oneliner' is raw HTML, moved verbatim from the old site's § prev list; null renders a RYAN-WRITES slot. 'todo' lines become TODO(ryan) comments and are never rendered. 'numbers' are [figure, label] pairs, set large in the log and in each case study's results. 'statue' is the Met Open Access plate carved beside the sheet in the log.",
   "projects": [
     {
       "sheet": "01",
@@ -26,20 +26,41 @@
         }
       ],
       "numbers": [
-        "5k+ youths",
-        "130 nations",
-        "135+ chapters",
-        "75+ staff",
-        "backed by citadel & hrt"
+        [
+          "5k+",
+          "youths"
+        ],
+        [
+          "130",
+          "nations"
+        ],
+        [
+          "135+",
+          "chapters"
+        ],
+        [
+          "75+",
+          "staff"
+        ],
+        [
+          "citadel & hrt",
+          "backed by"
+        ]
       ],
       "oneliner": "built a <a href=\"https://www.stemise.org/\" target=\"_blank\" rel=\"noreferrer\">STEM nonprofit</a>: 5k+ youths, 130 nations, 135+ chapters, 75+ staff. backed by citadel &amp; HRT",
       "todo": [
         "role: the old site listed founder, executive director and chairman. which titles do you hold now?",
         "stack: none listed"
       ],
-      "key": {
-        "fig": "5k+",
-        "label": "youths"
+      "statue": {
+        "src": "/assets/img/log/stemise.webp",
+        "w": 240,
+        "h": 360,
+        "title": "bronze statuette of athena flying her owl",
+        "by": "greek",
+        "date": "ca. 460 bce",
+        "medium": "bronze",
+        "met": 254648
       }
     },
     {
@@ -74,9 +95,18 @@
         }
       ],
       "numbers": [
-        "2.5k builders",
-        "98 nations",
-        "$200k in prizes"
+        [
+          "2.5k",
+          "builders"
+        ],
+        [
+          "98",
+          "nations"
+        ],
+        [
+          "$200k",
+          "in prizes"
+        ]
       ],
       "oneliner": "directed hackathons for 2.5k builders from 98 nations, $200k in prizes",
       "todo": [
@@ -84,9 +114,15 @@
         "status chip: none given",
         "stack: none listed"
       ],
-      "key": {
-        "fig": "2.5k",
-        "label": "builders"
+      "statue": {
+        "src": "/assets/img/log/hackathons.webp",
+        "w": 240,
+        "h": 360,
+        "title": "farnese hercules",
+        "by": "pietro da barga",
+        "date": "modeled ca. 1576; cast 17th century",
+        "medium": "bronze",
+        "met": 203947
       }
     },
     {
@@ -112,7 +148,12 @@
         }
       ],
       "links": [],
-      "numbers": [],
+      "numbers": [
+        [
+          "8-week",
+          "un sdg lesson pipeline"
+        ]
+      ],
       "oneliner": "built an AI curriculum pipeline @ project unison w/ barnard college",
       "todo": [
         "dates: VERIFY",
@@ -120,9 +161,15 @@
         "links: none given",
         "stack: none listed"
       ],
-      "key": {
-        "fig": "8-week",
-        "label": "un sdg lesson pipeline"
+      "statue": {
+        "src": "/assets/img/log/unison.webp",
+        "w": 240,
+        "h": 360,
+        "title": "venus italica",
+        "by": "antonio canova",
+        "date": "probably ca. 1822–23",
+        "medium": "carrara marble",
+        "met": 211504
       }
     },
     {
@@ -163,10 +210,22 @@
         }
       ],
       "numbers": [
-        "260+ waitlist",
-        "$2,500 funding",
-        "top 10% at yc f26",
-        "top 10% at founders inc. off season"
+        [
+          "260+",
+          "waitlist"
+        ],
+        [
+          "$2,500",
+          "funding"
+        ],
+        [
+          "top 10%",
+          "at yc f26"
+        ],
+        [
+          "top 10%",
+          "at founders inc. off season"
+        ]
       ],
       "oneliner": "built a <a href=\"https://www.tryprobix.com/\" target=\"_blank\" rel=\"noreferrer\">product lab</a> for reproducible science. top 10% at yc f26 &amp; founders inc",
       "todo": [
@@ -175,9 +234,15 @@
         "which two verification tools you engineered: VERIFY (Pedigree + Pledge?)",
         "stack: none listed"
       ],
-      "key": {
-        "fig": "260+",
-        "label": "waitlist"
+      "statue": {
+        "src": "/assets/img/log/probix.webp",
+        "w": 240,
+        "h": 360,
+        "title": "minerva",
+        "by": "clodion (claude michel)",
+        "date": "1766",
+        "medium": "terracotta",
+        "met": 206339
       }
     },
     {
@@ -213,17 +278,32 @@
         }
       ],
       "numbers": [
-        "redock 0.96 Å rmsd (mrtx1133 into 7rpz)",
-        "24-conformer closed→open ladder",
-        "fpocket recall 0.92 / mcc 0.95 on 7rpz"
+        [
+          "0.96 Å",
+          "redock rmsd, mrtx1133 into 7rpz"
+        ],
+        [
+          "24",
+          "conformer closed→open ladder"
+        ],
+        [
+          "0.92 / 0.95",
+          "fpocket recall / mcc on 7rpz"
+        ]
       ],
       "oneliner": "benchmarked 3 tools at detecting the KRAS G12D <a href=\"/assets/papers/kras-g12d-switch-ii-benchmark.pdf\" target=\"_blank\" rel=\"noreferrer\" type=\"application/pdf\">switch-II pocket</a> w/ prof. se-jin hwang @ hanyang univ",
       "todo": [
         "stack: none listed"
       ],
-      "key": {
-        "fig": "0.96 Å",
-        "label": "redock rmsd, mrtx1133 into 7rpz"
+      "statue": {
+        "src": "/assets/img/log/kras-benchmark.webp",
+        "w": 240,
+        "h": 360,
+        "title": "limestone statue of a youth holding a pyxis",
+        "by": "cypriot",
+        "date": "3rd–1st century bce",
+        "medium": "limestone",
+        "met": 242323
       }
     },
     {
@@ -254,7 +334,14 @@
         }
       ],
       "numbers": [
-        "detection rate: test 2/15 vs null control 2/15"
+        [
+          "2/15 vs 2/15",
+          "detection rate, test vs null control"
+        ],
+        [
+          "11",
+          "question protocol checklist"
+        ]
       ],
       "oneliner": "found 7 ways our own protein ML evaluation nearly misled us. accepted @ neurips 2026 <a href=\"https://tai-eval.github.io/\" target=\"_blank\" rel=\"noreferrer\">tae workshop</a>",
       "todo": [
@@ -264,9 +351,15 @@
         "co-author names: none given",
         "stack: none listed"
       ],
-      "key": {
-        "fig": "2/15 vs 2/15",
-        "label": "detection rate, test vs null control"
+      "statue": {
+        "src": "/assets/img/log/contaminated-ancestors.webp",
+        "w": 240,
+        "h": 360,
+        "title": "marble statue of a kouros (youth)",
+        "by": "greek, attic",
+        "date": "ca. 590–580 bce",
+        "medium": "marble",
+        "met": 253370
       }
     },
     {
@@ -305,7 +398,17 @@
         "paper venue: VERIFY",
         "accelerator interview with J (risingfounder.net): VERIFY whether it goes public",
         "stack: none listed"
-      ]
+      ],
+      "statue": {
+        "src": "/assets/img/log/openwm.webp",
+        "w": 240,
+        "h": 360,
+        "title": "atlas supporting the globe",
+        "by": "andrea briosco, called riccio",
+        "date": "16th century; globe: 19th century",
+        "medium": "bronze",
+        "met": 195535
+      }
     }
   ],
   "drafts": [

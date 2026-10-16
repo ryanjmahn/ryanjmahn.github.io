@@ -143,3 +143,15 @@ All from The Metropolitan Museum of Art, Open Access (public domain, CC0). Each 
 ## pl. 1, since the glow-up — The Thinker
 
 Auguste Rodin, *The Thinker (Le Penseur)*, 1904, plaster. The Metropolitan Museum of Art, object 209021, photo 4522, Open Access (public domain). Cut out of its black backdrop (minus the plinth) into `assets/img/thinker-520.webp`. It replaces *Pygmalion and Galatea* in the home page's opening.
+
+## the log's statues
+
+One per sheet, all The Metropolitan Museum of Art, Open Access (public domain). Each was cut out of its studio backdrop, recast as one pale stone (bronze and terracotta lifted to marble), and stood in the same 240 × 360 frame (`assets/img/log/<slug>.webp`). They carry no captions on the page; the credits are here.
+
+- vii OpenWM: Andrea Briosco, called Riccio, Atlas Supporting the Globe, 16th century (globe 19th century), bronze. https://www.metmuseum.org/art/collection/search/195535
+- vi Contaminated Ancestors: Marble statue of a kouros (youth), Greek, Attic, ca. 590–580 BCE. https://www.metmuseum.org/art/collection/search/253370
+- v KRAS benchmark: Limestone statue of a youth holding a pyxis, Cypriot, 3rd–1st century BCE. https://www.metmuseum.org/art/collection/search/242323
+- iv Probix Labs: Clodion (Claude Michel), Minerva, 1766, terracotta. https://www.metmuseum.org/art/collection/search/206339
+- iii Project UNISON: Antonio Canova, Venus Italica, probably ca. 1822–23, Carrara marble. https://www.metmuseum.org/art/collection/search/211504
+- ii DSH Hacks & UnivaBio: Pietro da Barga, Farnese Hercules, modeled ca. 1576, cast 17th century, bronze. https://www.metmuseum.org/art/collection/search/203947
+- i STEMise: Bronze statuette of Athena flying her owl, Greek, ca. 460 BCE. https://www.metmuseum.org/art/collection/search/254648
