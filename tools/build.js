@@ -48,7 +48,7 @@ ${description ? `<meta name="description" content="${esc(description)}" />` : "<
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="${esc(title)}" />
 <meta name="twitter:image" content="${SITE}/assets/img/og/home.jpg" />
-<meta name="theme-color" content="#F7F7F5" />
+<meta name="theme-color" content="#F2EFE9" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

@@ -54,3 +54,9 @@ Pages would run Jekyll here (there's no `.nojekyll`), but Jekyll won't install a
 ## second pass — carving
 
 The truss figure (DWG-002) moved off the home page to `/work/openwm/`, where it's the OpenWM demo (this overrides the brief's "must remain on the homepage", per your request). The home page's figure is now pl. 1, Rodin's *Pygmalion and Galatea* (Met Open Access, CC0). It starts as a rough block of stone and is carved away as the page scrolls (`assets/js/carve.js`): the block goes from the outside in, then the figure's surface resolves. Dragging across it carves by hand. On a phone the statue sits between the intro and the log and carves as it passes. Under reduced motion it's shown finished.
+
+## third pass — the glow-up
+
+- palette: warm plaster (`#F2EFE9`) and ink (`#15130F`) by day, gallery night (`#0D0C0B`) by dark, cobalt kept as the one accent.
+- home opens on a full-screen scene: Pygmalion and Galatea centred under a soft spotlight, "ryan" (serif italic) and "ahn" (sans) either side, a museum wall label with the carving readout. The scene holds while the scroll carves the statue from a rough quarried block; the name drifts apart as it does. Reduced motion shows it finished and still.
+- the bust (fig. 0) moved to "elsewhere", an about-the-artist panel beside the links.
