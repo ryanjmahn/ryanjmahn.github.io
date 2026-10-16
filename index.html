@@ -25,6 +25,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="preload" href="/assets/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/assets/img/pygmalion-520.webp" as="image" />
 <link rel="stylesheet" href="/assets/css/site.css" />
 <!-- TODO(ryan): jobTitle at OpenWM? (Probix Labs → OpenWM since oct 2026) -->
 <script type="application/ld+json">
@@ -61,51 +62,29 @@
 
 <main id="main" class="wrap">
 
-  <!-- after darshshri.dev: the thing that runs on the left, who's speaking on the right -->
-  <header class="row hero">
-    <div class="hero__fig">
-      <!-- fig. 1: run by assets/js/worldmodel.js -->
-      <figure class="world" id="fig-1">
-        <div class="world__stage">
-          <canvas class="world__field" aria-hidden="true"></canvas>
-          <div class="sheet" aria-hidden="true">
-            <div class="sheet__id">DWG-<span class="sheet__no">002</span></div>
-            <div class="sheet__title"><span class="sheet__kind">pratt</span> truss · <span class="sheet__bays">8</span> bays</div>
-            <ol class="sheet__steps">
-              <li data-step="draft">draft</li><li data-step="model">model</li><li data-step="simulate">simulate</li><li data-step="next">next</li>
-            </ol>
-            <dl class="sheet__read">
-              <dt>depth</dt><dd class="sheet__depth">—</dd>
-              <dt>sag</dt><dd class="sheet__sag">—</dd>
-              <dt>miss</dt><dd class="sheet__miss">—</dd>
-            </dl>
+  <div class="home">
+    <div class="home__copy">
+    <header class="hero">
+        <h1 class="hero__name mix"><em>ryan</em> ahn</h1>
+        <figure class="portrait">
+          <!-- fig. 0: dithered by assets/js/portrait.js from the photo in data-src -->
+          <div class="portrait__stage">
+            <canvas class="portrait__cells" data-src="/assets/img/portrait-480.jpg" role="img" aria-label="Portrait of Ryan Ahn, drawn in dithered pixels"></canvas>
+            <noscript><img src="/assets/img/portrait-480.jpg" alt="Portrait of Ryan Ahn" width="480" height="480" /></noscript>
+            <span class="figlabel" aria-hidden="true">FIG-000</span>
           </div>
-        </div>
-        <figcaption>fig. 1 — a world model at the drafting table. it guesses how each truss bends (squares) before the simulator solves it (line), then learns from the miss. last miss <span class="world__err">0</span> mm<span class="world__hint"> · click to redesign</span></figcaption>
-      </figure>
-    </div>
-    <div class="hero__intro">
-      <h1 class="hero__name mix"><em>ryan</em> ahn</h1>
-      <figure class="portrait">
-        <!-- fig. 0: dithered by assets/js/portrait.js from the photo in data-src -->
-        <div class="portrait__stage">
-          <canvas class="portrait__cells" data-src="/assets/img/portrait-480.jpg" role="img" aria-label="Portrait of Ryan Ahn, drawn in dithered pixels"></canvas>
-          <noscript><img src="/assets/img/portrait-480.jpg" alt="Portrait of Ryan Ahn" width="480" height="480" /></noscript>
-          <span class="figlabel" aria-hidden="true">FIG-000</span>
-        </div>
-        <figcaption>fig. 0 — ryan ahn, specimen of a builder.</figcaption>
-      </figure>
-      <p class="lede">sup! i'm ryan. i'm currently working on <a href="https://openwm.vercel.app/" target="_blank" rel="noreferrer">world models for physical design</a>.</p>
-      <p>i'm also a proponent of <strong>accessible, trustworthy science</strong>, a <strong>comp bio</strong> enthusiast, and a <strong>high school senior</strong>.</p>
-      <p class="hero__links mono"><a href="mailto:ryanjmahn1@gmail.com">email</a><a href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer">github ↗</a><a href="https://www.linkedin.com/in/ryan-ahn-81322736a/" target="_blank" rel="noreferrer">linkedin ↗</a></p>
-    </div>
-  </header>
+          <figcaption>fig. 0 — ryan ahn, specimen of a builder.</figcaption>
+        </figure>
+        <p class="lede">sup! i'm ryan. i'm currently working on <a href="https://openwm.vercel.app/" target="_blank" rel="noreferrer">world models for physical design</a>.</p>
+        <p>i'm also a proponent of <strong>accessible, trustworthy science</strong>, a <strong>comp bio</strong> enthusiast, and a <strong>high school senior</strong>.</p>
+        <p class="hero__links mono"><a href="mailto:ryanjmahn1@gmail.com">email</a><a href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer">github ↗</a><a href="https://www.linkedin.com/in/ryan-ahn-81322736a/" target="_blank" rel="noreferrer">linkedin ↗</a></p>
+      </header>
 
   <section class="section" id="log" aria-labelledby="log-title">
-    <div class="row section__head"><p class="gutter mono">§ 01</p><h2 class="main" id="log-title">the <em>log</em></h2></div>
-    <!-- written by tools/build.js from tools/projects.json; edit there, not here -->
-    <ol class="log">
-      <!-- build:log -->
+      <div class="row section__head"><p class="gutter mono">§ 01</p><h2 class="main" id="log-title">the <em>log</em></h2></div>
+      <!-- written by tools/build.js from tools/projects.json; edit there, not here -->
+      <ol class="log">
+        <!-- build:log -->
 <li class="row log__year" aria-hidden="true"><span class="gutter">2026</span><span class="main"></span></li>
 <li class="row entry reveal entry--now" data-category="company">
   <p class="gutter mono">oct 2026 → now</p>
@@ -166,25 +145,42 @@
     <ul class="stats"><li>2.5k builders</li><li>98 nations</li><li>$200k in prizes</li></ul>
   </div>
 </li>
-      <!-- /build:log -->
-    </ol>
-  </section>
+        <!-- /build:log -->
+      </ol>
+    </section>
 
-  <section class="section" aria-labelledby="elsewhere">
-    <div class="row section__head"><p class="gutter mono">§ 02</p><h2 class="main" id="elsewhere"><em>elsewhere</em></h2></div>
-    <div class="row"><div class="main">
-      <dl class="elsewhere">
-        <dt>email</dt><dd><a href="mailto:ryanjmahn1@gmail.com">ryanjmahn1@gmail.com</a></dd>
-        <dt>github</dt><dd><a href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer">github.com/ryanjmahn ↗</a></dd>
-        <dt>linkedin</dt><dd><a href="https://www.linkedin.com/in/ryan-ahn-81322736a/" target="_blank" rel="noreferrer">linkedin.com/in/ryan-ahn ↗</a></dd>
-        <dt>openwm</dt><dd><a href="https://openwm.vercel.app/" target="_blank" rel="noreferrer">openwm.vercel.app ↗</a></dd>
-        <dt>probix</dt><dd><a href="https://www.tryprobix.com/" target="_blank" rel="noreferrer">tryprobix.com ↗</a></dd>
-        <dt>stemise</dt><dd><a href="https://www.stemise.org/" target="_blank" rel="noreferrer">stemise.org ↗</a></dd>
-        <dt>diary</dt><dd><a href="/diary/">/diary/</a></dd>
-        <!-- TODO(ryan): x / instagram / other writing / podcasts -->
-      </dl>
-    </div></div>
-  </section>
+    <section class="section" aria-labelledby="elsewhere">
+      <div class="row section__head"><p class="gutter mono">§ 02</p><h2 class="main" id="elsewhere"><em>elsewhere</em></h2></div>
+      <div class="row"><div class="main">
+        <dl class="elsewhere">
+          <dt>email</dt><dd><a href="mailto:ryanjmahn1@gmail.com">ryanjmahn1@gmail.com</a></dd>
+          <dt>github</dt><dd><a href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer">github.com/ryanjmahn ↗</a></dd>
+          <dt>linkedin</dt><dd><a href="https://www.linkedin.com/in/ryan-ahn-81322736a/" target="_blank" rel="noreferrer">linkedin.com/in/ryan-ahn ↗</a></dd>
+          <dt>openwm</dt><dd><a href="https://openwm.vercel.app/" target="_blank" rel="noreferrer">openwm.vercel.app ↗</a></dd>
+          <dt>probix</dt><dd><a href="https://www.tryprobix.com/" target="_blank" rel="noreferrer">tryprobix.com ↗</a></dd>
+          <dt>stemise</dt><dd><a href="https://www.stemise.org/" target="_blank" rel="noreferrer">stemise.org ↗</a></dd>
+          <dt>diary</dt><dd><a href="/diary/">/diary/</a></dd>
+          <!-- TODO(ryan): x / instagram / other writing / podcasts -->
+        </dl>
+      </div></div>
+    </section>
+
+    </div>
+
+    <!-- pl. 1: carved by assets/js/carve.js as the page scrolls -->
+    <figure class="carve" aria-labelledby="pl-1-cap">
+      <div class="carve__stage">
+        <canvas class="carve__cells" data-src="/assets/img/pygmalion-520.webp" role="img" aria-label="Auguste Rodin's Pygmalion and Galatea, drawn in dithered pixels, cut out of a rough block of stone"></canvas>
+        <noscript><img src="/assets/img/pygmalion-520.webp" alt="Auguste Rodin's Pygmalion and Galatea" width="520" height="546" /></noscript>
+        <span class="figlabel" aria-hidden="true">PL-001</span>
+      </div>
+      <div class="carve__read mono" aria-hidden="true">
+        <ol class="sheet__steps carve__steps"><li>block</li><li>roughed</li><li>carved</li><li>finished</li></ol>
+        <span><span class="carve__pct">0</span>%</span>
+      </div>
+      <figcaption id="pl-1-cap">pl. 1 — auguste rodin, <em>pygmalion and galatea</em>, modeled 1889, carved ca. 1908–9. the met, open access.<span class="carve__hint"> · drag to carve</span></figcaption>
+    </figure>
+  </div>
 
 </main>
 
@@ -195,6 +191,6 @@
 
 <script src="/assets/js/site.js" defer></script>
 <script src="/assets/js/portrait.js" defer></script>
-<script src="/assets/js/worldmodel.js" defer></script>
+<script src="/assets/js/carve.js" defer></script>
 </body>
 </html>

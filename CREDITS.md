@@ -120,3 +120,9 @@ The home portrait (`assets/js/portrait.js`) is drawn as cells sampled
 from `assets/img/portrait-480.jpg`; the ASCII portrait remains on the 404. Initiative logos are the existing `assets/img/logos/` tiles.
 
 The plate photography below is no longer loaded by any page.
+
+## pl. 1 — Pygmalion and Galatea
+
+Auguste Rodin, *Pygmalion and Galatea*, modeled 1889, carved ca. 1908–9. The Metropolitan Museum of Art, object 191292, photo DP-13618-003, Open Access (public domain, CC0): https://www.metmuseum.org/art/collection/search/191292. Cut out of its backdrop with OpenCV GrabCut and saved as `assets/img/pygmalion-520.webp` (greyscale + alpha). `assets/js/carve.js` dithers it.
+
+JetBrains Mono (JetBrains, SIL OFL), self-hosted subset from Google Fonts.
