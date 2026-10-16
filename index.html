@@ -66,14 +66,14 @@
     <div class="split__copy">
     <header class="hero">
         <h1 class="hero__name mix"><em>ryan</em> ahn</h1>
-        <figure class="portrait">
-          <!-- fig. 0: dithered by assets/js/portrait.js from the photo in data-src -->
-          <div class="portrait__stage">
-            <canvas class="portrait__cells" data-src="/assets/img/portrait-480.jpg" role="img" aria-label="Portrait of Ryan Ahn, drawn in dithered pixels"></canvas>
-            <noscript><img src="/assets/img/portrait-480.jpg" alt="Portrait of Ryan Ahn" width="480" height="480" /></noscript>
+        <!-- fig. 0: the portrait as a marble bust, carved by assets/js/carve.js -->
+        <figure class="portrait carve" aria-labelledby="fig-0-cap">
+          <div class="carve__stage">
+            <canvas class="carve__cells" data-carve="load" data-cols="100" data-src="/assets/img/bust-360.webp" style="--ratio: 360 / 580" role="img" aria-label="Portrait of Ryan Ahn as a marble bust, drawn in dithered pixels"></canvas>
+            <noscript><img src="/assets/img/bust-360.webp" alt="Portrait of Ryan Ahn as a marble bust" width="360" height="580" /></noscript>
             <span class="figlabel" aria-hidden="true">FIG-000</span>
           </div>
-          <figcaption>fig. 0 — ryan ahn, specimen of a builder.</figcaption>
+          <figcaption id="fig-0-cap">fig. 0 — ryan ahn, specimen of a builder.</figcaption>
         </figure>
         <p class="lede">sup! i'm ryan. i'm currently working on <a href="https://openwm.vercel.app/" target="_blank" rel="noreferrer">world models for physical design</a>.</p>
         <p>i'm also a proponent of <strong>accessible, trustworthy science</strong>, a <strong>comp bio</strong> enthusiast, and a <strong>high school senior</strong>.</p>
@@ -190,7 +190,6 @@
 </footer>
 
 <script src="/assets/js/site.js" defer></script>
-<script src="/assets/js/portrait.js" defer></script>
 <script src="/assets/js/carve.js" defer></script>
 </body>
 </html>
