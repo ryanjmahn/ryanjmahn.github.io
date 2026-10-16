@@ -20,7 +20,11 @@ const link = (l) => `<a href="${esc(l.url)}"${external(l.url) ? ' target="_blank
 const todo = (lines) => lines.map((t) => `<!-- TODO(ryan): ${t} -->`).join("\n");
 const slot = (id, q) => `<!-- RYAN-WRITES: ${id} -->\n<p class="todo">[ryan writes: ${q}]</p>`;
 const chip = (s) => (s ? `<span class="chip${s === "building" ? " chip--building" : ""}">${esc(s)}</span>` : "");
-const stats = (nums) => `<ul class="stats" data-build="numbers">${nums.map((n) => `<li>${esc(n)}</li>`).join("")}</ul>`;
+// impact figures: the number set large, its label small beneath
+const metrics = (nums, attr = "") => nums.length
+  ? `<dl class="metrics"${attr}>${nums.map(([fig, label]) => `<div><dt>${esc(label)}</dt><dd>${esc(fig)}</dd></div>`).join("")}</dl>`
+  : "";
+const stats = (nums) => metrics(nums, ' data-build="numbers"') || '<dl class="metrics" data-build="numbers"></dl>';
 
 // log order: dated sheets newest first, then undated sheets by number, newest first
 const log = [...projects].sort((a, b) =>
@@ -181,7 +185,7 @@ log.forEach((p, i) => {
   const old = fs.existsSync(file) ? fs.readFileSync(file, "utf8") : "";
   const kept = old.match(/<!-- RYAN:BEGIN[^>]*-->\n([\s\S]*?)\n<!-- RYAN:END -->/);
   // the stat row inside your block follows numbers in projects.json
-  const block = (kept ? kept[1] : defaultBlock(p)).replace(/<ul class="stats" data-build="numbers">[\s\S]*?<\/ul>/, stats(p.numbers));
+  const block = (kept ? kept[1] : defaultBlock(p)).replace(/<(ul|dl) class="(?:stats|metrics)" data-build="numbers">[\s\S]*?<\/\1>/, stats(p.numbers));
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, casePage(p, i, block));
 });
@@ -192,28 +196,29 @@ log.forEach((p, i) => {
 const roman = (n) => [[1000, "m"], [900, "cm"], [500, "d"], [400, "cd"], [100, "c"], [90, "xc"], [50, "l"], [40, "xl"], [10, "x"], [9, "ix"], [5, "v"], [4, "iv"], [1, "i"]]
   .reduce((out, [v, r]) => { while (n >= v) { out += r; n -= v; } return out; }, "");
 
-// the log is a gallery wall: one panel per sheet, newest first. The first
-// panel of each year carries the year, cut in roman like an inscription.
+// the log: one sheet per row, newest first, each beside its own statue,
+// which carves itself as the row comes into view (assets/js/carve.js).
+// The first sheet of each year is headed by the year, cut in roman.
 let year = null;
 const rows = log.map((p) => {
   const y = p.start ? p.start.slice(0, 4) : null;
   const first = y !== year;
   year = y;
-  const yearMark = first ? `<p class="panel__year" aria-hidden="true">${y ? roman(+y).toUpperCase() : "sine data"}</p>` : "";
-  const key = p.key
-    ? `<p class="panel__key"><span class="panel__fig">${esc(p.key.fig)}</span><span class="mono">${esc(p.key.label)}</span></p>`
-    : p.now ? `<p class="panel__key"><span class="panel__fig panel__fig--now">now</span><span class="mono">building</span></p>` : "";
-  const rest = p.numbers.filter((n) => !p.key || !n.includes(p.key.fig.split(" ")[0])).slice(0, 3);
-  return `<article class="panel${p.now ? " panel--now" : ""}" data-category="${esc(p.category)}">
-  ${yearMark}
-  <p class="panel__no" aria-hidden="true">${roman(+p.sheet)}</p>
-  <p class="mono panel__label"><span class="sr-only">sheet ${esc(p.sheet)} · </span>${p.dates ? esc(p.dates) : "<!-- TODO(ryan): dates -->"}${p.dates ? " · " : ""}${esc(p.category)} ${chip(p.status)}</p>
-  <h3 class="panel__title"><a href="/work/${p.slug}/">${esc(p.title).replace(/(\S+-\S+)/g, '<span class="nw">$1</span>')}</a></h3>
-  ${key}
-  ${p.oneliner ? `<p class="panel__line">${p.oneliner}</p>` : p.now ? slot("now", "one line — what are you building at openwm right now?") : slot("one-liner", `one line on ${esc(p.title)}.`)}
-  ${rest.length ? `<ul class="stats">${rest.map((n) => `<li>${esc(n)}</li>`).join("")}</ul>` : ""}
-  <span class="panel__open mono" aria-hidden="true">open sheet ${esc(p.sheet)} →</span>
-</article>`;
+  const t = p.statue;
+  const yearRow = first ? `<li class="log__year"><span aria-hidden="true">${y ? roman(+y).toUpperCase() : "sine data"}</span><span class="sr-only">${y || "undated"}</span></li>\n` : "";
+  return `${yearRow}<li class="lot${p.now ? " lot--now" : ""}" data-category="${esc(p.category)}">
+  <figure class="carve lot__plate">
+    <canvas class="carve__cells" data-carve="load" data-cols="64" data-src="${t.src}" style="--ratio: ${t.w} / ${t.h}" role="img" aria-label="${esc(t.title)}, ${esc(t.by)}, drawn in dithered pixels"></canvas>
+    <noscript><img src="${t.src}" alt="${esc(t.title)}" width="${t.w}" height="${t.h}" loading="lazy" /></noscript>
+  </figure>
+  <div class="lot__body">
+    <p class="lot__meta"><span class="lot__no" aria-hidden="true">${roman(+p.sheet)}</span><span class="sr-only">sheet ${esc(p.sheet)}</span><span>${p.dates ? esc(p.dates) : "<!-- TODO(ryan): dates -->"}</span><span>${esc(p.category)}</span>${chip(p.status)}</p>
+    <h3 class="lot__title"><a href="/work/${p.slug}/">${esc(p.title).replace(/(\S+-\S+)/g, '<span class="nw">$1</span>')}</a></h3>
+    ${metrics(p.numbers.slice(0, 4))}
+    ${p.oneliner ? `<p class="lot__line">${p.oneliner}</p>` : p.now ? slot("now", "one line — what are you building at openwm right now?") : slot("one-liner", `one line on ${esc(p.title)}.`)}
+    <span class="lot__open" aria-hidden="true">open sheet →</span>
+  </div>
+</li>`;
 });
 const home = path.join(root, "index.html");
 const html = fs.readFileSync(home, "utf8");
