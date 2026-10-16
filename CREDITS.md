@@ -139,3 +139,7 @@ All from The Metropolitan Museum of Art, Open Access (public domain, CC0). Each 
 ## fig. 0 — the bust
 
 `assets/img/bust-360.webp` is made from `assets/img/src/ryan.png`: cut out of the white backdrop, the chest truncated in a curve like a classical bust, set on a plain socle, and recast as one stone (the darks lifted, the surface smoothed, lit from above left). `assets/js/carve.js` carves it like the statue plates. It replaced `assets/js/portrait.js`.
+
+## pl. 1, since the glow-up — The Thinker
+
+Auguste Rodin, *The Thinker (Le Penseur)*, 1904, plaster. The Metropolitan Museum of Art, object 209021, photo 4522, Open Access (public domain). Cut out of its black backdrop (minus the plinth) into `assets/img/thinker-520.webp`. It replaces *Pygmalion and Galatea* in the home page's opening.
