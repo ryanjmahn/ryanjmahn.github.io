@@ -76,15 +76,15 @@ const FOOTER = `<footer class="wrap colophon mono">
 // ---------- case studies ----------
 
 function defaultBlock(p) {
-  const fig = p.slug === "openwm" ? truss() : `<figure class="plate">
-  <div class="plate__frame plate__frame--empty"><span class="mono">FIG-${p.sheet}1 · image pending</span></div>
-  ${slot("fig-caption", "what's in this figure? (add the image path in tools/projects.json → hero, or swap this frame for an <img>)")}
+  const fig = p.slug === "openwm" ? truss() : `<figure class="plate row">
+  <div class="full plate__frame plate__frame--empty"><span class="mono">FIG-${p.sheet}1 · image pending</span></div>
+  <figcaption class="full">${slot("fig-caption", "what's in this figure? (swap the empty frame above for your image)")}</figcaption>
 </figure>`;
-  const sec = (n, id, h, body) => `<section class="section" aria-labelledby="${id}">
-  <div class="row section__head"><p class="gutter mono">§ ${n}</p><h2 class="main" id="${id}">${h}</h2></div>
-  <div class="row"><div class="main">
+  const sec = (n, id, h, body) => `<section class="row case__sec" aria-labelledby="${id}">
+  <div class="gutter"><p class="mono">§ ${n}</p><h2 class="mix" id="${id}">${h}</h2></div>
+  <div class="main">
 ${body}
-  </div></div>
+  </div>
 </section>`;
   return `${fig}
 ${sec("1", "built", "what i <em>built</em>", slot("what-i-built", "what did you personally build or do? separate your part from the team's."))}
@@ -98,7 +98,7 @@ ${sec("6", "again", "if i did it <em>again</em>", `${slot("if-i-did-it-again", "
 // fig. 1, as on the home page; worldmodel.js runs it
 function truss() {
   return `<!-- fig. 1: run by assets/js/worldmodel.js -->
-<figure class="world plate" id="fig-1">
+<figure class="world plate row" id="fig-1"><div class="full">
   <div class="world__stage">
     <canvas class="world__field" aria-hidden="true"></canvas>
     <div class="sheet" aria-hidden="true">
@@ -115,7 +115,7 @@ function truss() {
     </div>
   </div>
   <figcaption>fig. 1 — a world model at the drafting table. it guesses how each truss bends (squares) before the simulator solves it (line), then learns from the miss. last miss <span class="world__err">0</span> mm<span class="world__hint"> · click to redesign</span></figcaption>
-</figure>`;
+</div></figure>`;
 }
 
 function titleblock(p) {
@@ -159,9 +159,9 @@ ${todo(p.todo)}
 ${block}
 <!-- RYAN:END -->
 
-<section class="section" aria-labelledby="receipts">
-  <div class="row section__head"><p class="gutter mono">§ 7</p><h2 class="main" id="receipts">receipts</h2></div>
-  <div class="row"><div class="main">${receipts}</div></div>
+<section class="row case__sec" aria-labelledby="receipts">
+  <div class="gutter"><p class="mono">§ 7</p><h2 class="mix" id="receipts">receipts</h2></div>
+  <div class="main">${receipts}</div>
 </section>
 </div>
 
@@ -196,18 +196,17 @@ const rows = log.map((p) => {
   return `${marker}<li class="row entry reveal${p.now ? " entry--now" : ""}" data-category="${esc(p.category)}">
   <p class="gutter mono">${p.dates ? esc(p.dates) : "<!-- TODO(ryan): dates -->"}</p>
   <div class="main">
-    <p class="entry__meta"><span class="mono entry__sheet">sheet ${esc(p.sheet)}</span>${chip(p.status)}</p>
-    <h3><a href="/work/${p.slug}/">${esc(p.title)}</a></h3>
-    ${p.oneliner ? `<p>${p.oneliner}</p>` : slot("one-liner", `one line on ${esc(p.title)}.`)}
+    <div class="entry__meta"><h3><a href="/work/${p.slug}/">${esc(p.title)}</a></h3><span class="mono entry__sheet">sheet ${esc(p.sheet)}</span>${chip(p.status)}</div>
+    ${p.oneliner ? `<p>${p.oneliner}</p>` : p.now ? slot("now", "one line — what are you building at openwm right now?") : slot("one-liner", `one line on ${esc(p.title)}.`)}
     ${p.numbers.length ? `<ul class="stats">${p.numbers.slice(0, 3).map((n) => `<li>${esc(n)}</li>`).join("")}</ul>` : ""}
   </div>
 </li>`;
 });
 const home = path.join(root, "index.html");
 const html = fs.readFileSync(home, "utf8");
-const LOG = /(<!-- build:log -->\n)[\s\S]*?(\n\s*<!-- \/build:log -->)/;
+const LOG = /(<!-- build:log -->)[\s\S]*?(\n[ \t]*<!-- \/build:log -->)/;
 if (!LOG.test(html)) throw new Error("index.html is missing the <!-- build:log --> markers");
-fs.writeFileSync(home, html.replace(LOG, (_, a, b) => a + rows.join("\n") + b));
+fs.writeFileSync(home, html.replace(LOG, (_, a, b) => a + "\n" + rows.join("\n") + b));
 
 // ---------- sitemap ----------
 
