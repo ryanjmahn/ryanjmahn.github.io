@@ -96,109 +96,98 @@
   </section>
 
   <div class="wrap">
-  <section class="section" id="log" aria-labelledby="log-title">
-        <div class="row section__head"><p class="gutter mono">§ 01</p><h2 class="main" id="log-title">the <em>log</em></h2></div>
-        <!-- written by tools/build.js from tools/projects.json; edit there, not here -->
-        <ol class="log">
+  <!-- the log: a gallery wall, walked sideways while the page holds
+         (assets/js/gallery.js); stacked on a phone or under reduced motion -->
+    <section class="gallery" id="log" aria-labelledby="log-title">
+      <div class="gallery__stage">
+        <div class="gallery__track">
+          <header class="panel panel--intro">
+            <p class="mono">§ 01</p>
+            <h2 class="mix" id="log-title">the <em>log</em></h2>
+            <p class="mono gallery__hint" aria-hidden="true">vii sheets · newest first<span class="gallery__go"> · scroll →</span></p>
+          </header>
+          <!-- written by tools/build.js from tools/projects.json; edit there, not here -->
           <!-- build:log -->
-<li class="log__year" aria-label="2026"><span aria-hidden="true">MMXXVI</span></li>
-<li class="row entry reveal entry--now" data-category="company">
-  <div class="gutter">
-    <p class="entry__no"><span aria-hidden="true">vii</span><span class="sr-only">sheet 07</span></p>
-    <p class="mono entry__dates">oct 2026 → now</p>
-  </div>
-  <div class="main">
-    <p class="mono entry__label">company · <span class="entry__status">building</span></p>
-    <h3><a href="/work/openwm/">OpenWM</a></h3>
-    <!-- RYAN-WRITES: now -->
+<article class="panel panel--now" data-category="company">
+  <p class="panel__year" aria-hidden="true">MMXXVI</p>
+  <p class="panel__no" aria-hidden="true">vii</p>
+  <p class="mono panel__label"><span class="sr-only">sheet 07 · </span>oct 2026 → now · company <span class="chip chip--building">building</span></p>
+  <h3 class="panel__title"><a href="/work/openwm/">OpenWM</a></h3>
+  <p class="panel__key"><span class="panel__fig panel__fig--now">now</span><span class="mono">building</span></p>
+  <!-- RYAN-WRITES: now -->
 <p class="todo">[ryan writes: one line — what are you building at openwm right now?]</p>
-    
-    <span class="entry__open mono" aria-hidden="true">open sheet →</span>
-  </div>
-</li>
-<li class="row entry reveal" data-category="research">
-  <div class="gutter">
-    <p class="entry__no"><span aria-hidden="true">v</span><span class="sr-only">sheet 05</span></p>
-    <p class="mono entry__dates">jul 2026 → sep 2026</p>
-  </div>
-  <div class="main">
-    <p class="mono entry__label">research · <span class="entry__status">under review</span></p>
-    <h3><a href="/work/kras-benchmark/">KRAS G12D Switch-II benchmark</a></h3>
-    <p class="entry__line">benchmarked 3 tools at detecting the KRAS G12D <a href="/assets/papers/kras-g12d-switch-ii-benchmark.pdf" target="_blank" rel="noreferrer" type="application/pdf">switch-II pocket</a> w/ prof. se-jin hwang @ hanyang univ</p>
-    <ul class="stats"><li>redock 0.96 Å rmsd (mrtx1133 into 7rpz)</li><li>24-conformer closed→open ladder</li><li>fpocket recall 0.92 / mcc 0.95 on 7rpz</li></ul>
-    <span class="entry__open mono" aria-hidden="true">open sheet →</span>
-  </div>
-</li>
-<li class="row entry reveal" data-category="research">
-  <div class="gutter">
-    <p class="entry__no"><span aria-hidden="true">vi</span><span class="sr-only">sheet 06</span></p>
-    <p class="mono entry__dates">may 2026 → aug 2026</p>
-  </div>
-  <div class="main">
-    <p class="mono entry__label">research · <span class="entry__status">published</span></p>
-    <h3><a href="/work/contaminated-ancestors/">Contaminated Ancestors</a></h3>
-    <p class="entry__line">found 7 ways our own protein ML evaluation nearly misled us. accepted @ neurips 2026 <a href="https://tai-eval.github.io/" target="_blank" rel="noreferrer">tae workshop</a></p>
-    <ul class="stats"><li>detection rate: test 2/15 vs null control 2/15</li></ul>
-    <span class="entry__open mono" aria-hidden="true">open sheet →</span>
-  </div>
-</li>
-<li class="row entry reveal" data-category="company">
-  <div class="gutter">
-    <p class="entry__no"><span aria-hidden="true">iv</span><span class="sr-only">sheet 04</span></p>
-    <p class="mono entry__dates">feb 2026 → sep 2026</p>
-  </div>
-  <div class="main">
-    <p class="mono entry__label">company · <span class="entry__status">pivoted</span></p>
-    <h3><a href="/work/probix/">Probix Labs</a></h3>
-    <p class="entry__line">built a <a href="https://www.tryprobix.com/" target="_blank" rel="noreferrer">product lab</a> for reproducible science. top 10% at yc f26 &amp; founders inc</p>
-    <ul class="stats"><li>260+ waitlist</li><li>$2,500 funding</li><li>top 10% at yc f26</li></ul>
-    <span class="entry__open mono" aria-hidden="true">open sheet →</span>
-  </div>
-</li>
-<li class="log__year" aria-label="2025"><span aria-hidden="true">MMXXV</span></li>
-<li class="row entry reveal" data-category="community">
-  <div class="gutter">
-    <p class="entry__no"><span aria-hidden="true">i</span><span class="sr-only">sheet 01</span></p>
-    <p class="mono entry__dates">apr 2025 → now</p>
-  </div>
-  <div class="main">
-    <p class="mono entry__label">community · <span class="entry__status">live</span></p>
-    <h3><a href="/work/stemise/">STEMise</a></h3>
-    <p class="entry__line">built a <a href="https://www.stemise.org/" target="_blank" rel="noreferrer">STEM nonprofit</a>: 5k+ youths, 130 nations, 135+ chapters, 75+ staff. backed by citadel &amp; HRT</p>
-    <ul class="stats"><li>5k+ youths</li><li>130 nations</li><li>135+ chapters</li></ul>
-    <span class="entry__open mono" aria-hidden="true">open sheet →</span>
-  </div>
-</li>
-<li class="log__year" aria-label="undated"><span aria-hidden="true">sine data</span></li>
-<li class="row entry reveal" data-category="research">
-  <div class="gutter">
-    <p class="entry__no"><span aria-hidden="true">iii</span><span class="sr-only">sheet 03</span></p>
-    <p class="mono entry__dates"><!-- TODO(ryan): dates --></p>
-  </div>
-  <div class="main">
-    <p class="mono entry__label">research</p>
-    <h3><a href="/work/unison/">Project UNISON</a></h3>
-    <p class="entry__line">built an AI curriculum pipeline @ project unison w/ barnard college</p>
-    
-    <span class="entry__open mono" aria-hidden="true">open sheet →</span>
-  </div>
-</li>
-<li class="row entry reveal" data-category="community">
-  <div class="gutter">
-    <p class="entry__no"><span aria-hidden="true">ii</span><span class="sr-only">sheet 02</span></p>
-    <p class="mono entry__dates"><!-- TODO(ryan): dates --></p>
-  </div>
-  <div class="main">
-    <p class="mono entry__label">community</p>
-    <h3><a href="/work/hackathons/">DSH Hacks &amp; UnivaBio</a></h3>
-    <p class="entry__line">directed hackathons for 2.5k builders from 98 nations, $200k in prizes</p>
-    <ul class="stats"><li>2.5k builders</li><li>98 nations</li><li>$200k in prizes</li></ul>
-    <span class="entry__open mono" aria-hidden="true">open sheet →</span>
-  </div>
-</li>
+  
+  <span class="panel__open mono" aria-hidden="true">open sheet 07 →</span>
+</article>
+<article class="panel" data-category="research">
+  
+  <p class="panel__no" aria-hidden="true">v</p>
+  <p class="mono panel__label"><span class="sr-only">sheet 05 · </span>jul 2026 → sep 2026 · research <span class="chip">under review</span></p>
+  <h3 class="panel__title"><a href="/work/kras-benchmark/">KRAS G12D <span class="nw">Switch-II</span> benchmark</a></h3>
+  <p class="panel__key"><span class="panel__fig">0.96 Å</span><span class="mono">redock rmsd, mrtx1133 into 7rpz</span></p>
+  <p class="panel__line">benchmarked 3 tools at detecting the KRAS G12D <a href="/assets/papers/kras-g12d-switch-ii-benchmark.pdf" target="_blank" rel="noreferrer" type="application/pdf">switch-II pocket</a> w/ prof. se-jin hwang @ hanyang univ</p>
+  <ul class="stats"><li>24-conformer closed→open ladder</li><li>fpocket recall 0.92 / mcc 0.95 on 7rpz</li></ul>
+  <span class="panel__open mono" aria-hidden="true">open sheet 05 →</span>
+</article>
+<article class="panel" data-category="research">
+  
+  <p class="panel__no" aria-hidden="true">vi</p>
+  <p class="mono panel__label"><span class="sr-only">sheet 06 · </span>may 2026 → aug 2026 · research <span class="chip">published</span></p>
+  <h3 class="panel__title"><a href="/work/contaminated-ancestors/">Contaminated Ancestors</a></h3>
+  <p class="panel__key"><span class="panel__fig">2/15 vs 2/15</span><span class="mono">detection rate, test vs null control</span></p>
+  <p class="panel__line">found 7 ways our own protein ML evaluation nearly misled us. accepted @ neurips 2026 <a href="https://tai-eval.github.io/" target="_blank" rel="noreferrer">tae workshop</a></p>
+  
+  <span class="panel__open mono" aria-hidden="true">open sheet 06 →</span>
+</article>
+<article class="panel" data-category="company">
+  
+  <p class="panel__no" aria-hidden="true">iv</p>
+  <p class="mono panel__label"><span class="sr-only">sheet 04 · </span>feb 2026 → sep 2026 · company <span class="chip">pivoted</span></p>
+  <h3 class="panel__title"><a href="/work/probix/">Probix Labs</a></h3>
+  <p class="panel__key"><span class="panel__fig">260+</span><span class="mono">waitlist</span></p>
+  <p class="panel__line">built a <a href="https://www.tryprobix.com/" target="_blank" rel="noreferrer">product lab</a> for reproducible science. top 10% at yc f26 &amp; founders inc</p>
+  <ul class="stats"><li>$2,500 funding</li><li>top 10% at yc f26</li><li>top 10% at founders inc. off season</li></ul>
+  <span class="panel__open mono" aria-hidden="true">open sheet 04 →</span>
+</article>
+<article class="panel" data-category="community">
+  <p class="panel__year" aria-hidden="true">MMXXV</p>
+  <p class="panel__no" aria-hidden="true">i</p>
+  <p class="mono panel__label"><span class="sr-only">sheet 01 · </span>apr 2025 → now · community <span class="chip">live</span></p>
+  <h3 class="panel__title"><a href="/work/stemise/">STEMise</a></h3>
+  <p class="panel__key"><span class="panel__fig">5k+</span><span class="mono">youths</span></p>
+  <p class="panel__line">built a <a href="https://www.stemise.org/" target="_blank" rel="noreferrer">STEM nonprofit</a>: 5k+ youths, 130 nations, 135+ chapters, 75+ staff. backed by citadel &amp; HRT</p>
+  <ul class="stats"><li>130 nations</li><li>135+ chapters</li><li>75+ staff</li></ul>
+  <span class="panel__open mono" aria-hidden="true">open sheet 01 →</span>
+</article>
+<article class="panel" data-category="research">
+  <p class="panel__year" aria-hidden="true">sine data</p>
+  <p class="panel__no" aria-hidden="true">iii</p>
+  <p class="mono panel__label"><span class="sr-only">sheet 03 · </span><!-- TODO(ryan): dates -->research </p>
+  <h3 class="panel__title"><a href="/work/unison/">Project UNISON</a></h3>
+  <p class="panel__key"><span class="panel__fig">8-week</span><span class="mono">un sdg lesson pipeline</span></p>
+  <p class="panel__line">built an AI curriculum pipeline @ project unison w/ barnard college</p>
+  
+  <span class="panel__open mono" aria-hidden="true">open sheet 03 →</span>
+</article>
+<article class="panel" data-category="community">
+  
+  <p class="panel__no" aria-hidden="true">ii</p>
+  <p class="mono panel__label"><span class="sr-only">sheet 02 · </span><!-- TODO(ryan): dates -->community </p>
+  <h3 class="panel__title"><a href="/work/hackathons/">DSH Hacks &amp; UnivaBio</a></h3>
+  <p class="panel__key"><span class="panel__fig">2.5k</span><span class="mono">builders</span></p>
+  <p class="panel__line">directed hackathons for 2.5k builders from 98 nations, $200k in prizes</p>
+  <ul class="stats"><li>98 nations</li><li>$200k in prizes</li></ul>
+  <span class="panel__open mono" aria-hidden="true">open sheet 02 →</span>
+</article>
           <!-- /build:log -->
-        </ol>
-      </section>
+        </div>
+        <div class="gallery__rail mono" aria-hidden="true">
+          <span>the log</span>
+          <span class="gallery__bar"><i></i></span>
+          <span><span class="gallery__at">01</span> / 07</span>
+        </div>
+      </div>
+    </section>
 
     <!-- about the artist: the bust beside the ways to reach him -->
     <section class="section about" aria-labelledby="elsewhere">
@@ -238,5 +227,6 @@
 
 <script src="/assets/js/site.js" defer></script>
 <script src="/assets/js/carve.js" defer></script>
+<script src="/assets/js/gallery.js" defer></script>
 </body>
 </html>

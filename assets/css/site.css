@@ -234,70 +234,76 @@ figcaption { margin-top: .6rem; font-family: var(--mono); font-size: 12px; line-
 .now h3 { font-size: clamp(32px, 4vw, 44px); display: inline; margin-right: .6rem; }
 .now .todo { margin-top: .8rem; }
 
-/* the log, as a museum catalogue: sheets numbered in roman, years cut
-   across it like inscriptions, a hairline spine with a chisel mark per entry */
-.log { margin: 0; padding: 0; list-style: none; }
-.log__year {
-  display: flex; align-items: center; gap: 1.1rem;
-  margin: 2.2rem 0 .4rem;
-  font-family: var(--serif); font-size: clamp(22px, 2.4vw, 28px); letter-spacing: .32em; color: var(--muted);
-}
-.log__year:first-child { margin-top: .4rem; }
-.log__year span { padding-left: .32em; } /* balance the tracking */
-.log__year::before, .log__year::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
-.log__year::before { flex: 0 0 2.5rem; }
+/* the log, as a gallery wall (assets/js/gallery.js): one panel per sheet,
+   walked sideways while the stage holds; stacked when it isn't pinned */
+.gallery { position: relative; width: 100vw; margin: clamp(3rem, 8vw, 6rem) 0 0 calc(50% - 50vw); }
+.gallery__stage { overflow: clip; }
+.gallery__track { display: flex; flex-direction: column; padding: 0 max(var(--gap), calc((100vw - 1200px) / 2)); }
 
-.entry { position: relative; align-items: start; }
-.entry .gutter { padding: 1.1rem 0 0; }
-.entry__no {
-  margin: 0; font-family: var(--serif); font-style: italic;
-  font-size: clamp(44px, 5vw, 64px); line-height: .85; letter-spacing: -.02em;
-  color: color-mix(in srgb, var(--muted) 55%, var(--paper)); transition: color .3s var(--ease), transform .3s var(--ease);
+.panel {
+  position: relative;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 2.2rem 0 2.4rem;
+  border-top: 1px solid var(--rule);
 }
-.entry__dates { margin: .55rem 0 0; }
-.entry--now .entry__dates { color: var(--accent); }
-.entry .main {
-  --node: var(--muted);
-  padding: 1.15rem 0 1.4rem 1.7rem;
-  /* the spine, and a chisel mark (a small diamond) at each entry */
-  background:
-    linear-gradient(45deg, transparent 49%, var(--node) 49% 51%, transparent 51%) 0 0 / 0 0 no-repeat,
-    linear-gradient(var(--rule), var(--rule)) 3.5px 0 / 1px 100% no-repeat;
-  position: static;
+.panel--intro { justify-content: flex-start; border-top: 0; padding-top: 0; }
+.panel--intro h2 { font-size: clamp(56px, 9vw, 140px); line-height: .85; letter-spacing: -.045em; margin: .6rem 0 1rem; }
+.panel--intro h2 em { letter-spacing: -.02em; }
+
+/* the sheet number, cut huge behind the panel */
+.panel__no {
+  position: absolute; top: 1rem; right: 0; margin: 0; z-index: 0;
+  font-family: var(--serif); font-style: italic; line-height: .8; letter-spacing: -.03em;
+  font-size: clamp(120px, 16vw, 260px);
+  color: color-mix(in srgb, var(--rule) 70%, var(--paper));
+  transition: color .4s var(--ease);
+  pointer-events: none;
 }
-.entry .main::before {
-  content: ""; position: absolute; margin: .55rem 0 0 calc(-1.7rem + .5px);
-  width: 7px; height: 7px; background: var(--paper); border: 1px solid var(--node); transform: rotate(45deg);
-  transition: background .3s var(--ease), border-color .3s var(--ease);
+.panel > :not(.panel__no) { position: relative; z-index: 1; }
+.panel__year { margin: 0 0 auto; padding-bottom: 2rem; font-family: var(--serif); font-size: 22px; letter-spacing: .32em; color: var(--muted); }
+.panel__label { margin: 0 0 .5rem; font-size: 11px; display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .6rem; }
+.panel--now .panel__label { color: var(--accent); }
+.panel__title { font-size: clamp(40px, 5vw, 76px); line-height: .92; letter-spacing: -.02em; margin: 0 0 1.4rem; }
+.panel__title a { text-decoration: none; }
+.nw { white-space: nowrap; }
+/* the whole panel opens the sheet; links inside the line stay on top */
+.panel__title a::after { content: ""; position: absolute; inset: 0; z-index: 2; }
+.panel__line a, .panel .todo { position: relative; z-index: 3; }
+.panel__key { display: flex; align-items: baseline; flex-wrap: wrap; gap: .2rem .9rem; margin: 0 0 1rem; }
+.panel__fig { font-family: var(--serif); font-size: clamp(56px, 6.5vw, 104px); line-height: .9; letter-spacing: -.03em; color: var(--ink); }
+.panel__fig--now { font-style: italic; color: var(--accent); }
+.panel__key .mono { font-size: 11px; }
+.panel__line { margin: 0 0 .8rem; font-size: 16px; color: var(--muted); max-width: 40ch; }
+.panel__line a { color: var(--ink); }
+.panel .todo { max-width: 40ch; }
+.panel .stats { margin: 0 0 1rem; font-size: 11px; color: var(--muted); flex-direction: column; gap: .15rem; }
+.panel__open { margin-top: .4rem; font-size: 11px; color: var(--muted); transition: color .25s var(--ease), translate .25s var(--ease); }
+.panel:hover .panel__no, .panel:focus-within .panel__no { color: color-mix(in srgb, var(--muted) 45%, var(--paper)); }
+.panel:hover .panel__open, .panel:focus-within .panel__open { color: var(--accent); translate: 4px 0; }
+.panel:hover .panel__title a, .panel:focus-within .panel__title a { color: var(--ink); }
+
+.gallery__rail { display: none; }
+
+/* pinned: the wall runs sideways across one held screen */
+.gallery.is-pinned .gallery__stage { position: sticky; top: 0; height: 100svh; display: flex; flex-direction: column; }
+.gallery.is-pinned .gallery__track { flex: 1; flex-direction: row; align-items: stretch; width: max-content; padding-top: 4.5rem; will-change: transform; }
+.gallery.is-pinned .panel {
+  width: clamp(360px, 38vw, 600px); flex: none;
+  padding: 0 clamp(1.6rem, 3vw, 3rem) 1.5rem;
+  border-top: 0; border-left: 1px solid var(--rule);
 }
-.entry--now .main { --node: var(--accent); }
-.entry--now .main::before { background: var(--accent); }
-.entry + .entry .main, .log__year + .entry .main { border-top: 0; }
-.entry + .entry { border-top: 1px dotted var(--rule); }
-.entry__label { margin: 0 0 .2rem; font-size: 11px; }
-.entry--now .entry__status { color: var(--accent); }
-.entry h3 { font-size: clamp(28px, 3vw, 36px); margin: 0 0 .35rem; }
-.entry h3 a { text-decoration: none; display: inline-block; transition: transform .3s var(--ease); }
-/* the whole row opens the sheet; links inside the line stay on top */
-.entry h3 a::after { content: ""; position: absolute; inset: 0; }
-.entry .main p a, .entry .main .todo { position: relative; z-index: 1; }
-.entry__line { margin-bottom: .45rem; font-size: 15px; color: var(--muted); max-width: 54ch; }
-.entry__line a { color: var(--ink); }
-.entry .todo { margin: .3rem 0 .5rem; }
-.entry .stats { margin: 0; font-size: 11px; color: var(--muted); }
-.entry__open { display: inline-block; margin-top: .6rem; font-size: 11px; color: var(--accent); opacity: 0; transform: translateX(-4px); transition: opacity .25s var(--ease), transform .25s var(--ease); }
-.entry:hover .entry__no, .entry:focus-within .entry__no { color: var(--ink); transform: translateX(3px); }
-.entry:hover h3 a, .entry:focus-within h3 a { transform: translateX(4px); color: var(--ink); }
-.entry:hover .main::before, .entry:focus-within .main::before { background: var(--node); }
-.entry:hover .entry__open, .entry:focus-within .entry__open { opacity: 1; transform: none; }
-@media (max-width: 720px) {
-  .entry { grid-template-columns: 5.6rem minmax(0, 1fr); column-gap: .9rem; }
-  .entry .gutter, .entry .main { grid-column: auto; }
-  .entry__no { font-size: 40px; }
-  .entry__dates { font-size: 10px; }
-  .entry .main { padding-left: 1.3rem; }
-  .entry .main::before { margin-left: calc(-1.3rem + .5px); }
+.gallery.is-pinned .panel--intro { width: clamp(380px, 42vw, 640px); padding-left: 0; border-left: 0; justify-content: center; }
+.gallery.is-pinned .panel:last-child { margin-right: max(var(--gap), calc((100vw - 1200px) / 2)); border-right: 1px solid var(--rule); }
+.gallery.is-pinned .panel__no { right: clamp(1.2rem, 2.4vw, 2.4rem); }
+.gallery.is-pinned .gallery__rail {
+  display: flex; align-items: center; gap: 1.2rem;
+  padding: 1rem max(var(--gap), calc((100vw - 1200px) / 2)) 1.4rem;
+  font-size: 11px;
 }
+.gallery__bar { flex: 1; height: 1px; background: var(--rule); position: relative; }
+.gallery__bar i { position: absolute; inset: -1px 0; background: var(--ink); transform: scaleX(0); transform-origin: left; }
+.gallery__at { color: var(--ink); font-variant-numeric: tabular-nums; }
+.gallery + .section { margin-top: clamp(3rem, 7vw, 5rem); }
 
 /* fig. 1 — the world model at the drafting table (assets/js/worldmodel.js) */
 .world { margin: 0; }
@@ -408,7 +414,6 @@ html:not(.js) .sheet { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .js .reveal { opacity: 1; translate: none; transition: none; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
-  .entry:hover h3 a { transform: none; }
 }
 
 .page__title .lede__more { display: block; margin-top: .4em; font-family: var(--sans); font-weight: 400; font-size: clamp(17px, 2vw, 22px); letter-spacing: 0; color: var(--muted); }
@@ -511,3 +516,4 @@ html:not(.js) .sheet { display: none; }
   .scene__stage { position: relative; min-height: 100svh; height: auto; }
   .scene__word { translate: none; }
 }
+.gallery:not(.is-pinned) .gallery__go { display: none; }
