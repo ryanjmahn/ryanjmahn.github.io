@@ -135,3 +135,7 @@ All from The Metropolitan Museum of Art, Open Access (public domain, CC0). Each 
 - pl. 3, `/writing/`: Jean Antoine Houdon, Seated Voltaire, 1778, plaster tinted to imitate terracotta. https://www.metmuseum.org/art/collection/search/201455
 - pl. 4, `/contact/`: Marble statue of Hermes, Roman, after Polykleitos, 1st or 2nd century CE. https://www.metmuseum.org/art/collection/search/254925
 - pl. 404, `/404.html`: Marble statue of Herakles, Roman, 1st century CE. https://www.metmuseum.org/art/collection/search/254608
+
+## fig. 0 — the bust
+
+`assets/img/bust-360.webp` is made from `assets/img/src/ryan.png`: cut out of the white backdrop, the chest truncated in a curve like a classical bust, set on a plain socle, and recast as one stone (the darks lifted, the surface smoothed, lit from above left). `assets/js/carve.js` carves it like the statue plates. It replaced `assets/js/portrait.js`.

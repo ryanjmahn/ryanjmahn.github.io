@@ -216,11 +216,11 @@ html:not(.js) .carve__cells { display: none; }
 .lede { font-family: var(--serif); font-size: clamp(22px, 2.2vw, 26px); line-height: 1.25; margin: 1.2rem 0 .6em; }
 .hero__links { display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; margin-top: 1.2rem; }
 
-/* fig. 0 — the portrait, dithered by assets/js/portrait.js */
-.portrait { margin: 0; max-width: 168px; }
-.portrait__stage { position: relative; border: 1px solid var(--rule); padding: 8px; }
-.portrait__cells { display: block; width: 100%; aspect-ratio: 1; touch-action: pan-y; }
-html:not(.js) .portrait__cells { display: none; }
+/* fig. 0 — the portrait, as a marble bust (assets/js/carve.js) */
+.portrait { margin: 0; max-width: 190px; }
+/* the bust is a plate like the others, but sits in the copy, not pinned */
+.portrait.carve { position: static; margin: 0; order: 0; }
+.portrait .carve__stage { padding: 8px; }
 .figlabel { position: absolute; top: -1px; left: -1px; padding: 0 6px; background: var(--paper); border: 1px solid var(--rule); font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: var(--muted); }
 figcaption { margin-top: .6rem; font-family: var(--mono); font-size: 12px; line-height: 1.5; color: var(--muted); }
 
