@@ -31,10 +31,25 @@
 </header>
 
 <main id="main" class="wrap">
+<div class="lost">
+    <!-- pl. 404: carved by assets/js/carve.js once it's in view -->
+    <figure class="carve carve--tall" aria-labelledby="pl-404-cap">
+      <div class="carve__stage">
+        <canvas class="carve__cells" data-carve="load" data-cols="90" data-src="/assets/img/torso-360.webp" style="--ratio: 360 / 654" role="img" aria-label="Marble statue of Herakles, a torso without head, arms or lower legs, drawn in dithered pixels"></canvas>
+        <noscript><img src="/assets/img/torso-360.webp" alt="Marble statue of Herakles, a torso without head, arms or lower legs" width="360" height="654" /></noscript>
+        <span class="figlabel" aria-hidden="true">PL-404</span>
+      </div>
+      <div class="carve__read mono" aria-hidden="true">
+        <ol class="sheet__steps carve__steps"><li>block</li><li>roughed</li><li>carved</li><li>finished</li></ol>
+        <span><span class="carve__pct">0</span>%</span>
+      </div>
+      <figcaption id="pl-404-cap">pl. 404 — marble statue of <em>herakles</em>, roman, 1st century ce. the met, open access.<span class="carve__hint"> · drag to carve</span></figcaption>
+    </figure>
 <header class="page__head">
   <h1 class="page__title mix">404 — sheet <em>not found</em></h1>
   <p class="mono"><a href="/">← ryan ahn</a></p>
 </header>
+</div>
 </main>
 
 <footer class="wrap colophon mono">
@@ -43,5 +58,6 @@
 </footer>
 
 <script src="/assets/js/site.js" defer></script>
+<script src="/assets/js/carve.js" defer></script>
 </body>
 </html>

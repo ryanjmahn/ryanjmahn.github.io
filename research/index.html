@@ -33,6 +33,8 @@
 </header>
 
 <main id="main" class="wrap">
+<div class="split">
+  <div class="split__copy">
 <header class="page__head">
   <h1 class="page__title mix"><em>research</em></h1>
 </header>
@@ -64,6 +66,22 @@
     </li>
   </ol>
 </section>
+  </div>
+
+    <!-- pl. 2: carved by assets/js/carve.js once it's in view -->
+    <figure class="carve carve--tall" aria-labelledby="pl-2-cap">
+      <div class="carve__stage">
+        <canvas class="carve__cells" data-carve="load" data-cols="90" data-src="/assets/img/diogenes-360.webp" style="--ratio: 360 / 771" role="img" aria-label="Marble statue of Diogenes, drawn in dithered pixels"></canvas>
+        <noscript><img src="/assets/img/diogenes-360.webp" alt="Marble statue of Diogenes" width="360" height="771" /></noscript>
+        <span class="figlabel" aria-hidden="true">PL-002</span>
+      </div>
+      <div class="carve__read mono" aria-hidden="true">
+        <ol class="sheet__steps carve__steps"><li>block</li><li>roughed</li><li>carved</li><li>finished</li></ol>
+        <span><span class="carve__pct">0</span>%</span>
+      </div>
+      <figcaption id="pl-2-cap">pl. 2 — marble statue of <em>diogenes</em>, roman. the met, open access.<span class="carve__hint"> · drag to carve</span></figcaption>
+    </figure>
+</div>
 </main>
 
 <footer class="wrap colophon mono">
@@ -72,5 +90,6 @@
 </footer>
 
 <script src="/assets/js/site.js" defer></script>
+<script src="/assets/js/carve.js" defer></script>
 </body>
 </html>
