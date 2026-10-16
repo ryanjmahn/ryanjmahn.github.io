@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="ryan ahn" />
 <meta name="twitter:description" content="ryan ahn — working on world models for physical design. proponent of accessible, trustworthy science, comp bio enthusiast, and high school senior in seoul." />
 <meta name="twitter:image" content="https://ryanjmahn.github.io/assets/img/og/home.jpg" />
-<meta name="theme-color" content="#F7F7F5" />
+<meta name="theme-color" content="#F2EFE9" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -54,37 +54,53 @@
 </head>
 <body data-page="home">
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="wrap topbar">
+<header class="wrap topbar topbar--over">
   <a class="topbar__name" href="/">ryan ahn</a>
   <nav class="pills" aria-label="Site"><a href="/#log">work</a><a href="/research/">research</a><a href="/writing/">writing</a><a href="/diary/">diary</a><a href="/contact/">contact</a></nav>
   <button class="theme-toggle mono" type="button" aria-label="Switch to dark mode">dark</button>
 </header>
 
-<main id="main" class="wrap">
+<main id="main">
 
-  <div class="split">
-    <div class="split__copy">
-    <header class="hero">
-        <h1 class="hero__name mix"><em>ryan</em> ahn</h1>
-        <!-- fig. 0: the portrait as a marble bust, carved by assets/js/carve.js -->
-        <figure class="portrait carve" aria-labelledby="fig-0-cap">
-          <div class="carve__stage">
-            <canvas class="carve__cells" data-carve="load" data-cols="100" data-src="/assets/img/bust-360.webp" style="--ratio: 360 / 580" role="img" aria-label="Portrait of Ryan Ahn as a marble bust, drawn in dithered pixels"></canvas>
-            <noscript><img src="/assets/img/bust-360.webp" alt="Portrait of Ryan Ahn as a marble bust" width="360" height="580" /></noscript>
-            <span class="figlabel" aria-hidden="true">FIG-000</span>
-          </div>
-          <figcaption id="fig-0-cap">fig. 0 — ryan ahn, specimen of a builder.</figcaption>
-        </figure>
+  <!-- the opening: a statue under a light, carved as the scene scrolls
+       (assets/js/carve.js writes the progress to --p) -->
+  <section class="scene" data-scene aria-labelledby="name">
+    <div class="scene__stage">
+      <h1 class="sr-only" id="name">ryan ahn</h1>
+      <p class="scene__word scene__word--ryan" aria-hidden="true"><em>ryan</em></p>
+      <p class="scene__word scene__word--ahn" aria-hidden="true">ahn</p>
+
+      <!-- pl. 1 -->
+      <figure class="carve scene__plate" aria-labelledby="pl-1-cap">
+        <canvas class="carve__cells" data-carve="scroll" data-cols="150" data-src="/assets/img/pygmalion-520.webp" role="img" aria-label="Auguste Rodin's Pygmalion and Galatea, drawn in dithered pixels, cut out of a rough block of stone"></canvas>
+        <noscript><img src="/assets/img/pygmalion-520.webp" alt="Auguste Rodin's Pygmalion and Galatea" width="520" height="546" /></noscript>
+      </figure>
+
+      <!-- the wall label -->
+      <aside class="scene__label mono" aria-label="plate 1">
+        <p class="scene__label-no">PL-001</p>
+        <p id="pl-1-cap">pl. 1 — auguste rodin, <em>pygmalion and galatea</em>, modeled 1889, carved ca. 1908–9. the met, open access.<span class="carve__hint"> · drag to carve</span></p>
+        <div class="carve__read" aria-hidden="true">
+          <ol class="sheet__steps carve__steps"><li>block</li><li>roughed</li><li>carved</li><li>finished</li></ol>
+          <span><span class="carve__pct">0</span>%</span>
+        </div>
+      </aside>
+
+      <div class="scene__intro">
         <p class="lede">sup! i'm ryan. i'm currently working on <a href="https://openwm.vercel.app/" target="_blank" rel="noreferrer">world models for physical design</a>.</p>
         <p>i'm also a proponent of <strong>accessible, trustworthy science</strong>, a <strong>comp bio</strong> enthusiast, and a <strong>high school senior</strong>.</p>
-        <p class="hero__links mono"><a href="mailto:ryanjmahn1@gmail.com">email</a><a href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer">github ↗</a><a href="https://www.linkedin.com/in/ryan-ahn-81322736a/" target="_blank" rel="noreferrer">linkedin ↗</a></p>
-      </header>
+      </div>
 
+      <p class="scene__cue mono" aria-hidden="true">scroll to carve ↓</p>
+    </div>
+  </section>
+
+  <div class="wrap">
   <section class="section" id="log" aria-labelledby="log-title">
-      <div class="row section__head"><p class="gutter mono">§ 01</p><h2 class="main" id="log-title">the <em>log</em></h2></div>
-      <!-- written by tools/build.js from tools/projects.json; edit there, not here -->
-      <ol class="log">
-        <!-- build:log -->
+        <div class="row section__head"><p class="gutter mono">§ 01</p><h2 class="main" id="log-title">the <em>log</em></h2></div>
+        <!-- written by tools/build.js from tools/projects.json; edit there, not here -->
+        <ol class="log">
+          <!-- build:log -->
 <li class="log__year" aria-label="2026"><span aria-hidden="true">MMXXVI</span></li>
 <li class="row entry reveal entry--now" data-category="company">
   <div class="gutter">
@@ -180,14 +196,25 @@
     <span class="entry__open mono" aria-hidden="true">open sheet →</span>
   </div>
 </li>
-        <!-- /build:log -->
-      </ol>
-    </section>
+          <!-- /build:log -->
+        </ol>
+      </section>
 
-    <section class="section" aria-labelledby="elsewhere">
+    <!-- about the artist: the bust beside the ways to reach him -->
+    <section class="section about" aria-labelledby="elsewhere">
       <div class="row section__head"><p class="gutter mono">§ 02</p><h2 class="main" id="elsewhere"><em>elsewhere</em></h2></div>
-      <div class="row"><div class="main">
-        <dl class="elsewhere">
+      <div class="row">
+        <!-- fig. 0: the portrait as a marble bust, carved by assets/js/carve.js -->
+        <figure class="gutter portrait carve" aria-labelledby="fig-0-cap">
+          <div class="carve__stage">
+            <canvas class="carve__cells" data-carve="load" data-cols="100" data-src="/assets/img/bust-360.webp" style="--ratio: 360 / 580" role="img" aria-label="Portrait of Ryan Ahn as a marble bust, drawn in dithered pixels"></canvas>
+            <noscript><img src="/assets/img/bust-360.webp" alt="Portrait of Ryan Ahn as a marble bust" width="360" height="580" /></noscript>
+            <span class="figlabel" aria-hidden="true">FIG-000</span>
+          </div>
+          <figcaption id="fig-0-cap">fig. 0 — ryan ahn, specimen of a builder.</figcaption>
+        </figure>
+        <div class="main">
+          <dl class="elsewhere">
           <dt>email</dt><dd><a href="mailto:ryanjmahn1@gmail.com">ryanjmahn1@gmail.com</a></dd>
           <dt>github</dt><dd><a href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer">github.com/ryanjmahn ↗</a></dd>
           <dt>linkedin</dt><dd><a href="https://www.linkedin.com/in/ryan-ahn-81322736a/" target="_blank" rel="noreferrer">linkedin.com/in/ryan-ahn ↗</a></dd>
@@ -197,24 +224,9 @@
           <dt>diary</dt><dd><a href="/diary/">/diary/</a></dd>
           <!-- TODO(ryan): x / instagram / other writing / podcasts -->
         </dl>
-      </div></div>
+        </div>
+      </div>
     </section>
-
-    </div>
-
-    <!-- pl. 1: carved by assets/js/carve.js as the page scrolls -->
-    <figure class="carve" aria-labelledby="pl-1-cap">
-      <div class="carve__stage">
-        <canvas class="carve__cells" data-src="/assets/img/pygmalion-520.webp" role="img" aria-label="Auguste Rodin's Pygmalion and Galatea, drawn in dithered pixels, cut out of a rough block of stone"></canvas>
-        <noscript><img src="/assets/img/pygmalion-520.webp" alt="Auguste Rodin's Pygmalion and Galatea" width="520" height="546" /></noscript>
-        <span class="figlabel" aria-hidden="true">PL-001</span>
-      </div>
-      <div class="carve__read mono" aria-hidden="true">
-        <ol class="sheet__steps carve__steps"><li>block</li><li>roughed</li><li>carved</li><li>finished</li></ol>
-        <span><span class="carve__pct">0</span>%</span>
-      </div>
-      <figcaption id="pl-1-cap">pl. 1 — auguste rodin, <em>pygmalion and galatea</em>, modeled 1889, carved ca. 1908–9. the met, open access.<span class="carve__hint"> · drag to carve</span></figcaption>
-    </figure>
   </div>
 
 </main>
