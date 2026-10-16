@@ -16,8 +16,11 @@
     if (!canvas.getContext) return;
     var ctx = canvas.getContext("2d");
     var fig = canvas.closest(".carve");
-    var pctEl = fig.querySelector(".carve__pct");
-    var steps = fig.querySelectorAll(".carve__steps li");
+    // a scene (the home page's opening) holds its own readout, and hears --p
+    var scene = canvas.closest("[data-scene]");
+    var scope = scene || fig;
+    var pctEl = scope.querySelector(".carve__pct");
+    var steps = scope.querySelectorAll(".carve__steps li");
     // "scroll": carved as the page scrolls (home); "load": carves itself once in view
     var onLoad = canvas.getAttribute("data-carve") === "load";
     var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -83,6 +86,9 @@
         rough[k] = .24 + .14 * j + .05 * Math.sin(r * .35 + c * .12) + (inside[k] ? .16 : 0);
         cut[k] = inside[k] ? 2 : .04 + .62 * Math.pow(1 - d[k] / dmax, 2.2) + (j2 - .5) * .12;
         finish[k] = inside[k] ? .42 + .36 * j2 + .18 * (r / rows) : 2;
+        // the block comes from the quarry with rough edges, not a ruled square
+        var edge = Math.min(r, c, rows - 1 - r, COLS - 1 - c);
+        if (!inside[k] && edge < 1.5 + 5 * hash(k + 4241) * (.6 + .4 * Math.sin(r * .21 + c * .17))) cut[k] = .02;
       }
     }
 
@@ -129,6 +135,7 @@
 
     function readout() {
       if (pctEl) pctEl.textContent = Math.round(p * 100);
+      if (scene) scene.style.setProperty("--p", p.toFixed(3));
       for (var i = 0; i < steps.length; i++) {
         steps[i].classList.toggle("is-done", p >= STAGES[i + 1]);
         steps[i].classList.toggle("is-on", p >= STAGES[i] && !(p >= STAGES[i + 1]));
@@ -148,19 +155,20 @@
       }
     }
 
-    // how far along the carving should be: through the page while the plate
-    // is pinned beside it, through its own pass across the screen when not
+    // how far along the carving should be: through the scene while it's
+    // pinned (finished a little before the scene lets go), else through the
+    // plate's own pass across the screen
     function wanted() {
       if (onLoad) return 1;
       var raw;
-      if (getComputedStyle(fig).position === "sticky") {
-        var max = document.documentElement.scrollHeight - innerHeight;
-        raw = max > 0 ? scrollY / max / .85 : 1;
+      if (scene) {
+        var s = scene.getBoundingClientRect();
+        raw = -s.top / Math.max(1, s.height - innerHeight) / .85;
       } else {
         var rect = canvas.getBoundingClientRect();
         raw = (innerHeight - rect.top) / (innerHeight + rect.height) * 1.3;
       }
-      return Math.max(.1, Math.min(1, raw));
+      return Math.max(.04, Math.min(1, raw));
     }
 
     function frame(now) {

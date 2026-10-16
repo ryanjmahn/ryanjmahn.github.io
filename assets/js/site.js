@@ -20,7 +20,7 @@
       button.textContent = dark ? "light" : "dark";
       button.setAttribute("aria-label", "Switch to " + (dark ? "light" : "dark") + " mode");
     }
-    if (meta) meta.setAttribute("content", dark ? "#0E0E0F" : "#F7F7F5");
+    if (meta) meta.setAttribute("content", dark ? "#0D0C0B" : "#F2EFE9");
   }
 
   sync();
