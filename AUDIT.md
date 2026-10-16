@@ -16,7 +16,7 @@ Snapshot of `main` at 44c87ad (2026-10-09), and what the revamp does with each p
 | `assets/css/site.css` | all styles, Departure Mono everywhere, cards + shadows | **rewrite** to the new tokens; no cards, no shadows |
 | `assets/js/site.js` | theme toggle + rule-110 automaton in the letterhead | **keep** the toggle; **drop** the automaton (the new top bar is name + nav + toggle) |
 | `assets/js/worldmodel.js` | fig. 1, the truss world model | **keep untouched**; it reads `--ink --ink-2 --grid --card`, which the new tokens still define |
-| `assets/js/portrait.js` | fig. 0, the dithered portrait | **keep untouched** |
+| `assets/js/portrait.js` | fig. 0, the dithered portrait | replaced in the second pass: fig. 0 is now a marble bust carved by carve.js |
 | `assets/js/field.js` | dither field behind the page | **delete** (the brief asks for a calm page; it's in git history) |
 | `assets/js/plates.js`, `texture.js` | from the older multi-page site, no longer loaded anywhere | **delete** (along with `tools/sync-plates.js`, which only served plates.js) |
 | `assets/img/plate-00*` | photo plates from the older site | keep on disk; not used. Can become case-study heroes once you say which plate is which project |
