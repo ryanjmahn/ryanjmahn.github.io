@@ -126,3 +126,12 @@ The plate photography below is no longer loaded by any page.
 Auguste Rodin, *Pygmalion and Galatea*, modeled 1889, carved ca. 1908–9. The Metropolitan Museum of Art, object 191292, photo DP-13618-003, Open Access (public domain, CC0): https://www.metmuseum.org/art/collection/search/191292. Cut out of its backdrop with OpenCV GrabCut and saved as `assets/img/pygmalion-520.webp` (greyscale + alpha). `assets/js/carve.js` dithers it.
 
 JetBrains Mono (JetBrains, SIL OFL), self-hosted subset from Google Fonts.
+
+## pl. 2–4, pl. 404
+
+All from The Metropolitan Museum of Art, Open Access (public domain, CC0). Each was cut out of its studio backdrop with OpenCV GrabCut, with floor shadows removed and the tone evened, then saved as greyscale + alpha in `assets/img/*-360.webp`.
+
+- pl. 2, `/research/`: Marble statue of Diogenes, Roman. https://www.metmuseum.org/art/collection/search/251181
+- pl. 3, `/writing/`: Jean Antoine Houdon, Seated Voltaire, 1778, plaster tinted to imitate terracotta. https://www.metmuseum.org/art/collection/search/201455
+- pl. 4, `/contact/`: Marble statue of Hermes, Roman, after Polykleitos, 1st or 2nd century CE. https://www.metmuseum.org/art/collection/search/254925
+- pl. 404, `/404.html`: Marble statue of Herakles, Roman, 1st century CE. https://www.metmuseum.org/art/collection/search/254608
