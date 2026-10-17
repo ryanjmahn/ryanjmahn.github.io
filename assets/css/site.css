@@ -241,10 +241,8 @@ figcaption { margin-top: .6rem; font-family: var(--mono); font-size: 12px; line-
 .item__mark { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 7px; border: 1px solid var(--rule); color: var(--muted); }
 .item__line { margin: 0; font-size: 17px; line-height: 1.5; color: color-mix(in srgb, var(--ink) 78%, var(--paper)); max-width: none; }
 .item__line b { font-weight: 600; color: var(--ink); }
-.item__line a:not(.item__go) { color: var(--ink); }
+.item__line a { color: var(--ink); }
 .item .todo { display: inline-block; margin: 0; padding: .35rem .6rem; font-size: 12px; }
-.item__go { margin-left: .2rem; text-decoration: none; color: var(--muted); transition: color .2s var(--ease), margin .2s var(--ease); }
-.item:hover .item__go, .item__go:focus-visible { color: var(--accent); margin-left: .45rem; }
 .item--now .item__logos img { border-color: var(--accent); }
 
 /* impact figures: a row of big numerals, hairlines between, labels beneath */
