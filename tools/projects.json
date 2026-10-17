@@ -366,7 +366,7 @@
         }
       ],
       "numbers": [],
-      "oneliner": null,
+      "oneliner": "world models trained on specific hardware niches that test designs for real-world performance in milliseconds",
       "todo": [
         "paper venue: VERIFY",
         "accelerator interview with J (risingfounder.net): VERIFY whether it goes public",
