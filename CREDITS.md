@@ -159,3 +159,5 @@ One per sheet, all The Metropolitan Museum of Art, Open Access (public domain). 
 fig. 0 is the plain headshot again (`assets/img/portrait-480.jpg`); the marble bust was retired.
 
 The log's statues were retired when "what i've built" became short lines with logos. Logos: STEMise, DSH Hacks, UnivaBio and Probix from `assets/img/logos/` (already in the repo), and OpenWM's own icon from openwm.vercel.app (`assets/img/logos/openwm.svg`). Research lines get a plain paper mark rather than an invented logo.
+
+The research, writing, contact and diary pages were removed, and their plates (Diogenes, Voltaire, Hermes) with them. The Herakles torso stays on the 404.
