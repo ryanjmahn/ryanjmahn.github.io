@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="preload" href="/assets/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="/assets/img/thinker-520.webp" as="image" />
-<link rel="stylesheet" href="/assets/css/site.css?v=1c59e2f0" />
+<link rel="stylesheet" href="/assets/css/site.css?v=b17f46c2" />
 <!-- TODO(ryan): jobTitle at OpenWM? (Probix Labs → OpenWM since oct 2026) -->
 <script type="application/ld+json">
 {
@@ -47,7 +47,7 @@
   },
   "sameAs": [
     "https://github.com/ryanjmahn",
-    "https://www.linkedin.com/in/ryan-ahn-81322736a/"
+    "https://www.linkedin.com/in/ryan-ahn-57b570440/"
   ]
 }
 </script>
@@ -62,8 +62,8 @@
 
 <main id="main">
 
-  <!-- the opening: a statue under a light, carved as the scene scrolls
-       (assets/js/carve.js writes the progress to --p) -->
+  <!-- the opening: a statue under a light, carving itself out of the block
+       on load (assets/js/carve.js writes the progress to --p) -->
   <section class="scene" data-scene aria-labelledby="name">
     <div class="scene__stage">
       <h1 class="sr-only" id="name">ryan ahn</h1>
@@ -72,18 +72,9 @@
 
       <!-- pl. 1 -->
       <figure class="carve scene__plate">
-        <canvas class="carve__cells" data-carve="scroll" data-cols="150" data-src="/assets/img/thinker-520.webp" role="img" aria-label="Auguste Rodin's The Thinker, drawn in dithered pixels, cut out of a rough block of stone"></canvas>
+        <canvas class="carve__cells" data-carve="load" data-cols="150" data-src="/assets/img/thinker-520.webp" role="img" aria-label="Auguste Rodin's The Thinker, drawn in dithered pixels, cut out of a rough block of stone"></canvas>
         <noscript><img src="/assets/img/thinker-520.webp" alt="Auguste Rodin's The Thinker" width="520" height="720" /></noscript>
       </figure>
-
-      <!-- the wall label -->
-      <aside class="scene__label mono" aria-label="plate 1">
-        <p class="scene__label-no">PL-001</p>
-        <div class="carve__read" aria-hidden="true">
-          <ol class="sheet__steps carve__steps"><li>block</li><li>roughed</li><li>carved</li><li>finished</li></ol>
-          <span><span class="carve__pct">0</span>%</span>
-        </div>
-      </aside>
 
       <div class="scene__intro">
         <!-- fig. 0: the headshot, small, over the intro -->
@@ -95,13 +86,11 @@
         <p>i'm also a proponent of <strong>accessible, trustworthy science</strong>, a <strong>comp bio</strong> enthusiast, and a <strong>high school senior</strong>.</p>
         <ul class="socials">
         <li><a href="mailto:ryanjmahn1@gmail.com" aria-label="email" title="email"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m3 6 9 7 9-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></a></li>
-        <li><a href="https://www.linkedin.com/in/ryan-ahn-81322736a/" target="_blank" rel="noreferrer" aria-label="linkedin" title="linkedin"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/in/ryan-ahn-57b570440/" target="_blank" rel="noreferrer" aria-label="linkedin" title="linkedin"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg></a></li>
         <li><a href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer" aria-label="github" title="github"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg></a></li>
         </ul>
         <!-- TODO(ryan): x / instagram / other writing / podcasts, if you want them here -->
       </div>
-
-      <p class="scene__cue mono" aria-hidden="true">scroll to carve ↓</p>
     </div>
   </section>
 
