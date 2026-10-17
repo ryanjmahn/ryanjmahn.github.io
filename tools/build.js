@@ -196,29 +196,41 @@ log.forEach((p, i) => {
 const roman = (n) => [[1000, "m"], [900, "cm"], [500, "d"], [400, "cd"], [100, "c"], [90, "xc"], [50, "l"], [40, "xl"], [10, "x"], [9, "ix"], [5, "v"], [4, "iv"], [1, "i"]]
   .reduce((out, [v, r]) => { while (n >= v) { out += r; n -= v; } return out; }, "");
 
-// the log: one sheet per row, newest first, each beside its own statue,
-// which carves itself as the row comes into view (assets/js/carve.js).
-// The first sheet of each year is headed by the year, cut in roman.
-let year = null;
-const rows = log.map((p) => {
-  const y = p.start ? p.start.slice(0, 4) : null;
-  const first = y !== year;
-  year = y;
-  const t = p.statue;
-  const yearRow = first ? `<li class="log__year"><span aria-hidden="true">${y ? roman(+y).toUpperCase() : "sine data"}</span><span class="sr-only">${y || "undated"}</span></li>\n` : "";
-  return `${yearRow}<li class="lot${p.now ? " lot--now" : ""}" data-category="${esc(p.category)}">
-  <figure class="carve lot__plate">
-    <canvas class="carve__cells" data-carve="load" data-cols="64" data-src="${t.src}" style="--ratio: ${t.w} / ${t.h}" role="img" aria-label="${esc(t.title)}, ${esc(t.by)}, drawn in dithered pixels"></canvas>
-    <noscript><img src="${t.src}" alt="${esc(t.title)}" width="${t.w}" height="${t.h}" loading="lazy" /></noscript>
-  </figure>
-  <div class="lot__body">
-    <p class="lot__meta"><span class="lot__no" aria-hidden="true">${roman(+p.sheet)}</span><span class="sr-only">sheet ${esc(p.sheet)}</span><span>${p.dates ? esc(p.dates) : "<!-- TODO(ryan): dates -->"}</span><span>${esc(p.category)}</span>${chip(p.status)}</p>
-    <h3 class="lot__title"><a href="/work/${p.slug}/">${esc(p.title).replace(/(\S+-\S+)/g, '<span class="nw">$1</span>')}</a></h3>
-    ${metrics(p.numbers.slice(0, 4))}
-    ${p.oneliner ? `<p class="lot__line">${p.oneliner}</p>` : p.now ? slot("now", "one line — what are you building at openwm right now?") : slot("one-liner", `one line on ${esc(p.title)}.`)}
-  </div>
+// what i've built: concise rows grouped as current, startups, communities,
+// research, newest first in each; real logos where there are any, a plain
+// paper mark where there aren't, the impact figures inline and in ink
+const GROUPS = [
+  ["current", (p) => p.now],
+  ["startups", (p) => !p.now && p.category === "company"],
+  ["communities", (p) => p.category === "community"],
+  ["research", (p) => p.category === "research"],
+];
+const PAPER = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 2.75h8.5L19 7.25v14H6z M14.5 2.75v4.5H19 M9 11.5h7 M9 14.5h7 M9 17.5h4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>';
+// the impact figures in a line (5k+, 130, $200k, 10%…) set in ink; only
+// text between tags is touched, never the wording or the links' markup
+const boldFigures = (html) => html.replace(/>[^<]*</g, (t) =>
+  t.replace(/(\$?\d[\d.,]*(?:k\+?|\+|%)|(?<![\w-])\d{2,3}(?![\w%+k]))/g, "<b>$1</b>"));
+const item = (p) => {
+  const marks = p.logos && p.logos.length
+    ? p.logos.map(([name, src]) => `<img src="${src}" alt="" width="28" height="28" loading="lazy" title="${esc(name)}" />`).join("")
+    : `<span class="item__mark">${PAPER}</span>`;
+  const line = p.oneliner
+    ? boldFigures(`>${p.oneliner}<`).slice(1, -1)
+    : null;
+  return `<li class="item${p.now ? " item--now" : ""}">
+  <span class="item__logos">${marks}</span>
+  <p class="item__line">${line ?? (p.now ? slot("now", "one line — what are you building at openwm right now?") : slot("one-liner", `one line on ${esc(p.title)}.`))} <a class="item__go" href="/work/${p.slug}/" aria-label="${esc(p.title)}: the full sheet">→</a></p>
 </li>`;
-});
+};
+const rows = GROUPS.map(([label, has]) => {
+  const items = log.filter(has);
+  return items.length ? `<section class="built__group" aria-label="${label}">
+  <h3 class="built__label">${label}</h3>
+  <ul class="built__list">
+${items.map(item).join("\n")}
+  </ul>
+</section>` : "";
+}).filter(Boolean);
 const home = path.join(root, "index.html");
 const html = fs.readFileSync(home, "utf8");
 const LOG = /(<!-- build:log -->)[\s\S]*?(\n[ \t]*<!-- \/build:log -->)/;

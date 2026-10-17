@@ -1,5 +1,5 @@
 {
-  "_comment": "Facts only: one entry per sheet. node tools/build.js renders the case studies, the home log and the sitemap from this. 'start' (yyyy-mm) orders the log, newest first; sheets without one sit at the foot under n.d. 'oneliner' is raw HTML, moved verbatim from the old site's § prev list; null renders a RYAN-WRITES slot. 'todo' lines become TODO(ryan) comments and are never rendered. 'numbers' are [figure, label] pairs, set large in the log and in each case study's results. 'statue' is the Met Open Access plate carved beside the sheet in the log.",
+  "_comment": "Facts only: one entry per sheet. node tools/build.js renders the case studies, the home log and the sitemap from this. 'start' (yyyy-mm) orders the log, newest first; sheets without one sit at the foot under n.d. 'oneliner' is raw HTML, moved verbatim from the old site's § prev list; null renders a RYAN-WRITES slot. 'todo' lines become TODO(ryan) comments and are never rendered. 'numbers' are [figure, label] pairs, set large in the log and in each case study's results. 'logos' are [name, path] pairs of real logos only; sheets without one get a plain mark.",
   "projects": [
     {
       "sheet": "01",
@@ -52,16 +52,12 @@
         "role: the old site listed founder, executive director and chairman. which titles do you hold now?",
         "stack: none listed"
       ],
-      "statue": {
-        "src": "/assets/img/log/stemise.webp",
-        "w": 240,
-        "h": 360,
-        "title": "bronze statuette of athena flying her owl",
-        "by": "greek",
-        "date": "ca. 460 bce",
-        "medium": "bronze",
-        "met": 254648
-      }
+      "logos": [
+        [
+          "stemise",
+          "/assets/img/logos/stemise-192.webp"
+        ]
+      ]
     },
     {
       "sheet": "02",
@@ -114,16 +110,16 @@
         "status chip: none given",
         "stack: none listed"
       ],
-      "statue": {
-        "src": "/assets/img/log/hackathons.webp",
-        "w": 240,
-        "h": 360,
-        "title": "farnese hercules",
-        "by": "pietro da barga",
-        "date": "modeled ca. 1576; cast 17th century",
-        "medium": "bronze",
-        "met": 203947
-      }
+      "logos": [
+        [
+          "dsh hacks",
+          "/assets/img/logos/dsh-hacks-192.webp"
+        ],
+        [
+          "univabio",
+          "/assets/img/logos/univabio-192.webp"
+        ]
+      ]
     },
     {
       "sheet": "03",
@@ -160,17 +156,7 @@
         "status chip: none given",
         "links: none given",
         "stack: none listed"
-      ],
-      "statue": {
-        "src": "/assets/img/log/unison.webp",
-        "w": 240,
-        "h": 360,
-        "title": "venus italica",
-        "by": "antonio canova",
-        "date": "probably ca. 1822–23",
-        "medium": "carrara marble",
-        "met": 211504
-      }
+      ]
     },
     {
       "sheet": "04",
@@ -234,16 +220,12 @@
         "which two verification tools you engineered: VERIFY (Pedigree + Pledge?)",
         "stack: none listed"
       ],
-      "statue": {
-        "src": "/assets/img/log/probix.webp",
-        "w": 240,
-        "h": 360,
-        "title": "minerva",
-        "by": "clodion (claude michel)",
-        "date": "1766",
-        "medium": "terracotta",
-        "met": 206339
-      }
+      "logos": [
+        [
+          "probix labs",
+          "/assets/img/logos/probix-192.webp"
+        ]
+      ]
     },
     {
       "sheet": "05",
@@ -294,17 +276,7 @@
       "oneliner": "benchmarked 3 tools at detecting the KRAS G12D <a href=\"/assets/papers/kras-g12d-switch-ii-benchmark.pdf\" target=\"_blank\" rel=\"noreferrer\" type=\"application/pdf\">switch-II pocket</a> w/ prof. se-jin hwang @ hanyang univ",
       "todo": [
         "stack: none listed"
-      ],
-      "statue": {
-        "src": "/assets/img/log/kras-benchmark.webp",
-        "w": 240,
-        "h": 360,
-        "title": "limestone statue of a youth holding a pyxis",
-        "by": "cypriot",
-        "date": "3rd–1st century bce",
-        "medium": "limestone",
-        "met": 242323
-      }
+      ]
     },
     {
       "sheet": "06",
@@ -350,17 +322,7 @@
         "camera-ready PDF: VERIFY",
         "co-author names: none given",
         "stack: none listed"
-      ],
-      "statue": {
-        "src": "/assets/img/log/contaminated-ancestors.webp",
-        "w": 240,
-        "h": 360,
-        "title": "marble statue of a kouros (youth)",
-        "by": "greek, attic",
-        "date": "ca. 590–580 bce",
-        "medium": "marble",
-        "met": 253370
-      }
+      ]
     },
     {
       "sheet": "07",
@@ -399,16 +361,12 @@
         "accelerator interview with J (risingfounder.net): VERIFY whether it goes public",
         "stack: none listed"
       ],
-      "statue": {
-        "src": "/assets/img/log/openwm.webp",
-        "w": 240,
-        "h": 360,
-        "title": "atlas supporting the globe",
-        "by": "andrea briosco, called riccio",
-        "date": "16th century; globe: 19th century",
-        "medium": "bronze",
-        "met": 195535
-      }
+      "logos": [
+        [
+          "openwm",
+          "/assets/img/logos/openwm.svg"
+        ]
+      ]
     }
   ],
   "drafts": [

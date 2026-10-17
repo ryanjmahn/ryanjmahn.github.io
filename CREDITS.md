@@ -157,3 +157,5 @@ One per sheet, all The Metropolitan Museum of Art, Open Access (public domain). 
 - i STEMise: Bronze statuette of Athena flying her owl, Greek, ca. 460 BCE. https://www.metmuseum.org/art/collection/search/254648
 
 fig. 0 is the plain headshot again (`assets/img/portrait-480.jpg`); the marble bust was retired.
+
+The log's statues were retired when "what i've built" became short lines with logos. Logos: STEMise, DSH Hacks, UnivaBio and Probix from `assets/img/logos/` (already in the repo), and OpenWM's own icon from openwm.vercel.app (`assets/img/logos/openwm.svg`). Research lines get a plain paper mark rather than an invented logo.

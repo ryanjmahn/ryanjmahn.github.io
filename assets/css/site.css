@@ -229,44 +229,23 @@ figcaption { margin-top: .6rem; font-family: var(--mono); font-size: 12px; line-
 .now h3 { font-size: clamp(32px, 4vw, 44px); display: inline; margin-right: .6rem; }
 .now .todo { margin-top: .8rem; }
 
-/* the log: a sheet per row, each beside its own statue (carved as it comes
-   into view), its impact figures set large under the title */
-.log { margin: 0; padding: 0; list-style: none; }
-.log__year {
-  display: flex; align-items: center; gap: 1.1rem;
-  margin: 3rem 0 0; padding-bottom: .2rem;
-  font-family: var(--serif); font-size: clamp(22px, 2.4vw, 28px); letter-spacing: .32em; color: var(--muted);
-}
-.log__year:first-child { margin-top: 0; }
-.log__year::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
-
-.lot {
-  position: relative;
-  display: grid; grid-template-columns: clamp(120px, 15vw, 190px) minmax(0, 1fr);
-  column-gap: clamp(1.4rem, 4vw, 3.5rem); align-items: start;
-  padding: clamp(1.8rem, 4vw, 2.8rem) 0;
-  border-bottom: 1px solid var(--rule);
-}
-.lot__plate { margin: 0; position: static; }
-.lot__plate .carve__cells { width: 100%; aspect-ratio: var(--ratio); cursor: crosshair; }
-.lot__plate figcaption { margin-top: .5rem; font-family: var(--sans); font-size: 11px; line-height: 1.4; color: var(--muted); }
-.lot__plate figcaption em { font-style: italic; }
-
-/* labels in the sans, small and tracked: quieter than mono */
-.lot__meta {
-  display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .9rem; margin: 0 0 .5rem;
-  font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
-}
-.lot__no { font-family: var(--serif); font-style: italic; font-size: 26px; letter-spacing: 0; text-transform: none; color: var(--ink); line-height: 1; }
-.lot--now .lot__meta { color: var(--accent); }
-.lot__title { font-size: clamp(38px, 4.6vw, 64px); line-height: .95; letter-spacing: -.025em; margin: 0 0 1.4rem; }
-.lot__title a { text-decoration: none; display: inline-block; transition: transform .35s var(--ease); }
-/* the whole row opens the sheet; links in the line and the plate stay usable */
-.lot__title a::after { content: ""; position: absolute; inset: 0; }
-.lot__line a, .lot .todo, .lot__plate canvas { position: relative; z-index: 1; }
-.lot__line { margin: 1.2rem 0 0; font-size: 17px; line-height: 1.55; color: var(--ink); max-width: 52ch; }
-.lot .todo { margin: 1.2rem 0 0; max-width: 52ch; }
-.lot:hover .lot__title a, .lot:focus-within .lot__title a { transform: translateX(6px); color: var(--ink); }
+/* what i've built: short lines, a logo before each, in small groups,
+   after idhant.dev; the figures in each line set in ink */
+.built { max-width: 46rem; }
+.built__group + .built__group { margin-top: 2.2rem; }
+.built__label { margin: 0 0 .7rem; font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.built__list { margin: 0; padding: 0; list-style: none; }
+.item { display: flex; align-items: flex-start; gap: .9rem; padding: .55rem 0; }
+.item__logos { flex: none; display: flex; gap: 4px; padding-top: .05rem; }
+.item__logos img { width: 28px; height: 28px; border-radius: 7px; object-fit: cover; border: 1px solid var(--rule); background: #fff; }
+.item__mark { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 7px; border: 1px solid var(--rule); color: var(--muted); }
+.item__line { margin: 0; font-size: 17px; line-height: 1.5; color: color-mix(in srgb, var(--ink) 78%, var(--paper)); max-width: none; }
+.item__line b { font-weight: 600; color: var(--ink); }
+.item__line a:not(.item__go) { color: var(--ink); }
+.item .todo { display: inline-block; margin: 0; padding: .35rem .6rem; font-size: 12px; }
+.item__go { margin-left: .2rem; text-decoration: none; color: var(--muted); transition: color .2s var(--ease), margin .2s var(--ease); }
+.item:hover .item__go, .item__go:focus-visible { color: var(--accent); margin-left: .45rem; }
+.item--now .item__logos img { border-color: var(--accent); }
 
 /* impact figures: a row of big numerals, hairlines between, labels beneath */
 .metrics { display: flex; flex-wrap: wrap; margin: 0; border-top: 1px solid var(--ink); }
@@ -274,12 +253,8 @@ figcaption { margin-top: .6rem; font-family: var(--mono); font-size: 12px; line-
 .metrics div:last-child { border-right: 0; margin-right: 0; }
 .metrics dd { margin: 0; font-family: var(--serif); font-size: clamp(34px, 3.6vw, 52px); line-height: 1; letter-spacing: -.02em; color: var(--ink); white-space: nowrap; }
 .metrics dt { margin-top: .35rem; font-size: 11px; line-height: 1.35; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); max-width: 16ch; }
-.lot--now .metrics { border-top-color: var(--accent); }
 
 @media (max-width: 720px) {
-  .lot { grid-template-columns: 88px minmax(0, 1fr); column-gap: 1rem; }
-  .lot__plate figcaption { display: none; }
-  .lot__title { font-size: clamp(30px, 8.5vw, 40px); margin-bottom: 1rem; }
   .metrics { display: grid; grid-template-columns: 1fr 1fr; column-gap: 1rem; }
   .metrics div { padding-right: 0; margin-right: 0; border-right: 0; }
   .metrics dd { font-size: 28px; }

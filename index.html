@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="preload" href="/assets/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="/assets/img/thinker-520.webp" as="image" />
-<link rel="stylesheet" href="/assets/css/site.css?v=bfcaf7fd" />
+<link rel="stylesheet" href="/assets/css/site.css?v=0d65d4ef" />
 <!-- TODO(ryan): jobTitle at OpenWM? (Probix Labs → OpenWM since oct 2026) -->
 <script type="application/ld+json">
 {
@@ -109,98 +109,59 @@
   <section class="section log-section" id="log" aria-labelledby="log-title">
       <div class="row section__head"><p class="gutter mono">§ 01</p><h2 class="main" id="log-title">what i've <em>built</em></h2></div>
       <!-- written by tools/build.js from tools/projects.json; edit there, not here -->
-      <ol class="log">
+      <div class="built">
         <!-- build:log -->
-<li class="log__year"><span aria-hidden="true">MMXXVI</span><span class="sr-only">2026</span></li>
-<li class="lot lot--now" data-category="company">
-  <figure class="carve lot__plate">
-    <canvas class="carve__cells" data-carve="load" data-cols="64" data-src="/assets/img/log/openwm.webp" style="--ratio: 240 / 360" role="img" aria-label="atlas supporting the globe, andrea briosco, called riccio, drawn in dithered pixels"></canvas>
-    <noscript><img src="/assets/img/log/openwm.webp" alt="atlas supporting the globe" width="240" height="360" loading="lazy" /></noscript>
-  </figure>
-  <div class="lot__body">
-    <p class="lot__meta"><span class="lot__no" aria-hidden="true">vii</span><span class="sr-only">sheet 07</span><span>oct 2026 → now</span><span>company</span><span class="chip chip--building">building</span></p>
-    <h3 class="lot__title"><a href="/work/openwm/">OpenWM</a></h3>
-    
-    <!-- RYAN-WRITES: now -->
-<p class="todo">[ryan writes: one line — what are you building at openwm right now?]</p>
-  </div>
+<section class="built__group" aria-label="current">
+  <h3 class="built__label">current</h3>
+  <ul class="built__list">
+<li class="item item--now">
+  <span class="item__logos"><img src="/assets/img/logos/openwm.svg" alt="" width="28" height="28" loading="lazy" title="openwm" /></span>
+  <p class="item__line"><!-- RYAN-WRITES: now -->
+<p class="todo">[ryan writes: one line — what are you building at openwm right now?]</p> <a class="item__go" href="/work/openwm/" aria-label="OpenWM: the full sheet">→</a></p>
 </li>
-<li class="lot" data-category="research">
-  <figure class="carve lot__plate">
-    <canvas class="carve__cells" data-carve="load" data-cols="64" data-src="/assets/img/log/kras-benchmark.webp" style="--ratio: 240 / 360" role="img" aria-label="limestone statue of a youth holding a pyxis, cypriot, drawn in dithered pixels"></canvas>
-    <noscript><img src="/assets/img/log/kras-benchmark.webp" alt="limestone statue of a youth holding a pyxis" width="240" height="360" loading="lazy" /></noscript>
-  </figure>
-  <div class="lot__body">
-    <p class="lot__meta"><span class="lot__no" aria-hidden="true">v</span><span class="sr-only">sheet 05</span><span>jul 2026 → sep 2026</span><span>research</span><span class="chip">under review</span></p>
-    <h3 class="lot__title"><a href="/work/kras-benchmark/">KRAS G12D <span class="nw">Switch-II</span> benchmark</a></h3>
-    <dl class="metrics"><div><dt>redock rmsd, mrtx1133 into 7rpz</dt><dd>0.96 Å</dd></div><div><dt>conformer closed→open ladder</dt><dd>24</dd></div><div><dt>fpocket recall / mcc on 7rpz</dt><dd>0.92 / 0.95</dd></div></dl>
-    <p class="lot__line">benchmarked 3 tools at detecting the KRAS G12D <a href="/assets/papers/kras-g12d-switch-ii-benchmark.pdf" target="_blank" rel="noreferrer" type="application/pdf">switch-II pocket</a> w/ prof. se-jin hwang @ hanyang univ</p>
-  </div>
+  </ul>
+</section>
+<section class="built__group" aria-label="startups">
+  <h3 class="built__label">startups</h3>
+  <ul class="built__list">
+<li class="item">
+  <span class="item__logos"><img src="/assets/img/logos/probix-192.webp" alt="" width="28" height="28" loading="lazy" title="probix labs" /></span>
+  <p class="item__line">built a <a href="https://www.tryprobix.com/" target="_blank" rel="noreferrer">product lab</a> for reproducible science. top <b>10%</b> at yc f26 &amp; founders inc <a class="item__go" href="/work/probix/" aria-label="Probix Labs: the full sheet">→</a></p>
 </li>
-<li class="lot" data-category="research">
-  <figure class="carve lot__plate">
-    <canvas class="carve__cells" data-carve="load" data-cols="64" data-src="/assets/img/log/contaminated-ancestors.webp" style="--ratio: 240 / 360" role="img" aria-label="marble statue of a kouros (youth), greek, attic, drawn in dithered pixels"></canvas>
-    <noscript><img src="/assets/img/log/contaminated-ancestors.webp" alt="marble statue of a kouros (youth)" width="240" height="360" loading="lazy" /></noscript>
-  </figure>
-  <div class="lot__body">
-    <p class="lot__meta"><span class="lot__no" aria-hidden="true">vi</span><span class="sr-only">sheet 06</span><span>may 2026 → aug 2026</span><span>research</span><span class="chip">published</span></p>
-    <h3 class="lot__title"><a href="/work/contaminated-ancestors/">Contaminated Ancestors</a></h3>
-    <dl class="metrics"><div><dt>detection rate, test vs null control</dt><dd>2/15 vs 2/15</dd></div><div><dt>question protocol checklist</dt><dd>11</dd></div></dl>
-    <p class="lot__line">found 7 ways our own protein ML evaluation nearly misled us. accepted @ neurips 2026 <a href="https://tai-eval.github.io/" target="_blank" rel="noreferrer">tae workshop</a></p>
-  </div>
+  </ul>
+</section>
+<section class="built__group" aria-label="communities">
+  <h3 class="built__label">communities</h3>
+  <ul class="built__list">
+<li class="item">
+  <span class="item__logos"><img src="/assets/img/logos/stemise-192.webp" alt="" width="28" height="28" loading="lazy" title="stemise" /></span>
+  <p class="item__line">built a <a href="https://www.stemise.org/" target="_blank" rel="noreferrer">STEM nonprofit</a>: <b>5k+</b> youths, <b>130</b> nations, <b>135+</b> chapters, <b>75+</b> staff. backed by citadel &amp; HRT <a class="item__go" href="/work/stemise/" aria-label="STEMise: the full sheet">→</a></p>
 </li>
-<li class="lot" data-category="company">
-  <figure class="carve lot__plate">
-    <canvas class="carve__cells" data-carve="load" data-cols="64" data-src="/assets/img/log/probix.webp" style="--ratio: 240 / 360" role="img" aria-label="minerva, clodion (claude michel), drawn in dithered pixels"></canvas>
-    <noscript><img src="/assets/img/log/probix.webp" alt="minerva" width="240" height="360" loading="lazy" /></noscript>
-  </figure>
-  <div class="lot__body">
-    <p class="lot__meta"><span class="lot__no" aria-hidden="true">iv</span><span class="sr-only">sheet 04</span><span>feb 2026 → sep 2026</span><span>company</span><span class="chip">pivoted</span></p>
-    <h3 class="lot__title"><a href="/work/probix/">Probix Labs</a></h3>
-    <dl class="metrics"><div><dt>waitlist</dt><dd>260+</dd></div><div><dt>funding</dt><dd>$2,500</dd></div><div><dt>at yc f26</dt><dd>top 10%</dd></div><div><dt>at founders inc. off season</dt><dd>top 10%</dd></div></dl>
-    <p class="lot__line">built a <a href="https://www.tryprobix.com/" target="_blank" rel="noreferrer">product lab</a> for reproducible science. top 10% at yc f26 &amp; founders inc</p>
-  </div>
+<li class="item">
+  <span class="item__logos"><img src="/assets/img/logos/dsh-hacks-192.webp" alt="" width="28" height="28" loading="lazy" title="dsh hacks" /><img src="/assets/img/logos/univabio-192.webp" alt="" width="28" height="28" loading="lazy" title="univabio" /></span>
+  <p class="item__line">directed hackathons for <b>2.5k</b> builders from <b>98</b> nations, <b>$200k</b> in prizes <a class="item__go" href="/work/hackathons/" aria-label="DSH Hacks &amp; UnivaBio: the full sheet">→</a></p>
 </li>
-<li class="log__year"><span aria-hidden="true">MMXXV</span><span class="sr-only">2025</span></li>
-<li class="lot" data-category="community">
-  <figure class="carve lot__plate">
-    <canvas class="carve__cells" data-carve="load" data-cols="64" data-src="/assets/img/log/stemise.webp" style="--ratio: 240 / 360" role="img" aria-label="bronze statuette of athena flying her owl, greek, drawn in dithered pixels"></canvas>
-    <noscript><img src="/assets/img/log/stemise.webp" alt="bronze statuette of athena flying her owl" width="240" height="360" loading="lazy" /></noscript>
-  </figure>
-  <div class="lot__body">
-    <p class="lot__meta"><span class="lot__no" aria-hidden="true">i</span><span class="sr-only">sheet 01</span><span>apr 2025 → now</span><span>community</span><span class="chip">live</span></p>
-    <h3 class="lot__title"><a href="/work/stemise/">STEMise</a></h3>
-    <dl class="metrics"><div><dt>youths</dt><dd>5k+</dd></div><div><dt>nations</dt><dd>130</dd></div><div><dt>chapters</dt><dd>135+</dd></div><div><dt>staff</dt><dd>75+</dd></div></dl>
-    <p class="lot__line">built a <a href="https://www.stemise.org/" target="_blank" rel="noreferrer">STEM nonprofit</a>: 5k+ youths, 130 nations, 135+ chapters, 75+ staff. backed by citadel &amp; HRT</p>
-  </div>
+  </ul>
+</section>
+<section class="built__group" aria-label="research">
+  <h3 class="built__label">research</h3>
+  <ul class="built__list">
+<li class="item">
+  <span class="item__logos"><span class="item__mark"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 2.75h8.5L19 7.25v14H6z M14.5 2.75v4.5H19 M9 11.5h7 M9 14.5h7 M9 17.5h4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></span></span>
+  <p class="item__line">benchmarked 3 tools at detecting the KRAS G12D <a href="/assets/papers/kras-g12d-switch-ii-benchmark.pdf" target="_blank" rel="noreferrer" type="application/pdf">switch-II pocket</a> w/ prof. se-jin hwang @ hanyang univ <a class="item__go" href="/work/kras-benchmark/" aria-label="KRAS G12D Switch-II benchmark: the full sheet">→</a></p>
 </li>
-<li class="log__year"><span aria-hidden="true">sine data</span><span class="sr-only">undated</span></li>
-<li class="lot" data-category="research">
-  <figure class="carve lot__plate">
-    <canvas class="carve__cells" data-carve="load" data-cols="64" data-src="/assets/img/log/unison.webp" style="--ratio: 240 / 360" role="img" aria-label="venus italica, antonio canova, drawn in dithered pixels"></canvas>
-    <noscript><img src="/assets/img/log/unison.webp" alt="venus italica" width="240" height="360" loading="lazy" /></noscript>
-  </figure>
-  <div class="lot__body">
-    <p class="lot__meta"><span class="lot__no" aria-hidden="true">iii</span><span class="sr-only">sheet 03</span><span><!-- TODO(ryan): dates --></span><span>research</span></p>
-    <h3 class="lot__title"><a href="/work/unison/">Project UNISON</a></h3>
-    <dl class="metrics"><div><dt>un sdg lesson pipeline</dt><dd>8-week</dd></div></dl>
-    <p class="lot__line">built an AI curriculum pipeline @ project unison w/ barnard college</p>
-  </div>
+<li class="item">
+  <span class="item__logos"><span class="item__mark"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 2.75h8.5L19 7.25v14H6z M14.5 2.75v4.5H19 M9 11.5h7 M9 14.5h7 M9 17.5h4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></span></span>
+  <p class="item__line">found 7 ways our own protein ML evaluation nearly misled us. accepted @ neurips 2026 <a href="https://tai-eval.github.io/" target="_blank" rel="noreferrer">tae workshop</a> <a class="item__go" href="/work/contaminated-ancestors/" aria-label="Contaminated Ancestors: the full sheet">→</a></p>
 </li>
-<li class="lot" data-category="community">
-  <figure class="carve lot__plate">
-    <canvas class="carve__cells" data-carve="load" data-cols="64" data-src="/assets/img/log/hackathons.webp" style="--ratio: 240 / 360" role="img" aria-label="farnese hercules, pietro da barga, drawn in dithered pixels"></canvas>
-    <noscript><img src="/assets/img/log/hackathons.webp" alt="farnese hercules" width="240" height="360" loading="lazy" /></noscript>
-  </figure>
-  <div class="lot__body">
-    <p class="lot__meta"><span class="lot__no" aria-hidden="true">ii</span><span class="sr-only">sheet 02</span><span><!-- TODO(ryan): dates --></span><span>community</span></p>
-    <h3 class="lot__title"><a href="/work/hackathons/">DSH Hacks &amp; UnivaBio</a></h3>
-    <dl class="metrics"><div><dt>builders</dt><dd>2.5k</dd></div><div><dt>nations</dt><dd>98</dd></div><div><dt>in prizes</dt><dd>$200k</dd></div></dl>
-    <p class="lot__line">directed hackathons for 2.5k builders from 98 nations, $200k in prizes</p>
-  </div>
+<li class="item">
+  <span class="item__logos"><span class="item__mark"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 2.75h8.5L19 7.25v14H6z M14.5 2.75v4.5H19 M9 11.5h7 M9 14.5h7 M9 17.5h4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></span></span>
+  <p class="item__line">built an AI curriculum pipeline @ project unison w/ barnard college <a class="item__go" href="/work/unison/" aria-label="Project UNISON: the full sheet">→</a></p>
 </li>
+  </ul>
+</section>
         <!-- /build:log -->
-      </ol>
+      </div>
     </section>
 
   </div>
