@@ -238,6 +238,10 @@ figcaption { margin-top: .6rem; font-family: var(--mono); font-size: 12px; line-
 .item { display: flex; align-items: flex-start; gap: .9rem; padding: .55rem 0; }
 .item__logos { flex: none; display: flex; gap: 4px; padding-top: .05rem; }
 .item__logos img { width: 28px; height: 28px; border-radius: 7px; object-fit: cover; border: 1px solid var(--rule); background: #fff; }
+/* each logo opens its project's site */
+.item__logos a { display: block; border-radius: 7px; text-decoration: none; transition: translate .2s var(--ease), box-shadow .2s var(--ease); }
+.item__logos a:hover, .item__logos a:focus-visible { translate: 0 -2px; box-shadow: 0 0 0 2px var(--accent); }
+a.item__mark:hover, a.item__mark:focus-visible { color: var(--accent); }
 .item__mark { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 7px; border: 1px solid var(--rule); color: var(--muted); }
 .item__line { margin: 0; font-size: 17px; line-height: 1.5; color: color-mix(in srgb, var(--ink) 78%, var(--paper)); max-width: none; }
 .item__line b { font-weight: 600; color: var(--ink); }

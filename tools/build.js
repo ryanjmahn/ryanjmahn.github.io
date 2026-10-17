@@ -212,8 +212,8 @@ const boldFigures = (html) => html.replace(/>[^<]*</g, (t) =>
   t.replace(/(\$?\d[\d.,]*(?:k\+?|\+|%)|(?<![\w-])\d{2,3}(?![\w%+k]))/g, "<b>$1</b>"));
 const item = (p) => {
   const marks = p.logos && p.logos.length
-    ? p.logos.map(([name, src]) => `<img src="${src}" alt="" width="28" height="28" loading="lazy" title="${esc(name)}" />`).join("")
-    : `<span class="item__mark">${PAPER}</span>`;
+    ? p.logos.map(([name, src, url]) => `<a href="${esc(url)}"${external(url) ? ' target="_blank" rel="noreferrer"' : ""} aria-label="${esc(name)}${external(url) ? " (opens in a new tab)" : ""}" title="${esc(name)}"><img src="${src}" alt="" width="28" height="28" loading="lazy" /></a>`).join("")
+    : p.site ? `<a class="item__mark" href="${esc(p.site)}"${external(p.site) ? ' target="_blank" rel="noreferrer"' : ""} aria-label="${esc(p.title)}${external(p.site) ? " (opens in a new tab)" : ""}" title="${esc(p.title)}">${PAPER}</a>` : `<span class="item__mark">${PAPER}</span>`;
   const line = p.oneliner
     ? boldFigures(`>${p.oneliner}<`).slice(1, -1)
     : null;
