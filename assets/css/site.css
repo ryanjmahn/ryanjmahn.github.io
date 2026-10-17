@@ -271,9 +271,7 @@ figcaption { margin-top: .6rem; font-family: var(--mono); font-size: 12px; line-
 .lot__line a, .lot .todo, .lot__plate canvas { position: relative; z-index: 1; }
 .lot__line { margin: 1.2rem 0 0; font-size: 17px; line-height: 1.55; color: var(--ink); max-width: 52ch; }
 .lot .todo { margin: 1.2rem 0 0; max-width: 52ch; }
-.lot__open { display: inline-block; margin-top: 1.1rem; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); transition: color .25s var(--ease), translate .25s var(--ease); }
 .lot:hover .lot__title a, .lot:focus-within .lot__title a { transform: translateX(6px); color: var(--ink); }
-.lot:hover .lot__open, .lot:focus-within .lot__open { color: var(--accent); translate: 4px 0; }
 
 /* impact figures: a row of big numerals, hairlines between, labels beneath */
 .metrics { display: flex; flex-wrap: wrap; margin: 0; border-top: 1px solid var(--ink); }
