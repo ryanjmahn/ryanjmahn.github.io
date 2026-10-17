@@ -219,7 +219,7 @@ const item = (p) => {
     : null;
   return `<li class="item${p.now ? " item--now" : ""}">
   <span class="item__logos">${marks}</span>
-  <p class="item__line">${line ?? (p.now ? slot("now", "one line — what are you building at openwm right now?") : slot("one-liner", `one line on ${esc(p.title)}.`))} <a class="item__go" href="/work/${p.slug}/" aria-label="${esc(p.title)}: the full sheet">→</a></p>
+  <p class="item__line">${line ?? (p.now ? slot("now", "one line — what are you building at openwm right now?") : slot("one-liner", `one line on ${esc(p.title)}.`))}</p>
 </li>`;
 };
 const rows = GROUPS.map(([label, has]) => {
