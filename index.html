@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script>document.documentElement.classList.add("js");var t=null;try{t=localStorage.getItem("theme")}catch(e){}document.documentElement.setAttribute("data-theme",t==="light"?"light":"dark")</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ryan ahn</title>
 <meta name="description" content="ryan ahn — working on world models for physical design. proponent of accessible, trustworthy science, comp bio enthusiast, and high school senior in seoul." />
@@ -20,13 +20,13 @@
 <meta name="twitter:title" content="ryan ahn" />
 <meta name="twitter:description" content="ryan ahn — working on world models for physical design. proponent of accessible, trustworthy science, comp bio enthusiast, and high school senior in seoul." />
 <meta name="twitter:image" content="https://ryanjmahn.github.io/assets/img/og/home.jpg" />
-<meta name="theme-color" content="#F2EFE9" />
+<meta name="theme-color" content="#0D0C0B" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="preload" href="/assets/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="/assets/img/thinker-520.webp" as="image" />
-<link rel="stylesheet" href="/assets/css/site.css?v=3779b2d8" />
+<link rel="stylesheet" href="/assets/css/site.css?v=6fecf923" />
 <!-- TODO(ryan): jobTitle at OpenWM? (Probix Labs → OpenWM since oct 2026) -->
 <script type="application/ld+json">
 {
@@ -56,8 +56,7 @@
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="wrap topbar topbar--over">
   <a class="topbar__name" href="/">ryan ahn</a>
-  <nav class="pills" aria-label="Site"><a href="/#log">work</a><a href="/research/">research</a><a href="/writing/">writing</a><a href="/diary/">diary</a><a href="/contact/">contact</a></nav>
-  <button class="theme-toggle mono" type="button" aria-label="Switch to dark mode">dark</button>
+  <button class="theme-toggle mono" type="button" aria-label="Switch to light mode">light</button>
 </header>
 
 <main id="main">
@@ -95,7 +94,7 @@
 
   <div class="wrap">
   <section class="section log-section" id="log" aria-labelledby="log-title">
-      <div class="row section__head"><p class="gutter mono">§ 01</p><h2 class="main" id="log-title">what i've <em>built</em></h2></div>
+      <div class="section__head"><h2 id="log-title">what i've <em>built</em></h2></div>
       <!-- written by tools/build.js from tools/projects.json; edit there, not here -->
       <div class="built">
         <!-- build:log -->

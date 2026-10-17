@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script>document.documentElement.classList.add("js");var t=null;try{t=localStorage.getItem("theme")}catch(e){}document.documentElement.setAttribute("data-theme",t==="light"?"light":"dark")</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>DSH Hacks &amp; UnivaBio — ryan ahn</title>
 <!-- TODO(ryan): meta description -->
@@ -17,19 +17,18 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="DSH Hacks &amp; UnivaBio — ryan ahn" />
 <meta name="twitter:image" content="https://ryanjmahn.github.io/assets/img/og/home.jpg" />
-<meta name="theme-color" content="#F2EFE9" />
+<meta name="theme-color" content="#0D0C0B" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="preload" href="/assets/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="stylesheet" href="/assets/css/site.css?v=3779b2d8" />
+<link rel="stylesheet" href="/assets/css/site.css?v=6fecf923" />
 </head>
 <body data-page="work">
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="wrap topbar">
   <a class="topbar__name" href="/">ryan ahn</a>
-  <nav class="pills" aria-label="Site"><a href="/#log" aria-current="page">work</a><a href="/research/">research</a><a href="/writing/">writing</a><a href="/diary/">diary</a><a href="/contact/">contact</a></nav>
-  <button class="theme-toggle mono" type="button" aria-label="Switch to dark mode">dark</button>
+  <button class="theme-toggle mono" type="button" aria-label="Switch to light mode">light</button>
 </header>
 
 <main id="main" class="wrap">
