@@ -1,5 +1,5 @@
 {
-  "_comment": "Facts only: one entry per sheet. node tools/build.js renders the case studies, the home log and the sitemap from this. 'start' (yyyy-mm) orders the log, newest first; sheets without one sit at the foot under n.d. 'oneliner' is raw HTML, moved verbatim from the old site's § prev list; null renders a RYAN-WRITES slot. 'todo' lines become TODO(ryan) comments and are never rendered. 'numbers' are [figure, label] pairs, set large in the log and in each case study's results. 'logos' are [name, path] pairs of real logos only; sheets without one get a plain mark.",
+  "_comment": "Facts only: one entry per sheet. node tools/build.js renders the case studies, the home log and the sitemap from this. 'start' (yyyy-mm) orders the log, newest first; sheets without one sit at the foot under n.d. 'oneliner' is raw HTML, moved verbatim from the old site's § prev list; null renders a RYAN-WRITES slot. 'todo' lines become TODO(ryan) comments and are never rendered. 'numbers' are [figure, label] pairs, set large in the log and in each case study's results. 'logos' are [name, path, site] triples of real logos only, each linking to its site; sheets without one get a plain mark linking to 'site'.",
   "projects": [
     {
       "sheet": "01",
@@ -55,7 +55,8 @@
       "logos": [
         [
           "stemise",
-          "/assets/img/logos/stemise-192.webp"
+          "/assets/img/logos/stemise-192.webp",
+          "https://www.stemise.org/"
         ]
       ]
     },
@@ -113,11 +114,13 @@
       "logos": [
         [
           "dsh hacks",
-          "/assets/img/logos/dsh-hacks-192.webp"
+          "/assets/img/logos/dsh-hacks-192.webp",
+          "https://dshhacks.org/"
         ],
         [
           "univabio",
-          "/assets/img/logos/univabio-96.webp"
+          "/assets/img/logos/univabio-96.webp",
+          "https://univabio.devpost.com/"
         ]
       ]
     },
@@ -143,7 +146,12 @@
           "value": "ai × biomedicine"
         }
       ],
-      "links": [],
+      "links": [
+        {
+          "label": "projectunison.netlify.app",
+          "url": "https://projectunison.netlify.app/"
+        }
+      ],
       "numbers": [
         [
           "8-week",
@@ -154,9 +162,9 @@
       "todo": [
         "dates: VERIFY",
         "status chip: none given",
-        "links: none given",
         "stack: none listed"
-      ]
+      ],
+      "site": "https://projectunison.netlify.app/"
     },
     {
       "sheet": "04",
@@ -223,7 +231,8 @@
       "logos": [
         [
           "probix labs",
-          "/assets/img/logos/probix-192.webp"
+          "/assets/img/logos/probix-192.webp",
+          "https://www.tryprobix.com/"
         ]
       ]
     },
@@ -276,7 +285,8 @@
       "oneliner": "benchmarked 3 tools at detecting the KRAS G12D <a href=\"/assets/papers/kras-g12d-switch-ii-benchmark.pdf\" target=\"_blank\" rel=\"noreferrer\" type=\"application/pdf\">switch-II pocket</a> w/ prof. se-jin hwang @ hanyang univ",
       "todo": [
         "stack: none listed"
-      ]
+      ],
+      "site": "/assets/papers/kras-g12d-switch-ii-benchmark.pdf"
     },
     {
       "sheet": "06",
@@ -322,7 +332,8 @@
         "camera-ready PDF: VERIFY",
         "co-author names: none given",
         "stack: none listed"
-      ]
+      ],
+      "site": "https://tai-eval.github.io/"
     },
     {
       "sheet": "07",
@@ -364,7 +375,8 @@
       "logos": [
         [
           "openwm",
-          "/assets/img/logos/openwm.svg"
+          "/assets/img/logos/openwm.svg",
+          "https://openwm.vercel.app/"
         ]
       ]
     }
