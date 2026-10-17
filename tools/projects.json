@@ -1,5 +1,5 @@
 {
-  "_comment": "Facts only: one entry per sheet. node tools/build.js renders the case studies, the home log and the sitemap from this. 'start' (yyyy-mm) orders the log, newest first; sheets without one sit at the foot under n.d. 'oneliner' is raw HTML, moved verbatim from the old site's § prev list; null renders a RYAN-WRITES slot. 'todo' lines become TODO(ryan) comments and are never rendered. 'numbers' are [figure, label] pairs, set large in the log and in each case study's results. 'logos' are [name, path, site] triples of real logos only, each linking to its site; sheets without one get a plain mark linking to 'site'.",
+  "_comment": "Facts only: one entry per sheet. node tools/build.js renders the case studies, the home log and the sitemap from this. 'start' (yyyy-mm) orders the log, newest first; sheets without one sit at the foot under n.d. 'oneliner' is raw HTML, moved verbatim from the old site's § prev list; null renders a RYAN-WRITES slot. 'todo' lines become TODO(ryan) comments and are never rendered. 'numbers' are [figure, label] pairs, set large in the log and in each case study's results. 'logos' are [name, path, site] triples of real logos only, each linking to its site; sheets without one get a drawn 'mark' (molecule, tree, book) linking to 'site'.",
   "projects": [
     {
       "sheet": "01",
@@ -164,7 +164,8 @@
         "status chip: none given",
         "stack: none listed"
       ],
-      "site": "https://projectunison.netlify.app/"
+      "site": "https://projectunison.netlify.app/",
+      "mark": "book"
     },
     {
       "sheet": "04",
@@ -286,7 +287,8 @@
       "todo": [
         "stack: none listed"
       ],
-      "site": "/assets/papers/kras-g12d-switch-ii-benchmark.pdf"
+      "site": "/assets/papers/kras-g12d-switch-ii-benchmark.pdf",
+      "mark": "molecule"
     },
     {
       "sheet": "06",
@@ -333,7 +335,8 @@
         "co-author names: none given",
         "stack: none listed"
       ],
-      "site": "https://tai-eval.github.io/"
+      "site": "https://tai-eval.github.io/",
+      "mark": "tree"
     },
     {
       "sheet": "07",

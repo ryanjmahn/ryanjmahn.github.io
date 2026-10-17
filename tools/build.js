@@ -205,7 +205,17 @@ const GROUPS = [
   ["communities", (p) => p.category === "community"],
   ["research", (p) => p.category === "research"],
 ];
-const PAPER = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 2.75h8.5L19 7.25v14H6z M14.5 2.75v4.5H19 M9 11.5h7 M9 14.5h7 M9 17.5h4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>';
+// drawn marks for sheets with no logo, each after its subject
+const icon = (paths) => `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${paths}</svg>`;
+const MARKS = {
+  // a small molecule docked in a pocket: the KRAS switch-II benchmark
+  molecule: icon('<circle cx="6.5" cy="7" r="3"/><circle cx="17.5" cy="7" r="3"/><circle cx="12" cy="17" r="3"/><path d="M9.5 7h5M8 9.6l2.6 4.8M16 9.6l-2.6 4.8"/>'),
+  // a phylogenetic tree: reconstructed protein ancestors
+  tree: icon('<path d="M4 20V4M4 7h6v4h5v-3h5M10 11v5h6M15 11v-3M4 15h4"/><circle cx="20" cy="8" r="1.3" fill="currentColor"/><circle cx="16" cy="16" r="1.3" fill="currentColor"/><circle cx="8" cy="15" r="1.3" fill="currentColor"/>'),
+  // an open book: a curriculum
+  book: icon('<path d="M12 6.5C10 5 6.5 4.5 3.5 5v13c3-.5 6.5 0 8.5 1.5 2-1.5 5.5-2 8.5-1.5V5c-3-.5-6.5 0-8.5 1.5Z"/><path d="M12 6.5v13"/>'),
+};
+const PAPER = icon('<path d="M6 2.75h8.5L19 7.25v14H6z M14.5 2.75v4.5H19 M9 11.5h7 M9 14.5h7 M9 17.5h4.5"/>');
 // the impact figures in a line (5k+, 130, $200k, 10%…) set in ink; only
 // text between tags is touched, never the wording or the links' markup
 const boldFigures = (html) => html.replace(/>[^<]*</g, (t) =>
@@ -213,7 +223,7 @@ const boldFigures = (html) => html.replace(/>[^<]*</g, (t) =>
 const item = (p) => {
   const marks = p.logos && p.logos.length
     ? p.logos.map(([name, src, url]) => `<a href="${esc(url)}"${external(url) ? ' target="_blank" rel="noreferrer"' : ""} aria-label="${esc(name)}${external(url) ? " (opens in a new tab)" : ""}" title="${esc(name)}"><img src="${src}" alt="" width="28" height="28" loading="lazy" /></a>`).join("")
-    : p.site ? `<a class="item__mark" href="${esc(p.site)}"${external(p.site) ? ' target="_blank" rel="noreferrer"' : ""} aria-label="${esc(p.title)}${external(p.site) ? " (opens in a new tab)" : ""}" title="${esc(p.title)}">${PAPER}</a>` : `<span class="item__mark">${PAPER}</span>`;
+    : p.site ? `<a class="item__mark" href="${esc(p.site)}"${external(p.site) ? ' target="_blank" rel="noreferrer"' : ""} aria-label="${esc(p.title)}${external(p.site) ? " (opens in a new tab)" : ""}" title="${esc(p.title)}">${MARKS[p.mark] || PAPER}</a>` : `<span class="item__mark">${MARKS[p.mark] || PAPER}</span>`;
   const line = p.oneliner
     ? boldFigures(`>${p.oneliner}<`).slice(1, -1)
     : null;
