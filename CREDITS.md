@@ -155,3 +155,5 @@ One per sheet, all The Metropolitan Museum of Art, Open Access (public domain). 
 - iii Project UNISON: Antonio Canova, Venus Italica, probably ca. 1822–23, Carrara marble. https://www.metmuseum.org/art/collection/search/211504
 - ii DSH Hacks & UnivaBio: Pietro da Barga, Farnese Hercules, modeled ca. 1576, cast 17th century, bronze. https://www.metmuseum.org/art/collection/search/203947
 - i STEMise: Bronze statuette of Athena flying her owl, Greek, ca. 460 BCE. https://www.metmuseum.org/art/collection/search/254648
+
+fig. 0 is the plain headshot again (`assets/img/portrait-480.jpg`); the marble bust was retired.
