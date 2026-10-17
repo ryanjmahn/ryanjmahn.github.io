@@ -227,7 +227,9 @@ figcaption { margin-top: .6rem; font-family: var(--mono); font-size: 12px; line-
 
 /* what i've built: short lines, a logo before each, in small groups,
    after idhant.dev; the figures in each line set in ink */
-.built { max-width: 46rem; }
+.built { max-width: 46rem; margin: 0 auto; }
+/* the section is centred: its head too */
+.log-section .section__head { display: block; text-align: center; }
 .built__group + .built__group { margin-top: 2.2rem; }
 .built__label { margin: 0 0 .7rem; font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 .built__list { margin: 0; padding: 0; list-style: none; }

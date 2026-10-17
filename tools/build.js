@@ -37,7 +37,7 @@ function head({ title, url, description }) {
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script>document.documentElement.classList.add("js");var t=null;try{t=localStorage.getItem("theme")}catch(e){}document.documentElement.setAttribute("data-theme",t==="light"?"light":"dark")</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>${esc(title)}</title>
 ${description ? `<meta name="description" content="${esc(description)}" />` : "<!-- TODO(ryan): meta description -->"}
@@ -52,7 +52,7 @@ ${description ? `<meta name="description" content="${esc(description)}" />` : "<
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="${esc(title)}" />
 <meta name="twitter:image" content="${SITE}/assets/img/og/home.jpg" />
-<meta name="theme-color" content="#F2EFE9" />
+<meta name="theme-color" content="#0D0C0B" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -61,14 +61,11 @@ ${description ? `<meta name="description" content="${esc(description)}" />` : "<
 </head>`;
 }
 
-const NAV = [["work", "/#log"], ["research", "/research/"], ["writing", "/writing/"], ["diary", "/diary/"], ["contact", "/contact/"]];
-function topbar(current) {
-  const items = NAV.map(([label, href]) => `<a href="${href}"${label === current ? ' aria-current="page"' : ""}>${label}</a>`).join("");
+function topbar() {
   return `<a class="skip-link" href="#main">Skip to content</a>
 <header class="wrap topbar">
   <a class="topbar__name" href="/">ryan ahn</a>
-  <nav class="pills" aria-label="Site">${items}</nav>
-  <button class="theme-toggle mono" type="button" aria-label="Switch to dark mode">dark</button>
+  <button class="theme-toggle mono" type="button" aria-label="Switch to light mode">light</button>
 </header>`;
 }
 
@@ -148,7 +145,7 @@ function casePage(p, i, block) {
     : `<p class="mono">none yet</p>`;
   return `${head({ title: `${p.title} — ryan ahn`, url: `/work/${p.slug}/` })}
 <body data-page="work">
-${topbar("work")}
+${topbar()}
 
 <main id="main" class="wrap">
 ${todo(p.todo)}
@@ -249,7 +246,7 @@ fs.writeFileSync(home, html.replace(LOG, (_, a, b) => a + "\n" + rows.join("\n")
 
 // ---------- sitemap ----------
 
-const pages = ["/", ...log.map((p) => `/work/${p.slug}/`), "/research/", "/writing/", "/diary/", "/contact/"];
+const pages = ["/", ...log.map((p) => `/work/${p.slug}/`)];
 const today = new Date().toISOString().slice(0, 10);
 fs.writeFileSync(path.join(root, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
