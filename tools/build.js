@@ -216,7 +216,6 @@ const rows = log.map((p) => {
     <h3 class="lot__title"><a href="/work/${p.slug}/">${esc(p.title).replace(/(\S+-\S+)/g, '<span class="nw">$1</span>')}</a></h3>
     ${metrics(p.numbers.slice(0, 4))}
     ${p.oneliner ? `<p class="lot__line">${p.oneliner}</p>` : p.now ? slot("now", "one line — what are you building at openwm right now?") : slot("one-liner", `one line on ${esc(p.title)}.`)}
-    <span class="lot__open" aria-hidden="true">open sheet →</span>
   </div>
 </li>`;
 });
