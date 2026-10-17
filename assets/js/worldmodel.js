@@ -31,7 +31,7 @@
   var ITER_DT = .045;  // seconds per solver iteration on screen
   var RATE = .35;      // how far the model moves toward each run's best fit
   var PRIOR = [.5, 0];  // the model starts out thinking the truss is stiffer than it is, and ignores shear
-  var FONT = '10px "JetBrains Mono", ui-monospace, Menlo, monospace';
+  var FONT = '11px "Departure Mono", ui-monospace, Menlo, monospace';
 
   var w = 0, h = 0, dpr = 1, scale = 1, x0 = 0, deckY = 0;
   var ink = "#000", ink2 = "#777", grid = "rgba(0,0,0,.05)", paper = "#fff";
