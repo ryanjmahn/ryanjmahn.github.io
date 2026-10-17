@@ -2,89 +2,56 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script>document.documentElement.classList.add("js");var t=null;try{t=localStorage.getItem("theme")}catch(e){}document.documentElement.setAttribute("data-theme",t==="light"?"light":"dark")</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>404 · ryan ahn</title>
-<meta name="description" content="Page not found." />
 <meta name="robots" content="noindex" />
-<meta name="theme-color" content="#F7F7F7" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ryan ahn" />
+<meta property="og:title" content="404 · ryan ahn" />
+<meta property="og:image" content="https://ryanjmahn.github.io/assets/img/og/home.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="404 · ryan ahn" />
+<meta name="twitter:image" content="https://ryanjmahn.github.io/assets/img/og/home.jpg" />
+<meta name="theme-color" content="#0D0C0B" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-<link rel="preload" href="/assets/fonts/departure-mono.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="stylesheet" href="/assets/css/site.css" />
+<link rel="preload" href="/assets/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/assets/css/site.css?v=6fecf923" />
 </head>
 <body data-page="404">
 <a class="skip-link" href="#main">Skip to content</a>
+<header class="wrap topbar">
+  <a class="topbar__name" href="/">ryan ahn</a>
+  <button class="theme-toggle mono" type="button" aria-label="Switch to light mode">light</button>
+</header>
 
-<main class="letter" id="main">
-
-  <header class="vitals">
-    <a class="vitals__id" href="/">← ryan ahn</a>
-    <canvas class="vitals__trace" aria-hidden="true"></canvas>
-    <nav class="vitals__nav" aria-label="Site">
-      <a href="https://openwm.vercel.app/" target="_blank" rel="noreferrer">openwm ↗</a>
-      <a href="/diary/">diary</a>
-    </nav>
-    <button class="theme-toggle" type="button" aria-label="Switch to dark mode"><span class="theme-toggle__glyph" aria-hidden="true">◐</span> <span class="theme-toggle__label">dark</span></button>
-  </header>
-
-  <h1 class="page-title arrive" style="--i:0">404.</h1>
-  <p class="arrive" style="--i:1">no specimen at this address. <a href="/">back to the letter</a></p>
-
-  <figure class="portrait portrait--404 arrive" style="--i:2">
-    <pre class="ascii-portrait" role="img" aria-label="ASCII portrait of Ryan Ahn">
-                                              ...
-                                 .:=+*##*=-=+*#%###+=:
-                               :+#%%%%%%%%%%%%%%%%%%%%#=.
-                             :*%%%%%%%%%%%%@%%%%%%%%%%%%#+.
-                            -#%%%%%%%%%%%%%%%%%%%%%%%%%%%%#-
-                           +%%%%%%%%%%%%@%%%%%%%%%%%%%%%%%%%-
-                          -#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#.
-                         .#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#+
-                         +%%%%%%%%%%%%%#%%#####%%%%%%%%%%%%%##:
-                         #%%%%%%%%###****#******###%%%%%%%%%%%:
-                         #%%%%%%%#***++++***===++**#%%%%%%%%%%.
-                         +%%%%%%#*++==-+++*+=-----=+*#%%%%%%%*
-                         .%%%%##+=========++-::----===*%%%%%%-
-                          *%%*+=+++++===---::--==++++=-+*#%%*
-                          =%%====--:::----:::::::::::----+%%-
-                          -%#==--=====----::::::-==------=##:
-                         -+#*=---===*+-::-:::::-=*+==-::--#=-
-                         =-**=---:::::::--::::::::::::::--#:-
-                         ==+*=--:::..:::--:::-:......:::-=+-:
-                         --=+==-:::...:-=-:::--:......::-=--:
-                          -====--::...-=--::---:.....::---:-.
-                           --===-:::.:-=++====-:.....::--::.
-                             .==--::::::----::::...:::--.
-                              -==--::---------:::::::---
-                             .++==----=+++====+=:::::--.
-                           -#@@%+==--:--===----::::--=**=.
-                         -#@@@@@#*+=--::::::::::::--==#%%%*.
-                       -#%%@%@@@#**+=--::::..:::--=+=-#%%%%%-
-                     .*%%%%@%@@@*++***=----::---=+=---%@%%%%#:
-                    :#%%%%%%%@@@*+=++******+++++==----%@%%%%%#-
-                   =#%%%%%%%%%@%*======++++++==----::-#@%%%%%%%=
-                 .*%%%%%%%%%%%%#*=--------------:::::-=%%%%%%%%%*:
-                =#%%%%%%%%%%%%%%#+-------::::::::::::-+%%%%%%%%%%%*:
-              :*%%%%%%%%%%%%%%%%%*=-::::::::::::::::-=#%%%%%%%%%%%%%#=.
-              #%%%%%%%%%%%%%%%%%%%#+-::::::::::::::-=#%%%%%%%%%%%%%%%%#
-            .-#%%%%%%%%%%%%%%%%%%%%%#=-:::::::::::-+%%%%%%%%%%%%%%%%%%%#+-:
-        :=*#%%%%%@%%%%%%%%%%%%%%%%%%%%+-:::::::::-+%%%%%%%%%%%%%%%%%%%%%%%%%#+-.
-   .-+#%%%%%%%%%%%%%@%%%%%%%%%%%%%%%%%%#=:::::::-*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*=.
-:=#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#=:::=*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%+
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-@@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  </pre>
-  </figure>
-
+<main id="main" class="wrap">
+<div class="lost">
+    <!-- pl. 404: carved by assets/js/carve.js once it's in view -->
+    <figure class="carve carve--tall">
+      <div class="carve__stage">
+        <canvas class="carve__cells" data-carve="load" data-cols="90" data-src="/assets/img/torso-360.webp" style="--ratio: 360 / 654" role="img" aria-label="Marble statue of Herakles, a torso without head, arms or lower legs, drawn in dithered pixels"></canvas>
+        <noscript><img src="/assets/img/torso-360.webp" alt="Marble statue of Herakles, a torso without head, arms or lower legs" width="360" height="654" /></noscript>
+        <span class="figlabel" aria-hidden="true">PL-404</span>
+      </div>
+    </figure>
+<header class="page__head">
+  <h1 class="page__title mix">404 — sheet <em>not found</em></h1>
+  <p class="mono"><a href="/">← ryan ahn</a></p>
+</header>
+</div>
 </main>
 
-<script src="/assets/js/site.js" defer></script>
+<footer class="wrap colophon mono">
+  <span>end of entry.</span>
+  <span>seoul · last revised oct 2026</span>
+</footer>
+
+<script src="/assets/js/site.js?v=2078970d" defer></script>
+<script src="/assets/js/carve.js?v=3d326e8e" defer></script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script>document.documentElement.classList.add("js");var t=null;try{t=localStorage.getItem("theme")}catch(e){}document.documentElement.setAttribute("data-theme",t==="light"?"light":"dark")</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ryan ahn</title>
 <meta name="description" content="ryan ahn — working on world models for physical design. proponent of accessible, trustworthy science, comp bio enthusiast, and high school senior in seoul." />
@@ -20,12 +20,14 @@
 <meta name="twitter:title" content="ryan ahn" />
 <meta name="twitter:description" content="ryan ahn — working on world models for physical design. proponent of accessible, trustworthy science, comp bio enthusiast, and high school senior in seoul." />
 <meta name="twitter:image" content="https://ryanjmahn.github.io/assets/img/og/home.jpg" />
-<meta name="theme-color" content="#F7F7F7" />
+<meta name="theme-color" content="#0D0C0B" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-<link rel="preload" href="/assets/fonts/departure-mono.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="stylesheet" href="/assets/css/site.css" />
+<link rel="preload" href="/assets/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/assets/img/thinker-520.webp" as="image" />
+<link rel="stylesheet" href="/assets/css/site.css?v=6fecf923" />
+<!-- TODO(ryan): jobTitle at OpenWM? (Probix Labs → OpenWM since oct 2026) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -33,11 +35,10 @@
   "name": "Ryan Ahn",
   "url": "https://ryanjmahn.github.io/",
   "image": "https://ryanjmahn.github.io/assets/img/portrait-480.jpg",
-  "jobTitle": "Co-Founder & COO",
   "worksFor": {
     "@type": "Organization",
-    "name": "Probix Labs",
-    "url": "https://www.tryprobix.com/"
+    "name": "OpenWM",
+    "url": "https://openwm.vercel.app/"
   },
   "address": {
     "@type": "PostalAddress",
@@ -46,105 +47,119 @@
   },
   "sameAs": [
     "https://github.com/ryanjmahn",
-    "https://www.linkedin.com/in/ryan-ahn-81322736a/"
+    "https://www.linkedin.com/in/ryan-ahn-57b570440/"
   ]
 }
 </script>
 </head>
 <body data-page="home">
 <a class="skip-link" href="#main">Skip to content</a>
-<canvas class="field" aria-hidden="true"></canvas>
+<header class="wrap topbar topbar--over">
+  <a class="topbar__name" href="/">ryan ahn</a>
+  <button class="theme-toggle mono" type="button" aria-label="Switch to light mode">light</button>
+</header>
 
-<main class="letter letter--home" id="main">
+<main id="main">
 
-  <!-- letterhead: the automaton is run by assets/js/site.js -->
-  <header class="vitals">
-    <h1 class="vitals__id">ryan ahn</h1>
-    <canvas class="vitals__trace" aria-hidden="true"></canvas>
-    <nav class="vitals__nav" aria-label="Site">
-      <a href="https://openwm.vercel.app/" target="_blank" rel="noreferrer">openwm ↗</a>
-      <a href="/diary/">diary</a>
-    </nav>
-    <button class="theme-toggle" type="button" aria-label="Switch to dark mode"><span class="theme-toggle__glyph" aria-hidden="true">◐</span> <span class="theme-toggle__label">dark</span></button>
-  </header>
+  <!-- the opening: a statue under a light, carving itself out of the block
+       on load (assets/js/carve.js writes the progress to --p) -->
+  <section class="scene" data-scene aria-labelledby="name">
+    <div class="scene__stage">
+      <h1 class="sr-only" id="name">ryan ahn</h1>
+      <p class="scene__word scene__word--ryan" aria-hidden="true"><em>ryan</em></p>
+      <p class="scene__word scene__word--ahn" aria-hidden="true">ahn</p>
 
-  <div class="intro">
-    <div class="intro__copy">
-      <p class="lede arrive" style="--i:0">sup! i'm ryan. <span class="lede__more">i'm currently working on <a href="https://openwm.vercel.app/" target="_blank" rel="noreferrer">world models for physical design</a>.</span></p>
-      <p class="intro__sub arrive" style="--i:0">i'm also a proponent of <strong>accessible, trustworthy science</strong>, a <strong>comp bio</strong> enthusiast, and a <strong>high school senior</strong>.</p>
+      <!-- pl. 1 -->
+      <figure class="carve scene__plate">
+        <canvas class="carve__cells" data-carve="load" data-cols="150" data-src="/assets/img/thinker-520.webp" role="img" aria-label="Auguste Rodin's The Thinker, drawn in dithered pixels, cut out of a rough block of stone"></canvas>
+        <noscript><img src="/assets/img/thinker-520.webp" alt="Auguste Rodin's The Thinker" width="520" height="720" /></noscript>
+      </figure>
 
-      <div class="milestones arrive" style="--i:1">
-        <p class="label">§ prev</p>
-        <ul class="entries">
-          <li><svg class="glyph" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 20 8 10M20 20 32 9M20 20 34 27M20 20 10 31M20 20 22 35M20 20 18 5M8 10 18 5M32 9 34 27M10 31 22 35"/><circle cx="20" cy="20" r="3" class="fill"/><circle cx="8" cy="10" r="2"/><circle cx="32" cy="9" r="2"/><circle cx="34" cy="27" r="2"/><circle cx="10" cy="31" r="2"/><circle cx="22" cy="35" r="2"/><circle cx="18" cy="5" r="2"/></svg>built a <a href="https://www.stemise.org/" target="_blank" rel="noreferrer">STEM nonprofit</a>: 5k+ youths, 130 nations, 135+ chapters, 75+ staff. backed by citadel & HRT</li>
-          <li><svg class="glyph" viewBox="0 0 40 40" aria-hidden="true"><rect x="4" y="5" width="32" height="13"/><rect x="4" y="22" width="32" height="13"/><path d="M6 15c5 0 6-7 10-7s5 7 9 7 5-4 9-4M6 32c5 0 6-7 10-7s5 7 9 7 5-4 9-4"/><path d="M38 9v24" class="dash"/></svg>built a <a href="https://www.tryprobix.com/" target="_blank" rel="noreferrer">product lab</a> for reproducible science. top 10% at yc f26 &amp; founders inc</li>
-          <li><svg class="glyph" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="15"/><ellipse cx="20" cy="20" rx="6.5" ry="15"/><path d="M5 20h30M7.5 12h25M7.5 28h25"/><circle cx="13" cy="12" r="1.6" class="fill"/><circle cx="27" cy="16" r="1.6" class="fill"/><circle cx="16" cy="28" r="1.6" class="fill"/><circle cx="30" cy="25" r="1.6" class="fill"/></svg>directed hackathons for 2k+ builders from 98 nations, $200k in prizes</li>
-          <li id="kras-benchmark"><svg class="glyph" viewBox="0 0 40 40" aria-hidden="true"><path d="M8 12c3-6 12-8 18-5 5 2 9 7 8 13-1 4-4 5-7 4-3-1-3-5-6-5s-4 4-3 7c1 4 3 6 0 8-5 3-13 0-16-6-2-5-1-11 6-16z"/><path d="m21 17 2.6 1.5v3L21 23l-2.6-1.5v-3z" class="fill"/></svg>benchmarked 3 tools at detecting the KRAS G12D <a href="/assets/papers/kras-g12d-switch-ii-benchmark.pdf" target="_blank" rel="noreferrer" type="application/pdf">switch-II pocket</a> w/ prof. se-jin hwang @ hanyang univ</li>
-          <!-- TODO(ryan): link the paper once the OpenReview or proceedings page is live. Don't host the anonymous submission PDF. -->
-          <li id="contaminated-ancestors"><svg class="glyph" viewBox="0 0 40 40" aria-hidden="true"><path d="M3 34h6M9 34c6 0 4-8 10-8s4 8 10 8M29 34c2-6-3-9 0-14 3-5 9-2 8-9-1-5-6-6-9-4"/><circle cx="3" cy="34" r="1.6" class="fill"/><circle cx="9" cy="34" r="1.6" class="fill"/><circle cx="19" cy="26" r="1.6" class="fill"/><circle cx="29" cy="34" r="1.6" class="fill"/><circle cx="29" cy="20" r="1.6" class="fill"/><circle cx="37" cy="11" r="1.6" class="fill"/><circle cx="28" cy="7" r="1.6" class="fill"/></svg>found 7 ways our own protein ML evaluation nearly misled us. accepted @ neurips 2026 <a href="https://tai-eval.github.io/" target="_blank" rel="noreferrer">tae workshop</a></li>
-          <li><svg class="glyph" viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="4" width="11" height="8"/><rect x="14.5" y="16" width="11" height="8"/><rect x="27" y="28" width="11" height="8"/><path d="M7.5 12v8h7M20 24v8h7M12 18l2.5 2-2.5 2M24.5 30l2.5 2-2.5 2"/></svg>built an AI curriculum pipeline @ project unison w/ barnard college</li>
+      <div class="scene__intro">
+        <!-- fig. 0: the headshot, small, over the intro -->
+        <figure class="scene__me">
+          <img src="/assets/img/portrait-color-480.jpg" alt="Portrait of Ryan Ahn" width="96" height="96" />
+        </figure>
+        <p class="lede">sup! i'm ryan. i'm currently working on <a href="https://openwm.vercel.app/" target="_blank" rel="noreferrer">world models for physical design</a>.</p>
+        <p>i'm also a proponent of <strong>accessible, trustworthy science</strong>, a <strong>comp bio</strong> enthusiast, and a <strong>high school senior</strong>.</p>
+        <ul class="socials">
+        <li><a href="mailto:ryanjmahn1@gmail.com" aria-label="email" title="email"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m3 6 9 7 9-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/in/ryan-ahn-57b570440/" target="_blank" rel="noreferrer" aria-label="linkedin" title="linkedin"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg></a></li>
+        <li><a href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer" aria-label="github" title="github"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg></a></li>
         </ul>
-      </div>
-
-      <nav class="links arrive" style="--i:2" aria-label="Contact">
-        <a class="pill pill--dark" href="mailto:ryanjmahn1@gmail.com">email me <span class="pill__arrow" aria-hidden="true">→</span></a>
-        <a class="pill" href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer">github <span class="pill__arrow" aria-hidden="true">↗</span></a>
-        <a class="pill" href="https://www.linkedin.com/in/ryan-ahn-81322736a/" target="_blank" rel="noreferrer">linkedin <span class="pill__arrow" aria-hidden="true">↗</span></a>
-      </nav>
-    </div>
-
-    <figure class="portrait arrive" style="--i:1">
-      <!-- fig. 0: dithered by assets/js/portrait.js from the photo in data-src -->
-      <div class="portrait__stage">
-        <canvas class="portrait__cells" data-src="/assets/img/portrait-480.jpg" role="img" aria-label="Portrait of Ryan Ahn, drawn in dithered pixels"></canvas>
-        <noscript><img src="/assets/img/portrait-480.jpg" alt="Portrait of Ryan Ahn" width="480" height="480" /></noscript>
-        <span class="chip" aria-hidden="true">FIG-000</span>
-      </div>
-      <figcaption>fig. 0 — ryan ahn, specimen of a builder.</figcaption>
-    </figure>
-  </div>
-
-  <!-- fig. 1: run by assets/js/worldmodel.js -->
-  <figure class="world arrive" id="fig-1" style="--i:3">
-    <div class="world__stage">
-      <canvas class="world__field" aria-hidden="true"></canvas>
-      <div class="sheet" aria-hidden="true">
-        <div class="sheet__id">DWG-<span class="sheet__no">002</span></div>
-        <div class="sheet__title"><span class="sheet__kind">pratt</span> truss · <span class="sheet__bays">8</span> bays</div>
-        <ol class="sheet__steps">
-          <li data-step="draft">draft</li><li data-step="model">model</li><li data-step="simulate">simulate</li><li data-step="next">next</li>
-        </ol>
-        <dl class="sheet__read">
-          <dt>depth</dt><dd class="sheet__depth">—</dd>
-          <dt>sag</dt><dd class="sheet__sag">—</dd>
-          <dt>miss</dt><dd class="sheet__miss">—</dd>
-        </dl>
+        <!-- TODO(ryan): x / instagram / other writing / podcasts, if you want them here -->
       </div>
     </div>
-    <figcaption>fig. 1 — a world model at the drafting table. it guesses how each truss bends (squares) before the simulator solves it (line), then learns from the miss. last miss <span class="world__err">0</span> mm<span class="world__hint"> · click to redesign</span></figcaption>
-  </figure>
-
-  <section class="diary arrive" style="--i:4" aria-labelledby="diary-label">
-    <div class="diary__head">
-      <p class="label" id="diary-label">§ diary</p>
-      <a href="/diary/">all entries →</a>
-    </div>
-    <!-- the newest entry, copied from /diary/ -->
-    <ol class="posts">
-      <li><article class="post"><time datetime="2026-09-14">2026-09-14</time><div class="post__body"><p>day 1. will be documenting my life journey as I reach for the stars.</p></div></article></li>
-    </ol>
   </section>
 
-  <footer class="colophon arrive" style="--i:5">
-    <span>end of entry.</span>
-    <span>seoul · last revised oct 2026</span>
-  </footer>
+  <div class="wrap">
+  <section class="section log-section" id="log" aria-labelledby="log-title">
+      <div class="section__head"><h2 id="log-title">what i've <em>built</em></h2></div>
+      <!-- written by tools/build.js from tools/projects.json; edit there, not here -->
+      <div class="built">
+        <!-- build:log -->
+<section class="built__group" aria-label="current">
+  <h3 class="built__label">current</h3>
+  <ul class="built__list">
+<li class="item item--now">
+  <span class="item__logos"><a href="https://openwm.vercel.app/" target="_blank" rel="noreferrer" aria-label="openwm (opens in a new tab)" title="openwm"><img src="/assets/img/logos/openwm.svg" alt="" width="28" height="28" loading="lazy" /></a></span>
+  <p class="item__line">world models trained on specific hardware niches that test designs for real-world performance in milliseconds</p>
+</li>
+  </ul>
+</section>
+<section class="built__group" aria-label="startups">
+  <h3 class="built__label">startups</h3>
+  <ul class="built__list">
+<li class="item">
+  <span class="item__logos"><a href="https://www.tryprobix.com/" target="_blank" rel="noreferrer" aria-label="probix labs (opens in a new tab)" title="probix labs"><img src="/assets/img/logos/probix-192.webp" alt="" width="28" height="28" loading="lazy" /></a></span>
+  <p class="item__line">built a <a href="https://www.tryprobix.com/" target="_blank" rel="noreferrer">product lab</a> for reproducible science. top <b>10%</b> at yc f26 &amp; founders inc</p>
+</li>
+  </ul>
+</section>
+<section class="built__group" aria-label="communities">
+  <h3 class="built__label">communities</h3>
+  <ul class="built__list">
+<li class="item">
+  <span class="item__logos"><a href="https://www.stemise.org/" target="_blank" rel="noreferrer" aria-label="stemise (opens in a new tab)" title="stemise"><img src="/assets/img/logos/stemise-192.webp" alt="" width="28" height="28" loading="lazy" /></a></span>
+  <p class="item__line">built a <a href="https://www.stemise.org/" target="_blank" rel="noreferrer">STEM nonprofit</a>: <b>5k+</b> youths, <b>130</b> nations, <b>135+</b> chapters, <b>75+</b> staff. sponsored by citadel &amp; HRT</p>
+</li>
+<li class="item">
+  <span class="item__logos"><a href="https://dshhacks.org/" target="_blank" rel="noreferrer" aria-label="dsh hacks (opens in a new tab)" title="dsh hacks"><img src="/assets/img/logos/dsh-hacks-192.webp" alt="" width="28" height="28" loading="lazy" /></a><a href="https://univabio.devpost.com/" target="_blank" rel="noreferrer" aria-label="univabio (opens in a new tab)" title="univabio"><img src="/assets/img/logos/univabio-96.webp" alt="" width="28" height="28" loading="lazy" /></a></span>
+  <p class="item__line">directed hackathons for <b>2.5k</b> builders from <b>98</b> nations, <b>$200k</b> in prizes</p>
+</li>
+  </ul>
+</section>
+<section class="built__group" aria-label="research">
+  <h3 class="built__label">research</h3>
+  <ul class="built__list">
+<li class="item">
+  <span class="item__logos"><a class="item__mark" href="/assets/papers/kras-g12d-switch-ii-benchmark.pdf" aria-label="KRAS G12D Switch-II benchmark" title="KRAS G12D Switch-II benchmark"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="7" r="3"/><circle cx="17.5" cy="7" r="3"/><circle cx="12" cy="17" r="3"/><path d="M9.5 7h5M8 9.6l2.6 4.8M16 9.6l-2.6 4.8"/></svg></a></span>
+  <p class="item__line">benchmarked 3 tools at detecting the KRAS G12D <a href="/assets/papers/kras-g12d-switch-ii-benchmark.pdf" target="_blank" rel="noreferrer" type="application/pdf">switch-II pocket</a> w/ prof. se-jin hwang @ hanyang univ</p>
+</li>
+<li class="item">
+  <span class="item__logos"><a class="item__mark" href="https://tai-eval.github.io/" target="_blank" rel="noreferrer" aria-label="Contaminated Ancestors (opens in a new tab)" title="Contaminated Ancestors"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4M4 7h6v4h5v-3h5M10 11v5h6M15 11v-3M4 15h4"/><circle cx="20" cy="8" r="1.3" fill="currentColor"/><circle cx="16" cy="16" r="1.3" fill="currentColor"/><circle cx="8" cy="15" r="1.3" fill="currentColor"/></svg></a></span>
+  <p class="item__line">found 7 ways our own protein ML evaluation nearly misled us. accepted @ neurips 2026 <a href="https://tai-eval.github.io/" target="_blank" rel="noreferrer">tae workshop</a></p>
+</li>
+<li class="item">
+  <span class="item__logos"><a class="item__mark" href="https://projectunison.netlify.app/" target="_blank" rel="noreferrer" aria-label="Project UNISON (opens in a new tab)" title="Project UNISON"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10 5 6.5 4.5 3.5 5v13c3-.5 6.5 0 8.5 1.5 2-1.5 5.5-2 8.5-1.5V5c-3-.5-6.5 0-8.5 1.5Z"/><path d="M12 6.5v13"/></svg></a></span>
+  <p class="item__line">built an AI curriculum pipeline @ project unison w/ barnard college</p>
+</li>
+  </ul>
+</section>
+        <!-- /build:log -->
+      </div>
+    </section>
+
+  </div>
 
 </main>
 
-<script src="/assets/js/site.js" defer></script>
-<script src="/assets/js/field.js" defer></script>
-<script src="/assets/js/portrait.js" defer></script>
-<script src="/assets/js/worldmodel.js" defer></script>
+<footer class="wrap colophon mono">
+  <span>end of entry.</span>
+  <span>seoul · last revised oct 2026</span>
+</footer>
+
+<script src="/assets/js/site.js?v=2078970d" defer></script>
+<script src="/assets/js/carve.js?v=3d326e8e" defer></script>
 </body>
 </html>
