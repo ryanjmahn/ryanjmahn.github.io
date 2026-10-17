@@ -235,6 +235,23 @@ ${pages.map((u) => `  <url><loc>${SITE}${u}</loc><lastmod>${today}</lastmod></ur
 </urlset>
 `);
 
+// ---------- cache-busting ----------
+// every page asks for /assets/css|js/<file>?v=<hash of its contents>, so a
+// browser never pairs new HTML with a stale stylesheet or script
+const crypto = require("crypto");
+const version = (rel) => crypto.createHash("sha1").update(fs.readFileSync(path.join(root, rel))).digest("hex").slice(0, 8);
+(function stamp(dir) {
+  for (const f of fs.readdirSync(dir, { withFileTypes: true })) {
+    const p = path.join(dir, f.name);
+    if (f.isDirectory()) { if (!/^(\.git|tools|assets|screenshots|node_modules)$/.test(f.name)) stamp(p); }
+    else if (f.name.endsWith(".html")) {
+      const html = fs.readFileSync(p, "utf8");
+      const out = html.replace(/(["'])\/(assets\/(?:css|js)\/[\w.-]+\.(?:css|js))(?:\?v=\w+)?\1/g, (_, q, rel) => `${q}/${rel}?v=${version(rel)}${q}`);
+      if (out !== html) fs.writeFileSync(p, out);
+    }
+  }
+})(root);
+
 // ---------- what's left for you to write ----------
 
 const slots = [];
