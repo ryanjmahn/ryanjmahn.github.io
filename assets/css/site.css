@@ -46,33 +46,33 @@ a:hover { text-decoration-color: currentColor; }
 /* ---------- ghibli scene: only drawn in the ghibli theme ---------- */
 
 .scene { display: none; }
-:root[data-theme="ghibli"] { background: linear-gradient(#BCDDEE 0, #D7EBF1 30%, #EEF1E6 62%, var(--paper) 80%); min-height: 100%; }
+:root[data-theme="ghibli"] { background: linear-gradient(#D3E8F2 0, #E6F1F3 22%, var(--paper) 50%); min-height: 100%; }
 :root[data-theme="ghibli"] body { background: transparent; }
 :root[data-theme="ghibli"] .scene { display: block; position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
-:root[data-theme="ghibli"] main { padding-bottom: max(30vh, 180px); }
+:root[data-theme="ghibli"] main { padding-bottom: max(12vh, 80px); }
 
 /* painted cumulus: a flat white base with a soft blue-grey belly */
 .cloud {
-  position: absolute; left: 0; width: 220px; height: 64px; border-radius: 64px;
+  position: absolute; left: 0; width: 120px; height: 34px; border-radius: 34px;
   background: #FFFFFF;
-  box-shadow: inset 0 -10px 14px rgba(160, 188, 206, .45);
-  opacity: .92;
+  box-shadow: inset 0 -5px 8px rgba(160, 188, 206, .35);
+  opacity: .85;
   animation: drift 180s linear infinite;
 }
 .cloud::before, .cloud::after { content: ""; position: absolute; background: #FFFFFF; border-radius: 50%; }
-.cloud::before { width: 96px; height: 96px; left: 34px; top: -50px; }
-.cloud::after { width: 70px; height: 70px; left: 112px; top: -32px; }
-.cloud--1 { top: 9vh; animation-duration: 210s; animation-delay: -60s; }
-.cloud--2 { top: 24vh; scale: .7; animation-duration: 260s; animation-delay: -170s; opacity: .8; }
+.cloud::before { width: 52px; height: 52px; left: 18px; top: -27px; }
+.cloud::after { width: 38px; height: 38px; left: 61px; top: -17px; }
+.cloud--1 { top: 6vh; animation-duration: 210s; animation-delay: -60s; }
+.cloud--2 { top: 15vh; scale: .7; animation-duration: 260s; animation-delay: -170s; opacity: .8; }
 .cloud--3 { top: 4vh; scale: .5; animation-duration: 300s; animation-delay: -20s; opacity: .7; }
 @keyframes drift { from { translate: -260px 0; } to { translate: calc(100vw + 40px) 0; } }
 
 .hills { display: none; }
 :root[data-theme="ghibli"] body { position: relative; min-height: 100vh; min-height: 100svh; }
-:root[data-theme="ghibli"] .hills { display: block; position: absolute; left: 0; bottom: 0; z-index: -1; width: 100%; height: 26vh; min-height: 150px; }
-.hill--far { fill: #A8C98C; }
-.hill--mid { fill: #7EAE62; }
-.hill--near { fill: #5C8E48; }
+:root[data-theme="ghibli"] .hills { display: block; position: absolute; left: 0; bottom: 0; z-index: -1; width: 100%; height: 9vh; min-height: 56px; }
+.hill--far { fill: #C9DDB4; }
+.hill--mid { fill: #A9C98E; }
+.hill--near { fill: #86B06A; }
 
 @media (prefers-reduced-motion: reduce) { .cloud { animation: none; translate: 20vw 0; } .cloud--2 { translate: 62vw 0; } .cloud--3 { translate: 80vw 0; } }
 @media (max-width: 640px) { main { padding-top: 32px; } }
