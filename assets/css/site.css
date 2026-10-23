@@ -1,9 +1,5 @@
-/* one column of plain sentences, after idhant.dev. Instrument Serif
-   throughout. three themes: light, dark (both follow the system until
+/* one column of plain sentences, after idhant.dev, in Times New Roman. three themes: light, dark (both follow the system until
    chosen) and ghibli: a painted sky, slow clouds and green hills. */
-
-@font-face { font-family: "Instrument Serif"; font-style: normal; font-weight: 400; font-display: swap; src: url("/assets/fonts/instrument-serif.woff2") format("woff2"); }
-@font-face { font-family: "Instrument Serif"; font-style: italic; font-weight: 400; font-display: swap; src: url("/assets/fonts/instrument-serif-italic.woff2") format("woff2"); }
 
 :root {
   --paper: #FBFAF7;
@@ -26,23 +22,23 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font: 400 22px/1.5 "Instrument Serif", Georgia, "Times New Roman", serif;
+  font: 400 17px/1.5 "Times New Roman", Times, serif;
   font-synthesis: none;
   -webkit-font-smoothing: antialiased;
 }
 
-main { max-width: 640px; margin: 0 auto; padding: 56px 20px 72px; }
-h1 { font: inherit; margin: 0 0 18px; }
-p { margin: 0 0 18px; }
-ul { margin: 0 0 18px; padding: 0; list-style: none; }
-li { position: relative; padding-left: 20px; margin-bottom: 6px; }
+main { max-width: 540px; margin: 0 auto; padding: 40px 20px 64px; }
+h1 { font: inherit; margin: 0 0 14px; }
+p { margin: 0 0 14px; }
+ul { margin: 0 0 14px; padding: 0; list-style: none; }
+li { position: relative; padding-left: 18px; margin-bottom: 4px; }
 li::before { content: "•"; position: absolute; left: 2px; color: var(--muted); }
 
 a { color: var(--link); text-decoration: underline 1px var(--line); text-underline-offset: 3px; transition: text-decoration-color .2s; }
 a:hover { text-decoration-color: currentColor; }
 :focus-visible { outline: 2px solid currentColor; outline-offset: 3px; border-radius: 2px; }
 
-.themes { margin-top: 40px; color: var(--muted); font-size: 17px; }
+.themes { margin-top: 28px; color: var(--muted); font-size: 15px; }
 .themes button { font: inherit; color: var(--muted); background: none; border: 0; padding: 10px 2px; min-height: 44px; cursor: pointer; }
 .themes button:hover { color: var(--ink); }
 .themes button[aria-pressed="true"] { color: var(--ink); text-decoration: underline 1px var(--line); text-underline-offset: 3px; }
@@ -79,4 +75,4 @@ a:hover { text-decoration-color: currentColor; }
 .hill--near { fill: #5C8E48; }
 
 @media (prefers-reduced-motion: reduce) { .cloud { animation: none; translate: 20vw 0; } .cloud--2 { translate: 62vw 0; } .cloud--3 { translate: 80vw 0; } }
-@media (max-width: 640px) { body { font-size: 20px; } main { padding-top: 40px; } }
+@media (max-width: 640px) { main { padding-top: 32px; } }
