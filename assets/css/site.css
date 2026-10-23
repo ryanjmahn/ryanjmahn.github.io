@@ -1,5 +1,5 @@
-/* one column of plain sentences, after idhant.dev, in Times New Roman. three themes: light, dark (both follow the system until
-   chosen) and ghibli: a painted sky, slow clouds and green hills. */
+/* one column of plain sentences, after idhant.dev, in Times New Roman.
+   light and dark follow the system until one is chosen. */
 
 :root {
   --paper: #FBFAF7;
@@ -13,8 +13,6 @@
   :root:not([data-theme]) { --paper: #0D0C0B; --ink: #ECE7DE; --muted: #8F8A81; --line: rgba(236, 231, 222, .35); --link: #ECE7DE; color-scheme: dark; }
 }
 :root[data-theme="dark"] { --paper: #0D0C0B; --ink: #ECE7DE; --muted: #8F8A81; --line: rgba(236, 231, 222, .35); --link: #ECE7DE; color-scheme: dark; }
-/* ghibli: summer sky over a meadow; moss ink, grass links */
-:root[data-theme="ghibli"] { --paper: #F4F1E2; --ink: #2E3A2C; --muted: #536349; --line: rgba(63, 107, 46, .45); --link: #3F6B2E; color-scheme: light; }
 
 * { box-sizing: border-box; }
 html { background: var(--paper); -webkit-text-size-adjust: 100%; }
@@ -43,36 +41,4 @@ a:hover { text-decoration-color: currentColor; }
 .themes button:hover { color: var(--ink); }
 .themes button[aria-pressed="true"] { color: var(--ink); text-decoration: underline 1px var(--line); text-underline-offset: 3px; }
 
-/* ---------- ghibli scene: only drawn in the ghibli theme ---------- */
-
-.scene { display: none; }
-:root[data-theme="ghibli"] { background: linear-gradient(#D3E8F2 0, #E6F1F3 22%, var(--paper) 50%); min-height: 100%; }
-:root[data-theme="ghibli"] body { background: transparent; }
-:root[data-theme="ghibli"] .scene { display: block; position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
-:root[data-theme="ghibli"] main { padding-bottom: max(12vh, 80px); }
-
-/* painted cumulus: a flat white base with a soft blue-grey belly */
-.cloud {
-  position: absolute; left: 0; width: 120px; height: 34px; border-radius: 34px;
-  background: #FFFFFF;
-  box-shadow: inset 0 -5px 8px rgba(160, 188, 206, .35);
-  opacity: .85;
-  animation: drift 180s linear infinite;
-}
-.cloud::before, .cloud::after { content: ""; position: absolute; background: #FFFFFF; border-radius: 50%; }
-.cloud::before { width: 52px; height: 52px; left: 18px; top: -27px; }
-.cloud::after { width: 38px; height: 38px; left: 61px; top: -17px; }
-.cloud--1 { top: 6vh; animation-duration: 210s; animation-delay: -60s; }
-.cloud--2 { top: 15vh; scale: .7; animation-duration: 260s; animation-delay: -170s; opacity: .8; }
-.cloud--3 { top: 4vh; scale: .5; animation-duration: 300s; animation-delay: -20s; opacity: .7; }
-@keyframes drift { from { translate: -260px 0; } to { translate: calc(100vw + 40px) 0; } }
-
-.hills { display: none; }
-:root[data-theme="ghibli"] body { position: relative; min-height: 100vh; min-height: 100svh; }
-:root[data-theme="ghibli"] .hills { display: block; position: absolute; left: 0; bottom: 0; z-index: -1; width: 100%; height: 9vh; min-height: 56px; }
-.hill--far { fill: #C9DDB4; }
-.hill--mid { fill: #A9C98E; }
-.hill--near { fill: #86B06A; }
-
-@media (prefers-reduced-motion: reduce) { .cloud { animation: none; translate: 20vw 0; } .cloud--2 { translate: 62vw 0; } .cloud--3 { translate: 80vw 0; } }
 @media (max-width: 640px) { main { padding-top: 32px; } }

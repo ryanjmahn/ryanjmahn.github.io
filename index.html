@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark"||t==="ghibli")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ryan ahn</title>
 <meta name="description" content="ryan ahn: building world models for physical design at OpenWM. proponent of accessible, trustworthy science, comp bio enthusiast, high school senior in seoul." />
@@ -30,13 +30,6 @@
 </head>
 <body>
 
-<!-- ghibli theme only: sky and clouds, drawn in css (hidden otherwise) -->
-<div class="scene" aria-hidden="true">
-  <span class="cloud cloud--1"></span>
-  <span class="cloud cloud--2"></span>
-  <span class="cloud cloud--3"></span>
-</div>
-
 <main id="main">
   <h1>sup! i'm <em>ryan</em>.</h1>
 
@@ -58,17 +51,9 @@
 
   <p class="themes" role="group" aria-label="theme">
     <button type="button" data-set="light">light</button> ·
-    <button type="button" data-set="dark">dark</button> ·
-    <button type="button" data-set="ghibli">ghibli</button>
+    <button type="button" data-set="dark">dark</button>
   </p>
 </main>
-
-<!-- ghibli theme only: the hills close the page -->
-<svg class="hills" aria-hidden="true" viewBox="0 0 1440 260" preserveAspectRatio="none">
-  <path class="hill hill--far" d="M0 140 C 180 80, 360 90, 540 120 S 900 60, 1100 100 S 1340 90, 1440 110 V260 H0 Z" />
-  <path class="hill hill--mid" d="M0 190 C 220 130, 420 150, 640 175 S 1000 120, 1220 160 S 1400 170, 1440 165 V260 H0 Z" />
-  <path class="hill hill--near" d="M0 230 C 260 190, 520 205, 760 222 S 1160 200, 1440 215 V260 H0 Z" />
-</svg>
 
 <script src="/assets/js/site.js" defer></script>
 </body>
