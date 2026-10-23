@@ -1,458 +1,82 @@
-/* =========================================================
-   tokens — a drawing set: ink on paper, hairline rules, one blue.
-   The canvases (assets/js/portrait.js, worldmodel.js) read --ink,
-   --ink-2, --grid and --card from here. The theme follows the system
-   unless the toggle has set data-theme on <html>.
-   ========================================================= */
+/* one column of plain sentences, after idhant.dev. Instrument Serif
+   throughout. three themes: light, dark (both follow the system until
+   chosen) and ghibli: a painted sky, slow clouds and green hills. */
 
-:root {
-  /* plaster and ink, a gallery's light; cobalt is the one accent */
-  --paper:  #F2EFE9;
-  --ink:    #15130F;
-  --muted:  #6E6A63;
-  --rule:   #DCD7CE;
-  --accent: #2443D6;  /* sparingly: link hover, the "building" chip, the "now" node */
-  --spot:   rgba(255, 255, 255, .75);  /* the spotlight on the statue */
-
-  /* read by the canvases */
-  --ink-2: var(--muted);
-  --grid:  rgba(21, 19, 15, .05);
-  --card:  var(--paper);
-
-  color-scheme: light;
-
-  --serif: "Instrument Serif", Georgia, "Times New Roman", serif;
-  --sans:  "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-
-  --gap: clamp(1rem, 2.4vw, 2rem);
-  --ease: cubic-bezier(.2, .7, .2, 1);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper: #0D0C0B; --ink: #ECE7DE; --muted: #9C968C; --rule: #2B2925; --accent: #8A9BFF;
-    --grid: rgba(236, 231, 222, .05); --spot: rgba(255, 236, 205, .07);
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --paper: #0D0C0B; --ink: #ECE7DE; --muted: #9C968C; --rule: #2B2925; --accent: #8A9BFF;
-  --grid: rgba(236, 231, 222, .05); --spot: rgba(255, 236, 205, .07);
-  color-scheme: dark;
-}
-
-/* self-hosted, latin subsets (see AUDIT.md) */
 @font-face { font-family: "Instrument Serif"; font-style: normal; font-weight: 400; font-display: swap; src: url("/assets/fonts/instrument-serif.woff2") format("woff2"); }
 @font-face { font-family: "Instrument Serif"; font-style: italic; font-weight: 400; font-display: swap; src: url("/assets/fonts/instrument-serif-italic.woff2") format("woff2"); }
-@font-face { font-family: "Instrument Sans"; font-style: normal; font-weight: 400 700; font-display: swap; src: url("/assets/fonts/instrument-sans.woff2") format("woff2"); }
-@font-face { font-family: "Instrument Sans"; font-style: italic; font-weight: 400 700; font-display: swap; src: url("/assets/fonts/instrument-sans-italic.woff2") format("woff2"); }
-@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url("/assets/fonts/jetbrains-mono.woff2") format("woff2"); }
 
-/* =========================================================
-   base
-   ========================================================= */
+:root {
+  --paper: #FBFAF7;
+  --ink: #1A1A1A;
+  --muted: #77736B;
+  --line: rgba(26, 26, 26, .35);
+  --link: #1A1A1A;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) { --paper: #0D0C0B; --ink: #ECE7DE; --muted: #8F8A81; --line: rgba(236, 231, 222, .35); --link: #ECE7DE; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --paper: #0D0C0B; --ink: #ECE7DE; --muted: #8F8A81; --line: rgba(236, 231, 222, .35); --link: #ECE7DE; color-scheme: dark; }
+/* ghibli: summer sky over a meadow; moss ink, grass links */
+:root[data-theme="ghibli"] { --paper: #F4F1E2; --ink: #2E3A2C; --muted: #536349; --line: rgba(63, 107, 46, .45); --link: #3F6B2E; color-scheme: light; }
 
 * { box-sizing: border-box; }
-
-html {
-  -webkit-text-size-adjust: 100%;
-  overflow-x: clip;
-  background: var(--paper);
-}
-
+html { background: var(--paper); -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
-  color: var(--ink);
-  background-color: var(--paper);
-  /* paper grain: a tiny noise tile, faint enough not to touch contrast */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .035 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  font-family: var(--sans);
-  font-size: 17px;
-  line-height: 1.6;
-  /* Instrument Serif has no bold; never let the browser fake one */
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-}
-
-img { max-width: 100%; height: auto; display: block; }
-p { margin: 0 0 1em; max-width: 66ch; }
-strong, b { font-weight: 600; }
-
-a { color: inherit; text-decoration: underline dotted; text-decoration-thickness: 1px; text-underline-offset: .18em; text-decoration-color: var(--rule); transition: color .2s var(--ease), text-decoration-color .2s var(--ease); }
-a:hover { color: var(--accent); text-decoration-color: currentColor; }
-
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-
-::selection { background: color-mix(in srgb, var(--accent) 22%, transparent); }
-
-.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
-
-.skip-link {
-  position: absolute; top: 8px; left: 8px; z-index: 10;
-  padding: 6px 12px;
-  background: var(--ink); color: var(--paper);
-  font: 12px/1.4 var(--mono);
-  transform: translateY(-200%);
-}
-.skip-link:focus { transform: none; }
-
-/* small mono labels: dates, sheet numbers, chips, fig ids, nav */
-.mono, .label {
-  font-family: var(--mono);
-  font-size: 12px;
-  line-height: 1.5;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.05; letter-spacing: -.01em; margin: 0; }
-/* after livetheresidency.com: a sans headline with its key word in serif italic */
-.mix, .section__head h2 { font-family: var(--sans); font-weight: 500; letter-spacing: -.035em; }
-.mix em, .section__head h2 em { font-family: var(--serif); font-weight: 400; font-style: italic; letter-spacing: -.01em; }
-
-/* =========================================================
-   shell — 12 columns, the left three are the drawing-set gutter
-   ========================================================= */
-
-.wrap { width: min(100% - 2 * var(--gap), 1200px); margin: 0 auto; }
-
-.row {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: var(--gap);
-}
-.row > .gutter { grid-column: 1 / 4; }
-.row > .main { grid-column: 4 / 13; min-width: 0; }
-.row > .full { grid-column: 1 / -1; }
-@media (max-width: 720px) {
-  .row { grid-template-columns: minmax(0, 1fr); }
-  .row > .gutter, .row > .main, .row > .full { grid-column: 1; }
-}
-
-/* top bar: name left, nav and the toggle right */
-.topbar {
-  display: flex; flex-wrap: wrap; align-items: baseline; gap: .6rem 1.4rem;
-  padding: 1.1rem 0;
-  border-bottom: 1px solid var(--rule);
-}
-.topbar__name { margin-right: auto; font-family: var(--serif); font-size: 22px; line-height: 1; text-decoration: none; }
-/* the nav: a row of pills, the current page in solid ink */
-.pills { display: flex; flex-wrap: wrap; gap: 2px; padding: 3px; border: 1px solid var(--rule); border-radius: 999px; }
-.pills a { padding: 4px 13px; border-radius: 999px; font-size: 14px; line-height: 1.4; text-decoration: none; color: var(--muted); }
-.pills a:hover { color: var(--ink); }
-.pills a[aria-current="page"] { background: var(--ink); color: var(--paper); }
-@media (max-width: 560px) { .pills { order: 3; } .pills a { padding: 4px 9px; } }
-.theme-toggle {
-  padding: 0; border: 0; background: none; cursor: pointer;
-}
-.theme-toggle:hover { color: var(--ink); }
-html:not(.js) .theme-toggle { display: none; }
-
-main { display: block; padding-bottom: clamp(3rem, 8vw, 6rem); }
-
-/* a section: § number in the gutter, title in the main column */
-.section { margin-top: clamp(3.5rem, 8vw, 6rem); }
-.section__head { align-items: baseline; padding-bottom: .9rem; margin-bottom: 1.6rem; border-bottom: 1px solid var(--rule); }
-.section__head h2 { font-size: clamp(28px, 3.2vw, 32px); }
-@media (max-width: 720px) { .section__head .gutter { margin-bottom: .3rem; } }
-
-/* status chips */
-.chip {
-  display: inline-block;
-  padding: 1px 7px;
-  border: 1px solid var(--rule);
-  font-family: var(--mono); font-size: 11px; line-height: 1.6; letter-spacing: .06em; text-transform: uppercase;
-  color: var(--muted);
-  white-space: nowrap;
-}
-.chip--building { border-color: var(--accent); color: var(--accent); }
-
-/* your writing goes here: obviously unfinished */
-.todo {
-  margin: 0 0 1em;
-  padding: .7rem .9rem;
-  border: 1px dashed var(--muted);
-  font-family: var(--mono); font-size: 13px; line-height: 1.55;
-  color: var(--muted);
-}
-
-/* stat rows */
-.stats { display: flex; flex-wrap: wrap; gap: .3rem 1.4rem; margin: 0 0 1rem; padding: 0; list-style: none; font-family: var(--mono); font-size: 12px; letter-spacing: .04em; color: var(--ink); }
-.stats li::before { content: "▪ "; color: var(--muted); }
-
-/* =========================================================
-   home
-   ========================================================= */
-
-/* copy on the left, a statue plate pinned on the right (assets/js/carve.js);
-   on the home page the log scrolls past it and carves it */
-.split { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: clamp(2rem, 4.5vw, 4.5rem); align-items: start; }
-.hero { padding-top: clamp(2rem, 5vw, 3.5rem); }
-.carve { position: sticky; top: 1.25rem; margin: clamp(2rem, 5vw, 3.5rem) 0 0; }
-@media (max-width: 900px) {
-  .split { grid-template-columns: minmax(0, 1fr); }
-  /* on a phone: who, then the statue, then the log */
-  .split__copy { display: contents; }
-  .hero { order: 1; }
-  .split > .carve { order: 2; position: static; margin-top: 2rem; }
-  .split__copy > .section { order: 3; }
-}
-.carve__stage { position: relative; padding: clamp(10px, 2vw, 18px); border: 1px solid var(--rule); }
-.carve__cells { display: block; width: 100%; aspect-ratio: var(--ratio, 520 / 546); touch-action: pan-y; cursor: crosshair; }
-html:not(.js) .carve__cells { display: none; }
-.carve__stage noscript img { width: 100%; height: auto; }
-.carve figcaption { margin-top: .35rem; }
-.carve figcaption em { font-style: italic; }
-/* the standing figures are tall: keep them inside the screen */
-.carve--tall .carve__stage, .carve--tall figcaption { width: min(100%, 300px); margin-left: auto; }
-@media (max-width: 900px) { .carve--tall .carve__stage, .carve--tall figcaption { margin-left: 0; } }
-/* the 404: one fragment, centred */
-.lost { display: grid; justify-items: center; text-align: center; padding-top: clamp(2rem, 6vw, 4rem); }
-.lost .carve { position: static; width: min(100%, 300px); }
-.lost .carve--tall .carve__stage, .lost .carve--tall figcaption { margin: 0; width: 100%; }
-.hero__name { font-size: clamp(56px, 7vw, 84px); line-height: .9; letter-spacing: -.03em; margin-bottom: 1.2rem; }
-.lede { font-family: var(--serif); font-size: clamp(22px, 2.2vw, 26px); line-height: 1.25; margin: 1.2rem 0 .6em; }
-.hero__links { display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; margin-top: 1.2rem; }
-
-.figlabel { position: absolute; top: -1px; left: -1px; padding: 0 6px; background: var(--paper); border: 1px solid var(--rule); font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: var(--muted); }
-figcaption { margin-top: .6rem; font-family: var(--mono); font-size: 12px; line-height: 1.5; color: var(--muted); }
-
-/* now: one highlighted row */
-.now { align-items: baseline; padding: 1.2rem 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--rule); }
-.now .gutter { color: var(--accent); }
-.now h3 { font-size: clamp(32px, 4vw, 44px); display: inline; margin-right: .6rem; }
-.now .todo { margin-top: .8rem; }
-
-/* what i've built: short lines, a logo before each, in small groups,
-   after idhant.dev; the figures in each line set in ink */
-.built { max-width: 46rem; margin: 0 auto; }
-/* the section is centred: its head too */
-.log-section .section__head { display: block; text-align: center; }
-.built__group + .built__group { margin-top: 2.2rem; }
-.built__label { margin: 0 0 .7rem; font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-.built__list { margin: 0; padding: 0; list-style: none; }
-.item { display: flex; align-items: flex-start; gap: .9rem; padding: .55rem 0; }
-.item__logos { flex: none; display: flex; gap: 4px; padding-top: .05rem; }
-.item__logos img { width: 28px; height: 28px; border-radius: 7px; object-fit: cover; border: 1px solid var(--rule); background: #fff; }
-/* each logo opens its project's site */
-.item__logos a { display: block; border-radius: 7px; text-decoration: none; transition: translate .2s var(--ease), box-shadow .2s var(--ease); }
-.item__logos a:hover, .item__logos a:focus-visible { translate: 0 -2px; box-shadow: 0 0 0 2px var(--accent); }
-a.item__mark:hover, a.item__mark:focus-visible { color: var(--accent); }
-.item__mark { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 7px; border: 1px solid var(--rule); color: var(--ink); background: color-mix(in srgb, var(--paper) 80%, var(--rule)); }
-.item__mark svg { width: 21px; height: 21px; stroke-width: 1.7; }
-.item__line { margin: 0; font-size: 17px; line-height: 1.5; color: color-mix(in srgb, var(--ink) 78%, var(--paper)); max-width: none; }
-.item__line b { font-weight: 600; color: var(--ink); }
-.item__line a { color: var(--ink); }
-.item .todo { display: inline-block; margin: 0; padding: .35rem .6rem; font-size: 12px; }
-.item--now .item__logos img { border-color: var(--accent); }
-
-/* impact figures: a row of big numerals, hairlines between, labels beneath */
-.metrics { display: flex; flex-wrap: wrap; margin: 0; border-top: 1px solid var(--ink); }
-.metrics div { display: flex; flex-direction: column-reverse; justify-content: flex-end; padding: .7rem 1.6rem .2rem 0; margin-right: 1.6rem; border-right: 1px solid var(--rule); min-width: 0; }
-.metrics div:last-child { border-right: 0; margin-right: 0; }
-.metrics dd { margin: 0; font-family: var(--serif); font-size: clamp(34px, 3.6vw, 52px); line-height: 1; letter-spacing: -.02em; color: var(--ink); white-space: nowrap; }
-.metrics dt { margin-top: .35rem; font-size: 11px; line-height: 1.35; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); max-width: 16ch; }
-
-@media (max-width: 720px) {
-  .metrics { display: grid; grid-template-columns: 1fr 1fr; column-gap: 1rem; }
-  .metrics div { padding-right: 0; margin-right: 0; border-right: 0; }
-  .metrics dd { font-size: 28px; }
-}
-
-/* fig. 1 — the world model at the drafting table (assets/js/worldmodel.js) */
-.world { margin: 0; }
-.world__stage { position: relative; border: 1px solid var(--rule); overflow: hidden; }
-.world__field { display: block; width: 100%; height: clamp(260px, 30vw, 320px); touch-action: pan-y; cursor: crosshair; }
-html:not(.js) .world { display: none; }
-.world__err { display: inline-block; min-width: 3ch; text-align: right; color: var(--ink); font-variant-numeric: tabular-nums; }
-@media (hover: none) { .world__hint { display: none; } }
-/* the drawing-sheet corner over the truss; worldmodel.js drives it */
-.sheet {
-  position: absolute; top: 12px; left: 12px;
-  width: min(330px, calc(100% - 24px));
-  padding: 8px 10px;
-  border: 1px solid var(--rule);
   background: var(--paper);
-  font-family: var(--mono); font-size: 11px; line-height: 1.5; color: var(--muted);
-  pointer-events: none;
-}
-.sheet__id { letter-spacing: .08em; }
-.sheet__title { margin: 1px 0 6px; font-size: 12px; color: var(--ink); }
-.sheet__steps { display: flex; flex-wrap: wrap; gap: .2rem .9rem; margin: 0 0 4px; padding: 0; list-style: none; text-transform: uppercase; letter-spacing: .06em; }
-.sheet__steps li { opacity: .55; transition: opacity .25s var(--ease), color .25s var(--ease); }
-.sheet__steps li::before { content: "○ "; }
-.sheet__steps li.is-on { color: var(--ink); opacity: 1; }
-.sheet__steps li.is-on::before { content: "● "; }
-.sheet__steps li.is-done { opacity: 1; }
-.sheet__read { display: flex; flex-wrap: wrap; gap: 0 .45rem; margin: 0; text-transform: uppercase; letter-spacing: .04em; }
-.sheet__read dd { margin: 0 .5rem 0 0; color: var(--ink); font-variant-numeric: tabular-nums; }
-html:not(.js) .sheet { display: none; }
-@media (max-width: 560px) { .sheet__read { display: none; } .sheet__steps { margin-bottom: 0; } }
-
-/* elsewhere: three icons, nothing else */
-.socials { display: flex; gap: 1.4rem; margin: 0; padding: 0; list-style: none; }
-.socials a { display: grid; place-items: center; width: 52px; height: 52px; border: 1px solid var(--rule); border-radius: 50%; color: var(--ink); text-decoration: none; transition: color .25s var(--ease), border-color .25s var(--ease), translate .25s var(--ease); }
-.socials a:hover, .socials a:focus-visible { color: var(--accent); border-color: var(--accent); translate: 0 -2px; }
-.socials svg { width: 22px; height: 22px; }
-/* in the opening, under the intro: smaller, set to the intro's edge */
-.scene__intro .socials { justify-content: flex-end; gap: .5rem; margin-top: .9rem; }
-.scene__intro .socials a { width: 30px; height: 30px; }
-.scene__intro .socials svg { width: 14px; height: 14px; }
-@media (max-width: 900px) { .scene__intro .socials { justify-content: flex-start; margin-top: .7rem; } }
-
-/* =========================================================
-   case studies — /work/<slug>/
-   ========================================================= */
-
-.case__head { padding-top: clamp(2.5rem, 6vw, 4rem); }
-.case__title { font-size: clamp(40px, 6vw, 56px); margin: .3rem 0 1.6rem; }
-
-/* the title block, like the corner of an engineering drawing */
-.titleblock {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(10rem, 50%), 1fr));
-  margin: 0;
-  border-top: 1px solid var(--ink); border-left: 1px solid var(--rule);
-}
-.titleblock div { padding: .55rem .75rem .65rem; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); min-width: 0; }
-.titleblock dt { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
-.titleblock dd { margin: .15rem 0 0; font-family: var(--mono); font-size: 13px; line-height: 1.5; overflow-wrap: anywhere; }
-
-/* figure plates: a ruled frame until there's a real image */
-.plate { margin: clamp(2rem, 5vw, 3rem) 0 0; }
-.plate__frame { position: relative; border: 1px solid var(--rule); }
-.plate__frame--empty {
-  aspect-ratio: 16 / 5;
-  display: grid; place-items: center;
-  background-image: linear-gradient(to top right, transparent calc(50% - .5px), var(--rule) 50%, transparent calc(50% + .5px));
-}
-.plate__frame--empty span { padding: 2px 8px; background: var(--paper); }
-
-.case__sec { padding: 1.2rem 0 1.4rem; border-top: 1px solid var(--rule); row-gap: .6rem; }
-.case__sec:first-of-type { margin-top: clamp(2rem, 5vw, 3rem); }
-.case__sec h2 { font-size: clamp(24px, 2.6vw, 28px); margin-top: .2rem; }
-.case__sec .main > :last-child { margin-bottom: 0; }
-.receipts { margin: 0; padding: 0; list-style: none; font-family: var(--mono); font-size: 13px; }
-.receipts li { padding: .45rem 0; border-bottom: 1px solid var(--rule); }
-
-.pager { margin-top: clamp(3rem, 7vw, 5rem); padding-top: 1rem; border-top: 1px solid var(--ink); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
-.pager a { text-decoration: none; }
-.pager span { display: block; font-family: var(--serif); font-size: 24px; text-transform: none; letter-spacing: 0; color: var(--ink); }
-.pager a:hover span { color: var(--accent); }
-.pager__next { text-align: right; margin-left: auto; }
-
-/* =========================================================
-   research, writing, diary, contact
-   ========================================================= */
-
-.page__head { padding-top: clamp(2.5rem, 6vw, 4rem); }
-.page__title { font-size: clamp(48px, 8vw, 88px); line-height: .95; margin-bottom: .2em; }
-.page__title + p { color: var(--muted); }
-
-.papers, .posts { margin: 0; padding: 0; list-style: none; }
-.paper, .posts > li { padding: 1.3rem 0; border-bottom: 1px solid var(--rule); }
-.paper:first-child, .posts > li:first-child { border-top: 1px solid var(--rule); }
-.paper h2 { font-size: clamp(24px, 2.8vw, 30px); margin: .3rem 0 .5rem; }
-.paper h2 a { text-decoration: none; }
-.paper__by { margin-bottom: .4rem; }
-.paper__links { display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; }
-
-.post { display: grid; grid-template-columns: 11ch 1fr; gap: .3rem 1.4rem; }
-.post time { padding-top: .2rem; }
-.post__body > :last-child { margin-bottom: 0; }
-@media (max-width: 560px) { .post { grid-template-columns: 1fr; } }
-
-/* sign-off at the foot of every page */
-.colophon { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .3rem 1.2rem; padding: 1rem 0 2rem; border-top: 1px solid var(--rule); }
-
-/* =========================================================
-   motion — log entries rise 8px into place; nothing under reduced motion
-   ========================================================= */
-
-.js .reveal { opacity: 0; translate: 0 8px; transition: opacity .6s var(--ease), translate .6s var(--ease); }
-.js .reveal.is-in { opacity: 1; translate: 0 0; }
-
-@media (prefers-reduced-motion: reduce) {
-  .js .reveal { opacity: 1; translate: none; transition: none; }
-  *, *::before, *::after { transition: none !important; animation: none !important; }
+  color: var(--ink);
+  font: 400 22px/1.5 "Instrument Serif", Georgia, "Times New Roman", serif;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
 }
 
-.page__title .lede__more { display: block; margin-top: .4em; font-family: var(--sans); font-weight: 400; font-size: clamp(17px, 2vw, 22px); letter-spacing: 0; color: var(--muted); }
-/* on a phone the page's own content comes first; the tall plates follow it */
-@media (max-width: 900px) {
-  .split > .carve--tall { order: 4; margin-top: 3rem; }
-  .carve--tall .carve__stage, .carve--tall figcaption { width: min(100%, 240px); }
+main { max-width: 640px; margin: 0 auto; padding: 56px 20px 72px; }
+h1 { font: inherit; margin: 0 0 18px; }
+p { margin: 0 0 18px; }
+ul { margin: 0 0 18px; padding: 0; list-style: none; }
+li { position: relative; padding-left: 20px; margin-bottom: 6px; }
+li::before { content: "•"; position: absolute; left: 2px; color: var(--muted); }
+
+a { color: var(--link); text-decoration: underline 1px var(--line); text-underline-offset: 3px; transition: text-decoration-color .2s; }
+a:hover { text-decoration-color: currentColor; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; border-radius: 2px; }
+
+.themes { margin-top: 40px; color: var(--muted); font-size: 17px; }
+.themes button { font: inherit; color: var(--muted); background: none; border: 0; padding: 10px 2px; min-height: 44px; cursor: pointer; }
+.themes button:hover { color: var(--ink); }
+.themes button[aria-pressed="true"] { color: var(--ink); text-decoration: underline 1px var(--line); text-underline-offset: 3px; }
+
+/* ---------- ghibli scene: only drawn in the ghibli theme ---------- */
+
+.scene { display: none; }
+:root[data-theme="ghibli"] { background: linear-gradient(#BCDDEE 0, #D7EBF1 30%, #EEF1E6 62%, var(--paper) 80%); min-height: 100%; }
+:root[data-theme="ghibli"] body { background: transparent; }
+:root[data-theme="ghibli"] .scene { display: block; position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+:root[data-theme="ghibli"] main { padding-bottom: max(30vh, 180px); }
+
+/* painted cumulus: a flat white base with a soft blue-grey belly */
+.cloud {
+  position: absolute; left: 0; width: 220px; height: 64px; border-radius: 64px;
+  background: #FFFFFF;
+  box-shadow: inset 0 -10px 14px rgba(160, 188, 206, .45);
+  opacity: .92;
+  animation: drift 180s linear infinite;
 }
+.cloud::before, .cloud::after { content: ""; position: absolute; background: #FFFFFF; border-radius: 50%; }
+.cloud::before { width: 96px; height: 96px; left: 34px; top: -50px; }
+.cloud::after { width: 70px; height: 70px; left: 112px; top: -32px; }
+.cloud--1 { top: 9vh; animation-duration: 210s; animation-delay: -60s; }
+.cloud--2 { top: 24vh; scale: .7; animation-duration: 260s; animation-delay: -170s; opacity: .8; }
+.cloud--3 { top: 4vh; scale: .5; animation-duration: 300s; animation-delay: -20s; opacity: .7; }
+@keyframes drift { from { translate: -260px 0; } to { translate: calc(100vw + 40px) 0; } }
 
-/* =========================================================
-   the opening scene (home): a statue under a light, its name either side,
-   held on screen while the scroll carves it. carve.js sets --p (0..1).
-   ========================================================= */
+.hills { display: none; }
+:root[data-theme="ghibli"] body { position: relative; min-height: 100vh; min-height: 100svh; }
+:root[data-theme="ghibli"] .hills { display: block; position: absolute; left: 0; bottom: 0; z-index: -1; width: 100%; height: 26vh; min-height: 150px; }
+.hill--far { fill: #A8C98C; }
+.hill--mid { fill: #7EAE62; }
+.hill--near { fill: #5C8E48; }
 
-.topbar--over { position: absolute; top: 0; left: 0; right: 0; z-index: 5; border-bottom-color: transparent; }
-
-.scene { --p: 0; position: relative; }
-.scene__stage {
-  position: relative; height: 100svh; min-height: 600px; overflow: hidden;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  grid-template-rows: minmax(0, 1fr) auto;
-  column-gap: clamp(1rem, 3vw, 3rem);
-  padding: 5.5rem max(var(--gap), calc((100vw - 1200px) / 2)) 1.6rem;
-  /* the gallery light: a pool on the plinth, falling off into the room */
-  background: radial-gradient(ellipse 38% 55% at 50% 46%, var(--spot), transparent 70%);
-}
-.scene__word {
-  margin: 0; align-self: center; max-width: none;
-  font-size: clamp(76px, 12.5vw, 210px); line-height: .8; letter-spacing: -.045em; color: var(--ink);
-  animation: rise 1.1s var(--ease) backwards;
-}
-.scene__word--ryan { grid-column: 1; grid-row: 1; justify-self: end; font-family: var(--serif); letter-spacing: -.02em;
-  translate: calc(var(--p) * -3vw) calc(var(--p) * -4vh); }
-.scene__word--ryan em { font-style: italic; }
-.scene__word--ahn { grid-column: 3; grid-row: 1; justify-self: start; font-family: var(--sans); font-weight: 500;
-  translate: calc(var(--p) * 3vw) calc(var(--p) * 4vh); animation-delay: .12s; }
-
-.scene__plate { grid-column: 2; grid-row: 1 / 3; align-self: center; justify-self: center; margin: 0; animation: develop 1.4s var(--ease) .25s backwards; }
-.scene__plate .carve__cells { width: min(46vw, calc((100svh - 6.5rem) * 520 / 720)); aspect-ratio: 520 / 720; }
-
-
-.scene__intro { grid-column: 1; grid-row: 2; align-self: end; justify-self: end; max-width: 30rem; text-align: right; animation: rise 1s var(--ease) .4s backwards; }
-.scene__intro .lede { margin: 0 0 .5rem; }
-/* fig. 0 — the headshot, small, over the intro */
-.scene__me { display: flex; align-items: center; justify-content: flex-end; gap: .75rem; margin: 0 0 1rem; animation: develop 1.2s var(--ease) .55s backwards; }
-.scene__me img { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; border: 1px solid var(--rule); }
-.scene__intro p { margin-left: auto; }
-.scene__intro .lede + p { margin-bottom: 0; font-size: 15px; color: var(--muted); }
-.scene__intro strong { color: var(--ink); }
-
-
-@media (max-width: 900px) {
-  .scene__stage {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    grid-template-rows: auto minmax(0, 1fr) auto;
-    padding-top: 8rem; row-gap: .8rem;
-    background: radial-gradient(ellipse 60% 40% at 50% 50%, var(--spot), transparent 70%);
-  }
-  .scene__word { font-size: clamp(64px, 19vw, 120px); align-self: end; }
-  .scene__word--ryan { grid-column: 1; grid-row: 1; justify-self: start; }
-  .scene__word--ahn { grid-column: 2; grid-row: 1; justify-self: end; }
-  .scene__plate { grid-column: 1 / -1; grid-row: 2; justify-self: center; }
-  .scene__plate .carve__cells { width: min(88vw, calc((100svh - 26rem) * 520 / 720)); }
-  .scene__intro { grid-column: 1 / -1; grid-row: 3; justify-self: start; text-align: left; }
-  .scene__intro p { margin-left: 0; }
-  .scene__me { justify-content: flex-start; margin-bottom: .7rem; }
-  .scene__me img { width: 76px; height: 76px; }
-}
-
-/* below the scene: the log gets the room it earns */
-.scene + .wrap > .section:first-child { margin-top: clamp(3rem, 8vw, 6rem); }
-.section__head h2 { font-size: clamp(34px, 4.6vw, 56px); }
-
-
-@keyframes rise { from { opacity: 0; translate: 0 18px; } }
-@keyframes develop { from { opacity: 0; } }
-@media (prefers-reduced-motion: reduce) {
-  .scene__word { translate: none; }
-}
+@media (prefers-reduced-motion: reduce) { .cloud { animation: none; translate: 20vw 0; } .cloud--2 { translate: 62vw 0; } .cloud--3 { translate: 80vw 0; } }
+@media (max-width: 640px) { body { font-size: 20px; } main { padding-top: 40px; } }
