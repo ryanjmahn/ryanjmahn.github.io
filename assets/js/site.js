@@ -1,4 +1,4 @@
-// site.js — the theme picker: light, dark or ghibli. Until one is chosen
+// site.js — the theme picker: light or dark. Until one is chosen
 // the page follows the system (light/dark); the choice is kept in
 // localStorage and read back by the inline script in <head>.
 (function theme() {
@@ -6,7 +6,7 @@
   var buttons = document.querySelectorAll("[data-set]");
   var meta = document.querySelector('meta[name="theme-color"]');
   var system = window.matchMedia("(prefers-color-scheme: dark)");
-  var colors = { light: "#FBFAF7", dark: "#0D0C0B", ghibli: "#BCDDEE" };
+  var colors = { light: "#FBFAF7", dark: "#0D0C0B" };
 
   function current() { return root.getAttribute("data-theme") || (system.matches ? "dark" : "light"); }
   function sync() {
