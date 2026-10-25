@@ -1,614 +1,68 @@
-/* =========================================================
-   tokens — the letter, in black and white
-   A monotone slide: ink on paper, with greys standing in for the stains.
-   The variable names keep their histology roles (eosin = cytoplasm and
-   the one accent, nucleus/karyon = the nuclei). These are the only colour
-   values in the site; the canvases (assets/js/site.js, portrait.js,
-   worldmodel.js) read them from here. The theme follows the system unless
-   the toggle has set data-theme on <html>.
-   ========================================================= */
+/* plain pages in Times New Roman: a home page, then projects, initiatives,
+   cv and contact (structure after wenhao-lu.com). light and dark follow the
+   system until one is chosen. */
 
 :root {
-  --paper:    #F7F7F7;
-  --ink:      #1A1A1A;
-  --ink-2:    #8C8C8C;
-  /* raised surfaces: white cards on the off-white page, a dark pill */
-  --card:     #FFFFFF;
-  --card-edge: rgba(10, 10, 10, .08);
-  --shadow:   0 1px 2px rgba(10, 10, 10, .04), 0 12px 32px -12px rgba(10, 10, 10, .14);
-  --pill:     #1A1A1A;
-  --pill-ink: #F7F7F7;
-  --rule:     rgba(10, 10, 10, .16);
-  --grid:     rgba(10, 10, 10, .045);
-  --eosin:    #5C5C5C;
-  --nucleus:  #3A3A3A;
-  --karyon:   #000000;
-
+  --paper: #FBFAF7;
+  --ink: #1A1A1A;
+  --muted: #77736B;
+  --line: rgba(26, 26, 26, .35);
+  --link: #1A1A1A;
   color-scheme: light;
-
-  --copy: 13px;
-  --flow: 1em;
-  --measure: 60ch;
-  --ease: cubic-bezier(.2, .7, .2, 1);
-
-  /* one face for everything: reading text and readouts alike */
-  --font-text: "Departure Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  /* instrument readouts, labels, the blueprint: a pixel mono, crisp at
-     multiples of 11px (Departure Mono, Helena Zhang, OFL) */
-  --font-mono: "Departure Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
-
-/* darkfield: the same slide with the lights off */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper:   #0A0A0A;
-    --ink:     #EDEDED;
-    --ink-2:   #9A9A9A;
-    --rule:    rgba(237, 237, 237, .18);
-    --grid:    rgba(237, 237, 237, .04);
-    --eosin:   #B4B4B4;
-    --nucleus: #E0E0E0;
-    --karyon:  #000000;
-    --card:    #141414;
-    --card-edge: rgba(237, 237, 237, .10);
-    --shadow:  0 1px 2px rgba(0, 0, 0, .4), 0 12px 32px -12px rgba(0, 0, 0, .7);
-    --pill:    #EDEDED;
-    --pill-ink: #0A0A0A;
-    color-scheme: dark;
-  }
+  :root:not([data-theme]) { --paper: #0D0C0B; --ink: #ECE7DE; --muted: #8F8A81; --line: rgba(236, 231, 222, .35); --link: #ECE7DE; color-scheme: dark; }
 }
-:root[data-theme="dark"] {
-  --paper:   #0A0A0A;
-  --ink:     #EDEDED;
-  --ink-2:   #9A9A9A;
-  --rule:    rgba(237, 237, 237, .18);
-  --grid:    rgba(237, 237, 237, .04);
-  --eosin:   #B4B4B4;
-  --nucleus: #E0E0E0;
-  --karyon:  #000000;
-  --card:  #141414;
-  --card-edge: rgba(237, 237, 237, .10);
-  --shadow:  0 1px 2px rgba(0, 0, 0, .4), 0 12px 32px -12px rgba(0, 0, 0, .7);
-  --pill:  #EDEDED;
-  --pill-ink: #0A0A0A;
-  color-scheme: dark;
-}
-
-/* self-hosted, latin subsets */
-@font-face {
-  font-family: "Departure Mono";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/assets/fonts/departure-mono.woff2") format("woff2");
-}
-
-/* =========================================================
-   reset & base
-   ========================================================= */
+:root[data-theme="dark"] { --paper: #0D0C0B; --ink: #ECE7DE; --muted: #8F8A81; --line: rgba(236, 231, 222, .35); --link: #ECE7DE; color-scheme: dark; }
 
 * { box-sizing: border-box; }
-
-html {
-  -webkit-text-size-adjust: 100%;
-  overflow-x: clip;
-  background: var(--paper);
-}
-
+html { background: var(--paper); -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
-  min-height: 100vh;
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
+  background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-text);
-  font-size: var(--copy);
-  line-height: 1.65;
-  letter-spacing: 0;
-  /* the face has one weight; never let the browser smear a fake bold */
+  font: 400 17px/1.5 "Times New Roman", Times, serif;
   font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  /* a counting chamber: fine rulings every 24px, a heavier one every 96 */
-  background-color: var(--paper);
-  background-image:
-    linear-gradient(var(--grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid) 1px, transparent 1px),
-    linear-gradient(var(--grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-  background-size: 96px 96px, 96px 96px, 24px 24px, 24px 24px;
-  background-position: center top;
+  -webkit-font-smoothing: antialiased;
 }
 
-img { max-width: 100%; display: block; }
+header.site, main, footer.site { max-width: 580px; margin: 0 auto; padding: 0 20px; }
+header.site { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 18px; padding-top: 28px; padding-bottom: 8px; }
+header.site .mark { margin-right: auto; text-decoration: none; }
+header.site nav { display: flex; flex-wrap: wrap; gap: 0 14px; }
+header.site nav a { color: var(--muted); text-decoration: none; display: inline-block; padding: 10px 0; }
+header.site nav a:hover, header.site nav a[aria-current="page"] { color: var(--ink); }
+header.site nav a[aria-current="page"] { text-decoration: underline 1px var(--line); text-underline-offset: 3px; }
+main { padding-top: 32px; padding-bottom: 48px; }
+footer.site { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0 16px; padding-bottom: 32px; color: var(--muted); font-size: 15px; }
+footer.site p { margin: 0; }
+h1 { font-size: 22px; font-weight: 400; margin: 0 0 14px; }
+h2 { font-size: 19px; font-weight: 400; margin: 32px 0 10px; }
+h3 { font-size: 17px; font-weight: 400; font-style: italic; margin: 18px 0 6px; }
+.ko { color: var(--muted); font-size: 17px; margin-left: 4px; }
+.back { margin-top: -6px; }
+.meta { color: var(--muted); font-size: 15px; margin: -4px 0 10px; }
+article + article { margin-top: 36px; }
+.entry { margin-bottom: 16px; }
+.entry .row { display: flex; justify-content: space-between; gap: 12px; margin: 0 0 2px; }
+.entry .row b { font-weight: 700; }
+.entry .date { color: var(--muted); font-size: 15px; white-space: nowrap; }
+.entry .meta { margin: 0 0 4px; }
+ol { margin: 0 0 14px; padding-left: 22px; }
+ol li { padding-left: 4px; }
+ol li::before { content: none; }
+p { margin: 0 0 14px; }
+ul { margin: 0 0 14px; padding: 0; list-style: none; }
+li { position: relative; padding-left: 18px; margin-bottom: 4px; }
+li::before { content: "•"; position: absolute; left: 2px; color: var(--muted); }
 
-::selection { background: color-mix(in srgb, var(--eosin) 26%, transparent); }
+a { color: var(--link); text-decoration: underline 1px var(--line); text-underline-offset: 3px; transition: text-decoration-color .2s; }
+a:hover { text-decoration-color: currentColor; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; border-radius: 2px; }
 
-/* emphasis without a bold cut: full-strength ink */
-strong, b {
-  font-weight: 400;
-  color: var(--ink);
-}
+.themes { color: var(--muted); }
+.themes button { font: inherit; color: var(--muted); background: none; border: 0; padding: 10px 2px; min-height: 44px; cursor: pointer; }
+.themes button:hover { color: var(--ink); }
+.themes button[aria-pressed="true"] { color: var(--ink); text-decoration: underline 1px var(--line); text-underline-offset: 3px; }
 
-a {
-  color: inherit;
-  text-decoration: none;
-  background-image: linear-gradient(var(--eosin), var(--eosin));
-  background-repeat: no-repeat;
-  background-position: 0 100%;
-  background-size: 100% 1px;
-  padding-bottom: .04em;
-  transition: color .25s var(--ease), background-size .25s var(--ease);
-}
-a:hover { color: var(--eosin); background-size: 100% 2px; }
-
-:focus-visible {
-  outline: 2px solid var(--eosin);
-  outline-offset: 3px;
-  border-radius: 2px;
-}
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.skip-link {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  z-index: 10;
-  padding: 6px 12px;
-  background: var(--ink);
-  color: var(--paper);
-  font-family: var(--font-mono);
-  font-size: 13px;
-  transform: translateY(-200%);
-}
-.skip-link:focus { transform: none; }
-
-/* =========================================================
-   the letter — one column, one page
-   ========================================================= */
-
-.letter {
-  width: min(100% - 3rem, var(--measure));
-  margin: 0 auto;
-  padding: clamp(2.5rem, 7vw, 5rem) 0 clamp(2rem, 4vw, 3rem);
-}
-
-.letter p,
-.letter ul,
-.letter ol,
-.letter dl { margin: 0 0 var(--flow); }
-.letter > :last-child { margin-bottom: 0; }
-
-/* body copy sits a step under full ink, so <strong> is what the eye lands on */
-.letter p,
-.letter li,
-.letter dd { color: color-mix(in srgb, var(--ink) 86%, var(--paper)); }
-
-/* letterhead: who it is, and a running automaton. On the 404 the name is the way
-   back home. The automaton is run by site.js. */
-.vitals {
-  display: flex;
-  align-items: center;
-  gap: .9rem;
-  margin-bottom: clamp(1.6rem, 4vw, 2.6rem);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: .01em;
-  color: var(--ink-2);
-}
-.vitals__id {
-  margin: 0;
-  font: inherit;
-  color: var(--ink);
-  white-space: nowrap;
-  text-shadow: none;
-}
-a.vitals__id { background-size: 0 1px; }
-a.vitals__id:hover { background-size: 100% 1px; }
-.vitals__trace {
-  flex: 1;
-  min-width: 0;
-  height: 40px;
-  display: block;
-}
-/* without the script there is no trace; a plain rule holds its place */
-html:not(.js) .vitals__trace { height: 1px; background: var(--rule); }
-/* light / dark: a slide flipped between brightfield and darkfield */
-.theme-toggle {
-  flex: none;
-  padding: 2px 0;
-  border: 0;
-  background: none;
-  font: inherit;
-  color: var(--ink-2);
-  cursor: pointer;
-  transition: color .25s var(--ease);
-}
-.theme-toggle:hover { color: var(--ink); }
-.theme-toggle__glyph { display: inline-block; transition: transform .45s var(--ease); }
-.theme-toggle:hover .theme-toggle__glyph { transform: rotate(180deg); }
-html:not(.js) .theme-toggle { display: none; }
-.vitals__readout { white-space: nowrap; font-variant-numeric: tabular-nums; }
-
-/* home: the letter, with the portrait in its margin */
-.letter--home { --measure: 78ch; }
-.intro {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(160px, 27%, 250px);
-  column-gap: clamp(1.5rem, 4vw, 3rem);
-  align-items: start;
-}
-.intro__copy > :last-child { margin-bottom: 0; }
-@media (max-width: 720px) {
-  .intro { grid-template-columns: 1fr; row-gap: 1.4rem; }
-  .portrait { grid-row: 1; display: flex; align-items: flex-end; gap: 1rem; }
-  .portrait .portrait__stage { flex: none; width: 160px; padding: 8px; }
-  .portrait figcaption { margin: 0; }
-}
-
-.milestones { margin-bottom: var(--flow); }
-.milestones > p { margin-bottom: .1em; color: var(--ink); }
-
-/* a section label, the way a notebook heads a page */
-.letter .label {
-  margin-bottom: .55rem;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--ink-2);
-}
-.letter .milestones ul { margin-bottom: 0; }
-.milestones + .milestones { margin-top: var(--flow); }
-
-.letter ul { padding-left: 1.3em; list-style: disc outside; }
-.letter li { padding-left: .2em; margin-bottom: .16em; }
-.letter li::marker { color: var(--eosin); font-size: .7em; }
-
-/* the log: numbered entries, each with its own sketch in the margin */
-.letter .entries { padding-left: 2.1em; list-style: none; counter-reset: entry; }
-.entries li {
-  position: relative;
-  padding-left: 0;
-  margin-bottom: .5em;
-  counter-increment: entry;
-}
-.entries li::before {
-  content: counter(entry, decimal-leading-zero);
-  position: absolute;
-  left: -2.1em;
-  top: .42em;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--ink-2);
-}
-.glyph {
-  display: none;
-  position: absolute;
-  top: .1em;
-  width: 28px;
-  height: 28px;
-  fill: none;
-  stroke: var(--ink-2);
-  stroke-width: 1;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  overflow: visible;
-  transition: stroke .3s var(--ease), transform .4s var(--ease);
-}
-.glyph .fill { fill: var(--ink-2); stroke: none; transition: fill .3s var(--ease); }
-.glyph .dash { stroke-dasharray: 2 2.5; }
-.entries li:hover .glyph { stroke: var(--ink); transform: rotate(-4deg) scale(1.08); }
-.entries li:hover .glyph .fill { fill: var(--ink); }
-@media (min-width: 960px) {
-  /* a ruled margin down the left of the page, sketches outside it */
-  .letter--home { position: relative; }
-  .letter--home::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: -1.6rem;
-    width: 3px;
-    border-left: 1px solid var(--rule);
-    border-right: 1px solid var(--rule);
-  }
-  .glyph { display: block; left: calc(-2.1em - 1.6rem - 48px); }
-}
-
-.links {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: .5rem;
-  margin-top: calc(var(--flow) * 1.5);
-}
-
-/* =========================================================
-   fig. 0 — the portrait, dithered (assets/js/portrait.js); the ASCII
-   one survives on the 404
-   ========================================================= */
-
-.portrait__cells {
-  display: block;
-  width: 100%;
-  aspect-ratio: 1;
-  touch-action: pan-y;
-}
-html:not(.js) .portrait__cells { display: none; }
-
-.portrait {
-  margin: 0;
-  container-type: inline-size;
-}
-/* the plate sits on a card, labelled like a drawing */
-.portrait__stage {
-  position: relative;
-  padding: 12px;
-  border-radius: 14px;
-  background: var(--card);
-  box-shadow: 0 0 0 1px var(--card-edge), var(--shadow);
-}
-.portrait__stage img { display: block; width: 100%; height: auto; border-radius: 8px; }
-.chip {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--card) 88%, transparent);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-  box-shadow: 0 0 0 1px var(--card-edge);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  line-height: 1.4;
-  letter-spacing: .08em;
-  color: var(--ink-2);
-}
-.ascii-portrait {
-  margin: 0;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  /* 72 columns x .6em per character fills the frame's width */
-  font-size: calc(100cqi / 43.2);
-  line-height: 1;
-  white-space: pre;
-  overflow: hidden;
-  user-select: none;
-  color: var(--ink);
-}
-.portrait figcaption {
-  margin-top: .7rem;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  line-height: 1.4;
-  color: var(--ink-2);
-}
-
-/* =========================================================
-   fig. 1 — the world model at the drafting table (assets/js/worldmodel.js), home only
-   ========================================================= */
-
-.world { margin: clamp(2.2rem, 5vw, 3.2rem) 0 0; }
-.world__stage {
-  position: relative;
-  border-radius: 14px;
-  background: var(--card);
-  box-shadow: 0 0 0 1px var(--card-edge), var(--shadow);
-  overflow: hidden;
-}
-.world__field {
-  display: block;
-  width: 100%;
-  height: clamp(250px, 30vw, 300px);
-  touch-action: pan-y;
-  cursor: crosshair;
-}
-html:not(.js) .world { display: none; }
-.world figcaption {
-  margin-top: .7rem;
-  max-width: 62ch;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  line-height: 1.5;
-  color: var(--ink-2);
-}
-.world__err { display: inline-block; min-width: 3ch; text-align: right; color: var(--ink); font-variant-numeric: tabular-nums; }
-@media (hover: none) { .world__hint { display: none; } }
-
-
-/* =========================================================
-   borrowed from openwm, in grey: the nav, pills, the two-tone
-   headline, and the drawing sheet card
-   ========================================================= */
-
-/* nav: small caps-style links, underlined */
-.vitals__nav { display: flex; align-items: center; gap: 1rem; }
-.vitals__nav a {
-  color: var(--ink-2);
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  background-image: linear-gradient(var(--rule), var(--rule));
-}
-.vitals__nav a:hover,
-.vitals__nav a[aria-current="page"] { color: var(--ink); }
-
-/* pills: dark and solid for the main action, outlined for the rest,
-   each with its arrow in a small disc */
-.pill {
-  display: inline-flex;
-  align-items: center;
-  gap: .6rem;
-  padding: 5px 5px 5px 14px;
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  line-height: 1;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  color: var(--ink);
-  background: var(--card);
-  background-image: none;
-  box-shadow: 0 0 0 1px var(--card-edge);
-  transition: box-shadow .25s var(--ease), transform .25s var(--ease);
-}
-.pill:hover { color: var(--ink); background-size: auto; box-shadow: 0 0 0 1px var(--ink-2); }
-.pill__arrow {
-  display: inline-grid;
-  place-items: center;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--ink) 8%, transparent);
-  transition: transform .25s var(--ease);
-}
-.pill:hover .pill__arrow { transform: translateX(2px); }
-.pill--dark { color: var(--pill-ink); background: var(--pill); box-shadow: none; }
-.pill--dark:hover { color: var(--pill-ink); box-shadow: none; opacity: .88; }
-.pill--dark .pill__arrow { background: color-mix(in srgb, var(--pill-ink) 18%, transparent); }
-
-/* the headline: who, in ink; what, in grey */
-.letter .lede {
-  margin-bottom: .9rem;
-  font-size: 22px;
-  line-height: 1.3;
-  letter-spacing: -.01em;
-  color: var(--ink);
-}
-.lede__more { color: var(--ink-2); }
-.lede__more a { color: inherit; background-size: 100% 2px; }
-.lede__more a:hover { color: var(--ink); }
-.letter .intro__sub { color: var(--ink-2); }
-.intro__sub strong { color: var(--ink); }
-
-/* the drawing sheet: a card over fig. 1 that follows the run */
-.sheet {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  width: min(330px, calc(100% - 24px));
-  padding: 10px 12px 9px;
-  border-radius: 10px;
-  background: color-mix(in srgb, var(--card) 88%, transparent);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-  box-shadow: 0 0 0 1px var(--card-edge), var(--shadow);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  line-height: 1.5;
-  color: var(--ink-2);
-  pointer-events: none;
-}
-.sheet__id { letter-spacing: .08em; }
-.sheet__title { margin: 1px 0 6px; font-size: 13px; color: var(--ink); }
-.sheet__steps { display: flex; flex-wrap: wrap; gap: .2rem .9rem; margin: 0 0 4px; padding: 0; list-style: none; text-transform: uppercase; letter-spacing: .06em; }
-.sheet__steps li { margin: 0; padding: 0; color: var(--ink-2); opacity: .55; transition: opacity .25s var(--ease), color .25s var(--ease); }
-.sheet__steps li::before { content: "○ "; }
-.sheet__steps li.is-on { color: var(--ink); opacity: 1; }
-.sheet__steps li.is-on::before { content: "● "; }
-.sheet__steps li.is-done { opacity: 1; }
-.sheet__read { display: flex; flex-wrap: wrap; gap: 0 .45rem; margin: 0; text-transform: uppercase; letter-spacing: .04em; }
-.sheet__read dd { margin: 0 .5rem 0 0; color: var(--ink); font-variant-numeric: tabular-nums; }
-html:not(.js) .sheet { display: none; }
-/* on a phone the card keeps its title and steps; the truss needs the room */
-@media (max-width: 560px) { .sheet__read { display: none; } .sheet__steps { margin-bottom: 0; } }
-
-/* the dither field behind everything (assets/js/field.js) */
-.field { position: absolute; top: 0; left: 0; z-index: 0; pointer-events: none; }
-html:not(.js) .field { display: none; }
-.letter { position: relative; z-index: 1; }
-
-/* =========================================================
-   diary — short entries, newest first; a teaser on the home page
-   ========================================================= */
-
-.diary { margin-top: clamp(2.2rem, 5vw, 3.2rem); }
-.letter--diary .lede { margin-bottom: clamp(1.6rem, 4vw, 2.4rem); }
-.diary__head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
-.diary__head a { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-2); }
-.letter .posts { margin: 0; padding: 0; list-style: none; display: grid; gap: .7rem; }
-.letter .posts li { margin: 0; padding: 0; }
-.post {
-  display: grid;
-  grid-template-columns: 11ch 1fr;
-  gap: .3rem 1.2rem;
-  padding: 14px 16px;
-  border-radius: 12px;
-  background: var(--card);
-  box-shadow: 0 0 0 1px var(--card-edge), var(--shadow);
-}
-.post time { font-size: 11px; letter-spacing: .06em; color: var(--ink-2); padding-top: 2px; }
-.post__body > :last-child { margin-bottom: 0; }
-.letter .post__body p { color: var(--ink); }
-@media (max-width: 560px) { .post { grid-template-columns: 1fr; } }
-
-/* sign-off at the foot of the page */
-.colophon {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: .3rem 1.2rem;
-  margin-top: clamp(2rem, 5vw, 3rem);
-  padding-top: .8rem;
-  border-top: 1px dashed var(--rule);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--ink-2);
-}
-
-/* =========================================================
-   404
-   ========================================================= */
-
-.page-title {
-  margin: 0 0 .3em;
-  font: inherit;
-  font-style: italic;
-  font-size: 2.1em;
-  line-height: 1;
-}
-/* this portrait is 84 columns wide */
-.portrait--404 { max-width: 300px; margin-top: 2rem; }
-.portrait--404 .ascii-portrait { font-size: calc(100cqi / 50.4); }
-
-/* =========================================================
-   motion — one page load, in order: the letterhead, then the letter
-   line by line
-   ========================================================= */
-
-@keyframes rise { from { opacity: 0; translate: 0 12px; } to { opacity: 1; translate: 0 0; } }
-@keyframes develop { from { opacity: 0; } to { opacity: 1; } }
-
-.vitals { animation: develop .9s var(--ease) backwards; }
-.arrive { animation: rise .7s var(--ease) backwards; animation-delay: calc(var(--i, 0) * 80ms + 120ms); }
-
-/* page to page: a short cross-fade */
-@view-transition { navigation: auto; }
-.vitals { view-transition-name: vitals; }
-@keyframes vt-out { to { opacity: 0; translate: 0 -6px; } }
-@keyframes vt-in { from { opacity: 0; translate: 0 10px; } }
-::view-transition-old(root) { animation: vt-out .2s var(--ease) both; }
-::view-transition-new(root) { animation: vt-in .4s var(--ease) both; }
-
-@media (prefers-reduced-motion: reduce) {
-  @view-transition { navigation: none; }
-  * { animation-duration: .001ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
-}
-
-@media (max-width: 560px) {
-  .letter { width: calc(100% - 2rem); }
-  .vitals__trace { display: none; }
-  .vitals__nav { margin-left: auto; }
-}
+@media (max-width: 640px) { main { padding-top: 20px; } .entry .row { flex-direction: column; gap: 0; } }
