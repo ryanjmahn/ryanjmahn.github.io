@@ -7,7 +7,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from check import serve
 from playwright.sync_api import sync_playwright
 
-PAGES = ["/", "/projects/", "/initiatives/", "/cv/", "/contact/", "/404.html"]
+PAGES = ["/", "/projects/", "/initiatives/", "/contact/", "/404.html"]
 WIDTHS = [375, 768, 1440]
 
 def name(path):
