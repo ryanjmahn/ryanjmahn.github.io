@@ -1,5 +1,6 @@
-/* one column of plain sentences, after idhant.dev, in Times New Roman.
-   light and dark follow the system until one is chosen. */
+/* plain pages in Times New Roman: a home page, then projects, initiatives,
+   cv and contact (structure after wenhao-lu.com). light and dark follow the
+   system until one is chosen. */
 
 :root {
   --paper: #FBFAF7;
@@ -25,8 +26,31 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-main { max-width: 540px; margin: 0 auto; padding: 40px 20px 64px; }
-h1 { font: inherit; margin: 0 0 14px; }
+header.site, main, footer.site { max-width: 580px; margin: 0 auto; padding: 0 20px; }
+header.site { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 18px; padding-top: 28px; padding-bottom: 8px; }
+header.site .mark { margin-right: auto; text-decoration: none; }
+header.site nav { display: flex; flex-wrap: wrap; gap: 0 14px; }
+header.site nav a { color: var(--muted); text-decoration: none; display: inline-block; padding: 10px 0; }
+header.site nav a:hover, header.site nav a[aria-current="page"] { color: var(--ink); }
+header.site nav a[aria-current="page"] { text-decoration: underline 1px var(--line); text-underline-offset: 3px; }
+main { padding-top: 32px; padding-bottom: 48px; }
+footer.site { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0 16px; padding-bottom: 32px; color: var(--muted); font-size: 15px; }
+footer.site p { margin: 0; }
+h1 { font-size: 22px; font-weight: 400; margin: 0 0 14px; }
+h2 { font-size: 19px; font-weight: 400; margin: 32px 0 10px; }
+h3 { font-size: 17px; font-weight: 400; font-style: italic; margin: 18px 0 6px; }
+.ko { color: var(--muted); font-size: 17px; margin-left: 4px; }
+.back { margin-top: -6px; }
+.meta { color: var(--muted); font-size: 15px; margin: -4px 0 10px; }
+article + article { margin-top: 36px; }
+.entry { margin-bottom: 16px; }
+.entry .row { display: flex; justify-content: space-between; gap: 12px; margin: 0 0 2px; }
+.entry .row b { font-weight: 700; }
+.entry .date { color: var(--muted); font-size: 15px; white-space: nowrap; }
+.entry .meta { margin: 0 0 4px; }
+ol { margin: 0 0 14px; padding-left: 22px; }
+ol li { padding-left: 4px; }
+ol li::before { content: none; }
 p { margin: 0 0 14px; }
 ul { margin: 0 0 14px; padding: 0; list-style: none; }
 li { position: relative; padding-left: 18px; margin-bottom: 4px; }
@@ -36,9 +60,9 @@ a { color: var(--link); text-decoration: underline 1px var(--line); text-underli
 a:hover { text-decoration-color: currentColor; }
 :focus-visible { outline: 2px solid currentColor; outline-offset: 3px; border-radius: 2px; }
 
-.themes { margin-top: 28px; color: var(--muted); font-size: 15px; }
+.themes { color: var(--muted); }
 .themes button { font: inherit; color: var(--muted); background: none; border: 0; padding: 10px 2px; min-height: 44px; cursor: pointer; }
 .themes button:hover { color: var(--ink); }
 .themes button[aria-pressed="true"] { color: var(--ink); text-decoration: underline 1px var(--line); text-underline-offset: 3px; }
 
-@media (max-width: 640px) { main { padding-top: 32px; } }
+@media (max-width: 640px) { main { padding-top: 20px; } .entry .row { flex-direction: column; gap: 0; } }

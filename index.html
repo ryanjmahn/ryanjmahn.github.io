@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ryan ahn</title>
 <meta name="description" content="ryan ahn: building world models for physical design at OpenWM. proponent of accessible, trustworthy science, comp bio enthusiast, high school senior in seoul." />
@@ -10,15 +10,9 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ryan ahn" />
 <meta property="og:title" content="ryan ahn" />
-<meta property="og:description" content="building world models for physical design at OpenWM. high school senior in seoul." />
+<meta property="og:description" content="ryan ahn: building world models for physical design at OpenWM. proponent of accessible, trustworthy science, comp bio enthusiast, high school senior in seoul." />
 <meta property="og:url" content="https://ryanjmahn.github.io/" />
-<meta property="og:image" content="https://ryanjmahn.github.io/assets/img/og/home.jpg" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="ryan ahn" />
-<meta name="twitter:description" content="building world models for physical design at OpenWM. high school senior in seoul." />
-<meta name="twitter:image" content="https://ryanjmahn.github.io/assets/img/og/home.jpg" />
+<meta name="twitter:card" content="summary" />
 <meta name="theme-color" content="#FBFAF7" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
@@ -28,33 +22,60 @@
 {"@context":"https://schema.org","@type":"Person","name":"Ryan Ahn","url":"https://ryanjmahn.github.io/","worksFor":{"@type":"Organization","name":"OpenWM","url":"https://openwm.vercel.app/"},"address":{"@type":"PostalAddress","addressLocality":"Seoul","addressCountry":"KR"},"sameAs":["https://github.com/ryanjmahn","https://www.linkedin.com/in/ryan-ahn-57b570440/"]}
 </script>
 </head>
-<body>
+<body data-page="home">
+<!-- partial:header -->
+<header class="site">
+  <a class="mark" href="/">ryan ahn</a>
+  <nav aria-label="main">
+    <a href="/" data-nav="home">home</a>
+    <a href="/projects/" data-nav="projects">projects</a>
+    <a href="/initiatives/" data-nav="initiatives">initiatives</a>
+    <a href="/cv/" data-nav="cv">cv</a>
+    <a href="/contact/" data-nav="contact">contact</a>
+  </nav>
+</header>
+<!-- /partial:header -->
 
 <main id="main">
-  <h1>sup! i'm <em>ryan</em>.</h1>
+  <h1>ryan ahn <span class="ko" lang="ko">재민</span></h1>
 
-  <p>i'm building <a href="https://openwm.vercel.app/" target="_blank" rel="noreferrer">world models for physical design</a> @ openwm. our models test a hardware design for real-world performance in milliseconds.</p>
-
-  <p>before openwm i:</p>
-  <ul>
-    <li>co-founded <a href="https://www.tryprobix.com/" target="_blank" rel="noreferrer">a product lab</a> for reproducible science. top 10% at yc f26 &amp; founders inc</li>
-    <li>found 7 ways our own protein ml evaluation nearly misled us. accepted @ neurips 2026 <a href="https://tai-eval.github.io/" target="_blank" rel="noreferrer">tae workshop</a></li>
-    <li>benchmarked 3 tools at detecting the KRAS G12D <a href="/assets/papers/kras-g12d-switch-ii-benchmark.pdf" type="application/pdf">switch-II pocket</a> w/ prof. se-jin hwang @ hanyang univ</li>
-    <li>built a <a href="https://www.stemise.org/" target="_blank" rel="noreferrer">STEM nonprofit</a> for 5.2k+ youths across 130 nations. sponsored by hudson river trading &amp; citadel</li>
-    <li>directed <a href="https://dshhacks.org/" target="_blank" rel="noreferrer">hackathons</a> for 2.8k+ builders from 100 nations</li>
-  </ul>
-
-  <p>i'm also a proponent of accessible, trustworthy science, a comp bio enthusiast, and a high school senior in seoul.</p>
+  <p>sup! i'm ryan, a high school senior in seoul. i'm building <a href="https://openwm.vercel.app/" target="_blank" rel="noreferrer">world models for physical design</a> @ openwm: our models test a hardware design for real-world performance in milliseconds. i'm also a proponent of accessible, trustworthy science and a comp bio enthusiast.</p>
 
   <p class="links"><a href="mailto:ryanjmahn1@gmail.com">ryanjmahn1@gmail.com</a> | <a href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer">github</a> | <a href="https://www.linkedin.com/in/ryan-ahn-57b570440/" target="_blank" rel="noreferrer">linkedin</a></p>
   <!-- TODO(ryan): google scholar, once there's a profile -->
 
+  <h2>highlights</h2>
+
+  <h3>building</h3>
+  <ul>
+    <li><a href="https://openwm.vercel.app/" target="_blank" rel="noreferrer">openwm</a>: world models trained on specific hardware niches that test designs in milliseconds</li>
+    <li>co-founded <a href="https://www.tryprobix.com/" target="_blank" rel="noreferrer">probix labs</a>, a product lab for reproducible science. top 10% at yc f26 &amp; founders inc</li>
+  </ul>
+
+  <h3>research</h3>
+  <ul>
+    <li>found 7 ways our own protein ml evaluation nearly misled us. accepted @ neurips 2026 <a href="https://tai-eval.github.io/" target="_blank" rel="noreferrer">tae workshop</a></li>
+    <li>benchmarked 3 tools at detecting the KRAS G12D <a href="/assets/papers/kras-g12d-switch-ii-benchmark.pdf" type="application/pdf">switch-II pocket</a> w/ prof. se-jin hwang @ hanyang univ. under review</li>
+  </ul>
+
+  <h3>communities</h3>
+  <ul>
+    <li>built a <a href="https://www.stemise.org/" target="_blank" rel="noreferrer">STEM nonprofit</a> for 5.2k+ youths across 130 nations. sponsored by hudson river trading &amp; citadel</li>
+    <li>directed <a href="https://dshhacks.org/" target="_blank" rel="noreferrer">hackathons</a> for 2.8k+ builders from 100 nations</li>
+  </ul>
+
+  <p><a href="/cv/">full cv →</a></p>
+</main>
+
+<!-- partial:footer -->
+<footer class="site">
+  <p>© 2026 · built in seoul</p>
   <p class="themes" role="group" aria-label="theme">
     <button type="button" data-set="light">light</button> ·
     <button type="button" data-set="dark">dark</button>
   </p>
-</main>
-
+</footer>
 <script src="/assets/js/site.js" defer></script>
+<!-- /partial:footer -->
 </body>
 </html>

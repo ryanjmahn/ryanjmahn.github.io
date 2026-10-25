@@ -1,4 +1,4 @@
-// site.js — the theme picker: light or dark. Until one is chosen
+// site.js — marks the current page in the nav, and the theme picker: light or dark. Until one is chosen
 // the page follows the system (light/dark); the choice is kept in
 // localStorage and read back by the inline script in <head>.
 (function theme() {
@@ -25,4 +25,11 @@
   }
   system.addEventListener("change", sync);
   sync();
+})();
+
+// the header is identical on every page, so the current link is marked here
+(function nav() {
+  var page = document.body.getAttribute("data-page");
+  var link = page && document.querySelector('header.site a[data-nav="' + page + '"]');
+  if (link) link.setAttribute("aria-current", "page");
 })();
