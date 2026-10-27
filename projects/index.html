@@ -5,12 +5,12 @@
 <script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>projects · ryan ahn</title>
-<meta name="description" content="tools people can trust, and research on whether they deserve it: OpenWM, Contaminated Ancestors (NeurIPS 2026 TAE), a KRAS G12D pocket benchmark, Probix Labs, Project UNISON." />
+<meta name="description" content="tools people can trust, and research on whether they deserve it: OpenWM, Contaminated Ancestors (NeurIPS 2026 Trust-AI-Eval), Cartographic Generalization (NeurIPS 2026 AIDaR), a KRAS G12D pocket benchmark, Probix Labs, Project UNISON." />
 <link rel="canonical" href="https://ryanjmahn.github.io/projects/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ryan ahn" />
 <meta property="og:title" content="projects · ryan ahn" />
-<meta property="og:description" content="tools people can trust, and research on whether they deserve it: OpenWM, Contaminated Ancestors (NeurIPS 2026 TAE), a KRAS G12D pocket benchmark, Probix Labs, Project UNISON." />
+<meta property="og:description" content="tools people can trust, and research on whether they deserve it: OpenWM, Contaminated Ancestors (NeurIPS 2026 Trust-AI-Eval), Cartographic Generalization (NeurIPS 2026 AIDaR), a KRAS G12D pocket benchmark, Probix Labs, Project UNISON." />
 <meta property="og:url" content="https://ryanjmahn.github.io/projects/" />
 <meta name="twitter:card" content="summary" />
 <meta name="theme-color" content="#FBFAF7" />
@@ -40,29 +40,36 @@
 
   <article id="openwm">
     <h2>OpenWM</h2>
-    <p class="meta">leading technical development · with wenhao · sep 2026 → now</p>
-    <p>world models that test a hardware design in milliseconds, built so engineers know when to trust the answer. our first paper (in preparation) studies how AI designers game the models that score them. backed by a $2,500 grant from <a href="https://risingfounder.net/" target="_blank" rel="noreferrer">J accelerator</a>.</p>
+    <p class="meta">leading technical development · with wenhao · a16z speedrun alpha final round · sep 2026 → now</p>
+    <p>building world models that predict whether a hardware design will work before it's built, so engineers know when to trust the answer. our first paper (in preparation) studies how AI designers game the models that score them. backed by a $2,500 grant from <a href="https://risingfounder.net/" target="_blank" rel="noreferrer">J accelerator</a>.</p>
     <p class="links"><a href="https://openwm.vercel.app/" target="_blank" rel="noreferrer">openwm.vercel.app ↗</a></p>
   </article>
 
   <article id="contaminated-ancestors">
     <h2>Contaminated Ancestors</h2>
-    <p class="meta">2nd author · accepted @ neurips 2026 (tae, ai4science) · may → sep 2026</p>
+    <p class="meta">2nd author · neurips 2026 trust-ai-eval workshop · may → sep 2026</p>
     <p>trust starts with evaluation. we found 7 ways our own protein ML evaluation nearly misled us, and turned them into an 11-question checklist any lab can run.</p>
-    <p class="links"><a href="https://tai-eval.github.io/" target="_blank" rel="noreferrer">workshop ↗</a></p>
+    <p class="links"><a href="https://neurips.cc/virtual/2026/loc/sydney/178278" target="_blank" rel="noreferrer">neurips paper ↗</a></p>
+  </article>
+
+  <article id="cartographic">
+    <h2>Cartographic Generalization</h2>
+    <p class="meta">2nd author · neurips 2026 ai data readiness for scientific discovery (aidar) workshop</p>
+    <p>benchmarks are only as trustworthy as their data: downsampling skin-lesion images drops structure unevenly, not uniformly.</p>
+    <p class="links"><a href="https://neurips.cc/virtual/2026/loc/paris/162359" target="_blank" rel="noreferrer">neurips paper ↗</a></p>
   </article>
 
   <article id="kras">
     <h2>KRAS G12D pocket benchmark</h2>
     <p class="meta">sole author · w/ prof. se-jin hwang, hanyang univ. · under review, CJSJ · jun → sep 2026</p>
-    <p>i tested 3 tools at finding a cancer drug pocket. the one built for the job came last (0.12 vs 0.95 MCC): a tool's label isn't evidence.</p>
+    <p>i tested 3 tools at finding a cancer drug pocket. a GNN tool built for the job ranked last, recovering 40% of the pocket vs 92% for a geometric method (0.12 vs 0.95 MCC): a tool's label isn't evidence.</p>
     <p class="links"><a href="/assets/papers/kras-g12d-switch-ii-benchmark.pdf">manuscript (pdf)</a> | <a href="https://github.com/ryanjmahn/KRASG12DBenchmarking" target="_blank" rel="noreferrer">code ↗</a></p>
   </article>
 
   <article id="probix">
     <h2>Probix Labs</h2>
     <p class="meta">co-founder &amp; coo · feb → sep 2026 · pivoted to openwm</p>
-    <p>a product lab for reproducible science, so researchers can trust what they build on. i coded 2 of its 6 tools (3k+ lines shipped). 260+ waitlist; top 10% at yc f26 &amp; founders inc.</p>
+    <p>a product lab for reproducible science, so researchers can trust what they build on. i coded 2 of its 6 tools (3k+ lines shipped). 260+ waitlist; top 10% applicant at yc f26 &amp; founders inc.</p>
     <p class="links"><a href="https://www.tryprobix.com/" target="_blank" rel="noreferrer">tryprobix.com ↗</a></p>
   </article>
   <!-- TODO(ryan): name the 2 tools you coded (pledge and pedigree?) -->
