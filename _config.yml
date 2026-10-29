@@ -1,0 +1,5 @@
+# Keep repo-only files off the published site.
+exclude:
+  - CLAUDE.md
+  - notes/
+  - scripts/
