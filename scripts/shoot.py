@@ -26,7 +26,6 @@ if __name__ == "__main__":
                 pg = ctx.new_page()
                 for path in PAGES:
                     pg.goto(base + path, wait_until="networkidle")
-                    pg.evaluate("document.querySelectorAll('.reveal').forEach(e => e.classList.add('is-in'))")
                     pg.screenshot(path=os.path.join(out, f"{name(path)}-{w}-{theme}.png"), full_page=True)
                 ctx.close()
         b.close()

@@ -6,7 +6,7 @@
   var buttons = document.querySelectorAll("[data-set]");
   var meta = document.querySelector('meta[name="theme-color"]');
   var system = window.matchMedia("(prefers-color-scheme: dark)");
-  var colors = { light: "#FBFAF7", dark: "#0D0C0B" };
+  var colors = { light: "#F2ECE0", dark: "#12100D" };
 
   function current() { return root.getAttribute("data-theme") || (system.matches ? "dark" : "light"); }
   function sync() {
