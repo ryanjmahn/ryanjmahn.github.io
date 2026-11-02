@@ -13,7 +13,7 @@
 <meta property="og:description" content="ryan ahn, a high school senior in seoul growing a culture that builds human-centered technology people can trust: world models at OpenWM, research on whether scientific tools deserve trust, and STEM communities in 130 nations." />
 <meta property="og:url" content="https://ryanjmahn.github.io/" />
 <meta name="twitter:card" content="summary" />
-<meta name="theme-color" content="#FBFAF7" />
+<meta name="theme-color" content="#F2ECE0" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -27,54 +27,61 @@
 <header class="site">
   <a class="mark" href="/">ryan ahn</a>
   <nav aria-label="main">
-    <a href="/" data-nav="home">home</a>
-    <a href="/projects/" data-nav="projects">projects</a>
-    <a href="/initiatives/" data-nav="initiatives">initiatives</a>
-    <a href="/contact/" data-nav="contact">contact</a>
+    <a href="/" data-nav="home"><span>01</span>home</a>
+    <a href="/projects/" data-nav="projects"><span>02</span>projects</a>
+    <a href="/initiatives/" data-nav="initiatives"><span>03</span>initiatives</a>
+    <a href="/contact/" data-nav="contact"><span>04</span>contact</a>
   </nav>
 </header>
 <!-- /partial:header -->
 
 <main id="main">
-  <h1>ryan ahn <span class="ko" lang="ko">재민</span></h1>
+  <section class="hero">
+    <h1>ryan <em>ahn</em></h1>
+    <p class="intro">sup! i'm ryan, a high school senior in seoul. i want to grow a culture that builds human-centered technology people can trust.</p>
+    <!-- TODO(ryan): the framing (culture, human-centered, trust) is drafted from your spike; reword in your voice -->
+    <dl class="titleblock">
+      <div><dt>name</dt><dd>ryan ahn <span lang="ko">재민</span></dd></div>
+      <div><dt>based in</dt><dd>seoul</dd></div>
+      <div class="wide"><dt>now</dt><dd>building <a href="https://openwm.vercel.app/" target="_blank" rel="noreferrer">world models for physical design</a> @ openwm</dd></div>
+      <div class="wide"><dt>reach</dt><dd><a href="mailto:ryanjmahn1@gmail.com">ryanjmahn1@gmail.com</a> · <a href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer">github</a> · <a href="https://www.linkedin.com/in/ryan-ahn-57b570440/" target="_blank" rel="noreferrer">linkedin</a></dd></div>
+      <span class="seal" lang="ko" aria-label="jaemin">재민</span>
+    </dl>
+    <!-- TODO(ryan): google scholar, once there's a profile -->
+  </section>
 
-  <p>sup! i'm ryan, a high school senior in seoul. i want to grow a culture that builds human-centered technology people can trust.</p>
-
-  <p>right now i'm building <a href="https://openwm.vercel.app/" target="_blank" rel="noreferrer">world models for physical design</a> @ openwm.</p>
-  <!-- TODO(ryan): the framing (culture, human-centered, trust) is drafted from your spike; reword in your voice -->
-
-  <p class="links"><a href="mailto:ryanjmahn1@gmail.com">ryanjmahn1@gmail.com</a> | <a href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer">github</a> | <a href="https://www.linkedin.com/in/ryan-ahn-57b570440/" target="_blank" rel="noreferrer">linkedin</a></p>
-  <!-- TODO(ryan): google scholar, once there's a profile -->
-
-  <h2>highlights</h2>
-
-  <h3>building tools people can trust</h3>
-  <ul>
-    <li><a href="https://openwm.vercel.app/" target="_blank" rel="noreferrer">openwm</a>: building world models that predict whether a hardware design will work before it's built. a16z speedrun alpha final round </li>
-    <li>co-founded <a href="https://www.tryprobix.com/" target="_blank" rel="noreferrer">probix labs</a>, a product lab for reproducible science. top 10% applicant at yc f26 &amp; founders inc</li>
-  </ul>
-
-  <h3>checking whether our tools deserve trust</h3>
-  <ul>
-    <li>found 7 ways our own protein ml evaluation nearly misled us. 2nd author, <a href="https://neurips.cc/virtual/2026/loc/sydney/178278" target="_blank" rel="noreferrer">neurips 2026 trust-ai-eval workshop</a></li>
-    <li>showed downsampled dermoscopy benchmarks lose structure unevenly. 2nd author, <a href="https://neurips.cc/virtual/2026/loc/paris/162359" target="_blank" rel="noreferrer">neurips 2026 ai data readiness for scientific discovery (aidar) workshop</a></li>
-    <li>showed a GNN tool built for the KRAS G12D <a href="https://github.com/ryanjmahn/KRASG12DBenchmarking" target="_blank" rel="noreferrer">switch-II pocket</a> ranked last of 3, recovering 40% of the pocket vs 92% for a geometric method. sole author, CJSJ quarterfinalist</li>
-  </ul>
-
-  <h3>growing the people who build them</h3>
-  <ul>
-    <li>co-founded <a href="https://www.stemise.org/" target="_blank" rel="noreferrer">stemise</a>, building a culture of STEM innovation for 5.4k+ youths (including DSH Hacks) across 130 nations, sponsored by Citadel &amp; Hudson River Trading</li>
-    <li>directed <a href="https://dshhacks.org/" target="_blank" rel="noreferrer">dsh hacks</a> &amp; <a href="https://univabio.org/" target="_blank" rel="noreferrer">univabio</a>, hackathons where 3k+ builders from 100+ nations shipped 530+ projects</li>
-  </ul>
+  <section class="record" aria-labelledby="rec">
+    <h2 id="rec">the record</h2>
+    <div class="ledger">
+      <h3>building</h3>
+      <ul>
+        <li><span><a href="https://openwm.vercel.app/" target="_blank" rel="noreferrer">openwm</a>: world models for hardware design</span><b>a16z speedrun alpha final round</b></li>
+        <li><span><a href="https://www.tryprobix.com/" target="_blank" rel="noreferrer">probix labs</a>: tools for reproducible science</span><b>top 10% applicant, yc f26</b></li>
+      </ul>
+    </div>
+    <div class="ledger">
+      <h3>research</h3>
+      <ul>
+        <li><span><a href="https://neurips.cc/virtual/2026/loc/sydney/178278" target="_blank" rel="noreferrer">how protein ml evals mislead</a> <span class="note">2nd author</span></span><b>neurips 2026 workshop</b></li>
+        <li><span><a href="https://neurips.cc/virtual/2026/loc/paris/162359" target="_blank" rel="noreferrer">what downsampling hides in skin images</a> <span class="note">2nd author</span></span><b>neurips 2026 workshop</b></li>
+        <li><span><a href="/projects/#kras">a GNN tool for KRAS G12D ranked last of 3</a> <span class="note">sole author</span></span><b>CJSJ quarterfinalist</b></li>
+      </ul>
+    </div>
+    <div class="ledger">
+      <h3>community</h3>
+      <ul>
+        <li><span><a href="https://www.stemise.org/" target="_blank" rel="noreferrer">stemise</a>: STEM in 130 nations</span><b>5,400+ youths</b></li>
+        <li><span><a href="https://dshhacks.org/" target="_blank" rel="noreferrer">dsh hacks</a> &amp; <a href="https://univabio.org/" target="_blank" rel="noreferrer">univabio</a>: hackathons</span><b>530+ projects</b></li>
+        <li><span><a href="https://synthify-magazine.vercel.app/" target="_blank" rel="noreferrer">synthify</a>: a student magazine</span><b>25+ writers</b></li>
+      </ul>
+    </div>
+  </section>
 </main>
 
 <!-- partial:footer -->
 <footer class="site">
-  <p>© 2026 · built in seoul</p>
-  <p class="themes" role="group" aria-label="theme">
-    <button type="button" data-set="light">light</button> ·
-    <button type="button" data-set="dark">dark</button>
-  </p>
+  <p><a href="mailto:ryanjmahn1@gmail.com">email</a> · <a href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer">github</a> · <a href="https://www.linkedin.com/in/ryan-ahn-57b570440/" target="_blank" rel="noreferrer">linkedin</a></p>
+  <p><span class="sheet"></span> · seoul · rev. nov 2026 · <span class="themes" role="group" aria-label="theme"><button type="button" data-set="light">light</button> / <button type="button" data-set="dark">dark</button></span></p>
 </footer>
 <script src="/assets/js/site.js" defer></script>
 <!-- /partial:footer -->
