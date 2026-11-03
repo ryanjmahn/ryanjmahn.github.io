@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Project Unison">
+  <defs>
+    <linearGradient id="pu" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#185f96"/>
+      <stop offset="1" stop-color="#5bb8e8"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="url(#pu)"/>
+  <!-- Graduation cap (education) -->
+  <g fill="#ffffff">
+    <!-- mortarboard -->
+    <path d="M32 18 L54 27 L32 36 L10 27 Z"/>
+    <!-- head band under the cap -->
+    <path d="M20 31.5 L20 41 C20 44.3 25.4 47 32 47 C38.6 47 44 44.3 44 41 L44 31.5 L32 36.4 Z" opacity="0.92"/>
+    <!-- tassel -->
+    <path d="M54 27 L54 38" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle cx="54" cy="40" r="2.6"/>
+  </g>
+</svg>

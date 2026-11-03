@@ -1,0 +1,3 @@
+# Keep repo-only files off the published site.
+exclude:
+  - scripts/
