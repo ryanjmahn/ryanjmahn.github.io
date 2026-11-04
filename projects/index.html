@@ -13,16 +13,21 @@
 <meta property="og:description" content="tools people can trust, and research on whether they deserve it: OpenWM, Contaminated Ancestors (NeurIPS 2026 Trust-AI-Eval), Cartographic Generalization (NeurIPS 2026 AIDaR), a KRAS G12D pocket benchmark, Probix Labs, Project UNISON." />
 <meta property="og:url" content="https://ryanjmahn.github.io/projects/" />
 <meta name="twitter:card" content="summary" />
-<meta name="theme-color" content="#F2ECE0" />
+<meta name="theme-color" content="#F1ECE1" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@87.5,300..600&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@800&text=%EC%9E%AC%EB%AF%BC&display=swap" />
 <link rel="stylesheet" href="/assets/css/site.css" />
 </head>
 <body data-page="projects">
 <!-- partial:header -->
 <header class="site">
-  <a class="mark" href="/">ryan ahn</a>
+  <a class="mark" href="/">ryan ahn<span lang="ko">재민</span></a>
+  <p class="clock"><i aria-hidden="true"></i>seoul <time data-clock>--:--</time> kst</p>
   <nav aria-label="main">
     <a href="/" data-nav="home"><span>01</span>home</a>
     <a href="/projects/" data-nav="projects"><span>02</span>projects</a>
@@ -33,7 +38,7 @@
 <!-- /partial:header -->
 
 <main id="main">
-  <h1>projects</h1>
+  <h1 data-dim="06 figures">projects</h1>
   <p class="intro">tools people can trust, and tests of whether they deserve it.</p>
   <div class="figs">
     <article id="openwm">
@@ -65,8 +70,8 @@
       <p class="fig">fig. 04</p>
       <h2>KRAS G12D pocket benchmark</h2>
       <p class="meta">sole author · w/ prof. se-jin hwang, hanyang univ. · CJSJ quarterfinalist</p>
-      <p>i tested 3 tools at finding a cancer drug pocket. the one built for the job came last: a tool's label isn't evidence.</p>
-      <p class="links"><a href="/assets/papers/kras-g12d-switch-ii-benchmark.pdf">manuscript ↗</a> · <a href="https://github.com/ryanjmahn/KRASG12DBenchmarking" target="_blank" rel="noreferrer">code ↗</a></p>
+      <p>i tested 3 tools at finding a cancer drug pocket. the one built for the job came last: a tool's label isn't evidence. <span class="note">next: checking whether that holds across 15–25 cryptic pockets, then building a light layer that cuts the specialist's false positives. aiming for icml &amp; neurips 2027 workshops.</span></p>
+      <p class="links"><a href="/assets/papers/kras-g12d-switch-ii-benchmark.pdf">manuscript ↗</a> · <a href="https://github.com/ryanjmahn/KRAS-G12D-SIIP-Benchmark" target="_blank" rel="noreferrer">repo ↗</a></p>
     </article>
     <article id="probix">
       <div class="plate"><span class="big-logo dark"><img src="/assets/img/logos/probix.png" alt="Probix Labs" width="96" height="96" loading="lazy" /></span></div>
