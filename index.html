@@ -2,99 +2,151 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script>document.documentElement.classList.add("js")</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ryan ahn</title>
-<meta name="description" content="ryan ahn, a high school senior in seoul growing a culture that builds human-centered technology people can trust: world models at OpenWM, research on whether scientific tools deserve trust, and STEM communities in 130 nations." />
+<meta name="description" content="ryan ahn, a high school senior in seoul: co-founder of a stealth startup, co-author of two NeurIPS 2026 workshop papers, founder of STEMise (5,600+ youths in 130 nations)." />
 <link rel="canonical" href="https://ryanjmahn.github.io/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ryan ahn" />
 <meta property="og:title" content="ryan ahn" />
-<meta property="og:description" content="ryan ahn, a high school senior in seoul growing a culture that builds human-centered technology people can trust: world models at OpenWM, research on whether scientific tools deserve trust, and STEM communities in 130 nations." />
+<meta property="og:description" content="co-founder of a stealth startup, co-author of two NeurIPS 2026 workshop papers, founder of STEMise. seoul." />
 <meta property="og:url" content="https://ryanjmahn.github.io/" />
 <meta name="twitter:card" content="summary" />
-<meta name="theme-color" content="#F1ECE1" />
+<meta name="theme-color" content="#FFFFFF" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@87.5,300..600&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@800&text=%EC%9E%AC%EB%AF%BC&display=swap" />
-<link rel="stylesheet" href="/assets/css/site.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" />
+<link rel="stylesheet" href="/assets/css/site.css?v=16" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","name":"Ryan Ahn","url":"https://ryanjmahn.github.io/","worksFor":{"@type":"Organization","name":"OpenWM","url":"https://openwm.vercel.app/"},"address":{"@type":"PostalAddress","addressLocality":"Seoul","addressCountry":"KR"},"sameAs":["https://github.com/ryanjmahn","https://www.linkedin.com/in/ryan-ahn-57b570440/"]}
+{"@context":"https://schema.org","@type":"Person","name":"Ryan Ahn","alternateName":"Ahn Jaemin","url":"https://ryanjmahn.github.io/","address":{"@type":"PostalAddress","addressLocality":"Seoul","addressCountry":"KR"},"sameAs":["https://github.com/ryanjmahn","https://www.linkedin.com/in/ryan-ahn-57b570440/"]}
 </script>
 </head>
-<body data-page="home">
-<!-- partial:header -->
-<header class="site">
-  <a class="mark" href="/">ryan ahn<span lang="ko">재민</span></a>
-  <p class="clock"><i aria-hidden="true"></i>seoul <time data-clock>--:--</time> kst</p>
-  <nav aria-label="main">
-    <a href="/" data-nav="home"><span>01</span>home</a>
-    <a href="/projects/" data-nav="projects"><span>02</span>projects</a>
-    <a href="/initiatives/" data-nav="initiatives"><span>03</span>initiatives</a>
-    <a href="/contact/" data-nav="contact"><span>04</span>contact</a>
-  </nav>
-</header>
-<!-- /partial:header -->
+<body>
+<a class="skip" href="#main">skip to content</a>
 
-<main id="main">
-  <section class="hero">
-    <h1 data-dim="37.5665° n · 126.9780° e · seoul">ryan <em>ahn</em></h1>
-    <p class="intro">sup! i'm ryan, a high school senior in seoul. i care about technology people can actually trust, so i build it (right now, world models at openwm), test whether the tools scientists already rely on deserve that trust, and help grow communities where young builders learn to do both.</p>
-    <!-- TODO(ryan): the framing (culture, human-centered, trust) is drafted from your spike; reword in your voice -->
-    <dl class="titleblock">
-      <div><dt>name</dt><dd>ryan ahn <span lang="ko">재민</span></dd></div>
-      <div><dt>based in</dt><dd>seoul</dd></div>
-      <div class="wide"><dt>now</dt><dd>building <a href="https://openwm.vercel.app/" target="_blank" rel="noreferrer">world models for physical design</a> @ openwm</dd></div>
-      <div class="wide"><dt>reach</dt><dd><a href="mailto:ryanjmahn1@gmail.com">ryanjmahn1@gmail.com</a> · <a href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer">github</a> · <a href="https://www.linkedin.com/in/ryan-ahn-57b570440/" target="_blank" rel="noreferrer">linkedin</a></dd></div>
-      <span class="seal" lang="ko" aria-label="jaemin">재민</span>
-    </dl>
-    <!-- TODO(ryan): google scholar, once there's a profile -->
+<main id="main" class="page">
+  <header class="top">
+    <a class="brand" href="/">ryan ahn</a>
+    <nav aria-label="links">
+      <a href="mailto:ryanjmahn1@gmail.com">email</a>
+      <a href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer">github</a>
+      <a href="https://www.linkedin.com/in/ryan-ahn-57b570440/" target="_blank" rel="noreferrer">linkedin</a>
+    </nav>
+  </header>
+
+  <canvas class="land" aria-hidden="true"></canvas>
+
+  <h1>hi, i'm ryan</h1>
+  <!-- ========== YOUR INTRO: write it here. one <p> per paragraph. ========== -->
+  <div class="intro">
+    <p>i'm a high school senior in seoul. i believe that human-centered technology starts with trust and care about technology people can actually trust, so i build it (right now, a stealth startup), test whether the tools scientists already rely on deserve that trust, and help grow communities where young builders learn to do both.</p>
+  </div>
+  <!-- ========== end of intro ========== -->
+
+  <section id="now" aria-labelledby="h-now">
+    <h2 id="h-now">now</h2>
+    <article class="item" data-reveal>
+      <h3>stealth</h3>
+      <p class="meta">co-founder · sep 2026 → now</p>
+      <p>building something new in AI. more soon.</p>
+      <p class="nums">a16z speedrun alpha, final round · $2,500 grant from <a href="https://risingfounder.net/" target="_blank" rel="noreferrer">J accelerator</a></p>
+    </article>
   </section>
 
-  <section class="record" aria-labelledby="rec">
-    <h2 id="rec">the record</h2>
-    <div class="ledger">
-      <h3>building</h3>
-      <ul>
-        <li><span><a href="https://openwm.vercel.app/" target="_blank" rel="noreferrer">openwm</a>: world models for hardware design</span><b>a16z speedrun alpha final round</b></li>
-        <li><span><a href="https://www.tryprobix.com/" target="_blank" rel="noreferrer">probix labs</a>: tools for reproducible science</span><b>top 10% applicant, yc f26</b></li>
-      </ul>
-    </div>
-    <div class="ledger">
-      <h3>research</h3>
-      <ul>
-        <li><span><a href="https://neurips.cc/virtual/2026/loc/sydney/178278" target="_blank" rel="noreferrer">how protein ml evals mislead</a> <span class="note">co-author</span></span><b>neurips 2026 workshop</b></li>
-        <li><span><a href="https://neurips.cc/virtual/2026/loc/paris/162359" target="_blank" rel="noreferrer">what downsampling hides in skin images</a> <span class="note">co-author</span></span><b>neurips 2026 workshop</b></li>
-        <li><span><a href="/projects/#kras">a GNN tool for KRAS G12D ranked last of 3</a> <span class="note">sole author</span></span><b>CJSJ quarterfinalist</b></li>
-      </ul>
-    </div>
-    <div class="ledger">
-      <h3>community</h3>
-      <ul>
-        <li><span><a href="https://www.stemise.org/" target="_blank" rel="noreferrer">stemise</a>: free STEM for youths in 130 nations</span><b>5,600+ youths</b></li>
-        <li><span><a href="https://dshhacks.org/" target="_blank" rel="noreferrer">dsh hacks</a> &amp; <a href="https://univabio.org/" target="_blank" rel="noreferrer">univabio</a>: hackathons</span><b>530+ projects</b></li>
-        <li><span><a href="https://synthify-magazine.vercel.app/" target="_blank" rel="noreferrer">synthify</a>: a student magazine</span><b>25+ writers</b></li>
-      </ul>
+  <section id="research" aria-labelledby="h-research">
+    <h2 id="h-research">research</h2>
+    <article class="item" id="contaminated-ancestors" data-reveal>
+      <h3>Contaminated Ancestors</h3>
+      <p class="meta">co-author · neurips 2026 · trust-ai-eval workshop</p>
+      <p>how our own protein ML evaluation nearly misled us, turned into a checklist any lab can run.</p>
+      <p class="more"><a href="https://neurips.cc/virtual/2026/loc/sydney/178278" target="_blank" rel="noreferrer">paper ↗</a></p>
+    </article>
+    <article class="item" id="cartographic" data-reveal>
+      <h3>Cartographic Generalization</h3>
+      <p class="meta">co-author · neurips 2026 · aidar workshop</p>
+      <p>downsampling skin-lesion images drops structure unevenly, not uniformly.</p>
+      <p class="more"><a href="https://neurips.cc/virtual/2026/loc/paris/162359" target="_blank" rel="noreferrer">paper ↗</a></p>
+    </article>
+    <article class="item" id="kras" data-reveal>
+      <h3>KRAS G12D pocket benchmark</h3>
+      <p class="meta">sole author · w/ prof. se-jin hwang · CJSJ quarterfinalist</p>
+      <p>i tested 3 tools at finding a cancer drug pocket. the one built for the job came last: a geometric method recovered 92% of the switch-II pocket, the GNN built for it 40%.</p>
+      <p class="nums">next: 15–25 cryptic pockets, then a layer that cuts the specialist's false positives. target: icml &amp; neurips 2027 workshops.</p>
+      <p class="more"><a href="/assets/papers/kras-g12d-switch-ii-benchmark.pdf">manuscript ↗</a> <a href="https://github.com/ryanjmahn/KRAS-G12D-SIIP-Benchmark" target="_blank" rel="noreferrer">repo ↗</a></p>
+    </article>
+  </section>
+
+  <section id="builds" aria-labelledby="h-builds">
+    <h2 id="h-builds">builds</h2>
+    <article class="item" id="probix" data-reveal>
+      <h3><a href="https://www.tryprobix.com/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/probix.png" alt="" width="22" height="22" loading="lazy" />Probix Labs</a></h3>
+      <p class="meta">co-founder &amp; coo · feb → sep 2026 · pivoted to what i'm building now</p>
+      <p>a product lab for reproducible science. i coded 2 of its 6 tools.</p>
+      <!-- TODO(ryan): name the 2 tools you coded (pledge and pedigree?) -->
+      <p class="nums">260+ waitlist · top 10% applicant, yc f26 &amp; founders inc</p>
+    </article>
+    <article class="item" id="unison" data-reveal>
+      <h3><a href="https://projectunison.netlify.app/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/unison.svg" alt="" width="22" height="22" loading="lazy" />Project UNISON</a></h3>
+      <p class="meta">curriculum &amp; AI pipeline developer · barnard college · 2026</p>
+      <p>an AI pipeline that fits an 8-week UN SDG curriculum to each student. i wrote its AI × biomedicine lessons.</p>
+    </article>
+  </section>
+
+  <section id="side" aria-labelledby="h-side">
+    <h2 id="h-side">on the side</h2>
+    <div class="bento" data-reveal>
+      <a class="tile" href="https://github.com/ryanjmahn/squeeze" target="_blank" rel="noreferrer"><span>built</span><b>squeeze 🍋</b><small>trims logs so coding agents read 12 lines, not 77</small></a>
+      <a class="tile" href="https://github.com/ryanjmahn/graveyard" target="_blank" rel="noreferrer"><span>built</span><b>graveyard 🪦</b><small>remembers dead-end fixes so agents don't retry them</small></a>
+      <a class="tile pet-tile" href="https://github.com/ryanjmahn/terminal-tamagotchi" target="_blank" rel="noreferrer"><span>built for fun</span><pre class="pet" aria-hidden="true">╭─────────╮
+│  <i>◕</i> ‿ <i>◕</i>  │
+╰─┬─────┬─╯</pre><b>terminal tamagotchi</b><small>an ascii pet that feeds on your git commits</small></a>
+      <div class="tile"><span>learning</span><b>stanford CS229</b><small>andrew ng's machine learning lectures</small></div>
+      <div class="tile"><span>playing</span><b>brawl stars &amp; roblox</b></div>
+      <div class="tile cr7"><span>goat</span><b>cristiano ronaldo</b><small class="suii">SUIIII</small></div>
+      <div class="tile wide"><span>eating, in seoul</span><b>jack jack burger · taksim kebab · butanchu</b></div>
     </div>
   </section>
-  <section class="log" aria-labelledby="log">
-    <h2 id="log">the log</h2>
-    <p class="meta"><b data-gh-total>…</b> github contributions in the last year · <a href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer">@ryanjmahn ↗</a></p>
-    <div class="gh" data-gh="ryanjmahn" role="img" aria-label="github contribution chart for the last year"></div>
-    <p class="gh-key meta" aria-hidden="true">less <i data-l="0"></i><i data-l="1"></i><i data-l="2"></i><i data-l="3"></i><i data-l="4"></i> more</p>
+
+  <section id="community" aria-labelledby="h-community">
+    <h2 id="h-community">community</h2>
+    <article class="item" id="stemise" data-reveal>
+      <h3><a href="https://www.stemise.org/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/stemise.png" alt="" width="22" height="22" loading="lazy" />STEMise</a></h3>
+      <p class="meta">founder &amp; executive director · apr 2025 → now</p>
+      <p>free competitions, research and student-led chapters for young people anywhere. trustworthy AI tech for the underserved, built with UC Berkeley &amp; UCSB researchers; backed by Citadel &amp; Hudson River Trading, fiscally sponsored by Hack Club.</p>
+      <dl class="stats"><div><dd>5,600+</dd><dt>youths served*</dt></div><div><dd>130</dd><dt>nations</dt></div><div><dd>129</dd><dt>chapters</dt></div><div><dd>75+</dd><dt>staff</dt></div></dl>
+      <p class="nums">* incl. dsh hacks participants · 350K+ media impressions</p>
+    </article>
+    <article class="item" id="hackathons" data-reveal>
+      <h3><a href="https://dshhacks.org/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/dsh.png" alt="" width="22" height="22" loading="lazy" />DSH Hacks</a> &amp; <a href="https://univabio.org/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/univabio.svg" alt="" width="22" height="22" loading="lazy" />UnivaBio</a></h3>
+      <p class="meta">lead competition director &amp; organizer · 3 hackathons</p>
+      <p>hackathons where students build technology for real people. 130+ judges &amp; mentors from 40+ companies, incl. Y Combinator, Goldman Sachs &amp; Google; 20+ sponsors.</p>
+      <dl class="stats"><div><dd>2,300+</dd><dt>dsh hacks participants</dt></div><div><dd>930+</dd><dt>univabio participants</dt></div><div><dd>530+</dd><dt>projects</dt></div><div><dd>$200,000</dd><dt>in prizes</dt></div></dl>
+      <p class="nums">3,200+ participants total, from 100+ nations</p>
+    </article>
+    <article class="item" id="synthify" data-reveal>
+      <h3><a href="https://synthify-magazine.vercel.app/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/synthify.jpg" alt="" width="22" height="22" loading="lazy" />Synthify</a></h3>
+      <p class="meta">head of journalism · 2024 → now</p>
+      <p>a magazine giving young writers a public voice, sent to 50+ institutions.</p>
+      <dl class="stats"><div><dd>8</dd><dt>editions</dt></div><div><dd>60+</dd><dt>articles</dt></div><div><dd>25+</dd><dt>writers</dt></div><div><dd>350+</dd><dt>copies</dt></div></dl>
+    </article>
   </section>
+
+  <section id="log" aria-labelledby="h-log">
+    <h2 id="h-log">github</h2>
+    <div data-reveal>
+      <p class="meta"><b data-gh-total>…</b> contributions in the last year · <a href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer">@ryanjmahn ↗</a></p>
+      <div class="gh" data-gh="ryanjmahn" role="img" aria-label="github contribution chart for the last year"></div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p>ryan ahn · <a href="mailto:ryanjmahn1@gmail.com">ryanjmahn1@gmail.com</a></p>
+  </footer>
 </main>
-
-<!-- partial:footer -->
-<footer class="site">
-  <p><a href="mailto:ryanjmahn1@gmail.com">email</a> · <a href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer">github</a> · <a href="https://www.linkedin.com/in/ryan-ahn-57b570440/" target="_blank" rel="noreferrer">linkedin</a></p>
-  <p><span class="sheet"></span> · seoul · rev. nov 2026 · <span class="themes" role="group" aria-label="theme"><button type="button" data-set="light">light</button> / <button type="button" data-set="dark">dark</button></span></p>
-</footer>
-<script src="/assets/js/site.js" defer></script>
-<!-- /partial:footer -->
+<script src="/assets/js/site.js?v=16" defer></script>
 </body>
 </html>
