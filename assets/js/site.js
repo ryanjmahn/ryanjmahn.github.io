@@ -24,7 +24,7 @@ function countTo(text, t) {
   var n = Math.round(parseInt(m[2].replace(/,/g, ""), 10) * t);
   return m[1] + (m[2].indexOf(",") > -1 ? n.toLocaleString("en-US") : String(n)) + m[3];
 }
-console.assert(countTo("$200,000", 1) === "$200,000" && countTo("5,600+", 0.5) === "2,800+" && countTo("final round", 0) === "final round", "countTo");
+console.assert(countTo("$200,000", 1) === "$200,000" && countTo("6,000+", 0.5) === "3,000+" && countTo("final round", 0) === "final round", "countTo");
 (function countUp() {
   var els = document.querySelectorAll(".stats dd, .proof b, .flowfig b");
   if (calm || !els.length || !("IntersectionObserver" in window)) return;

@@ -5,12 +5,12 @@
 <script>document.documentElement.classList.add("js")</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ryan ahn</title>
-<meta name="description" content="ryan ahn, a high school senior in seoul: co-founder of a stealth startup, co-author of two NeurIPS 2026 workshop papers, founder of STEMise (5,600+ youths in 130 nations)." />
+<meta name="description" content="ryan ahn, a high school senior in seoul: co-founder of a stealth startup, co-author of a NeurIPS 2026 workshop paper, founder of STEMise (6,000+ youths in 130 nations)." />
 <link rel="canonical" href="https://ryanjmahn.github.io/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ryan ahn" />
 <meta property="og:title" content="ryan ahn" />
-<meta property="og:description" content="co-founder of a stealth startup, co-author of two NeurIPS 2026 workshop papers, founder of STEMise. seoul." />
+<meta property="og:description" content="co-founder of a stealth startup, co-author of a NeurIPS 2026 workshop paper, founder of STEMise. seoul." />
 <meta property="og:url" content="https://ryanjmahn.github.io/" />
 <meta name="twitter:card" content="summary" />
 <meta name="theme-color" content="#FFFFFF" />
@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" />
-<link rel="stylesheet" href="/assets/css/site.css?v=16" />
+<link rel="stylesheet" href="/assets/css/site.css?v=22" />
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Ryan Ahn","alternateName":"Ahn Jaemin","url":"https://ryanjmahn.github.io/","address":{"@type":"PostalAddress","addressLocality":"Seoul","addressCountry":"KR"},"sameAs":["https://github.com/ryanjmahn","https://www.linkedin.com/in/ryan-ahn-57b570440/"]}
 </script>
@@ -31,11 +31,6 @@
 <main id="main" class="page">
   <header class="top">
     <a class="brand" href="/">ryan ahn</a>
-    <nav aria-label="links">
-      <a href="mailto:ryanjmahn1@gmail.com">email</a>
-      <a href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer">github</a>
-      <a href="https://www.linkedin.com/in/ryan-ahn-57b570440/" target="_blank" rel="noreferrer">linkedin</a>
-    </nav>
   </header>
 
   <canvas class="land" aria-hidden="true"></canvas>
@@ -43,9 +38,14 @@
   <h1>hi, i'm ryan</h1>
   <!-- ========== YOUR INTRO: write it here. one <p> per paragraph. ========== -->
   <div class="intro">
-    <p>i'm a high school senior in seoul. i believe that human-centered technology starts with trust and care about technology people can actually trust, so i build it (right now, a stealth startup), test whether the tools scientists already rely on deserve that trust, and help grow communities where young builders learn to do both.</p>
+    <p>i'm a 17-year-old student in seoul, obsessed with whether the tools we trust actually deserve it. so i benchmark them until they break, build the ones i wish existed, and run communities where other young people can do the same.</p>
   </div>
   <!-- ========== end of intro ========== -->
+  <nav class="hi" aria-label="links">
+    <a href="mailto:ryanjmahn1@gmail.com">email</a>
+    <a href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer">github ↗</a>
+    <a href="https://www.linkedin.com/in/ryan-ahn-57b570440/" target="_blank" rel="noreferrer">linkedin ↗</a>
+  </nav>
 
   <section id="now" aria-labelledby="h-now">
     <h2 id="h-now">now</h2>
@@ -53,7 +53,7 @@
       <h3>stealth</h3>
       <p class="meta">co-founder · sep 2026 → now</p>
       <p>building something new in AI. more soon.</p>
-      <p class="nums">a16z speedrun alpha, final round · $2,500 grant from <a href="https://risingfounder.net/" target="_blank" rel="noreferrer">J accelerator</a></p>
+      <p class="nums">a16z speedrun alpha, final round · $2,500 grant from a startup accelerator</p>
     </article>
   </section>
 
@@ -65,17 +65,11 @@
       <p>how our own protein ML evaluation nearly misled us, turned into a checklist any lab can run.</p>
       <p class="more"><a href="https://neurips.cc/virtual/2026/loc/sydney/178278" target="_blank" rel="noreferrer">paper ↗</a></p>
     </article>
-    <article class="item" id="cartographic" data-reveal>
-      <h3>Cartographic Generalization</h3>
-      <p class="meta">co-author · neurips 2026 · aidar workshop</p>
-      <p>downsampling skin-lesion images drops structure unevenly, not uniformly.</p>
-      <p class="more"><a href="https://neurips.cc/virtual/2026/loc/paris/162359" target="_blank" rel="noreferrer">paper ↗</a></p>
-    </article>
     <article class="item" id="kras" data-reveal>
       <h3>KRAS G12D cryptic-pocket benchmark</h3>
       <p class="meta">sole author · w/ prof. se-jin hwang · CJSJ quarterfinalist, under review</p>
       <p>i tested 3 MD-free pocket finders on the cancer drug pocket behind MRTX1133. plain geometry won on the open structure (MCC 0.95); the GNN built for cryptic pockets came last (0.12).</p>
-      <p class="nums">next: does that hold across 15–25 cryptic pockets, and how much do static predictions shift as a pocket opens? then a predictor that reads a cheap ensemble of conformations instead of one snapshot. target: icml &amp; neurips 2027 workshops.</p>
+      <p class="nums">now scaled to 218 CryptoBench targets: detection flips on 44% of them under &lt;1.4 Å of backbone motion. next: a rule for when to trust a prediction. target: icml 2027 workshops.</p>
       <p class="more"><a href="/assets/papers/kras-g12d-switch-ii-benchmark.pdf">manuscript ↗</a> <a href="https://github.com/ryanjmahn/KRAS-G12D-SIIP-Benchmark" target="_blank" rel="noreferrer">repo ↗</a></p>
     </article>
   </section>
@@ -106,8 +100,78 @@
 ╰─┬─────┬─╯</pre><b>terminal tamagotchi</b><small>an ascii pet that feeds on your git commits</small></a>
       <div class="tile"><span>learning</span><b>stanford CS229</b><small>andrew ng's machine learning lectures</small></div>
       <div class="tile"><span>playing</span><b>brawl stars &amp; roblox</b></div>
-      <div class="tile cr7"><span>goat</span><b>cristiano ronaldo</b><small class="suii">SUIIII</small></div>
-      <div class="tile wide"><span>eating, in seoul</span><b>jack jack burger · taksim kebab · butanchu</b></div>
+      <div class="tile cr7"><span>goat</span><pre class="siu" aria-hidden="true">                                  ...:::-----====+++++++++++++===========------::::...
+                               ...::-----===+++=++*****+++====++++*+++++++======----:::...
+                             ..::-----===++**#**%%%%%@%%@@%###*-+::=*+=*++****++====---:::..
+                          ..::---====*+*##%%%%@@@@@@@%%@@@@@@@@@%@%*#=.:%%+:=*+****+++==---::..
+                        ..::--==+++*###%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@** -*=#*##**++===--:..
+                      ..::--=++**+#%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%@@@@@%#%@@-%. -%+#**++=--:..
+                     ..::-=++*##%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+@@@@@@@@@@%:+#* .*#++==--::..
+                   ...:--=+*###=       -*++%@%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@=@@+:+ %#.====--::..
+                  ...:--=+###                          .:====-*@@@@@@@@@@@@@*@@*@@#@#. %@=+-% +:=--::...
+                 ..::--=+##                                     :---@@@@@@@%@@@@*@@@-=.%.:@*+%# ==::::...
+                ..::--=+#-       . .:. .      .                      .+-%@@@@@@@%@@%@@%%=#%* @%: :=+:-::..
+               ...::--+*:     .::::.......                              .  *@@*%@@@@*@@@@@#:%@%#:% #::--::.
+              ...:::-=*-      ....:.   .......                  ... .  .--=-:#%+@@@@@@@@@@@#@%@-=+-=.=+:-::..
+              ...::--++ .                 .....          ..      ..:. :+=-=-=+%++*@@@@@@@%@+@@%##%@* ++ +-::..
+              ..:::--#.                   .::..          .  .. ...:..:=*-:-=#-%%+@@#@@@@@@@*%@##@#@*.=*:.=-::..
+            ....::::*=                                      ..:......:+#+:=*@:*@#@%@%@@@@@@@#@#@@@@+*%#=-*=-::..
+            ...:::.:=               .                         ..::::-=*=%*=*@=+%#@**%@%#@@@@@@%@#@@@%*#*#+==-::.
+           ....:: :%=:::+=       .::::               .:===:   . ...:..::+%==#+-=*%*##@@@@@@@@@@@@@@@%@%*=+*+--:..
+          ....::.=@%@@@@@@@@%=-::--=--==+%@@@@@@@@@@@@@@@@@@+:. ...::.  :+##@%+*=#*#+%%%@@@%@@@@@@%@@@#@+%*+--::..
+         ....::.:#  -=+%@@@@@@@#==---=#%@@@@@@@@@@@@@*=+#%@@@@+: .:.:...:--++@%%@%-+=%*#@@@**@%@@@#@@%@@%#*+--:::..
+        ....:::.+-.++=+++#%@@@@+. .. .-+#@@@@@@+.      .::.:+#@@%=..:::::.  ..**#%***#+%@@@%%%#@@@@@@=@@@@**+==--:.
+       ....::::.-=*@@@@@@@@**#@# .:.  -+#%@@##@@@@%=--:..::-:-*@@@@=-:::.. ....-*%%*=%#%@%@@@@%@@@@%%@@@%%*+#*+=-::.
+      .....:::::.-#@@@@@@@% :@+  .  .-++*@@*+@@@@@@@@@@@#**+*+++++%%=-:::::-::::+%%**#%@#@@%@@@@@@%%@@#@#@==#*+=--:.
+      ....::::-:::=#@@-@@#.:*     .==. .+@#.-@@@:%@@* =@@@@@*==--=====-:-----:-++#@#@####@%@%%%@@@@@@@%@@%+*#*+==-::.
+     ....:::::-----: .=:--+*      ==    .::==---=-=-+##*%##**+++--:-..:...:--:::=@#+@%+*%@%@*%@@@@@@@@@@@%-*%#*+==-:.
+     .....:::---==.          ..  .:-       :==--:-.           .----:   ..:::::-:.+#=%@@#%##@@%@@@@@@@@@@%*-@%##*+=-:.
+     ...::::---=*           :.:-::::.       ..:.-.                     .:::-----.*%*#%%%@@@%@@%%+::::#@@#**@@%#*+=-:..
+    ....::::--=+          ..    .:-=:     .   ..:::..:      ....       .:::-:--:.++=#*#@@@#.     -*#=  #@+@@@%#*+=--:.
+    ...:::---=+.                   .--:     ..    .. .. ..   ....    ..:--::::--..-%@@%=:   ::*@@@@@@@* +#@@@%#*+==-:.
+    ...::---=+=       .#*+--=++=:     --:...            ......      .:---=--::--::+@@=   -##::.+*   .*=. @@@@%#*+==-:.
+    ..:::---=+- ..    :@@@@@@@@@@@@@*=*#..:-:              ..       :==-==========+@#-+=+%@:-@*     -+-  %@@@%#*+==-:.
+    ..:::--==+-.::  .=.:@@#*@#-:==*%@@@=   :-:.            :.....:-=++=+++=+======%@*=.   + @@@-    =+   @@@@%#*+==-:.
+    ..::---=+*: -:..--     . .             =+=+-.. ...::......:-==*###**+=====+=-+@-.     @+-#:..:  *   #@@@@%#*+=--:.
+    ..::---=+#- -: .      .---.     :::::.    .-:--==-::::--===+*****++=====-=++-++ .    %@#.   :  =.  @@@@@@%#*+=-::.
+    ..::---=+#+ -:                     .-:.::  ..:-=======+**++++=====--+====++==++*+.::.=.     . .  #@@@@@@%%#*+=-:..
+    ..::---=+#* -      :*%%%@@@@@#*=.    :-=-:::..:-==++**++==--::--===-+===++++###+=##-     +=-. -%@%@@@@@@%#**+=-:.
+     ..::--=+#* :  -=-@@@@@@@@@@@@@@@@@@+-=+=-=--::-=-====-:::::::.:==-:======+***++.  :   :-. .-@@@#@@@@@@@%#*+==-:.
+     ..::--=+## : :*%@@@@%       .  +##@@@@@%*=-==-++*=-:::--::::::----=+===++***=+.     =+#%*=%@@@#@@@@@@@%%#*+=-::.
+     ..::--=+##  .*#%@@@@        :  =- -@@%+=+=..:===+=--:--:-:--=-::::-==++****++@@@@@@@@%**:=@@@@@@@@@@@@%#**+=-:.
+      ..:--=+*#   :: .     .--:.-:.::.      .::::-==-----=----==-==...::-+=+*#*++*@@@##%#=-=-+@@#@@@@@@@@@%%#*+=--:.
+      ..::-==*#      . :+++**+-......     .. .:+=-==--==-::---+--:-:::.====**##++=     --::=%@@#@@@@@@@@@@%#*++=-:.
+       ..:--=+* ..   .=*#%#%%#***+=---=-:..::-.::-=====+=--==+==-----=====+**#*=-:. .:=+-..%@##@@@@@@@@@@%##*+=-::.
+       ..::-=+*::.  .-+*#**##*===--::::..:::===+#*****+=+===+=---::===+=+=+####+::::-+**- #@##%#%%%@@@@@@%#*+==-:.
+        ..:--=*=:.       :---.         .. .:=***#*+++=+=====--:-----=+==+*#%**#*==---++-.+%+**####%%%@@%%#*++=-:..
+         .::-==*:        :     .       :::+===*#*+=---=---==:::--=+==++**######+=---=+=  #=+++***###%%%##**+=-:..
+          .::-=+*..:   -:-::    :. . :-.-:==+***-::.:=+=---:-===+******#%#***#*-:::-=+= .+===++****###***++=-::.
+          ..::-=++:=--=-=+=-...----++=++*#+=+=.:..:--::-====++*%%#%%%%%@@*+++*-.:::--=- .+-====+++****++===-::.
+           ..::-=+=###%#@@%*-+%+=##@@%#%##*+:::-=*+====+**##%@@@@@@@%@@%#+-=+-....::--.  +---===++++====---::.
+            ..::-==+#%%@@@@@@%@@@@@@@@@@#*==++**#*#%@@@@@@@@@@@@@@@%#%@%#=..:......:-::  -:---======----:::..
+             ..:--=-=##%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%%%%%##*-    .::..:----.:-:----------::::...
+              ..:----:-*%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%#%%##%%*#*-:. ...  ...:::---- :-::-----:::::....
+                .:::--::.:=#@@@@@@@@@@@@@@@@@@@@@@@@@@@@%@@@@@%#+=:  .. :::. ..::::-==- .-.::::::::.....
+                 ..:::::::.   =@@@@@@@@@@@@@@@@@@@@@@%%%%%%%%#*+-=::.....:::..:::::-=-: .-.:::::......
+                   ...::::::   :==-*@@@@@@@@@@@@@*:::::::-==+++--::..::.:::--:..::-::-:. :..........
+                     ...:::.   :.:  --+@@@@@#-            .:::::...::::::--=-::::.::--:.  :......
+                       ...:.   :=:               .        ::. .:..::::::.:::::::::-:-:.    :.
+                          .    ....          .:::-:......-.. .....:::-::::.::::...::::.     .
+                               .. -         :-+++===----:::.....::::::.:...:::::...::::.
+                                  .:.     .:---:-==-=====-:......:........::..:........
+                                   ..:...:-=----:::-----=-:..:.... ................</pre><b>cristiano ronaldo</b></div>
+      <div class="tile wide"><span>eating, in seoul</span><pre class="burger" aria-hidden="true">        _.-'''''''''''-._        
+     .-'                 '-.     
+   .'  o    o       o    o  '.   
+  /  o    o    o o    o    o  \  
+ /_____________________________\ 
+(  ~~~  ~~~~  ~~~~~  ~~~~  ~~~  )
+ \_____________________________/ 
+ |#############################| 
+ |_____________________________| 
+  \  ~~~  ~~~~ ~~~ ~~~~  ~~~  /  
+   \_________________________/   
+    '-.___________________.-'    </pre><b>jack jack burger · taksim kebab · butanchu</b></div>
     </div>
   </section>
 
@@ -117,15 +181,15 @@
       <h3><a href="https://www.stemise.org/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/stemise.png" alt="" width="22" height="22" loading="lazy" />STEMise</a></h3>
       <p class="meta">founder &amp; executive director · apr 2025 → now</p>
       <p>free competitions, research and student-led chapters for young people anywhere. trustworthy AI tech for the underserved, built with UC Berkeley &amp; UCSB researchers; backed by Citadel &amp; Hudson River Trading, fiscally sponsored by Hack Club.</p>
-      <dl class="stats"><div><dd>5,600+</dd><dt>youths served*</dt></div><div><dd>130</dd><dt>nations</dt></div><div><dd>129</dd><dt>chapters</dt></div><div><dd>75+</dd><dt>staff</dt></div></dl>
+      <dl class="stats"><div><dd>6,000+</dd><dt>youths served*</dt></div><div><dd>130</dd><dt>nations</dt></div><div><dd>129</dd><dt>chapters</dt></div><div><dd>75+</dd><dt>staff</dt></div></dl>
       <p class="nums">* incl. dsh hacks participants · 350K+ media impressions</p>
     </article>
     <article class="item" id="hackathons" data-reveal>
       <h3><a href="https://dshhacks.org/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/dsh.png" alt="" width="22" height="22" loading="lazy" />DSH Hacks</a> &amp; <a href="https://univabio.org/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/univabio.svg" alt="" width="22" height="22" loading="lazy" />UnivaBio</a></h3>
       <p class="meta">lead competition director &amp; organizer · 3 hackathons</p>
       <p>hackathons where students build technology for real people. 130+ judges &amp; mentors from 40+ companies, incl. Y Combinator, Goldman Sachs &amp; Google; 20+ sponsors.</p>
-      <dl class="stats"><div><dd>2,300+</dd><dt>dsh hacks participants</dt></div><div><dd>930+</dd><dt>univabio participants</dt></div><div><dd>530+</dd><dt>projects</dt></div><div><dd>$200,000</dd><dt>in prizes</dt></div></dl>
-      <p class="nums">3,200+ participants total, from 100+ nations</p>
+      <dl class="stats"><div><dd>2,400+</dd><dt>dsh hacks participants</dt></div><div><dd>930+</dd><dt>univabio participants</dt></div><div><dd>530+</dd><dt>projects</dt></div><div><dd>$200,000</dd><dt>in prizes</dt></div></dl>
+      <p class="nums">3,300+ participants total, from 100+ nations</p>
     </article>
     <article class="item" id="synthify" data-reveal>
       <h3><a href="https://synthify-magazine.vercel.app/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/synthify.jpg" alt="" width="22" height="22" loading="lazy" />Synthify</a></h3>
@@ -147,6 +211,6 @@
     <p>ryan ahn · <a href="mailto:ryanjmahn1@gmail.com">ryanjmahn1@gmail.com</a></p>
   </footer>
 </main>
-<script src="/assets/js/site.js?v=16" defer></script>
+<script src="/assets/js/site.js?v=22" defer></script>
 </body>
 </html>

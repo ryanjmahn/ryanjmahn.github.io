@@ -29,16 +29,16 @@ a:hover { color: var(--accent); text-decoration-color: currentColor; }
 h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -.035em; line-height: 1.15; }
 .skip { position: absolute; left: -999px; top: 8px; z-index: 100; padding: 10px 14px; background: var(--fg); color: var(--bg); }
 .skip:focus { left: 8px; }
-.meta, .nums, .more, .top nav, .stats dt, .foot { font-family: var(--mono); letter-spacing: -.01em; }
+.meta, .nums, .more, .stats dt, .foot { font-family: var(--mono); letter-spacing: -.01em; }
 
 /* ---------- the column ---------- */
 
 .page { max-width: 680px; margin: 0 auto; padding: 0 20px 64px; }
 .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 80px; }
 .brand { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 600; letter-spacing: -.035em; text-decoration: none; }
-.top nav { display: flex; gap: 4px; font-size: 12.5px; }
-.top nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 8px; text-decoration: none; color: var(--fg-2); }
-.top nav a:hover { color: var(--accent); }
+.hi { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 14px; font-family: var(--mono); font-size: 13px; animation: fade 1s .5s var(--ease) both; }
+.hi a { display: inline-flex; align-items: center; min-height: 44px; color: var(--fg-2); }
+.hi a:hover { color: var(--accent); }
 
 /* the canvas is a couple hundred pixels wide; the browser scales it up crisp */
 .land { display: block; width: 100%; aspect-ratio: 2 / 1; border-radius: 16px; background: #9CC0FF; image-rendering: pixelated; animation: fade 1.2s var(--ease) both; }
@@ -77,15 +77,16 @@ a.tile:hover { color: var(--fg); background: color-mix(in srgb, var(--accent) 9%
 .tile span { font: 10.5px/1.6 var(--mono); color: var(--muted); }
 .tile b { font-size: 14.5px; font-weight: 600; letter-spacing: -.025em; line-height: 1.3; }
 .tile small { font-size: 12.5px; line-height: 1.4; color: var(--fg-2); }
-.tile.wide { grid-column: span 2; }
-.pet-tile { grid-row: span 2; }
+.tile.wide { grid-column: span 2; grid-row: span 2; }
+.burger { align-self: center; margin: auto 0; padding: 8px 0; font: 11px/1.08 ui-monospace, "SF Mono", Menlo, monospace; color: var(--fg); white-space: pre; transition: transform .4s var(--ease); }
+.tile.wide:hover .burger { transform: translateY(-3px); }
+.pet-tile, .cr7 { grid-row: span 2; }
 .pet { margin: 10px 0 auto; padding: 8px 0 12px; font: 10px/1.2 ui-monospace, "SF Mono", Menlo, monospace; color: var(--fg); animation: bob 2.4s ease-in-out infinite; }
 .pet i { display: inline-block; font-style: normal; animation: blink 4s infinite; }
 @keyframes bob { 50% { transform: translateY(-3px); } }
 @keyframes blink { 0%, 92%, 100% { transform: none; } 95% { transform: scaleY(.1); } }
-.suii { display: inline-block; font-weight: 700; letter-spacing: .02em; color: var(--accent) !important; transform-origin: bottom left; }
-.cr7:hover .suii { animation: suii .7s var(--ease); }
-@keyframes suii { 40% { transform: translateY(-8px) rotate(-6deg) scale(1.15); } }
+.siu { align-self: center; margin: 10px 0; padding: 0; font: 2.9px/3.3px ui-monospace, "SF Mono", Menlo, monospace; color: var(--fg); white-space: pre; overflow: hidden; transition: transform .5s var(--ease); }
+.cr7:hover .siu { transform: scale(1.04); }
 
 /* ---------- github ---------- */
 
@@ -125,7 +126,8 @@ a.tile:hover { color: var(--fg); background: color-mix(in srgb, var(--accent) 9%
 @media (max-width: 560px) {
   .land { aspect-ratio: 4 / 3; border-radius: 12px; }
   .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .top nav a { padding: 0 6px; }
+  .hi { gap: 14px; }
   .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .pet-tile { grid-row: auto; }
+  .pet-tile, .cr7 { grid-row: auto; }
+  .tile.wide { grid-column: 1 / -1; grid-row: auto; }
 }
