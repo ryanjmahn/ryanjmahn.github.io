@@ -70,27 +70,6 @@ code { font-family: var(--mono); font-size: .86em; padding: 1px 5px; border-radi
 .stats dd { margin: 0; font-size: 26px; font-weight: 600; letter-spacing: -.05em; line-height: 1.1; font-variant-numeric: tabular-nums; }
 .stats dt { font-size: 11px; color: var(--muted); line-height: 1.35; margin-top: 4px; }
 
-/* ---------- off the clock ---------- */
-
-/* every piece of tile art sits in a slot of one height, so the titles beneath them align */
-.tile .art { flex: none; height: 136px; margin: 12px 0 14px; display: flex; align-items: center; justify-content: center; }
-.bento { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; margin-top: 22px; }
-.tile { grid-column: span 2; }
-.pet-tile, .net-tile { grid-column: span 3; }
-.tile { display: flex; flex-direction: column; gap: 2px; padding: 12px 14px 13px; border-radius: 12px; background: var(--bg-2); text-decoration: none; color: var(--fg); transition: transform .3s var(--ease), background-color .3s; }
-a.tile:hover { color: var(--fg); background: color-mix(in srgb, var(--accent) 9%, var(--bg-2)); transform: translateY(-2px); }
-.tile span { font: 10.5px/1.6 var(--mono); color: var(--muted); }
-.tile b { font-size: 14.5px; font-weight: 600; letter-spacing: -.025em; line-height: 1.3; }
-.tile small { font-size: 12.5px; line-height: 1.4; color: var(--fg-2); }
-.pet { font: 10px/1.2 ui-monospace, "SF Mono", Menlo, monospace; color: var(--fg); animation: bob 2.4s ease-in-out infinite; }
-.pet i { display: inline-block; font-style: normal; animation: blink 4s infinite; }
-@keyframes bob { 50% { transform: translateY(-3px); } }
-@keyframes blink { 0%, 92%, 100% { transform: none; } 95% { transform: scaleY(.1); } }
-.net { width: 148px; overflow: visible; }
-.net .wires line { stroke: currentColor; stroke-width: .7; opacity: .28; stroke-dasharray: 3 6; animation: flow 2.4s linear infinite; animation-delay: calc(var(--i) * -90ms); }
-.net .nodes circle { fill: var(--bg-2); stroke: currentColor; stroke-width: 1; }
-@keyframes flow { to { stroke-dashoffset: -18; } }
-
 /* ---------- github ---------- */
 
 #log .meta { margin: 14px 0 12px; }
@@ -130,7 +109,4 @@ a.tile:hover { color: var(--fg); background: color-mix(in srgb, var(--accent) 9%
   .land { aspect-ratio: 4 / 3; border-radius: 12px; }
   .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .hi { gap: 14px; }
-  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
-  .tile, .pet-tile, .net-tile { grid-column: auto; }
-  .tile .art { height: 112px; }
 }
