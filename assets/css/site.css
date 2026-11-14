@@ -49,6 +49,7 @@ h1 { font-size: clamp(36px, 7vw, 48px); letter-spacing: -.05em; margin: 48px 0 1
 
 section { margin-top: 64px; scroll-margin-top: 24px; }
 h2 { font-size: 22px; letter-spacing: -.04em; margin-bottom: 4px; }
+.sub { max-width: 54ch; margin: 0; font-size: 14px; line-height: 1.5; color: var(--muted); }
 
 .item { padding: 22px 0 18px; border-bottom: 1px solid var(--line); }
 .item:last-child { border-bottom: 0; }
@@ -71,22 +72,24 @@ code { font-family: var(--mono); font-size: .86em; padding: 1px 5px; border-radi
 
 /* ---------- off the clock ---------- */
 
-.bento { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 16px; }
+/* every piece of tile art sits in a slot of one height, so the titles beneath them align */
+.tile .art { flex: none; height: 136px; margin: 12px 0 14px; display: flex; align-items: center; justify-content: center; }
+.bento { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; margin-top: 22px; }
+.tile { grid-column: span 2; }
+.pet-tile, .net-tile { grid-column: span 3; }
 .tile { display: flex; flex-direction: column; gap: 2px; padding: 12px 14px 13px; border-radius: 12px; background: var(--bg-2); text-decoration: none; color: var(--fg); transition: transform .3s var(--ease), background-color .3s; }
 a.tile:hover { color: var(--fg); background: color-mix(in srgb, var(--accent) 9%, var(--bg-2)); transform: translateY(-2px); }
 .tile span { font: 10.5px/1.6 var(--mono); color: var(--muted); }
 .tile b { font-size: 14.5px; font-weight: 600; letter-spacing: -.025em; line-height: 1.3; }
 .tile small { font-size: 12.5px; line-height: 1.4; color: var(--fg-2); }
-.tile.wide { grid-column: span 2; grid-row: span 2; }
-.burger { align-self: center; margin: auto 0; padding: 8px 0; font: 11px/1.08 ui-monospace, "SF Mono", Menlo, monospace; color: var(--fg); white-space: pre; transition: transform .4s var(--ease); }
-.tile.wide:hover .burger { transform: translateY(-3px); }
-.pet-tile, .cr7 { grid-row: span 2; }
-.pet { margin: 10px 0 auto; padding: 8px 0 12px; font: 10px/1.2 ui-monospace, "SF Mono", Menlo, monospace; color: var(--fg); animation: bob 2.4s ease-in-out infinite; }
+.pet { font: 10px/1.2 ui-monospace, "SF Mono", Menlo, monospace; color: var(--fg); animation: bob 2.4s ease-in-out infinite; }
 .pet i { display: inline-block; font-style: normal; animation: blink 4s infinite; }
 @keyframes bob { 50% { transform: translateY(-3px); } }
 @keyframes blink { 0%, 92%, 100% { transform: none; } 95% { transform: scaleY(.1); } }
-.siu { align-self: center; margin: 10px 0; padding: 0; font: 2.9px/3.3px ui-monospace, "SF Mono", Menlo, monospace; color: var(--fg); white-space: pre; overflow: hidden; transition: transform .5s var(--ease); }
-.cr7:hover .siu { transform: scale(1.04); }
+.net { width: 148px; overflow: visible; }
+.net .wires line { stroke: currentColor; stroke-width: .7; opacity: .28; stroke-dasharray: 3 6; animation: flow 2.4s linear infinite; animation-delay: calc(var(--i) * -90ms); }
+.net .nodes circle { fill: var(--bg-2); stroke: currentColor; stroke-width: 1; }
+@keyframes flow { to { stroke-dashoffset: -18; } }
 
 /* ---------- github ---------- */
 
@@ -127,7 +130,7 @@ a.tile:hover { color: var(--fg); background: color-mix(in srgb, var(--accent) 9%
   .land { aspect-ratio: 4 / 3; border-radius: 12px; }
   .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .hi { gap: 14px; }
-  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .pet-tile, .cr7 { grid-row: auto; }
-  .tile.wide { grid-column: 1 / -1; grid-row: auto; }
+  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+  .tile, .pet-tile, .net-tile { grid-column: auto; }
+  .tile .art { height: 112px; }
 }
