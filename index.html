@@ -5,12 +5,12 @@
 <script>document.documentElement.classList.add("js")</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ryan ahn</title>
-<meta name="description" content="ryan ahn — 17, seoul. working on trustworthy science and tech: two NeurIPS 2026 workshop papers, a stealth AI startup, and STEMise (6,200+ youths in 130 nations)." />
+<meta name="description" content="ryan ahn — 17, seoul. working on trustworthy, human-centered science and tech: two NeurIPS 2026 workshop papers, co-founder of OpenWM, and STEMise (6,300+ youths in 135+ countries)." />
 <link rel="canonical" href="https://ryanjmahn.github.io/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ryan ahn" />
 <meta property="og:title" content="ryan ahn" />
-<meta property="og:description" content="trustworthy science and tech. two NeurIPS 2026 workshop papers, a stealth AI startup, founder of STEMise. seoul." />
+<meta property="og:description" content="trustworthy, human-centered science and tech. two NeurIPS 2026 workshop papers, co-founder of OpenWM, founder of STEMise. seoul." />
 <meta property="og:url" content="https://ryanjmahn.github.io/" />
 <meta name="twitter:card" content="summary" />
 <meta name="theme-color" content="#FFFFFF" />
@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" />
-<link rel="stylesheet" href="/assets/css/site.css?v=29" />
+<link rel="stylesheet" href="/assets/css/site.css?v=46" />
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Ryan Ahn","alternateName":"Ahn Jaemin","url":"https://ryanjmahn.github.io/","address":{"@type":"PostalAddress","addressLocality":"Seoul","addressCountry":"KR"},"sameAs":["https://github.com/ryanjmahn","https://www.linkedin.com/in/ryan-ahn-57b570440/"]}
 </script>
@@ -38,7 +38,7 @@
   <h1>hi, i'm ryan</h1>
   <!-- ========== YOUR INTRO: write it here. one <p> per paragraph. ========== -->
   <div class="intro">
-    <p>i'm a 17-year-old student in seoul working on trustworthy science and tech. i stress-test the computational tools researchers already rely on, build the ones i wish existed, and run communities where other young people learn to do both. a result is only as good as the evidence that it holds.</p>
+    <p>i'm a 17-year-old student in seoul working on trustworthy, human-centered science and tech. i stress-test the computational tools researchers already rely on, build the ones i wish existed, and run communities where other young people learn to do both.</p>
   </div>
   <!-- ========== end of intro ========== -->
   <nav class="hi" aria-label="links">
@@ -49,54 +49,51 @@
 
   <section id="now" aria-labelledby="h-now">
     <h2 id="h-now">now</h2>
-    <p class="sub">what i’m building.</p>
     <article class="item" data-reveal>
-      <h3>stealth</h3>
+      <h3>OpenWM</h3>
       <p class="meta">co-founder · sep 2026 → now</p>
-      <p>building something new in ai — the same obsession, aimed at systems instead of papers. more soon.</p>
+      <p>building.</p>
       <p class="nums">a16z speedrun alpha, final round · $2,500 grant from a startup accelerator</p>
     </article>
   </section>
 
   <section id="research" aria-labelledby="h-research">
     <h2 id="h-research">research</h2>
-    <p class="sub">trustworthy science — do the computational tools researchers rely on actually hold up?</p>
     <article class="item" id="contaminated-ancestors" data-reveal>
       <h3>Contaminated Ancestors</h3>
-      <p class="meta">co-author · neurips 2026 · trust-ai-eval workshop</p>
-      <p>our own protein ML evaluation nearly misled us. the post-mortem became a checklist any lab can run before trusting a benchmark.</p>
-      <p class="more"><a href="https://neurips.cc/virtual/2026/loc/sydney/178278" target="_blank" rel="noreferrer">paper ↗</a></p>
+      <p class="meta">co-author · neurips 2026 · trust-ai-eval (TAE) workshop</p>
+      <p>built an AI tool to catch errors in reconstructed ancient proteins, then tested it hard enough to watch it lose — and found the flaws in our own testing that nearly hid it.</p>
+      <p class="nums"><b>36 of 40</b> errors caught by plain text-matching, <b>11</b> by our AI · <b>7</b> flaws in our own evaluation · an <b>11-point</b> checklist so other labs catch theirs</p>
+      <p class="more"><a href="https://neurips.cc/virtual/2026/loc/sydney/178278" target="_blank" rel="noreferrer">paper ↗</a> <a href="https://github.com/ryanjmahn/ProteinMPNN-Extension" target="_blank" rel="noreferrer">repo ↗</a></p>
     </article>
     <article class="item" id="cartographic" data-reveal>
       <h3>Cartographic Generalization</h3>
-      <p class="meta">co-author · neurips 2026 · aidar workshop</p>
-      <p>downsampling skin-lesion images drops structure unevenly, not uniformly, so a routine preprocessing step can quietly shape what a model is scored on.</p>
-      <p class="more"><a href="https://neurips.cc/virtual/2026/loc/paris/162359" target="_blank" rel="noreferrer">paper ↗</a></p>
+      <p class="meta">co-author · neurips 2026 · AI data readiness for scientific discovery (AIDaR) workshop</p>
+      <p>audited a medical AI dataset and found its images were unreadable before training even started — and more unreadable on darker skin. built a format that fixes it.</p>
+      <p class="nums"><b>4 of 5</b> diagnostic signs destroyed at 224×224 → 28×28 · <b>~80%</b> of detail kept instead of a third · skin-tone gap cut <b>52%</b></p>
+      <p class="more"><a href="https://neurips.cc/virtual/2026/loc/paris/162359" target="_blank" rel="noreferrer">paper ↗</a> <a href="https://github.com/ryanjmahn/DermaMNIST-Extension" target="_blank" rel="noreferrer">repo ↗</a></p>
     </article>
     <article class="item" id="kras" data-reveal>
       <h3>KRAS G12D cryptic-pocket benchmark</h3>
       <p class="meta">sole author · w/ prof. se-jin hwang · CJSJ quarterfinalist, under review</p>
-      <p>i benchmarked 3 pocket finders on the kras g12d drug pocket and found the cryptic-pocket specialist doesn’t beat plain geometry — fpocket hits 0.95 mcc on the open structure.</p>
-      <p class="nums">now scaled across 218 cryptobench targets: fpocket’s site detection flips on 46% of a conformational subset under &lt;1.4 å of backbone motion. next: a rule for when to trust a prediction. target: icml 2027 workshops.</p>
+      <p>benchmarked the tools drug programs use to find where a cancer drug can bind. the one built for the job came last; the simplest won. two follow-ups ask what a leaderboard really measures, and when a prediction is worth believing.</p>
+      <p class="nums"><b>0.95</b> MCC for the simplest tool vs <b>0.12</b> for the specialist · scaled to <b>218</b> proteins · a trust rule right <b>75%</b> of the time against <b>37%</b> overall · target: icml &amp; iclr 2027 workshops</p>
       <p class="more"><a href="/assets/papers/kras-g12d-switch-ii-benchmark.pdf">manuscript ↗</a> <a href="https://github.com/ryanjmahn/KRAS-G12D-SIIP-Benchmark" target="_blank" rel="noreferrer">repo ↗</a></p>
     </article>
   </section>
 
   <section id="builds" aria-labelledby="h-builds">
     <h2 id="h-builds">builds</h2>
-    <p class="sub">trustworthy tech — software that makes work checkable, and the small tools that keep ai agents honest.</p>
     <article class="item" id="halo" data-reveal>
-      <h3><a href="https://joinhalo.vercel.app/" target="_blank" rel="noreferrer">Halo</a></h3>
-      <p class="meta">building · now</p>
+      <h3><a href="https://joinhalo.vercel.app/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/halo.svg" alt="" width="22" height="22" loading="lazy" />Halo</a></h3>
+      <p class="meta">nov 2026</p>
       <p>a network for builders just starting out: who you can actually reach, through people you already trust.</p>
-      <p class="more"><a href="https://joinhalo.vercel.app/" target="_blank" rel="noreferrer">joinhalo.vercel.app ↗</a></p>
     </article>
     <article class="item" id="probix" data-reveal>
       <h3><a href="https://www.tryprobix.com/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/probix.png" alt="" width="22" height="22" loading="lazy" />Probix Labs</a></h3>
-      <p class="meta">co-founder &amp; coo · feb → sep 2026 · pivoted to what i'm building now</p>
-      <p>a product lab for reproducible science: tools that make a published result checkable by the next person. i coded 2 of its 6.</p>
-      <!-- TODO(ryan): name the 2 tools you coded (pledge and pedigree?) -->
-      <p class="nums">260+ waitlist · top 10% applicant, yc f26 &amp; founders inc</p>
+      <p class="meta">co-founder &amp; coo · feb → sep 2026</p>
+      <p>a product lab for reproducible science — tools that let the next person check a published result. i coded 2 of its 6.</p>
+      <p class="nums"><b>260+</b> waitlist · top <b>10%</b> applicant, yc f26 &amp; founders inc</p>
     </article>
     <article class="item" id="unison" data-reveal>
       <h3><a href="https://projectunison.netlify.app/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/unison.svg" alt="" width="22" height="22" loading="lazy" />Project UNISON</a></h3>
@@ -106,33 +103,27 @@
     <article class="item" id="agent-tools" data-reveal>
       <h3>tools for coding agents</h3>
       <p class="meta">open source · python, no dependencies</p>
-      <p>three small things i built while working with coding agents: <b>squeeze</b> trims a command's output so an agent reads the 12 lines that matter instead of 77, <b>graveyard</b> records fixes that already failed so the next session doesn't retry them, and <b>terminal tamagotchi</b> is an ascii pet that feeds on your git commits.</p>
-      <p class="more"><a href="https://github.com/ryanjmahn/squeeze" target="_blank" rel="noreferrer">squeeze ↗</a> <a href="https://github.com/ryanjmahn/graveyard" target="_blank" rel="noreferrer">graveyard ↗</a> <a href="https://github.com/ryanjmahn/terminal-tamagotchi" target="_blank" rel="noreferrer">terminal tamagotchi ↗</a></p>
+      <ul class="facts">
+        <li><a href="https://github.com/ryanjmahn/squeeze" target="_blank" rel="noreferrer">squeeze ↗</a> — trims a command's output so an agent reads the 12 lines that matter, not 77.</li>
+        <li><a href="https://github.com/ryanjmahn/graveyard" target="_blank" rel="noreferrer">graveyard ↗</a> — records fixes that already failed, so the next session doesn't retry them.</li>
+        <li><a href="https://github.com/ryanjmahn/terminal-tamagotchi" target="_blank" rel="noreferrer">terminal tamagotchi ↗</a> — an ascii pet that feeds on your git commits.</li>
+      </ul>
     </article>
   </section>
 
   <section id="community" aria-labelledby="h-community">
     <h2 id="h-community">community</h2>
-    <p class="sub">teaching the next set of people to build both.</p>
     <article class="item" id="stemise" data-reveal>
       <h3><a href="https://www.stemise.org/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/stemise.png" alt="" width="22" height="22" loading="lazy" />STEMise</a></h3>
       <p class="meta">founder &amp; executive director · apr 2025 → now</p>
-      <p>free competitions, research and student-led chapters for young people anywhere. trustworthy AI tech for the underserved, built with UC Berkeley &amp; UCSB researchers; backed by Citadel &amp; Hudson River Trading, fiscally sponsored by Hack Club.</p>
-      <dl class="stats"><div><dd>6,200+</dd><dt>youths served*</dt></div><div><dd>130</dd><dt>nations</dt></div><div><dd>129</dd><dt>chapters</dt></div><div><dd>75+</dd><dt>staff</dt></div></dl>
-      <p class="nums">* incl. dsh hacks participants · 350K+ media impressions</p>
+      <p>free competitions, research programs and student-led chapters that put real STEM work within reach of young people anywhere, whatever their school can offer. sponsored by Hack Club, backed by Citadel &amp; Hudson River Trading.</p>
+      <dl class="stats"><div><dd>6,300+</dd><dt>youths served</dt></div><div><dd>135+</dd><dt>countries</dt></div><div><dd>129</dd><dt>chapters</dt></div><div><dd>75+</dd><dt>staff</dt></div></dl>
     </article>
     <article class="item" id="hackathons" data-reveal>
       <h3><a href="https://dshhacks.org/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/dsh.png" alt="" width="22" height="22" loading="lazy" />DSH Hacks</a> &amp; <a href="https://univabio.org/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/univabio.svg" alt="" width="22" height="22" loading="lazy" />UnivaBio</a></h3>
       <p class="meta">lead competition director &amp; organizer · 3 hackathons</p>
-      <p>hackathons where students build technology for real people. 130+ judges &amp; mentors from 40+ companies, incl. Y Combinator, Goldman Sachs &amp; Google; 20+ sponsors.</p>
-      <dl class="stats"><div><dd>2,500+</dd><dt>dsh hacks participants</dt></div><div><dd>930+</dd><dt>univabio participants</dt></div><div><dd>530+</dd><dt>projects</dt></div><div><dd>$200,000</dd><dt>in prizes</dt></div></dl>
-      <p class="nums">3,400+ participants total, from 100+ nations</p>
-    </article>
-    <article class="item" id="synthify" data-reveal>
-      <h3><a href="https://synthify-magazine.vercel.app/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/synthify.jpg" alt="" width="22" height="22" loading="lazy" />Synthify</a></h3>
-      <p class="meta">head of journalism · 2024 → now</p>
-      <p>a magazine giving young writers a public voice, sent to 50+ institutions.</p>
-      <dl class="stats"><div><dd>8</dd><dt>editions</dt></div><div><dd>60+</dd><dt>articles</dt></div><div><dd>25+</dd><dt>writers</dt></div><div><dd>350+</dd><dt>copies</dt></div></dl>
+      <p>hackathons where students build technology for real people, judged by 130+ mentors from 40+ companies.</p>
+      <dl class="stats"><div><dd>3,500+</dd><dt>participants</dt></div><div><dd>115+</dd><dt>countries</dt></div><div><dd>800+</dd><dt>AI projects</dt></div><div><dd>$200,000</dd><dt>in prizes, from 20+ sponsors</dt></div></dl>
     </article>
   </section>
 
@@ -148,6 +139,6 @@
     <p>ryan ahn · <a href="mailto:ryanjmahn1@gmail.com">ryanjmahn1@gmail.com</a></p>
   </footer>
 </main>
-<script src="/assets/js/site.js?v=29" defer></script>
+<script src="/assets/js/site.js?v=46" defer></script>
 </body>
 </html>
