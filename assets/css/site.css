@@ -90,7 +90,11 @@ code { font-family: var(--mono); font-size: .86em; padding: 1px 5px; border-radi
 
 /* ---------- footer, 404 ---------- */
 
-.foot { margin-top: 72px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--muted); }
+.quote { margin: 72px 0 0; padding: 0; }
+.quote blockquote { margin: 0; }
+.quote p { margin: 0 0 8px; font-size: clamp(20px, 2.6vw, 26px); font-weight: 500; letter-spacing: -.035em; line-height: 1.25; }
+.quote figcaption { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.foot { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--muted); }
 .nf { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
 .nf h1 { font-size: clamp(48px, 10vw, 80px); }
 
