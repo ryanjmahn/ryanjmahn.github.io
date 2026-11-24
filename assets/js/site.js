@@ -48,23 +48,45 @@ console.assert(countTo("$200,000", 1) === "$200,000" && countTo("6,000+", 0.5) =
 (function contributions() {
   var box = document.querySelector("[data-gh]");
   if (!box) return;
-  var total = document.querySelector("[data-gh-total]");
   fetch("https://github-contributions-api.jogruber.de/v4/" + box.getAttribute("data-gh") + "?y=last")
     .then(function (r) { if (!r.ok) throw r; return r.json(); })
     .then(function (data) {
-      var days = data.contributions, html = "";
+      var days = data.contributions, html = "", months = "";
+      var pad = new Date(days[0].date + "T00:00:00Z").getUTCDay();
+      var fmt = function (d, o) { return d.toLocaleString("en-US", Object.assign({ timeZone: "UTC" }, o)).toLowerCase(); };
       // pad the first column so each row is a weekday (sunday on top)
-      for (var p = new Date(days[0].date + "T00:00:00Z").getUTCDay(); p > 0; p--) html += '<i style="visibility:hidden"></i>';
+      for (var p = pad; p > 0; p--) html += '<i style="visibility:hidden"></i>';
       days.forEach(function (d, i) {
-        html += '<i data-l="' + d.level + '" style="--c:' + Math.floor(i / 7) + '" title="' + d.date + ": " + d.count + (d.count === 1 ? " contribution" : " contributions") + '"></i>';
+        var dt = new Date(d.date + "T00:00:00Z");
+        var tip = fmt(dt, { month: "short", day: "numeric" }) + " · " + (d.count || "no") + (d.count === 1 ? " contribution" : " contributions");
+        html += '<i data-l="' + d.level + '"' + (i === days.length - 1 ? " data-today" : "") + ' style="--c:' + Math.floor(i / 7) + '" data-t="' + tip + '"></i>';
+        if (dt.getUTCDate() === 1) months += '<span style="grid-column:' + (Math.floor((i + pad) / 7) + 1) + '">' + fmt(dt, { month: "short" }) + "</span>";
       });
       box.innerHTML = html;
-      box.scrollLeft = box.scrollWidth;
+      var m = document.querySelector("[data-gh-months]");
+      if (m) { m.innerHTML = months; m.style.gridTemplateColumns = "repeat(" + Math.ceil((days.length + pad) / 7) + ", minmax(8px, 1fr))"; }
+      var scroll = box.parentNode; scroll.scrollLeft = scroll.scrollWidth;
+      var total = document.querySelector("[data-gh-total]");
       if (total) total.textContent = data.total.lastYear.toLocaleString("en-US");
+      // one shared hover label instead of the browser's native title tooltip
+      var tipEl = document.querySelector("[data-gh-tip]");
+      if (tipEl) {
+        box.addEventListener("mouseover", function (e) {
+          var t = e.target.getAttribute && e.target.getAttribute("data-t");
+          if (!t) return;
+          var r = e.target.getBoundingClientRect(), sr = scroll.getBoundingClientRect();
+          tipEl.textContent = t; tipEl.hidden = false;
+          tipEl.style.left = (r.left - sr.left + scroll.scrollLeft + r.width / 2) + "px";
+          tipEl.style.top = (r.top - sr.top + scroll.scrollTop) + "px";
+        });
+        box.addEventListener("mouseleave", function () { tipEl.hidden = true; });
+      }
     })
     .catch(function () {
       // chart unavailable: keep just the link to the profile
-      if (total) total.parentNode.innerHTML = '<a href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer">github activity ↗</a>';
+      document.querySelectorAll("[data-gh-body]").forEach(function (el) { el.remove(); });
+      var line = document.querySelector("[data-gh-line]");
+      if (line) line.innerHTML = '<a href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer">github activity ↗</a>';
     });
 })();
 
