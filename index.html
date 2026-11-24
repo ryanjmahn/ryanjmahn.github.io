@@ -5,7 +5,7 @@
 <script>document.documentElement.classList.add("js")</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ryan ahn</title>
-<meta name="description" content="ryan ahn — 17, seoul. working on trustworthy, human-centered science and tech: two NeurIPS 2026 workshop papers, co-founder of OpenWM, and STEMise (6,300+ youths in 138 countries)." />
+<meta name="description" content="ryan ahn — 17, seoul. working on trustworthy, human-centered science and tech: two NeurIPS 2026 workshop papers, co-founder of OpenWM, and STEMise (6,600+ youths in 140 countries)." />
 <link rel="canonical" href="https://ryanjmahn.github.io/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="ryan ahn" />
@@ -52,7 +52,7 @@
     <article class="item" data-reveal>
       <h3>OpenWM</h3>
       <p class="meta">co-founder · sep 2026 → now</p>
-      <p>verification layer for physical AI.</p>
+      <p>verification layer for physical ai.</p>
       <p class="nums">a16z speedrun alpha, final round · $2,500 grant from a startup accelerator</p>
     </article>
   </section>
@@ -61,23 +61,23 @@
     <h2 id="h-research">research</h2>
     <article class="item" id="contaminated-ancestors" data-reveal>
       <h3>Evaluation Reliability in Protein ML</h3>
-      <p class="meta">co-author · neurips 2026 · trust-ai-eval (TAE) workshop</p>
-      <p>built a ProteinMPNN-based tool to catch errors in reconstructed ancient proteins — then found the flaws in our own testing that nearly hid how badly it did.</p>
+      <p class="meta">co-author · neurips 2026 · AI4Science &amp; trust-ai-eval (TAE) workshops</p>
+      <p>built and audited a proteinmpnn-based tool that catches errors in reconstructed ancient proteins. ran 120+ trials across 40 protein families, then wrote a reference checklist so other labs can audit theirs.</p>
       <p class="nums"><b>36 of 40</b> errors caught by plain text-matching, <b>11</b> by our AI · <b>7</b> flaws in our own evaluation · an <b>11-point</b> checklist so other labs catch theirs</p>
       <p class="more"><a href="https://neurips.cc/virtual/2026/loc/sydney/178278" target="_blank" rel="noreferrer">paper ↗</a> <a href="https://github.com/ryanjmahn/ProteinMPNN-Extension" target="_blank" rel="noreferrer">repo ↗</a></p>
     </article>
     <article class="item" id="cartographic" data-reveal>
       <h3>Data Readiness in Medical Imaging Benchmarks</h3>
       <p class="meta">co-author · neurips 2026 · AI data readiness for scientific discovery (AIDaR) workshop</p>
-      <p>audited DermaMNIST, a widely used medical AI dataset, and found its images lose most of what dermatologists diagnose by before training even starts — and lose it unevenly across skin tones. built a format that keeps those signs.</p>
+      <p>audited dermamnist, a widely used medical ai benchmark, and proved its 28×28 resize destroys 4 of 5 diagnostic signs in skin cancer images — unevenly across skin tones. built a format that keeps them.</p>
       <p class="nums"><b>4 of 5</b> diagnostic signs destroyed at 224×224 → 28×28 · <b>~80%</b> of detail kept instead of a third · skin-tone gap cut <b>52%</b></p>
       <p class="more"><a href="https://neurips.cc/virtual/2026/loc/paris/162359" target="_blank" rel="noreferrer">paper ↗</a> <a href="https://github.com/ryanjmahn/DermaMNIST-Extension" target="_blank" rel="noreferrer">repo ↗</a></p>
     </article>
     <article class="item" id="kras" data-reveal>
       <h3>Benchmark Design in Cryptic Pocket Prediction</h3>
       <p class="meta">sole author · w/ prof. se-jin hwang · CJSJ semi-finalist, under review</p>
-      <p>benchmarked three computational tools on their ability to find the Switch-II cryptic pocket in KRAS G12D; the one built for cryptic pockets placed last. two follow-up studies ask what such a leaderboard really measures, and when a prediction is worth believing.</p>
-      <p class="nums"><b>0.95</b> MCC for the simplest tool vs <b>0.12</b> for the specialist · scaled to <b>218</b> proteins · a trust rule right <b>75%</b> of the time against <b>37%</b> overall · target: icml &amp; iclr 2027 workshops</p>
+      <p>solo-benchmarked three software tools on detecting the switch-ii cryptic pocket in kras g12d, using a 24-conformer normal-mode ladder built from the crystal structure. the tool built for cryptic pockets placed last. extended to 218 targets to ask when a prediction is worth believing.</p>
+      <p class="nums"><b>0.95</b> MCC for the simplest tool vs <b>0.12</b> for the specialist · scaled to <b>218</b> proteins · a trust rule right <b>75%</b> of the time against <b>37%</b> overall</p>
       <p class="more"><a href="/assets/papers/kras-g12d-switch-ii-benchmark.pdf">manuscript ↗</a> <a href="https://github.com/ryanjmahn/KRAS-G12D-SIIP-Benchmark" target="_blank" rel="noreferrer">repo ↗</a></p>
     </article>
   </section>
@@ -87,13 +87,13 @@
     <article class="item" id="probix" data-reveal>
       <h3><a href="https://www.tryprobix.com/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/probix.png" alt="" width="22" height="22" loading="lazy" />Probix Labs</a></h3>
       <p class="meta">co-founder &amp; coo · feb → sep 2026</p>
-      <p>a product lab addressing reproducibility crisis by building tools for verifying published science. i built two tools specifically for biomedical research.</p>
+      <p>a product lab building tools that verify published science, aimed at the reproducibility crisis. i built two of them, both for auditing biomedical research, and secured the ieee north macedonia chair as a founding partner.</p>
       <p class="nums"><b>260+</b> waitlist · top <b>10%</b> applicant, yc f26 &amp; founders inc</p>
     </article>
     <article class="item" id="unison" data-reveal>
       <h3><a href="https://projectunison.netlify.app/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/unison.svg" alt="" width="22" height="22" loading="lazy" />Project UNISON</a></h3>
-      <p class="meta">curriculum &amp; AI pipeline developer · barnard college · 2026</p>
-      <p>an AI pipeline that fits an 8-week UN SDG curriculum to each student. i wrote its AI × biomedicine lessons.</p>
+      <p class="meta">curriculum &amp; ai pipeline developer · w/ prof. mark santolucito, barnard college · 2026</p>
+      <p>co-engineered an ai pipeline that generates 8-week k-12 un sdg courses. verified the generated lessons for accuracy and wrote a 3-part ai × biomedicine unit.</p>
     </article>
   </section>
 
@@ -101,15 +101,15 @@
     <h2 id="h-community">community</h2>
     <article class="item" id="stemise" data-reveal>
       <h3><a href="https://www.stemise.org/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/stemise.png" alt="" width="22" height="22" loading="lazy" />STEMise</a></h3>
-      <p class="meta">founder &amp; chairman (executive director emeritus) · apr 2025 → now</p>
-      <p>free competitions, research programs and student-led chapters that put real STEM work within reach of young people anywhere. backed by Citadel &amp; Hudson River Trading. collaborated with researchers from berkeley & purdue & ucsb for human-centric AI research projects.</p>
-      <dl class="stats"><div><dd>6,300+</dd><dt>youths served</dt></div><div><dd>138</dd><dt>countries</dt></div><div><dd>129</dd><dt>chapters</dt></div><div><dd>75+</dd><dt>staff</dt></div></dl>
+      <p class="meta">founder &amp; executive director · apr 2025 → now</p>
+      <p>building a culture of young stem builders through free competitions, research programs and student-led chapters. sponsored by citadel &amp; hudson river trading. ran a human-centric ai research lab with mentors from berkeley, purdue &amp; ucsb.</p>
+      <dl class="stats"><div><dd>6,600+</dd><dt>youths served</dt></div><div><dd>140</dd><dt>countries</dt></div><div><dd>129</dd><dt>chapters</dt></div><div><dd>75+</dd><dt>staff</dt></div></dl>
     </article>
     <article class="item" id="hackathons" data-reveal>
       <h3><a href="https://dshhacks.org/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/dsh.png" alt="" width="22" height="22" loading="lazy" />DSH Hacks</a> &amp; <a href="https://univabio.org/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/univabio.svg" alt="" width="22" height="22" loading="lazy" />UnivaBio</a></h3>
-      <p class="meta">lead competition director &amp; organizer · 3 hackathons</p>
-      <p>global hackathons where students build human-centered technology targeting different social issues, judged by 130+ mentors from 40+ companies.</p>
-      <dl class="stats"><div><dd>3,500+</dd><dt>participants</dt></div><div><dd>115+</dd><dt>countries</dt></div><div><dd>800+</dd><dt>AI projects built</dt></div><div><dd>$200,000+</dd><dt>in prizes, from 20+ sponsors</dt></div></dl>
+      <p class="meta">co-founder &amp; lead competition director · 3 hackathons</p>
+      <p>global hackathons where students build human-centered ai technology for real social issues.</p>
+      <dl class="stats"><div><dd>800+</dd><dt>AI projects built</dt></div><div><dd>115+</dd><dt>countries</dt></div><div><dd>$200,000+</dd><dt>in prizes, from 20+ sponsors</dt></div><div><dd>130+</dd><dt>judges from 40+ companies</dt></div></dl>
     </article>
   </section>
 
