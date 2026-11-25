@@ -20,7 +20,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&family=Doto:wght@700..900&display=swap" />
-<link rel="stylesheet" href="/assets/css/site.css?v=55" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@600&display=swap&text=%20.abcdefhilmnoqrstuvwy" />
+<link rel="stylesheet" href="/assets/css/site.css?v=64" />
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Ryan Ahn","alternateName":"Ahn Jaemin","url":"https://ryanjmahn.github.io/","address":{"@type":"PostalAddress","addressLocality":"Seoul","addressCountry":"KR"},"sameAs":["https://github.com/ryanjmahn","https://www.linkedin.com/in/ryan-ahn-57b570440/"]}
 </script>
@@ -28,89 +29,109 @@
 <body>
 <a class="skip" href="#main">skip to content</a>
 
-<main id="main" class="page">
-  <header class="top">
-    <a class="brand" href="/">ryan ahn</a>
-  </header>
-
-  <canvas class="land" aria-hidden="true"></canvas>
-
-  <h1>hi, i'm ryan</h1>
-  <!-- ========== YOUR INTRO: write it here. one <p> per paragraph. ========== -->
+<div class="page">
+  <header class="side">
+    <h1>ryan ahn</h1>
+    <p class="loc"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M8 14.5s5-4.3 5-8.3A5 5 0 0 0 3 6.2c0 4 5 8.3 5 8.3z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="6.3" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>seoul, korea</p>
+    <div class="hero">
+      <canvas class="land" aria-hidden="true"></canvas>
+      <span class="hud hud-tl">physical ai · live</span>
+      <span class="hud hud-tr" data-verdict>verifying…</span>
+      <span class="hud hud-bl"><i class="sw sw-real"></i>reality <i class="sw sw-ghost"></i>world model</span>
+    </div>
+    <!-- ========== YOUR INTRO: write it here. one <p> per paragraph. ========== -->
   <div class="intro">
     <p>i'm a 17-year-old obsessed with <mark>human-centered science and tech grounded in trust</mark>. i <mark>stress-test</mark> the computational tools researchers already rely on, build the ones i wish existed, and run communities where other young people learn to do both.</p>
   </div>
   <!-- ========== end of intro ========== -->
-  <nav class="hi" aria-label="links">
-    <a href="mailto:ryanjmahn1@gmail.com">email</a>
-    <a href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer">github ↗</a>
-    <a href="https://www.linkedin.com/in/ryan-ahn-57b570440/" target="_blank" rel="noreferrer">linkedin ↗</a>
-  </nav>
+    <p class="links"><a href="mailto:ryanjmahn1@gmail.com">email</a> · <a href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer">github</a> · <a href="https://www.linkedin.com/in/ryan-ahn-57b570440/" target="_blank" rel="noreferrer">linkedin</a></p>
+  </header>
 
+  <main id="main" class="list">
   <section id="now" aria-labelledby="h-now">
     <h2 id="h-now">now</h2>
-    <article class="item" data-reveal>
-      <h3>OpenWM</h3>
-      <p class="meta">co-founder · sep 2026 → now</p>
-      <p>verification layer for <mark>physical ai</mark>.</p>
-      <p class="nums">a16z speedrun alpha, final round · $2,500 grant from a startup accelerator</p>
-    </article>
+    <details class="row" id="openwm">
+      <summary><img class="ico" src="/assets/img/logos/openwm.svg" alt="" width="22" height="22" loading="lazy" /><span class="ttl">OpenWM · co-founder</span><span class="yr">now</span><svg class="chev" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+      <div class="body">
+        <p class="meta">co-founder · sep 2026 → now</p>
+        <p>verification layer for <mark>physical ai</mark>.</p>
+        <p class="nums">a16z speedrun alpha, final round · $2,500 grant from a startup accelerator</p>
+      </div>
+    </details>
   </section>
 
   <section id="research" aria-labelledby="h-research">
     <h2 id="h-research">research</h2>
-    <article class="item" id="contaminated-ancestors" data-reveal>
-      <h3>Evaluation Reliability in Protein ML</h3>
-      <p class="meta">co-author · neurips 2026 · AI4Science &amp; trust-ai-eval (TAE) workshops</p>
-      <p>built and audited a proteinmpnn-based tool that <mark>catches errors in reconstructed ancient proteins</mark>. ran 120+ trials across 40 protein families, then wrote a <mark>reference checklist</mark> so other labs can audit theirs.</p>
-      <p class="nums">NeurIPS 2026 Trust-AI-Eval (TAE) | <b>1 of Only 3</b> All-High-School-Author Papers of <b>226</b> Accepted (<b>1.33%</b>) · <b>36 of 40</b> errors caught by plain text-matching, <b>11</b> by our AI · <b>7</b> flaws in our own evaluation · an <b>11-point</b> checklist so other labs catch theirs</p>
-      <p class="more"><a href="https://neurips.cc/virtual/2026/loc/sydney/178278" target="_blank" rel="noreferrer">paper ↗</a> <a href="https://github.com/ryanjmahn/ProteinMPNN-Extension" target="_blank" rel="noreferrer">repo ↗</a></p>
-    </article>
-    <article class="item" id="cartographic" data-reveal>
-      <h3>Data Readiness in Medical Imaging Benchmarks</h3>
-      <p class="meta">co-author · neurips 2026 · AI data readiness for scientific discovery (AIDaR) workshop</p>
-      <p>audited dermamnist, a widely used medical ai benchmark, and proved its 28×28 resize <mark>destroys 4 of 5 diagnostic signs</mark> in skin cancer images — <mark>unevenly across skin tones</mark>. built a format that keeps them.</p>
-      <p class="nums"><b>4 of 5</b> diagnostic signs destroyed at 224×224 → 28×28 · <b>~80%</b> of detail kept instead of a third · skin-tone gap cut <b>52%</b></p>
-      <p class="more"><a href="https://neurips.cc/virtual/2026/loc/paris/162359" target="_blank" rel="noreferrer">paper ↗</a> <a href="https://github.com/ryanjmahn/DermaMNIST-Extension" target="_blank" rel="noreferrer">repo ↗</a></p>
-    </article>
-    <article class="item" id="kras" data-reveal>
-      <h3>Benchmark Design in Cryptic Pocket Prediction</h3>
-      <p class="meta">sole author · w/ prof. se-jin hwang · CJSJ semi-finalist, under review</p>
-      <p>solo-benchmarked three software tools on detecting the switch-ii cryptic pocket in kras g12d, using a 24-conformer normal-mode ladder built from the crystal structure. the tool built for cryptic pockets <mark>placed last</mark>. extended to 218 targets to ask when a prediction is <mark>worth believing</mark>.</p>
-      <p class="nums"><b>0.95</b> MCC for the simplest tool vs <b>0.12</b> for the specialist · scaled to <b>218</b> proteins · a trust rule right <b>75%</b> of the time against <b>37%</b> overall</p>
-      <p class="more"><a href="/assets/papers/kras-g12d-switch-ii-benchmark.pdf">manuscript ↗</a> <a href="https://github.com/ryanjmahn/KRAS-G12D-SIIP-Benchmark" target="_blank" rel="noreferrer">repo ↗</a></p>
-    </article>
+    <details class="row" id="contaminated-ancestors">
+      <summary><span class="tile" style="--t:linear-gradient(140deg,#FFB27A,#F2541B)" aria-hidden="true"><svg viewBox="0 0 28 28" width="28" height="28"><path d="M4 14c2.5-8 5.5-8 8 0s5.5 8 8 0 4-6 4-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 14c2.5 8 5.5 8 8 0s5.5-8 8 0 4 6 4 6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/><circle cx="8" cy="9" r="1.4" fill="#fff"/><circle cx="16" cy="19" r="1.4" fill="#fff"/></svg></span><span class="ttl">Evaluation Reliability in Protein ML</span><span class="yr">2026</span><svg class="chev" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+      <div class="body">
+        <p class="meta">co-author · neurips 2026 · AI4Science &amp; trust-ai-eval (TAE) workshops</p>
+        <p>built and audited a proteinmpnn-based tool that <mark>catches errors in reconstructed ancient proteins</mark>. ran 120+ trials across 40 protein families, then wrote a <mark>reference checklist</mark> so other labs can audit theirs.</p>
+        <p class="nums">NeurIPS 2026 Trust-AI-Eval (TAE) | <b>1 of Only 3</b> All-High-School-Author Papers of <b>226</b> Accepted (<b>1.33%</b>) · <b>36 of 40</b> errors caught by plain text-matching, <b>11</b> by our AI · <b>7</b> flaws in our own evaluation · an <b>11-point</b> checklist so other labs catch theirs</p>
+        <p class="more"><a href="https://neurips.cc/virtual/2026/loc/sydney/178278" target="_blank" rel="noreferrer">paper ↗</a> <a href="https://github.com/ryanjmahn/ProteinMPNN-Extension" target="_blank" rel="noreferrer">repo ↗</a></p>
+      </div>
+    </details>
+    <details class="row" id="cartographic">
+      <summary><span class="tile" style="--t:linear-gradient(140deg,#FFC2D4,#E5487F)" aria-hidden="true"><svg viewBox="0 0 28 28" width="28" height="28"><rect x="5.0" y="5.0" width="4" height="4" rx=".8" fill="#fff" opacity=".25"/><rect x="9.5" y="5.0" width="4" height="4" rx=".8" fill="#fff" opacity=".6"/><rect x="14.0" y="5.0" width="4" height="4" rx=".8" fill="#fff" opacity=".6"/><rect x="18.5" y="5.0" width="4" height="4" rx=".8" fill="#fff" opacity=".25"/><rect x="5.0" y="9.5" width="4" height="4" rx=".8" fill="#fff" opacity=".6"/><rect x="9.5" y="9.5" width="4" height="4" rx=".8" fill="#fff" opacity="1"/><rect x="14.0" y="9.5" width="4" height="4" rx=".8" fill="#fff" opacity="1"/><rect x="18.5" y="9.5" width="4" height="4" rx=".8" fill="#fff" opacity=".6"/><rect x="5.0" y="14.0" width="4" height="4" rx=".8" fill="#fff" opacity=".6"/><rect x="9.5" y="14.0" width="4" height="4" rx=".8" fill="#fff" opacity="1"/><rect x="14.0" y="14.0" width="4" height="4" rx=".8" fill="#fff" opacity="1"/><rect x="18.5" y="14.0" width="4" height="4" rx=".8" fill="#fff" opacity=".6"/><rect x="5.0" y="18.5" width="4" height="4" rx=".8" fill="#fff" opacity=".25"/><rect x="9.5" y="18.5" width="4" height="4" rx=".8" fill="#fff" opacity=".6"/><rect x="14.0" y="18.5" width="4" height="4" rx=".8" fill="#fff" opacity=".6"/><rect x="18.5" y="18.5" width="4" height="4" rx=".8" fill="#fff" opacity=".25"/></svg></span><span class="ttl">Data Readiness in Medical Imaging Benchmarks</span><span class="yr">2026</span><svg class="chev" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+      <div class="body">
+        <p class="meta">co-author · neurips 2026 · AI data readiness for scientific discovery (AIDaR) workshop</p>
+        <p>audited dermamnist, a widely used medical ai benchmark, and proved its 28×28 resize <mark>destroys 4 of 5 diagnostic signs</mark> in skin cancer images — <mark>unevenly across skin tones</mark>. built a format that keeps them.</p>
+        <p class="nums"><b>4 of 5</b> diagnostic signs destroyed at 224×224 → 28×28 · <b>~80%</b> of detail kept instead of a third · skin-tone gap cut <b>52%</b></p>
+        <p class="more"><a href="https://neurips.cc/virtual/2026/loc/paris/162359" target="_blank" rel="noreferrer">paper ↗</a> <a href="https://github.com/ryanjmahn/DermaMNIST-Extension" target="_blank" rel="noreferrer">repo ↗</a></p>
+      </div>
+    </details>
+    <details class="row" id="kras">
+      <summary><span class="tile" style="--t:linear-gradient(140deg,#9DB8FF,#2F5BEA)" aria-hidden="true"><svg viewBox="0 0 28 28" width="28" height="28"><path d="M7 8.5c3-4.5 11-4.5 13.5-.5 1.2 2-.8 3.6-2.6 4.2 2 .6 3.8 2 3.4 4.6-.6 4.4-8 6.4-12.3 4.6S4.5 12.4 7 8.5z" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="19.5" cy="12.6" r="2.2" fill="#FFD4A4"/></svg></span><span class="ttl">Benchmark Design in Cryptic Pocket Prediction</span><span class="yr">2026</span><svg class="chev" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+      <div class="body">
+        <p class="meta">sole author · w/ prof. se-jin hwang · CJSJ semi-finalist, under review</p>
+        <p>solo-benchmarked three software tools on detecting the switch-ii cryptic pocket in kras g12d, using a 24-conformer normal-mode ladder built from the crystal structure. the tool built for cryptic pockets <mark>placed last</mark>. extended to 218 targets to ask when a prediction is <mark>worth believing</mark>.</p>
+        <p class="nums"><b>0.95</b> MCC for the simplest tool vs <b>0.12</b> for the specialist · scaled to <b>218</b> proteins · a trust rule right <b>75%</b> of the time against <b>37%</b> overall</p>
+        <p class="more"><a href="/assets/papers/kras-g12d-switch-ii-benchmark.pdf">manuscript ↗</a> <a href="https://github.com/ryanjmahn/KRAS-G12D-SIIP-Benchmark" target="_blank" rel="noreferrer">repo ↗</a></p>
+      </div>
+    </details>
   </section>
 
   <section id="builds" aria-labelledby="h-builds">
     <h2 id="h-builds">builds</h2>
-    <article class="item" id="probix" data-reveal>
-      <h3><a href="https://www.tryprobix.com/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/probix.png" alt="" width="22" height="22" loading="lazy" />Probix Labs</a></h3>
-      <p class="meta">co-founder &amp; coo · feb → sep 2026</p>
-      <p>a product lab building tools that <mark>verify published science</mark>, aimed at the reproducibility crisis. i built two of them, both for auditing biomedical research, and secured the <mark>ieee north macedonia chair</mark> as a founding partner.</p>
-      <p class="nums"><b>260+</b> waitlist · top <b>10%</b> applicant, yc f26 &amp; founders inc</p>
-    </article>
-    <article class="item" id="unison" data-reveal>
-      <h3><a href="https://projectunison.netlify.app/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/unison.svg" alt="" width="22" height="22" loading="lazy" />Project UNISON</a></h3>
-      <p class="meta">curriculum &amp; ai pipeline developer · w/ prof. mark santolucito, barnard college · 2026</p>
-      <p>co-engineered an ai pipeline that generates <mark>8-week k-12 un sdg courses</mark>. verified the generated lessons for accuracy and wrote a <mark>3-part ai × biomedicine unit</mark>.</p>
-    </article>
+    <details class="row" id="probix">
+      <summary><img class="ico" src="/assets/img/logos/probix.png" alt="" width="22" height="22" loading="lazy" /><span class="ttl">Probix Labs · co-founder &amp; coo</span><span class="yr">2026</span><svg class="chev" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+      <div class="body">
+        <p class="meta">co-founder &amp; coo · feb → sep 2026</p>
+        <p>a product lab building tools that <mark>verify published science</mark>, aimed at the reproducibility crisis. i built two of them, both for auditing biomedical research, and secured the <mark>ieee north macedonia chair</mark> as a founding partner.</p>
+        <p class="nums"><b>260+</b> waitlist · top <b>10%</b> applicant, yc f26 &amp; founders inc</p>
+        <p class="more"><a href="https://www.tryprobix.com/" target="_blank" rel="noreferrer">site ↗</a></p>
+      </div>
+    </details>
+    <details class="row" id="unison">
+      <summary><img class="ico" src="/assets/img/logos/unison.svg" alt="" width="22" height="22" loading="lazy" /><span class="ttl">Project UNISON · barnard college</span><span class="yr">2026</span><svg class="chev" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+      <div class="body">
+        <p class="meta">curriculum &amp; ai pipeline developer · w/ prof. mark santolucito, barnard college · 2026</p>
+        <p>co-engineered an ai pipeline that generates <mark>8-week k-12 un sdg courses</mark>. verified the generated lessons for accuracy and wrote a <mark>3-part ai × biomedicine unit</mark>.</p>
+        <p class="more"><a href="https://projectunison.netlify.app/" target="_blank" rel="noreferrer">site ↗</a></p>
+      </div>
+    </details>
   </section>
 
   <section id="community" aria-labelledby="h-community">
     <h2 id="h-community">community</h2>
-    <article class="item" id="stemise" data-reveal>
-      <h3><a href="https://www.stemise.org/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/stemise.png" alt="" width="22" height="22" loading="lazy" />STEMise</a></h3>
-      <p class="meta">founder &amp; executive director · apr 2025 → now</p>
-      <p>building a <mark>culture of young stem builders</mark> through free competitions, research programs and student-led chapters. sponsored by <mark>citadel &amp; hudson river trading</mark>. ran a human-centric ai research lab with mentors from berkeley, purdue &amp; ucsb.</p>
-      <dl class="stats"><div><dd>6,600+</dd><dt>youths served</dt></div><div><dd>140</dd><dt>countries</dt></div><div><dd>129</dd><dt>chapters</dt></div><div><dd>75+</dd><dt>staff</dt></div></dl>
-    </article>
-    <article class="item" id="hackathons" data-reveal>
-      <h3><a href="https://dshhacks.org/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/dsh.png" alt="" width="22" height="22" loading="lazy" />DSH Hacks</a> &amp; <a href="https://univabio.org/" target="_blank" rel="noreferrer"><img class="mark" src="/assets/img/logos/univabio.svg" alt="" width="22" height="22" loading="lazy" />UnivaBio</a></h3>
-      <p class="meta">co-founder &amp; lead competition director · 3 hackathons</p>
-      <p>global hackathons where students build <mark>human-centered ai technology</mark> for real social issues.</p>
-      <dl class="stats"><div><dd>800+</dd><dt>AI projects built</dt></div><div><dd>115+</dd><dt>countries</dt></div><div><dd>$200,000+</dd><dt>in prizes, from 20+ sponsors</dt></div><div><dd>130+</dd><dt>judges from 40+ companies</dt></div></dl>
-    </article>
+    <details class="row" id="stemise">
+      <summary><img class="ico" src="/assets/img/logos/stemise.png" alt="" width="22" height="22" loading="lazy" /><span class="ttl">STEMise · founder</span><span class="yr">now</span><svg class="chev" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+      <div class="body">
+        <p class="meta">founder &amp; executive director · apr 2025 → now</p>
+        <p>building a <mark>culture of young stem builders</mark> through free competitions, research programs and student-led chapters. sponsored by <mark>citadel &amp; hudson river trading</mark>. ran a human-centric ai research lab with mentors from berkeley, purdue &amp; ucsb.</p>
+        <dl class="stats"><div><dd>6,600+</dd><dt>youths served</dt></div><div><dd>140</dd><dt>countries</dt></div><div><dd>129</dd><dt>chapters</dt></div><div><dd>75+</dd><dt>staff</dt></div></dl>
+        <p class="more"><a href="https://www.stemise.org/" target="_blank" rel="noreferrer">site ↗</a></p>
+      </div>
+    </details>
+    <details class="row" id="hackathons">
+      <summary><span class="ico2"><img class="ico" src="/assets/img/logos/dsh.png" alt="" width="22" height="22" loading="lazy" /><img class="ico" src="/assets/img/logos/univabio.svg" alt="" width="22" height="22" loading="lazy" /></span><span class="ttl">DSH Hacks &amp; UnivaBio</span><span class="yr">×3</span><svg class="chev" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+      <div class="body">
+        <p class="meta">co-founder &amp; lead competition director · 3 hackathons</p>
+        <p>global hackathons where students build <mark>human-centered ai technology</mark> for real social issues.</p>
+        <dl class="stats"><div><dd>800+</dd><dt>AI projects built</dt></div><div><dd>115+</dd><dt>countries</dt></div><div><dd>$200,000+</dd><dt>in prizes, from 20+ sponsors</dt></div><div><dd>130+</dd><dt>judges from 40+ companies</dt></div></dl>
+        <p class="more"><a href="https://dshhacks.org/" target="_blank" rel="noreferrer">dsh hacks ↗</a> <a href="https://univabio.org/" target="_blank" rel="noreferrer">univabio ↗</a></p>
+      </div>
+    </details>
   </section>
 
   <section id="log" aria-labelledby="h-log">
@@ -118,9 +139,6 @@
     <div data-reveal>
       <p class="meta" data-gh-line><b data-gh-total>…</b> contributions in the last year · <a href="https://github.com/ryanjmahn" target="_blank" rel="noreferrer">@ryanjmahn ↗</a></p>
       <div class="gh-wrap" data-gh-body>
-        <svg class="cell cell-peek" viewBox="0 0 80 80" width="72" height="72" aria-hidden="true"><g stroke="#111113" stroke-width="2.4" stroke-linecap="round"><line x1="17.4" y1="37.8" x2="8.1" y2="34.4"/><circle cx="8.1" cy="34.4" r="3" fill="#FFD4A4"/><line x1="26.2" y1="26.3" x2="20.5" y2="18.1"/><circle cx="20.5" cy="18.1" r="3" fill="#FFD4A4"/><line x1="40.0" y1="22.0" x2="40.0" y2="12.0"/><circle cx="40.0" cy="12.0" r="3" fill="#FFD4A4"/><line x1="53.8" y1="26.3" x2="59.5" y2="18.1"/><circle cx="59.5" cy="18.1" r="3" fill="#FFD4A4"/><line x1="62.6" y1="37.8" x2="71.9" y2="34.4"/><circle cx="71.9" cy="34.4" r="3" fill="#FFD4A4"/><circle cx="40" cy="46" r="24" fill="#FFD4A4"/></g><ellipse cx="28" cy="52" rx="4" ry="2.6" fill="#FFB8CC"/><ellipse cx="52" cy="52" rx="4" ry="2.6" fill="#FFB8CC"/><circle cx="33" cy="44" r="2.8" fill="#111113"/><circle cx="47" cy="44" r="2.8" fill="#111113"/><path d="M35 51 Q40 56 45 51" fill="none" stroke="#111113" stroke-width="2.2" stroke-linecap="round"/><circle cx="50" cy="33" r="3" fill="#fff" stroke="#111113" stroke-width="1.8"/></svg>
-        <svg class="cell cell-float" viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><g stroke="#111113" stroke-width="1.8" stroke-linecap="round"><line x1="35.0" y1="24.0" x2="42.5" y2="24.0"/><circle cx="42.5" cy="24.0" r="2.2" fill="#fff"/><line x1="31.8" y1="31.8" x2="37.1" y2="37.1"/><circle cx="37.1" cy="37.1" r="2.2" fill="#fff"/><line x1="24.0" y1="35.0" x2="24.0" y2="42.5"/><circle cx="24.0" cy="42.5" r="2.2" fill="#fff"/><line x1="16.2" y1="31.8" x2="10.9" y2="37.1"/><circle cx="10.9" cy="37.1" r="2.2" fill="#fff"/><line x1="13.0" y1="24.0" x2="5.5" y2="24.0"/><circle cx="5.5" cy="24.0" r="2.2" fill="#fff"/><line x1="16.2" y1="16.2" x2="10.9" y2="10.9"/><circle cx="10.9" cy="10.9" r="2.2" fill="#fff"/><line x1="24.0" y1="13.0" x2="24.0" y2="5.5"/><circle cx="24.0" cy="5.5" r="2.2" fill="#fff"/><line x1="31.8" y1="16.2" x2="37.1" y2="10.9"/><circle cx="37.1" cy="10.9" r="2.2" fill="#fff"/><circle cx="24" cy="24" r="11" fill="#FFB8CC"/></g><circle cx="20.5" cy="23" r="1.5" fill="#111113"/><circle cx="27.5" cy="23" r="1.5" fill="#111113"/><path d="M21 27 Q24 29.5 27 27" fill="none" stroke="#111113" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <svg class="cell cell-dna" viewBox="0 0 40 70" width="30" height="52" aria-hidden="true"><g stroke="#FFB8CC" stroke-width="2.6" stroke-linecap="round"><line x1="15" y1="13" x2="25" y2="13"/><line x1="13" y1="20" x2="27" y2="20"/><line x1="15" y1="27" x2="25" y2="27"/><line x1="15" y1="45" x2="25" y2="45"/><line x1="13" y1="52" x2="27" y2="52"/><line x1="15" y1="59" x2="25" y2="59"/></g><g fill="none" stroke-width="3.2" stroke-linecap="round"><path d="M10 3 C34 15 34 27 20 35 S6 55 30 67" stroke="#7CA6FF"/><path d="M30 3 C6 15 6 27 20 35 S34 55 10 67" stroke="#284EDE"/></g></svg>
         <div class="gh-scroll">
           <div class="gh-months" data-gh-months aria-hidden="true"></div>
           <div class="gh-tip" data-gh-tip hidden></div>
@@ -141,7 +159,9 @@
   <footer class="foot">
     <p>ryan ahn · <a href="mailto:ryanjmahn1@gmail.com">ryanjmahn1@gmail.com</a></p>
   </footer>
+  </main>
+</div>
 </main>
-<script src="/assets/js/site.js?v=55" defer></script>
+<script src="/assets/js/site.js?v=64" defer></script>
 </body>
 </html>
