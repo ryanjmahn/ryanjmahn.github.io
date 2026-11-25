@@ -1,4 +1,4 @@
-// site.js — scroll reveals, count-ups, the github chart and the hero landscape.
+// site.js — scroll reveals, count-ups, the github chart and the physical-ai hero.
 var calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 var root = document.documentElement;
 
@@ -64,7 +64,7 @@ console.assert(countTo("$200,000", 1) === "$200,000" && countTo("6,000+", 0.5) =
       });
       box.innerHTML = html;
       var m = document.querySelector("[data-gh-months]");
-      if (m) { m.innerHTML = months; m.style.gridTemplateColumns = "repeat(" + Math.ceil((days.length + pad) / 7) + ", minmax(8px, 1fr))"; }
+      if (m) { m.innerHTML = months; m.style.gridTemplateColumns = "repeat(" + Math.ceil((days.length + pad) / 7) + ", minmax(6px, 1fr))"; }
       var scroll = box.parentNode; scroll.scrollLeft = scroll.scrollWidth;
       var total = document.querySelector("[data-gh-total]");
       if (total) total.textContent = data.total.lastYear.toLocaleString("en-US");
@@ -90,155 +90,140 @@ console.assert(countTo("$200,000", 1) === "$200,000" && countTo("6,000+", 0.5) =
     });
 })();
 
-// the hero: a dithered landscape, drawn pixel by pixel. a lake reflects the sky,
-// layers drift past at their own depths like a view from a train, clouds roll,
-// birds cross, the cursor shifts the parallax, and on load the picture resolves
-// from coarse blocks to fine pixels.
-var SKY = [[40, 78, 222], [124, 166, 255], [255, 184, 204], [255, 212, 164]];
-var SUN = [255, 122, 64], SUNU = .7, SUNV = .36;
-var FAR = { y: .40, a: .10, f: 6.5, c: [156, 146, 236], s: .15 };
-var MID = { y: .52, a: .06, f: 3.8, c: [92, 126, 212], s: .35 };
-var LAKE = .62;
-var NEAR = { y: .78, a: .12, f: 1.9, c: [46, 142, 94], s: .8 };
-var FIELD = { y: .91, a: .035, f: 1.5, c: [240, 182, 60], s: 1.4 };
-var FLOWERS = [[255, 255, 255], [226, 71, 27], [255, 128, 176]];
+// the hero: physical ai under a verification layer, drawn as a dithered pixel scene.
+// a robot arm moves a block between two pads (reality, warm). a world model predicts
+// the same motion (cyan ghost) and drifts when contact makes it unsure. a verifier
+// box tracks the gripper: green while prediction and reality agree, red when they part.
 var BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
+var BG = [[22, 34, 120], [40, 78, 222], [124, 166, 255], [255, 184, 204]];
+var FLOOR = [255, 212, 164], GRID = [255, 160, 150], ARM = [255, 238, 218], BASE = [24, 28, 64], JOINT = [255, 150, 110], BLOCK = [255, 122, 64];
+var GHOST = [94, 224, 255], OK = [60, 220, 150], BAD = [255, 90, 79], SCAN = [200, 245, 255];
+var KEYS = [[0, "home"], [.15, "upA"], [.25, "atA"], [.32, "atA"], [.42, "upA"], [.62, "upB"], [.72, "atB"], [.78, "atB"], [.88, "upB"], [1, "home"]];
+var PERIOD = 4.2;
 
-function ridge(h, u) {
-  return h.y - h.a * (Math.sin(u * h.f * 2.1 + h.f) * .6 + Math.sin(u * h.f * 4.7 + 1.3) * .28 + Math.sin(u * h.f * 11.3) * .12);
-}
-function hash(x, y) { var n = Math.sin(x * 127.1 + y * 311.7) * 43758.5453; return n - Math.floor(n); }
-// smooth 2d value noise in 0..1, for the clouds
-function noise(x, y) {
-  var i = Math.floor(x), j = Math.floor(y), fx = x - i, fy = y - j;
-  fx = fx * fx * (3 - 2 * fx); fy = fy * fy * (3 - 2 * fy);
-  var a = hash(i, j), b = hash(i + 1, j), c = hash(i, j + 1), d = hash(i + 1, j + 1);
-  return a + (b - a) * fx + (c - a) * fy + (a - b - c + d) * fx * fy;
-}
-// a pine every so often along the near hill: how far it pokes above the ridge
-function tree(wu) {
-  var cell = Math.floor(wu * 30), local = wu * 30 - cell, r = hash(cell, 7);
-  if (r < .45) return 0;
-  return (.025 + r * .045) * Math.max(0, 1 - Math.abs(local - .5) * 3.2);
-}
 function lerp(a, b, t) { return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; }
+function smooth(t) { return t * t * (3 - 2 * t); }
 // snap a channel to 9 levels, nudged by the bayer threshold so gradients turn into dither
 function dither(c, b) { var q = Math.round((c + (b / 16 - .47) * 32) / 32) * 32; return q < 0 ? 0 : q > 255 ? 255 : q; }
-console.assert(dither(0, 0) === 0 && dither(255, 15) === 255 && dither(128, 8) === 128 && noise(3, 4) === hash(3, 4) && tree(0) >= 0, "land");
+// squared distance from point p to segment ab
+function seg(px, py, ax, ay, bx, by) {
+  var dx = bx - ax, dy = by - ay, t = Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / (dx * dx + dy * dy || 1)));
+  var ex = px - ax - dx * t, ey = py - ay - dy * t; return ex * ex + ey * ey;
+}
+// two-link inverse kinematics, elbow up (screen y points down)
+function ik(bx, by, tx, ty, l1, l2) {
+  var dx = tx - bx, dy = ty - by, d = Math.min(Math.sqrt(dx * dx + dy * dy), l1 + l2 - 1e-4);
+  var a = Math.atan2(dy, dx), k = Math.acos(Math.max(-1, Math.min(1, (l1 * l1 + d * d - l2 * l2) / (2 * l1 * d))));
+  var e1 = [bx + l1 * Math.cos(a - k), by + l1 * Math.sin(a - k)], e2 = [bx + l1 * Math.cos(a + k), by + l1 * Math.sin(a + k)];
+  var el = e1[1] < e2[1] ? e1 : e2, f = l2 / Math.max(1e-6, Math.hypot(tx - el[0], ty - el[1]));
+  return [el, [el[0] + (tx - el[0]) * Math.min(1, f * 1.0001), el[1] + (ty - el[1]) * Math.min(1, f * 1.0001)]];
+}
+console.assert(dither(0, 0) === 0 && dither(255, 15) === 255 && seg(0, 1, -1, 0, 1, 0) === 1 && Math.abs(ik(0, 0, 1, 0, .6, .6)[1][0] - 1) < 1e-3, "hero");
 
-(function land() {
+(function hero() {
   var cv = document.querySelector(".land");
   if (!cv || !cv.getContext) return;
-  var ctx = cv.getContext("2d");
-  var W, H, img, far, mid, near, nearBase, field, start = 0, raf = 0, visible = true, mx = 0, tx = 0, offF = 0;
+  var ctx = cv.getContext("2d"), verdict = document.querySelector("[data-verdict]");
+  var W, H, img, start = 0, raf = 0, visible = true, lastHud = 0, trail = [];
 
   function setup() {
     W = Math.max(80, Math.round(cv.clientWidth / 3));
-    H = Math.max(40, Math.round(W * cv.clientHeight / Math.max(1, cv.clientWidth)));
+    H = Math.max(60, Math.round(W * cv.clientHeight / Math.max(1, cv.clientWidth)));
     cv.width = W; cv.height = H;
     img = ctx.createImageData(W, H);
-    far = new Float32Array(W); mid = new Float32Array(W); near = new Float32Array(W); nearBase = new Float32Array(W); field = new Float32Array(W);
   }
 
-  function sky(x, y, t) {
-    var u = x / W, v = y / H;
-    var c = v < .26 ? lerp(SKY[0], SKY[1], v / .26) : v < .44 ? lerp(SKY[1], SKY[2], (v - .26) / .18) : lerp(SKY[2], SKY[3], Math.min(1, (v - .44) / .16));
-    var du = u - SUNU, dv = (v - SUNV) * H / W, d = Math.sqrt(du * du + dv * dv);
-    if (d < .06) return SUN;
-    c = lerp(c, [255, 180, 124], Math.max(0, .6 - d * 2));
-    // slow-turning rays around the sun
-    var ray = Math.pow(Math.max(0, Math.sin(Math.atan2(dv, du) * 9 + t * .15)), 8) * Math.max(0, .45 - d);
-    c = lerp(c, [255, 236, 200], Math.min(.5, ray * 1.6));
-    // three birds, wings flapping
-    for (var i = 0; i < 3; i++) {
-      var bx = ((.1 + i * .37 + t * .012 * (1 + i * .3)) % 1.2 - .1) * W, by = (.2 + i * .05 + .01 * Math.sin(t * .7 + i)) * H;
-      var px = Math.round(x - bx), py = Math.round(y - by), flap = Math.sin(t * 6 + i * 2) > 0 ? -1 : 0;
-      if (Math.abs(px) <= 2 && py === (Math.abs(px) === 1 ? flap : Math.abs(px) === 2 ? flap + 1 : 0)) return [44, 48, 72];
+  // the arm's state at time t, in units of canvas height (x spans 0..W/H)
+  function pose(t, ghost) {
+    var ax = W / H, cyc = t / PERIOD, n = Math.floor(cyc), ph = cyc - n, flip = n % 2;
+    var A = ax / 2 + (flip ? .34 : -.34) * Math.min(1, ax / 1.25), B = ax / 2 + (flip ? -.34 : .34) * Math.min(1, ax / 1.25);
+    var P = { home: [ax / 2, .36], upA: [A, .56], atA: [A, .74], upB: [B, .56], atB: [B, .74] };
+    for (var i = 1; i < KEYS.length && KEYS[i][0] < ph; i++);
+    var k0 = KEYS[i - 1], k1 = KEYS[i], f = smooth((ph - k0[0]) / Math.max(1e-6, k1[0] - k0[0]));
+    var p = [P[k0[1]][0] + (P[k1[1]][0] - P[k0[1]][0]) * f, P[k0[1]][1] + (P[k1[1]][1] - P[k0[1]][1]) * f];
+    var held = ph > .3 && ph < .76, err = 0;
+    if (ghost) {
+      // the model wobbles a little always, and drifts hard after each grasp (contact is hard to predict)
+      var spike = ph > .3 && ph < .52 ? Math.sin((ph - .3) / .22 * Math.PI) : 0;
+      p = [p[0] + Math.sin(t * 1.9) * .012 + spike * .09 * (flip ? -1 : 1), p[1] + Math.cos(t * 2.3) * .01 + spike * .05];
     }
-    var k = noise(u * 4 + t * .02, v * 9) * .65 + noise(u * 9 + t * .035, v * 20) * .35;
-    var k2 = noise(u * 4 + t * .02, (v - .035) * 9) * .65 + noise(u * 9 + t * .035, (v - .035) * 20) * .35;
-    var band = Math.max(0, 1 - Math.abs(v - .17) / .13), a = Math.max(0, Math.min(1, (k - .52) * 4)) * band;
-    return lerp(c, k2 < k - .02 ? [255, 252, 246] : [246, 204, 214], a);
-  }
-
-  // sky and mountains: what the lake reflects
-  function back(x, y, t) {
-    var v = y / H, c = range(x, y, t), m = (v - (LAKE - .09)) / .09;
-    if (m > 0 && v < LAKE) c = lerp(c, [244, 226, 238], Math.min(.75, m * (noise(x / W * 7 + t * .05, v * 28) * .9 + .2)));
-    return c;
-  }
-  function range(x, y, t) {
-    var v = y / H, r;
-    if (v >= (r = mid[x])) return lerp(lerp(MID.c, [30, 40, 90], Math.min(1, (v - r) / .1) * .3), v - r < 1.5 / H ? [255, 214, 190] : MID.c, v - r < 1.5 / H ? .45 : 0);
-    if (v >= (r = far[x])) {
-      var c = lerp(FAR.c, SKY[3], .22);
-      return v - r < .025 && r < FAR.y - .03 ? lerp(c, [255, 250, 250], .7) : c;
-    }
-    return sky(x, y, t);
-  }
-
-  function color(x, y, t) {
-    var v = y / H, r;
-    var up = H - 1 - y;
-    if (up < 9) {
-      var gx = Math.floor(x - Math.sin(t * 1.6 + x * .13) * up * .22 + offF * 1.3 * W);
-      if (up < 2 + hash(gx, 12) * 7 && hash(gx, 11) > .5) return up > 4 ? [70, 160, 84] : [34, 112, 62];
-    }
-    if (v >= (r = field[x])) {
-      var fx = Math.floor(x + offF * W);
-      if (hash(fx, y) > .93) return FLOWERS[Math.floor(hash(y, fx) * 3)];
-      return lerp(FIELD.c, [196, 120, 36], Math.min(1, (v - r) / .1) * .5);
-    }
-    if (v >= (r = near[x])) {
-      if (v < nearBase[x]) return [26, 96, 66];
-      var c = lerp(NEAR.c, [16, 60, 40], Math.min(1, (v - r) / .12) * .45);
-      return v - r < 1.5 / H ? lerp(c, [210, 240, 170], .5) : c;
-    }
-    if (v >= LAKE) {
-      if (v - LAKE < 1.2 / H) return lerp(back(x, y, t), [236, 240, 255], .45);
-      var ripple = Math.round(Math.sin(y * 1.7 + t * 2.4) * 1.3), xr = Math.min(W - 1, Math.max(0, x + ripple));
-      var my = Math.round(2 * LAKE * H - y), depth = Math.min(1, (v - LAKE) / .2);
-      var c2 = lerp(back(xr, my, t), [36, 64, 150], .22 + depth * .3);
-      if (Math.abs(x / W - SUNU) < .045 - depth * .02 + .012 * Math.sin(y * 2.3 + t * 3)) c2 = lerp(c2, SUN, .65);
-      if (hash(x, y + Math.floor(t * 5) * 97) > .996) c2 = [255, 255, 255];
-      return c2;
-    }
-    return back(x, y, t);
+    var base = [ax / 2, .78], j = ik(base[0], base[1], p[0], p[1], .3, .3);
+    var block = held ? [j[1][0], j[1][1] + .05] : [ph < .3 ? A : B, .8];
+    return { base: base, el: j[0], ee: j[1], block: block, held: held };
   }
 
   function frame(now) {
     if (!start) start = now;
-    var t = (now - start) / 1000, d = img.data;
-    mx += (tx - mx) * .06;
-    var drift = t * .006 + mx * .02;
-    offF = drift * FIELD.s;
-    for (var x = 0; x < W; x++) {
-      var u = x / W;
-      far[x] = ridge(FAR, u + drift * FAR.s);
-      mid[x] = ridge(MID, u + drift * MID.s);
-      nearBase[x] = ridge(NEAR, u + drift * NEAR.s);
-      near[x] = nearBase[x] - tree(u + drift * NEAR.s);
-      field[x] = ridge(FIELD, u + offF);
+    var t = (now - start) / 1000, d = img.data, ax = W / H;
+    var R = pose(t, false), G = pose(t, true);
+    var err = Math.hypot(R.ee[0] - G.ee[0], R.ee[1] - G.ee[1]), bad = err > .035;
+    trail.push(G.ee); if (trail.length > 26) trail.shift();
+    var scan = ((t * .45) % 1.3 - .15) * ax, bx0 = R.ee[0] - .11, bx1 = R.ee[0] + .11, by0 = R.ee[1] - .08, by1 = R.ee[1] + .14;
+    var e = calm ? 1 : Math.min(1, t / 1.4), bs = Math.max(1, Math.round(12 * Math.pow(1 - e, 2.2)));
+    var px1 = 1 / H, arm2 = .022 * .022, gh2 = .013 * .013;
+    var xs = [R.base[0], R.el[0], R.ee[0], G.el[0], G.ee[0], R.block[0], bx0, bx1], ys = [R.el[1], R.ee[1], G.el[1], G.ee[1], by0];
+    trail.forEach(function (p) { xs.push(p[0]); ys.push(p[1]); });
+    var mx0 = Math.min.apply(0, xs) - .08, mx1 = Math.max.apply(0, xs) + .08, my0 = Math.min.apply(0, ys) - .08;
+
+    function color(x, y, b) {
+      var u = x / H, v = y / H, c;
+      // backdrop: deep blue to pink, and a floor with a receding grid
+      if (v < .8) c = v < .4 ? lerp(BG[0], BG[1], v / .4) : v < .66 ? lerp(BG[1], BG[2], (v - .4) / .26) : lerp(BG[2], BG[3], (v - .66) / .14);
+      else {
+        var z = 1 / (v - .74), gx = (u - ax / 2) * z * .9, gz = z * .35 + t * .25;
+        c = (Math.abs(gx - Math.round(gx)) < .05 * z * .12 + .02 || Math.abs(gz - Math.round(gz)) < .06) ? GRID : FLOOR;
+      }
+      // pads
+      var pa = ax / 2 - .34 * Math.min(1, ax / 1.25), pb = ax / 2 + .34 * Math.min(1, ax / 1.25);
+      if (v > .82 && v < .85 && (Math.abs(u - pa) < .1 || Math.abs(u - pb) < .1)) c = [255, 255, 255];
+      var near = u > mx0 && u < mx1 && v > my0;
+      if (near) {
+        // ghost trail and ghost arm (dithered half-tone)
+        for (var i = 0; i < trail.length; i += 2) if (Math.abs(u - trail[i][0]) < px1 && Math.abs(v - trail[i][1]) < px1) c = lerp(c, GHOST, i / trail.length);
+        var g1 = seg(u, v, G.base[0], G.base[1], G.el[0], G.el[1]), g2 = seg(u, v, G.el[0], G.el[1], G.ee[0], G.ee[1]);
+        if ((g1 < gh2 || g2 < gh2 || Math.hypot(u - G.ee[0], v - G.ee[1]) < .02) && b < 9) c = GHOST;
+        // reality: base, links, joints, gripper, block
+        if (Math.abs(u - R.block[0]) < .05 && Math.abs(v - R.block[1]) < .05) c = v - (R.block[1] - .05) < px1 * 1.5 ? [255, 190, 150] : BLOCK;
+        if (v > .76 && v < .82 && Math.abs(u - R.base[0]) < .07) c = BASE;
+        var a1 = seg(u, v, R.base[0], R.base[1], R.el[0], R.el[1]), a2 = seg(u, v, R.el[0], R.el[1], R.ee[0], R.ee[1]);
+        if (a1 < arm2 || a2 < arm2 * .7) c = ARM;
+        if (Math.hypot(u - R.el[0], v - R.el[1]) < .026 || Math.hypot(u - R.base[0], v - R.base[1]) < .03) c = JOINT;
+        if (Math.abs(v - R.ee[1] - .02) < .025 && (Math.abs(u - R.ee[0] - .045) < .008 || Math.abs(u - R.ee[0] + .045) < .008)) c = ARM;
+        if (Math.abs(v - R.ee[1]) < .008 && Math.abs(u - R.ee[0]) < .05) c = ARM;
+        // verifier: corner brackets around the gripper
+        var onX = (Math.abs(u - bx0) < px1 || Math.abs(u - bx1) < px1) && v > by0 && v < by1, onY = (Math.abs(v - by0) < px1 || Math.abs(v - by1) < px1) && u > bx0 && u < bx1;
+        var corner = (Math.min(Math.abs(u - bx0), Math.abs(u - bx1)) < .035) && (Math.min(Math.abs(v - by0), Math.abs(v - by1)) < .035);
+        if ((onX || onY) && corner) c = bad ? BAD : OK;
+      }
+      // the scan beam
+      var ds = u - scan;
+      if (ds < 0 && ds > -.12) c = lerp(c, SCAN, (1 + ds / .12) * .35);
+      if (Math.abs(ds) < px1) c = SCAN;
+      return c;
     }
-    // load-in: blocks of 16 pixels shrink to 1
-    var e = calm ? 1 : Math.min(1, t / 1.5), bs = Math.max(1, Math.round(16 * Math.pow(1 - e, 2.2)));
+
     for (var y = 0; y < H; y += bs)
-      for (x = 0; x < W; x += bs) {
-        var c = color(Math.min(W - 1, x + (bs >> 1)), Math.min(H - 1, y + (bs >> 1)), t);
+      for (var x = 0; x < W; x += bs) {
+        var cx = Math.min(W - 1, x + (bs >> 1)), cy = Math.min(H - 1, y + (bs >> 1));
         for (var yy = y; yy < Math.min(H, y + bs); yy++)
           for (var xx = x; xx < Math.min(W, x + bs); xx++) {
-            var b = BAYER[(yy & 3) * 4 + (xx & 3)], i = (yy * W + xx) * 4;
+            var b = BAYER[(yy & 3) * 4 + (xx & 3)], c = color(bs > 1 ? cx : xx, bs > 1 ? cy : yy, b), i = (yy * W + xx) * 4;
             d[i] = dither(c[0], b); d[i + 1] = dither(c[1], b); d[i + 2] = dither(c[2], b); d[i + 3] = 255;
           }
       }
     ctx.putImageData(img, 0, 0);
+    if (verdict && now - lastHud > 180) {
+      lastHud = now;
+      var score = Math.max(0, 1 - err * 6).toFixed(2);
+      verdict.textContent = bad ? "✗ flagged · Δ " + err.toFixed(2) : "✓ verified · " + score;
+      verdict.className = "hud hud-tr " + (bad ? "bad" : "ok");
+    }
   }
 
   function loop(now) { frame(now); raf = visible && !calm ? requestAnimationFrame(loop) : 0; }
   function go() { if (calm) { frame(performance.now()); return; } if (!raf) raf = requestAnimationFrame(loop); }
 
   setup();
-  window.addEventListener("pointermove", function (e) { if (e.pointerType === "mouse") tx = e.clientX / window.innerWidth * 2 - 1; }, { passive: true });
   var lastW = cv.clientWidth;
   if ("ResizeObserver" in window)
     new ResizeObserver(function () { if (cv.clientWidth === lastW) return; lastW = cv.clientWidth; setup(); if (calm) go(); }).observe(cv);
