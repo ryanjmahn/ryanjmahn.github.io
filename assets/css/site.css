@@ -49,12 +49,12 @@ h1 { font: 600 clamp(40px, 5vw, 54px)/1 var(--display); letter-spacing: -.01em; 
 .hud { position: absolute; display: inline-flex; align-items: center; gap: 6px; padding: 3px 8px; border-radius: 6px; background: rgba(10, 14, 40, .62); color: #fff; font: 10.5px/1.4 var(--mono); letter-spacing: 0; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
 .hud-tl { top: 10px; left: 10px; }
 .hud-tl::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #FF5A4F; box-shadow: 0 0 6px #FF5A4F; animation: blink 1.4s steps(1) infinite; }
-.hud-tr { top: 10px; right: 10px; min-width: 17ch; justify-content: center; transition: background .25s; }
+.hud-tr { top: 10px; right: 10px; min-width: 22ch; justify-content: center; transition: background .25s; }
 .hud-tr.bad { background: rgba(200, 40, 40, .78); }
 .hud-tr.ok { background: rgba(16, 120, 80, .72); }
 .hud-bl { bottom: 10px; left: 10px; }
 .sw { width: 10px; height: 3px; border-radius: 2px; }
-.sw-real { background: #FFD4A4; }
+.sw-real { background: #F4F0E8; }
 .sw-ghost { background: #5EE0FF; margin-left: 6px; }
 
 .list section { margin: 0 0 64px; scroll-margin-top: 24px; }

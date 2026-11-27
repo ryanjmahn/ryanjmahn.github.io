@@ -1,4 +1,4 @@
-// site.js — scroll reveals, count-ups, the github chart and the physical-ai hero.
+// site.js — scroll reveals, count-ups, the github chart and the humanoid hero.
 var calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 var root = document.documentElement;
 
@@ -90,41 +90,59 @@ console.assert(countTo("$200,000", 1) === "$200,000" && countTo("6,000+", 0.5) =
     });
 })();
 
-// the hero: physical ai under a verification layer, drawn as a dithered pixel scene.
-// a robot arm moves a block between two pads (reality, warm). a world model predicts
-// the same motion (cyan ghost) and drifts when contact makes it unsure. a verifier
-// box tracks the gripper: green while prediction and reality agree, red when they part.
+// the hero: humanoid robots under a verification layer, drawn as a dithered pixel scene.
+// a humanoid walks through a sunset city while a world model predicts its gait (cyan
+// skeleton, a beat ahead). every few seconds it hits a slick patch and slips: the real
+// pose leaves the prediction, the verifier brackets go red until it recovers.
 var BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
-var BG = [[22, 34, 120], [40, 78, 222], [124, 166, 255], [255, 184, 204]];
-var FLOOR = [255, 212, 164], GRID = [255, 160, 150], ARM = [255, 238, 218], BASE = [24, 28, 64], JOINT = [255, 150, 110], BLOCK = [255, 122, 64];
-var GHOST = [94, 224, 255], OK = [60, 220, 150], BAD = [255, 90, 79], SCAN = [200, 245, 255];
-var KEYS = [[0, "home"], [.15, "upA"], [.25, "atA"], [.32, "atA"], [.42, "upA"], [.62, "upB"], [.72, "atB"], [.78, "atB"], [.88, "upB"], [1, "home"]];
-var PERIOD = 4.2;
+var SKY = [[30, 46, 150], [64, 104, 236], [150, 170, 255], [255, 184, 204], [255, 214, 170]];
+var CITY = [150, 140, 220], CITY2 = [196, 160, 214], FLOOR = [255, 212, 164], GRID = [246, 168, 150], ICE = [226, 244, 255];
+var SHELL = [244, 240, 232], SHELL2 = [176, 172, 196], JOINT = [34, 36, 58], VISOR = [26, 34, 70], GLOW = [94, 224, 255];
+var GHOST = [94, 224, 255], OK = [60, 220, 150], BAD = [255, 90, 79], FAR = [168, 150, 226];
+var STEP = 2 * Math.PI * .85, PERIOD = 7, SLIP_AT = 4.6, SLIP_LEN = 1.5, GROUND_V = .34;
 
 function lerp(a, b, t) { return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; }
-function smooth(t) { return t * t * (3 - 2 * t); }
 // snap a channel to 9 levels, nudged by the bayer threshold so gradients turn into dither
 function dither(c, b) { var q = Math.round((c + (b / 16 - .47) * 32) / 32) * 32; return q < 0 ? 0 : q > 255 ? 255 : q; }
+function hash(x, y) { var n = Math.sin(x * 127.1 + y * 311.7) * 43758.5453; return n - Math.floor(n); }
 // squared distance from point p to segment ab
 function seg(px, py, ax, ay, bx, by) {
   var dx = bx - ax, dy = by - ay, t = Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / (dx * dx + dy * dy || 1)));
   var ex = px - ax - dx * t, ey = py - ay - dy * t; return ex * ex + ey * ey;
 }
-// two-link inverse kinematics, elbow up (screen y points down)
-function ik(bx, by, tx, ty, l1, l2) {
-  var dx = tx - bx, dy = ty - by, d = Math.min(Math.sqrt(dx * dx + dy * dy), l1 + l2 - 1e-4);
-  var a = Math.atan2(dy, dx), k = Math.acos(Math.max(-1, Math.min(1, (l1 * l1 + d * d - l2 * l2) / (2 * l1 * d))));
-  var e1 = [bx + l1 * Math.cos(a - k), by + l1 * Math.sin(a - k)], e2 = [bx + l1 * Math.cos(a + k), by + l1 * Math.sin(a + k)];
-  var el = e1[1] < e2[1] ? e1 : e2, f = l2 / Math.max(1e-6, Math.hypot(tx - el[0], ty - el[1]));
-  return [el, [el[0] + (tx - el[0]) * Math.min(1, f * 1.0001), el[1] + (ty - el[1]) * Math.min(1, f * 1.0001)]];
+// how far into a slip we are at time t: 0 walking, rising to 1 mid-slip, back to 0
+function slipAt(t) { var k = (t % PERIOD - SLIP_AT) / SLIP_LEN; return k > 0 && k < 1 ? Math.sin(k * Math.PI) : 0; }
+// a humanoid's body as capsules [ax, ay, bx, by, radius, colour], back to front, plus its head
+function body(p, slip, ox, oy, s, far) {
+  var segs = [], sh = far ? FAR : SHELL, sh2 = far ? FAR : SHELL2, jt = far ? FAR : JOINT;
+  var hip = [ox, oy - .01 * s * Math.cos(2 * p)], lean = .08 - .45 * slip;
+  var top = [hip[0] + .19 * s * Math.sin(lean), hip[1] - .19 * s * Math.cos(lean)];
+  function leg(ph, kick, col) {
+    var a = .42 * Math.sin(ph) + kick, k = .1 + .75 * Math.max(0, Math.cos(ph));
+    var kn = [hip[0] + .13 * s * Math.sin(a), hip[1] + .13 * s * Math.cos(a)], b = a - k;
+    var an = [kn[0] + .13 * s * Math.sin(b), kn[1] + .13 * s * Math.cos(b)];
+    segs.push([hip[0], hip[1], kn[0], kn[1], .03 * s, col], [kn[0], kn[1], an[0], an[1], .025 * s, col],
+      [an[0] - .01 * s, an[1] + .012 * s, an[0] + .05 * s, an[1] + .012 * s, .014 * s, jt], [kn[0], kn[1], kn[0], kn[1], .016 * s, jt]);
+  }
+  function arm(ph, col) {
+    var a = -.38 * Math.sin(ph) - 1.25 * slip, el = [top[0] + .1 * s * Math.sin(a), top[1] + .1 * s * Math.cos(a)], f = a + .6 + .4 * slip;
+    var hd = [el[0] + .1 * s * Math.sin(f), el[1] + .1 * s * Math.cos(f)];
+    segs.push([top[0], top[1], el[0], el[1], .022 * s, col], [el[0], el[1], hd[0], hd[1], .02 * s, col], [el[0], el[1], el[0], el[1], .014 * s, jt]);
+  }
+  leg(p + Math.PI, -.2 * slip, sh2); arm(p + Math.PI, sh2);
+  var mid = [hip[0] + (top[0] - hip[0]) * .45, hip[1] + (top[1] - hip[1]) * .45];
+  segs.push([hip[0] - .015 * s, hip[1], hip[0] + .015 * s, hip[1], .034 * s, jt], [hip[0], hip[1], mid[0], mid[1], .03 * s, sh2], [mid[0], mid[1], top[0], top[1] + .02 * s, .05 * s, sh]);
+  leg(p, .55 * slip, sh); arm(p, sh);
+  var head = [top[0] + .075 * s * Math.sin(lean), top[1] - .075 * s * Math.cos(lean), .052 * s];
+  return { segs: segs, head: head };
 }
-console.assert(dither(0, 0) === 0 && dither(255, 15) === 255 && seg(0, 1, -1, 0, 1, 0) === 1 && Math.abs(ik(0, 0, 1, 0, .6, .6)[1][0] - 1) < 1e-3, "hero");
+console.assert(dither(0, 0) === 0 && dither(255, 15) === 255 && seg(0, 1, -1, 0, 1, 0) === 1 && slipAt(0) === 0 && slipAt(SLIP_AT + SLIP_LEN / 2) === 1, "hero");
 
 (function hero() {
   var cv = document.querySelector(".land");
   if (!cv || !cv.getContext) return;
   var ctx = cv.getContext("2d"), verdict = document.querySelector("[data-verdict]");
-  var W, H, img, start = 0, raf = 0, visible = true, lastHud = 0, trail = [];
+  var W, H, img, start = 0, raf = 0, visible = true, lastHud = 0;
 
   function setup() {
     W = Math.max(80, Math.round(cv.clientWidth / 3));
@@ -132,90 +150,75 @@ console.assert(dither(0, 0) === 0 && dither(255, 15) === 255 && seg(0, 1, -1, 0,
     cv.width = W; cv.height = H;
     img = ctx.createImageData(W, H);
   }
-
-  // the arm's state at time t, in units of canvas height (x spans 0..W/H)
-  function pose(t, ghost) {
-    var ax = W / H, cyc = t / PERIOD, n = Math.floor(cyc), ph = cyc - n, flip = n % 2;
-    var A = ax / 2 + (flip ? .34 : -.34) * Math.min(1, ax / 1.25), B = ax / 2 + (flip ? -.34 : .34) * Math.min(1, ax / 1.25);
-    var P = { home: [ax / 2, .36], upA: [A, .56], atA: [A, .74], upB: [B, .56], atB: [B, .74] };
-    for (var i = 1; i < KEYS.length && KEYS[i][0] < ph; i++);
-    var k0 = KEYS[i - 1], k1 = KEYS[i], f = smooth((ph - k0[0]) / Math.max(1e-6, k1[0] - k0[0]));
-    var p = [P[k0[1]][0] + (P[k1[1]][0] - P[k0[1]][0]) * f, P[k0[1]][1] + (P[k1[1]][1] - P[k0[1]][1]) * f];
-    var held = ph > .3 && ph < .76, err = 0;
-    if (ghost) {
-      // the model wobbles a little always, and drifts hard after each grasp (contact is hard to predict)
-      var spike = ph > .3 && ph < .52 ? Math.sin((ph - .3) / .22 * Math.PI) : 0;
-      p = [p[0] + Math.sin(t * 1.9) * .012 + spike * .09 * (flip ? -1 : 1), p[1] + Math.cos(t * 2.3) * .01 + spike * .05];
+  function box(b) {
+    var x0 = 9, x1 = -9, y0 = 9, y1 = -9;
+    b.segs.forEach(function (q) { x0 = Math.min(x0, q[0], q[2]); x1 = Math.max(x1, q[0], q[2]); y0 = Math.min(y0, q[1], q[3]); y1 = Math.max(y1, q[1], q[3]); });
+    return [Math.min(x0, b.head[0] - b.head[2]) - .04, Math.max(x1, b.head[0] + b.head[2]) + .04, b.head[1] - b.head[2] - .04, y1 + .04];
+  }
+  function hit(b, u, v, bb) {
+    var ol = 1.2 / H;
+    if (u < bb[0] || u > bb[1] || v < bb[2] || v > bb[3]) return null;
+    var c = null, h = b.head, dx = u - h[0], dy = v - h[1];
+    for (var i = 0; i < b.segs.length; i++) {
+      var q = b.segs[i], d2 = seg(u, v, q[0], q[1], q[2], q[3]), o = q[4] + ol;
+      if (d2 < o * o) c = d2 < q[4] * q[4] ? q[5] : b.far ? FAR : JOINT;
     }
-    var base = [ax / 2, .78], j = ik(base[0], base[1], p[0], p[1], .3, .3);
-    var block = held ? [j[1][0], j[1][1] + .05] : [ph < .3 ? A : B, .8];
-    return { base: base, el: j[0], ee: j[1], block: block, held: held };
+    var hd = Math.sqrt(dx * dx + dy * dy);
+    if (hd < h[2] + ol && hd >= h[2]) c = b.far ? FAR : JOINT;
+    if (dx * dx + dy * dy < h[2] * h[2]) c = b.far ? FAR : dx > -h[2] * .1 && Math.abs(dy + h[2] * .05) < h[2] * .38 ? (Math.abs(dy + h[2] * .05) < h[2] * .1 ? GLOW : VISOR) : SHELL;
+    return c;
   }
 
   function frame(now) {
     if (!start) start = now;
-    var t = (now - start) / 1000, d = img.data, ax = W / H;
-    var R = pose(t, false), G = pose(t, true);
-    var err = Math.hypot(R.ee[0] - G.ee[0], R.ee[1] - G.ee[1]), bad = err > .035;
-    trail.push(G.ee); if (trail.length > 26) trail.shift();
-    var scan = ((t * .45) % 1.3 - .15) * ax, bx0 = R.ee[0] - .11, bx1 = R.ee[0] + .11, by0 = R.ee[1] - .08, by1 = R.ee[1] + .14;
+    var t = (now - start) / 1000, d = img.data, ax = W / H, sl = slipAt(t), cx = ax * .46, oy = .56;
+    var R = body(STEP * t, sl, cx, oy, 1, false), G = body(STEP * (t + .12), 0, cx, oy, 1, false);
+    var fx = ((t * .045) % 1.5 - .25) * ax, F = body(STEP * .8 * t, 0, fx, .62, .32, true); F.far = true;
+    var rb = box(R), gb = box(G), fb = box(F), bb = [Math.min(rb[0], gb[0]), Math.max(rb[1], gb[1]), Math.min(rb[2], gb[2]), Math.max(rb[3], gb[3])];
+    var bad = sl > .25, px1 = 1 / H, ts = t - t % PERIOD + SLIP_AT, ice = cx + (ts + .05 - t) * GROUND_V;
     var e = calm ? 1 : Math.min(1, t / 1.4), bs = Math.max(1, Math.round(12 * Math.pow(1 - e, 2.2)));
-    var px1 = 1 / H, arm2 = .022 * .022, gh2 = .013 * .013;
-    var xs = [R.base[0], R.el[0], R.ee[0], G.el[0], G.ee[0], R.block[0], bx0, bx1], ys = [R.el[1], R.ee[1], G.el[1], G.ee[1], by0];
-    trail.forEach(function (p) { xs.push(p[0]); ys.push(p[1]); });
-    var mx0 = Math.min.apply(0, xs) - .08, mx1 = Math.max.apply(0, xs) + .08, my0 = Math.min.apply(0, ys) - .08;
 
     function color(x, y, b) {
-      var u = x / H, v = y / H, c;
-      // backdrop: deep blue to pink, and a floor with a receding grid
-      if (v < .8) c = v < .4 ? lerp(BG[0], BG[1], v / .4) : v < .66 ? lerp(BG[1], BG[2], (v - .4) / .26) : lerp(BG[2], BG[3], (v - .66) / .14);
-      else {
-        var z = 1 / (v - .74), gx = (u - ax / 2) * z * .9, gz = z * .35 + t * .25;
-        c = (Math.abs(gx - Math.round(gx)) < .05 * z * .12 + .02 || Math.abs(gz - Math.round(gz)) < .06) ? GRID : FLOOR;
+      var u = x / H, v = y / H, c, hz = .66;
+      if (v < hz) {
+        var k = v / hz * (SKY.length - 1), i = Math.min(SKY.length - 2, Math.floor(k));
+        c = lerp(SKY[i], SKY[i + 1], k - i);
+        // two layers of city blocks drifting at their own depths
+        var c1 = Math.floor((u + t * .012) * 9), h1 = .1 + hash(c1, 3) * .16;
+        if (v > hz - h1 * .7) c = CITY2;
+        var c2 = Math.floor((u + t * .03) * 6), h2 = .06 + hash(c2, 5) * .14, wnd = (Math.floor((u + t * .03) * 60) + Math.floor(v * 70)) % 3 === 0;
+        if (v > hz - h2) c = wnd && v < hz - .01 && hash(c2, Math.floor(v * 70)) > .55 ? [255, 222, 170] : CITY;
+      } else {
+        var z = 1 / (v - hz + .02), gz = z * .5 + t * GROUND_V * 4, gx = (u - ax * .5) * z * .7;
+        c = Math.abs(gz - Math.round(gz)) < .07 || Math.abs(gx - Math.round(gx)) < .04 ? GRID : FLOOR;
+        if (v > .815 && v < .85 && Math.abs(u - ice) < .1) c = hash(x, y + Math.floor(t * 6)) > .9 ? [255, 255, 255] : ICE;
       }
-      // pads
-      var pa = ax / 2 - .34 * Math.min(1, ax / 1.25), pb = ax / 2 + .34 * Math.min(1, ax / 1.25);
-      if (v > .82 && v < .85 && (Math.abs(u - pa) < .1 || Math.abs(u - pb) < .1)) c = [255, 255, 255];
-      var near = u > mx0 && u < mx1 && v > my0;
-      if (near) {
-        // ghost trail and ghost arm (dithered half-tone)
-        for (var i = 0; i < trail.length; i += 2) if (Math.abs(u - trail[i][0]) < px1 && Math.abs(v - trail[i][1]) < px1) c = lerp(c, GHOST, i / trail.length);
-        var g1 = seg(u, v, G.base[0], G.base[1], G.el[0], G.el[1]), g2 = seg(u, v, G.el[0], G.el[1], G.ee[0], G.ee[1]);
-        if ((g1 < gh2 || g2 < gh2 || Math.hypot(u - G.ee[0], v - G.ee[1]) < .02) && b < 9) c = GHOST;
-        // reality: base, links, joints, gripper, block
-        if (Math.abs(u - R.block[0]) < .05 && Math.abs(v - R.block[1]) < .05) c = v - (R.block[1] - .05) < px1 * 1.5 ? [255, 190, 150] : BLOCK;
-        if (v > .76 && v < .82 && Math.abs(u - R.base[0]) < .07) c = BASE;
-        var a1 = seg(u, v, R.base[0], R.base[1], R.el[0], R.el[1]), a2 = seg(u, v, R.el[0], R.el[1], R.ee[0], R.ee[1]);
-        if (a1 < arm2 || a2 < arm2 * .7) c = ARM;
-        if (Math.hypot(u - R.el[0], v - R.el[1]) < .026 || Math.hypot(u - R.base[0], v - R.base[1]) < .03) c = JOINT;
-        if (Math.abs(v - R.ee[1] - .02) < .025 && (Math.abs(u - R.ee[0] - .045) < .008 || Math.abs(u - R.ee[0] + .045) < .008)) c = ARM;
-        if (Math.abs(v - R.ee[1]) < .008 && Math.abs(u - R.ee[0]) < .05) c = ARM;
-        // verifier: corner brackets around the gripper
-        var onX = (Math.abs(u - bx0) < px1 || Math.abs(u - bx1) < px1) && v > by0 && v < by1, onY = (Math.abs(v - by0) < px1 || Math.abs(v - by1) < px1) && u > bx0 && u < bx1;
-        var corner = (Math.min(Math.abs(u - bx0), Math.abs(u - bx1)) < .035) && (Math.min(Math.abs(v - by0), Math.abs(v - by1)) < .035);
-        if ((onX || onY) && corner) c = bad ? BAD : OK;
+      var f = hit(F, u, v, fb); if (f) c = f;
+      if (u > bb[0] && u < bb[1] && v > bb[2] && v < bb[3]) {
+        // world model's predicted skeleton, under the real robot
+        for (var j = 0; j < G.segs.length; j++) { var q = G.segs[j]; if (seg(u, v, q[0], q[1], q[2], q[3]) < .009 * .009 && b < 10) c = GHOST; }
+        var g = G.head; if (Math.abs(Math.hypot(u - g[0], v - g[1]) - g[2]) < px1 && b < 10) c = GHOST;
+        var r = hit(R, u, v, rb); if (r) c = r;
+        // verifier: corner brackets around the robot
+        var onX = (Math.abs(u - rb[0]) < px1 || Math.abs(u - rb[1]) < px1) && v > rb[2] && v < rb[3], onY = (Math.abs(v - rb[2]) < px1 || Math.abs(v - rb[3]) < px1) && u > rb[0] && u < rb[1];
+        if ((onX || onY) && Math.min(Math.abs(u - rb[0]), Math.abs(u - rb[1])) < .04 && Math.min(Math.abs(v - rb[2]), Math.abs(v - rb[3])) < .04) c = bad ? BAD : OK;
       }
-      // the scan beam
-      var ds = u - scan;
-      if (ds < 0 && ds > -.12) c = lerp(c, SCAN, (1 + ds / .12) * .35);
-      if (Math.abs(ds) < px1) c = SCAN;
       return c;
     }
 
     for (var y = 0; y < H; y += bs)
       for (var x = 0; x < W; x += bs) {
-        var cx = Math.min(W - 1, x + (bs >> 1)), cy = Math.min(H - 1, y + (bs >> 1));
+        var cx2 = Math.min(W - 1, x + (bs >> 1)), cy2 = Math.min(H - 1, y + (bs >> 1));
         for (var yy = y; yy < Math.min(H, y + bs); yy++)
           for (var xx = x; xx < Math.min(W, x + bs); xx++) {
-            var b = BAYER[(yy & 3) * 4 + (xx & 3)], c = color(bs > 1 ? cx : xx, bs > 1 ? cy : yy, b), i = (yy * W + xx) * 4;
+            var b = BAYER[(yy & 3) * 4 + (xx & 3)], c = color(bs > 1 ? cx2 : xx, bs > 1 ? cy2 : yy, b), i = (yy * W + xx) * 4;
             d[i] = dither(c[0], b); d[i + 1] = dither(c[1], b); d[i + 2] = dither(c[2], b); d[i + 3] = 255;
           }
       }
     ctx.putImageData(img, 0, 0);
-    if (verdict && now - lastHud > 180) {
+    if (verdict && now - lastHud > 200) {
       lastHud = now;
-      var score = Math.max(0, 1 - err * 6).toFixed(2);
-      verdict.textContent = bad ? "✗ flagged · Δ " + err.toFixed(2) : "✓ verified · " + score;
+      verdict.textContent = bad ? "✗ slip · off-prediction" : "✓ gait verified · " + (.97 + .02 * Math.sin(t)).toFixed(2);
       verdict.className = "hud hud-tr " + (bad ? "bad" : "ok");
     }
   }
